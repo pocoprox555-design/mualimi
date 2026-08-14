@@ -16,6 +16,7 @@ COPY --from=build /app/server.mjs ./server.mjs
 COPY --from=build /app/curriculum.mjs ./curriculum.mjs
 COPY --from=build /app/lib ./lib
 COPY --from=build /app/curriculum-library ./curriculum-library
+RUN mkdir -p /app/curriculum-data && chown -R node:node /app
 USER node
 EXPOSE 3000
 CMD ["node", "production-server.mjs"]
