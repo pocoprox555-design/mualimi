@@ -1,0 +1,59 @@
+# نشر تلقائي على Google Cloud Run عند كل git push.
+# يُشغَّل عبر Cloud Build Trigger مربوط بمستودع GitHub (انظر تعليمات النشر).
+steps:
+  # 1) إنشاء مستودع Artifact Registry إن لم يكن موجودًا (مطلوب لمرة واحدة)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud artifacts repositories create $_REPO --repository-format=docker --location=$_REGION || true
+
+  # 2) بناء صورة الحاوية من Dockerfile الموجود (يشتغل بداخله: npm ci + build + test + validate)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_IMAGE', '.']
+
+  # 3) رفع الصورة إلى Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_IMAGE']
+
+  # 4) نشر/تحديث خدمة Cloud Run
+  #    --port=3000 يطابق ما يستمع إليه production-server.mjs عبر PORT.
+  #    --timeout=360s يغطي أطول جولة وكيل (300ث) + هامش.
+  #    --min-instances=0 للبقاء داخل الطبقة المجانية (يبدأ باردًا عند أول طلب).
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - '$_SERVICE'
+      - '--image=$_IMAGE'
+      - '--region=$_REGION'
+      - '--port=3000'
+      - '--timeout=360s'
+      - '--cpu=1'
+      - '--memory=1Gi'
+      - '--max-instances=3'
+      - '--min-instances=0'
+      - '--concurrency=8'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=AI_MODEL=$_AI_MODEL,AI_ENDPOINT=$_AI_ENDPOINT,AI_CONTEXT_WINDOW=$_AI_CTX,AI_MAX_OUTPUT_TOKENS=$_AI_MAXTOK,NODE_ENV=production'
+      - '--set-secrets=AI_API_KEY=mualimi-key:latest,CURRICULUM_ADMIN_TOKEN=mualimi-admin:latest'
+
+# المتغيرات الافتراضية (يمكن تعديلها من لوحة Cloud Build Trigger دون لمس الملف)
+substitutions:
+  _SERVICE: 'mualimi'
+  _REGION: 'us-central1'
+  _REPO: 'mualimi'
+  _IMAGE: 'us-central1-docker.pkg.dev/$PROJECT_ID/mualimi/mualimi:$SHORT_SHA'
+  _AI_MODEL: 'mimo-v2.5'
+  _AI_ENDPOINT: 'https://opencode.ai/zen/go/v1'
+  _AI_CTX: '1000000'
+  _AI_MAXTOK: '131000'
+
+images:
+  - '$_IMAGE'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'
+timeout: '1200s'

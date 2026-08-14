@@ -1,0 +1,20 @@
+{
+  "name": "معلمي — مساعد رحما الذكي",
+  "short_name": "معلمي",
+  "description": "مساعد تعليمي شخصي بالذكاء الاصطناعي لرحما — السادس الإعدادي، بغداد.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e1a2e",
+  "theme_color": "#0e1a2e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

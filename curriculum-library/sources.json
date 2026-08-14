@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "notice": "هذه قائمة مصادر مرشحة للمتابعة فقط. لا يعني إدراج الرابط امتلاك حق إعادة توزيع الملف.",
+  "sources": [
+    {
+      "name": "فهرس كتب السادس الأدبي 2023-2024",
+      "url": "http://www.ahmed-aldaoody.com/2023/10/pdf-2024_10.html",
+      "classification": "mirror",
+      "licenseStatus": "unverified",
+      "allowAutomaticImport": false
+    },
+    {
+      "name": "صفحة كتب السادس الأدبي 2025-2026",
+      "url": "https://iraqedu.net/السادس-الادبي/كتب-السادس-الادبي/",
+      "classification": "mirror",
+      "licenseStatus": "unverified",
+      "allowAutomaticImport": false
+    }
+  ]
+}

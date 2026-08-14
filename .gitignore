@@ -1,0 +1,27 @@
+# المفتاح السري لا يُشارك أبدًا
+.env
+.env.local
+.env.*.local
+
+# اعتمادات ومخرجات البناء
+node_modules/
+dist/
+dist-ssr/
+curriculum-data/
+
+# سجلات
+*.log
+npm-debug.log*
+
+# نظام التشغيل
+.DS_Store
+Thumbs.db
+
+# كاش أدوات المساعدة (لا علاقة له بالتطبيق ولا يُرفع للمستودع)
+.mimosa/
+.zcode/
+
+# مخرجات تشغيل محلية مؤقتة
+.server-*.log
+.server-pid
+.chat-out.sse

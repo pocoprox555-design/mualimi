@@ -1,0 +1,239 @@
+{
+  "editionYear": 2025,
+  "extractionQuality": {
+    "assessment": "good",
+    "mode": "ocr-text",
+    "notes": "الملف النصي مرقم صفحة/سطر، والفهرست في الصفحة 112 يثبت البنية العامة. توجد أخطاء OCR عربية متفرقة في بعض العناوين والمتن، خصوصاً داخل الصفحات الكثيفة."
+  },
+  "hierarchy": [
+    {
+      "lessons": [
+        {
+          "kind": "reading",
+          "number": 1,
+          "pageRange": [
+            4,
+            7
+          ],
+          "title": "الإصلاح ضرورة"
+        },
+        {
+          "kind": "grammar",
+          "number": 2,
+          "pageRange": [
+            8,
+            17
+          ],
+          "title": "أسلوب التعجب"
+        },
+        {
+          "kind": "writing",
+          "number": 3,
+          "pageRange": [
+            18,
+            18
+          ],
+          "title": "التعبير"
+        },
+        {
+          "kind": "literature",
+          "number": 4,
+          "pageRange": [
+            19,
+            26
+          ],
+          "title": "ثانية يجيء الحسين"
+        }
+      ],
+      "number": 6,
+      "pageRange": [
+        3,
+        26
+      ],
+      "title": "بالإصلاح تنهض الأمة",
+      "type": "unit"
+    },
+    {
+      "lessons": [
+        {
+          "kind": "reading",
+          "number": 1,
+          "pageRange": [
+            28,
+            31
+          ],
+          "title": "أبناؤنا المسؤولية المقدسة"
+        },
+        {
+          "kind": "grammar",
+          "number": 2,
+          "pageRange": [
+            32,
+            38
+          ],
+          "title": "أسلوبا المدح والذم"
+        },
+        {
+          "kind": "literature",
+          "number": 3,
+          "pageRange": [
+            41,
+            50
+          ],
+          "title": "القصة القصيرة: النشأة والتطور"
+        }
+      ],
+      "number": 7,
+      "pageRange": [
+        28,
+        50
+      ],
+      "title": "حقوق الطفل",
+      "type": "unit"
+    },
+    {
+      "lessons": [
+        {
+          "kind": "reading",
+          "number": 1,
+          "pageRange": [
+            52,
+            54
+          ],
+          "title": "جائزة نوبل للآداب"
+        },
+        {
+          "kind": "grammar",
+          "number": 2,
+          "pageRange": [
+            55,
+            59
+          ],
+          "title": "أسلوبا التمني والترجي"
+        },
+        {
+          "kind": "literature",
+          "number": 3,
+          "pageRange": [
+            60,
+            64
+          ],
+          "title": "الرواية"
+        },
+        {
+          "kind": "critical_study",
+          "number": 4,
+          "pageRange": [
+            64,
+            66
+          ],
+          "title": "الواقعية"
+        }
+      ],
+      "number": 8,
+      "pageRange": [
+        51,
+        66
+      ],
+      "title": "جائزة نوبل",
+      "type": "unit"
+    },
+    {
+      "lessons": [
+        {
+          "kind": "reading",
+          "number": 1,
+          "pageRange": [
+            68,
+            71
+          ],
+          "title": "رسالة من أب إلى ابنه"
+        },
+        {
+          "kind": "grammar",
+          "number": 2,
+          "pageRange": [
+            72,
+            81
+          ],
+          "title": "أسلوبا العرض والتحضيض"
+        },
+        {
+          "kind": "writing",
+          "number": 3,
+          "pageRange": [
+            82,
+            82
+          ],
+          "title": "التعبير"
+        },
+        {
+          "kind": "literature",
+          "number": 4,
+          "pageRange": [
+            83,
+            88
+          ],
+          "title": "المقالة"
+        }
+      ],
+      "number": 9,
+      "pageRange": [
+        67,
+        88
+      ],
+      "title": "بين الجديد والقديم",
+      "type": "unit"
+    },
+    {
+      "lessons": [
+        {
+          "kind": "reading",
+          "number": 1,
+          "pageRange": [
+            90,
+            92
+          ],
+          "title": "حسن السيرة من الإيمان"
+        },
+        {
+          "kind": "grammar",
+          "number": 2,
+          "pageRange": [
+            93,
+            101
+          ],
+          "title": "أسلوب التحذير والإغراء"
+        },
+        {
+          "kind": "literature",
+          "number": 3,
+          "pageRange": [
+            102,
+            106
+          ],
+          "title": "فن السيرة"
+        },
+        {
+          "kind": "critical_study",
+          "number": 4,
+          "pageRange": [
+            107,
+            108
+          ],
+          "title": "الرمزية"
+        }
+      ],
+      "number": 10,
+      "pageRange": [
+        89,
+        108
+      ],
+      "title": "السيرة الحسنة",
+      "type": "unit"
+    }
+  ],
+  "pageCount": 112,
+  "part": "الجزء الثاني",
+  "title": "كتاب اللغة العربية - الصف السادس الإعدادي - الجزء الثاني"
+}
