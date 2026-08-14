@@ -805,19 +805,34 @@ textarea:focus-visible {
   .layout { grid-template-columns: 1fr; }
   .sidebar {
     flex-direction: row;
-    padding: 8px 10px;
+    padding: 6px 8px;
     overflow-x: auto;
     border-inline-start: none;
     border-bottom: 1px solid var(--border);
   }
-  .nav { flex-direction: row; gap: 6px; }
-  .nav-btn { padding: 9px 12px; font-size: 0.85rem; white-space: nowrap; }
+  .nav { flex-direction: row; gap: 4px; }
+  .nav-btn { padding: 7px 10px; font-size: 0.8rem; white-space: nowrap; }
   .sidebar-memory, .sidebar-foot { display: none; }
-  .messages { padding: 16px 12px; }
-  .msg { max-width: 92%; }
+  .topbar { padding: 8px 12px; }
+  .brand-logo { width: 34px; height: 34px; font-size: 18px; border-radius: 10px; }
+  .brand-text strong { font-size: 0.92rem; }
+  .gear-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+  .chat-head { padding: 6px 12px 2px; }
+  .chat-title { font-size: 0.95rem; }
+  .messages { padding: 10px 10px; gap: 10px; }
+  .msg { max-width: 94%; }
+  .bubble { padding: 10px 13px; font-size: 0.9rem; }
   .user-chip { display: none; }
-  .chat-view { height: calc(100dvh - 110px); }
-  .view { padding: 16px 12px; }
+  .chat-view { height: calc(100dvh - 90px); }
+  .view { padding: 12px 10px; }
+  .composer { padding: 6px 10px 10px; }
+  .composer-box { padding: 6px 8px; gap: 6px; }
+  .tool-btn, .send-btn, .cancel-btn { width: 38px; height: 38px; font-size: 1rem; border-radius: 12px; }
+  .attach-btn { width: 38px; height: 38px; font-size: 1.1rem; border-radius: 12px; }
+  #input { font-size: 0.9rem; padding: 8px 4px; max-height: 100px; }
+  .composer-hint { margin-top: 5px; }
+  .chips { gap: 5px; }
+  .chip { padding: 5px 10px; font-size: 0.72rem; }
 }
 
 @media (max-width: 420px) {
