@@ -653,7 +653,7 @@
     try {
       const response = await fetch('/api/conversation-title', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...Memory.getApiHeaders() },
         body: JSON.stringify({ user: user.content, assistant: assistant.content }),
       })
       if (!response.ok) return
@@ -962,16 +962,42 @@
   function setupSettings() {
     const gear = $('#settingsBtn')
     if (!gear) return
-    gear.addEventListener('click', () => $('#settingsModal').classList.remove('hidden'))
+    const syncApiFields = () => {
+      $('#settingsApiKey').value = Memory.settings.apiKey || ''
+      $('#settingsApiEndpoint').value = Memory.settings.apiEndpoint || ''
+      $('#settingsApiModel').value = Memory.settings.apiModel || ''
+    }
+    gear.addEventListener('click', () => {
+      syncApiFields()
+      $('#settingsModal').classList.remove('hidden')
+    })
     $('#settingsClose').addEventListener('click', () => $('#settingsModal').classList.add('hidden'))
     $('#settingsName').value = 'رحما'
     $('#settingsBranch').value = Memory.settings.branch || ''
+    syncApiFields()
     loadCurriculum()
     $('#uploadCurriculum').addEventListener('click', uploadCurriculum)
     $('#settingsSave').addEventListener('click', () => {
+      const apiEndpoint = $('#settingsApiEndpoint').value.trim()
+      if (apiEndpoint) {
+        try {
+          const parsed = new URL(apiEndpoint)
+          const localHttp = parsed.protocol === 'http:' && ['localhost', '127.0.0.1', '[::1]'].includes(parsed.hostname)
+          if ((parsed.protocol !== 'https:' && !localHttp) || !parsed.host) throw new Error('INVALID_API_ENDPOINT')
+        } catch {
+          toast('رابط API غير صحيح — استخدمي رابط HTTPS صالحًا')
+          return
+        }
+      }
       Memory.setSetting('name', 'رحما')
       Memory.setSetting('branch', $('#settingsBranch').value)
+      Memory.setSetting('apiKey', $('#settingsApiKey').value.trim())
+      Memory.setSetting('apiEndpoint', apiEndpoint)
+      Memory.setSetting('apiModel', $('#settingsApiModel').value.trim())
       $('.user-chip').textContent = 'مرحبًا، ' + Memory.settings.name
+      Teacher.getConfig(true).then((cfg) => {
+        $('#connLabel').textContent = cfg.hasKey ? 'جاهز' : 'المفتاح غير مضبوط'
+      }).catch(() => {})
       toast('تم حفظ الإعدادات ✅', true)
       $('#settingsModal').classList.add('hidden')
     })

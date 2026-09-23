@@ -142,24 +142,38 @@
       <label class="fld">اسمك
         <input id="settingsName" class="search-input" value="رحما" placeholder="رحما" readonly />
       </label>
-      <label class="fld">الفرع الدراسي
-        <select id="settingsBranch" class="search-input">
-          <option value="">— اختاري الفرع —</option>
-          <option value="أحيائي">أحيائي</option>
-          <option value="تطبيقي">تطبيقي</option>
-          <option value="أدبي">أدبي</option>
-        </select>
-      </label>
-      <div class="curriculum-box">
-        <strong>📚 مكتبة المنهج</strong>
-         <p class="modal-note">أضيفي ملفات PDF أو TXT أو MD مساعدة. سيبحث المعلم فيها عند الحاجة، بينما تبقى الكتب المدرسية المرقمة هي المرجع الأساسي.</p>
+       <label class="fld">الفرع الدراسي
+         <select id="settingsBranch" class="search-input">
+           <option value="">— اختاري الفرع —</option>
+           <option value="أحيائي">أحيائي</option>
+           <option value="تطبيقي">تطبيقي</option>
+           <option value="أدبي">أدبي</option>
+         </select>
+       </label>
+       <div class="api-box">
+         <strong>🤖 إعدادات الذكاء الاصطناعي</strong>
+         <p class="modal-note">يمكنك تغيير مزوّد الذكاء الاصطناعي من هنا. اتركي الرابط أو النموذج فارغًا لاستخدام إعدادات الخادم الافتراضية.</p>
+         <label class="fld">مفتاح API
+           <input id="settingsApiKey" class="search-input" type="password" autocomplete="new-password" placeholder="أدخلي مفتاح API" dir="ltr" />
+         </label>
+         <label class="fld">رابط API
+           <input id="settingsApiEndpoint" class="search-input" type="url" inputmode="url" placeholder="https://example.com/v1" dir="ltr" />
+         </label>
+         <label class="fld">اسم النموذج
+           <input id="settingsApiModel" class="search-input" type="text" autocomplete="off" placeholder="مثال: mimo-v2.5" dir="ltr" />
+         </label>
+         <p class="modal-note">تُحفظ هذه البيانات على هذا الجهاز فقط، وتُرسل إلى خادم التطبيق عند طلب الرد.</p>
+       </div>
+       <div class="curriculum-box">
+         <strong>📚 مكتبة المنهج</strong>
+          <p class="modal-note">أضيفي ملفات PDF أو TXT أو MD مساعدة. سيبحث المعلم فيها عند الحاجة، بينما تبقى الكتب المدرسية المرقمة هي المرجع الأساسي.</p>
         <label class="upload-label" for="curriculumFile">اختيار كتاب</label>
         <input id="curriculumFile" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain,text/markdown" />
         <button id="uploadCurriculum" class="btn-ghost" type="button">رفع وفهرسة الكتاب</button>
         <div id="curriculumStatus" class="curriculum-status">جارٍ تحميل قائمة الكتب…</div>
         <div id="curriculumList" class="curriculum-list"></div>
       </div>
-      <p class="modal-note">الذكاء الاصطناعي يعمل عبر خادم آمن على الجهة الخلفية، ويُضبط مفتاحه في ملف <code>.env</code> — لا حاجة لأي مفتاح هنا.</p>
+       <p class="modal-note">إذا تركتِ مفتاح API فارغًا، سيستخدم التطبيق المفتاح المضبوط على الخادم.</p>
       <div class="modal-actions">
         <button id="settingsSave" class="btn-primary">حفظ</button>
         <button id="settingsClose" class="btn-ghost">إغلاق</button>

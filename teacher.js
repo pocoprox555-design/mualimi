@@ -16,14 +16,14 @@
   function getConfig(force) {
     if (config && !force) return Promise.resolve(config)
     if (configPromise) return configPromise
-    configPromise = fetch('/api/config', { cache: 'no-store' })
+    configPromise = fetch('/api/config', { cache: 'no-store', headers: Memory.getApiHeaders() })
       .then((r) => r.json())
       .then((c) => {
-        config = { hasKey: !!c.hasKey, model: c.model || 'deepseek-v4-flash', streaming: !!c.streaming }
+        config = { hasKey: !!c.hasKey, model: c.model || 'MiMo-V2.6-Flash', streaming: !!c.streaming }
         return config
       })
       .catch(() => {
-        config = { hasKey: false, model: 'deepseek-v4-flash', streaming: false }
+        config = { hasKey: false, model: 'MiMo-V2.6-Flash', streaming: false }
         return config
       })
       .finally(() => { configPromise = null })
@@ -145,7 +145,7 @@
       try {
         const res = await fetchWithTimeout('/api/chat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...Memory.getApiHeaders() },
           body,
         }, REQUEST_TIMEOUT_MS, signal)
 

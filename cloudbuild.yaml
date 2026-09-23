@@ -45,7 +45,7 @@ substitutions:
   _REGION: 'us-central1'
   _REPO: 'mualimi'
   _IMAGE: 'us-central1-docker.pkg.dev/$PROJECT_ID/mualimi/mualimi:$SHORT_SHA'
-  _AI_MODEL: 'mimo-v2.5'
+  _AI_MODEL: 'MiMo-V2.6-Flash'
   _AI_ENDPOINT: 'https://opencode.ai/zen/go/v1'
   _AI_CTX: '1000000'
   _AI_MAXTOK: '131000'

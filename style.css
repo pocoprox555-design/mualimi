@@ -672,6 +672,8 @@ body {
 }
 .modal-card {
   width: 100%; max-width: 400px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
   background: linear-gradient(160deg, var(--surface), var(--bg-2));
   border: 1px solid var(--gold);
   border-radius: 22px;
@@ -682,6 +684,10 @@ body {
 .modal-card h3 { font-family: 'Amiri', serif; color: var(--gold-2); margin-bottom: 6px; }
 .modal-note { font-size: 0.78rem; color: var(--text-2); margin: 4px 0 14px; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-start; }
+.api-box { margin: 16px 0; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: rgba(29, 111, 165, 0.04); }
+.api-box strong { color: var(--gold-2); }
+.api-box .fld { margin: 10px 0; }
+.api-box .search-input { margin-top: 6px; }
 
 /* ─── Toast ─── */
 .toast {

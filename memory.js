@@ -47,6 +47,9 @@ function cleanHistoricalAssistantContent(content) {
 const DEFAULT_SETTINGS = {
   name: 'رحما',
   branch: '',
+  apiKey: '',
+  apiEndpoint: '',
+  apiModel: 'MiMo-V2.6-Flash',
 }
 
 const Memory = {
@@ -76,6 +79,17 @@ const Memory = {
   setSetting(key, val) {
     this.settings[key] = key === 'name' ? 'رحما' : val
     this.persist()
+  },
+
+  getApiHeaders() {
+    const headers = {}
+    const key = String(this.settings.apiKey || '').trim()
+    const endpoint = String(this.settings.apiEndpoint || '').trim()
+    const model = String(this.settings.apiModel || '').trim()
+    if (key) headers['X-AI-API-Key'] = key
+    if (endpoint) headers['X-AI-Endpoint'] = endpoint
+    if (model) headers['X-AI-Model'] = model
+    return headers
   },
 
   /* ── الذاكرة الدائمة ── */
@@ -189,7 +203,7 @@ const Memory = {
     try {
       const res = await fetch('/api/summarize', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...this.getApiHeaders() },
         body: JSON.stringify({ memory: this.getMemory(), newInfo }),
       })
       if (res.status === 501) return false // لا مفتاح — لا تلخيص
