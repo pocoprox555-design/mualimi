@@ -7,6 +7,7 @@ try { process.loadEnvFile(path.join(process.cwd(), '.env')) } catch {}
 const { createCurriculumTools } = await import('../lib/curriculum-tools.mjs')
 const { createProviderAdapter } = await import('../lib/provider-adapter.mjs')
 const { AgentRunner } = await import('../lib/agent-runner.mjs')
+const { buildSystemPrompt } = await import('../lib/agent-prompt.mjs')
 
 const model = process.argv[2]
 if (!model) { console.error('Usage: node scripts/eval-model.mjs <model> ["question"]'); process.exit(1) }
@@ -18,18 +19,13 @@ let key = String(process.env.AI_API_KEY || '').trim()
 if (key.startsWith('b64:')) key = Buffer.from(key.slice(4), 'base64').toString('utf8').trim()
 if (!key) { console.error('AI_API_KEY missing'); process.exit(1) }
 
-const systemPrompt = [
-  'أنت «المعلم»، معلم ذكي للطالبة رحما في السادس الإعدادي العراقي.',
-  'عند سؤال محدد: ابحث في كتب PDF، ثم افتح الصفحة المطلوبة كاملة قبل الإجابة.',
-  'إذا ذكرت الطالبة اسم المادة أو الكتاب صراحة فالمادة محسومة؛ لا تعرض بطاقات اختيار المادة.',
-  'لا تنسب معلومة لصفحة لم تفتحها. استخدم الأدوات المتاحة.',
-].join('\n')
+const systemPrompt = buildSystemPrompt({ branch: process.env.EVAL_BRANCH || 'غير محدد' })
 
 const curriculum = createCurriculumTools()
 const provider = createProviderAdapter({ endpoint, key, model })
 const runner = new AgentRunner({
   provider,
-  toolDefinitions: curriculum.definitions.filter((t) => t.function?.name !== 'set_conversation_title'),
+  toolDefinitions: curriculum.definitions,
   toolHandlers: curriculum.handlers,
   maxOutputTokens: 3000,
   windowTokens: 120000,

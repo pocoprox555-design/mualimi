@@ -1,5 +1,270 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-08-14T20:14:42.576Z",
-  "materials": []
+  "schemaVersion": 2,
+  "sourceOfTruth": "curriculum-library",
+  "materials": [
+    {
+      "bookId": "english-literature-sixth-pdf",
+      "title": "الأدب الإنكليزي للسادس الإعدادي",
+      "subject": "اللغة الإنكليزية",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 29,
+      "searchablePageCount": 29,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الادب انكليزي سادس اعدادي.pdf",
+        "bytes": 21401650,
+        "checksum": "a96446f54642b37e33dbfff07e80ebdd03205ad98360285c3ce405cf3f407945",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "economics-sixth-literary-pdf",
+      "title": "الاقتصاد للصف السادس الإعدادي الأدبي",
+      "subject": "الاقتصاد",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 112,
+      "searchablePageCount": 108,
+      "needsOcrPageCount": 4,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الاقتصاد السادس الادبي.pdf",
+        "bytes": 1427367,
+        "checksum": "eb8c8888827e734a99157b990d0eb17bde153165408bdf1768f5baa152d3db42",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "history-sixth-literary-pdf",
+      "title": "التاريخ للصف السادس الإعدادي الأدبي",
+      "subject": "التاريخ",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 204,
+      "searchablePageCount": 204,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب التاريخ السادس الادبي.pdf",
+        "bytes": 3046673,
+        "checksum": "2974593964f7f9a53e39f01d2a310e76064529008bb4004e3df3e78e916c8b8b",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "geography-sixth-literary-pdf",
+      "title": "الجغرافية للصف السادس الإعدادي الأدبي",
+      "subject": "الجغرافية",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 172,
+      "searchablePageCount": 171,
+      "needsOcrPageCount": 1,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الجغرافية السادس الادبي.pdf",
+        "bytes": 2331193,
+        "checksum": "67c3fc0be0bbf7d0bb5b172b416dedeac3ba684479c0848d915520b3fc231dff",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "mathematics-sixth-literary-pdf",
+      "title": "الرياضيات للصف السادس الإعدادي الأدبي",
+      "subject": "الرياضيات",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 140,
+      "searchablePageCount": 126,
+      "needsOcrPageCount": 14,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الرياضيات السادس الادبي.pdf",
+        "bytes": 2845189,
+        "checksum": "f0cadbefec6737ffa87fa96b9d44a199c7b272f81f54ff49f373f8b51914dcd4",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "islamic-sixth-preparatory-2025",
+      "title": "القرآن الكريم والتربية الإسلامية للصف السادس الإعدادي",
+      "subject": "التربية الإسلامية",
+      "grade": "السادس الإعدادي",
+      "branch": "عام",
+      "edition": "الطبعة التاسعة",
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 164,
+      "searchablePageCount": 64,
+      "needsOcrPageCount": 100,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الاسلامية السادس الاعدادي.pdf",
+        "bytes": 7529763,
+        "checksum": "e6b3f9b6a185d80988168b02cf09a585378faffb8826d05e2da77e83e9aa4ad1",
+        "publisher": "جمهورية العراق — وزارة التربية — المديرية العامة للمناهج",
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "arabic-sixth-preparatory-part-1-2025",
+      "title": "اللغة العربية للصف السادس الإعدادي — الجزء الأول",
+      "subject": "اللغة العربية",
+      "grade": "السادس الإعدادي",
+      "branch": "عام",
+      "edition": "الطبعة الرابعة",
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 164,
+      "searchablePageCount": 164,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب العربي السادس الاعدادي الجزء الاول.pdf",
+        "bytes": 17031966,
+        "checksum": "f3b779e1b8af0018f3224d088a4f44a2c90f4004f02f12067971751eebb77ad2",
+        "publisher": "جمهورية العراق — وزارة التربية — المديرية العامة للمناهج",
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "arabic-sixth-preparatory-part-2-2025",
+      "title": "اللغة العربية للصف السادس الإعدادي — الجزء الثاني",
+      "subject": "اللغة العربية",
+      "grade": "السادس الإعدادي",
+      "branch": "عام",
+      "edition": "الطبعة الرابعة",
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 112,
+      "searchablePageCount": 112,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب العربي السادس الاعدادي الجزء الثاني.pdf",
+        "bytes": 17057772,
+        "checksum": "a7a4b6f4bf2be91aa7bb245170d53ee2b8025b0269f0ca522aaa9251e3952133",
+        "publisher": "جمهورية العراق — وزارة التربية — المديرية العامة للمناهج",
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "english-literature-exercises-sixth-pdf",
+      "title": "تمارين الأدب الإنكليزي للسادس الإعدادي",
+      "subject": "اللغة الإنكليزية",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-exercises",
+      "pageCount": 24,
+      "searchablePageCount": 24,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب تمارين الادب انكليزي سادس اعدادي.pdf",
+        "bytes": 730119,
+        "checksum": "18f12a9928f8442fc5fea7f4ec5c910e8264c6df0bdc89a902265e4dbd71073d",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "english-literature-teacher-guide-95722f85-pdf",
+      "title": "دليل مدرس الأدب الإنكليزي — دليل المدرس لمادة الادب انكليزي سادس اعدادي",
+      "subject": "دليل المدرس",
+      "grade": "السادس الإعدادي",
+      "branch": "أدبي",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "teacher-guide",
+      "pageCount": 28,
+      "searchablePageCount": 28,
+      "needsOcrPageCount": 0,
+      "source": {
+        "type": "pdf",
+        "fileName": "دليل المدرس لمادة الادب انكليزي سادس اعدادي.pdf",
+        "bytes": 739838,
+        "checksum": "79f217b228090802b8c847382e07a158f2ffa45a21c43a9908b1ea83c33f4c2b",
+        "publisher": null,
+        "authoritative": false
+      }
+    },
+    {
+      "bookId": "student-book-sixth-pdf",
+      "title": "كتاب الطالب للصف السادس الإعدادي",
+      "subject": "كتاب الطالب",
+      "grade": "السادس الإعدادي",
+      "branch": "عام",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-textbook",
+      "pageCount": 119,
+      "searchablePageCount": 81,
+      "needsOcrPageCount": 38,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب الطالب السادس الاعدادي.pdf",
+        "bytes": 90090308,
+        "checksum": "6212d79f5e5f2cfb324133b0934c8e296352e76854e8bbc65148538bfc1039b1",
+        "publisher": null,
+        "authoritative": true
+      }
+    },
+    {
+      "bookId": "student-activity-sixth-pdf",
+      "title": "كتاب النشاط للصف السادس الإعدادي",
+      "subject": "كتاب النشاط",
+      "grade": "السادس الإعدادي",
+      "branch": "عام",
+      "edition": null,
+      "year": 2025,
+      "format": "pdf",
+      "referenceKind": "official-exercises",
+      "pageCount": 188,
+      "searchablePageCount": 130,
+      "needsOcrPageCount": 58,
+      "source": {
+        "type": "pdf",
+        "fileName": "كتاب النشاط السادس الاعدادي.pdf",
+        "bytes": 15125803,
+        "checksum": "23dde734e922a610b5e2cfca4537decd0fabb2721f55f53cb8fee45ae33d7af8",
+        "publisher": null,
+        "authoritative": true
+      }
+    }
+  ]
 }

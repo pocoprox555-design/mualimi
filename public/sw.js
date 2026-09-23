@@ -1,6 +1,6 @@
 /* معلمي — Service Worker للإشعارات وذاكرة التخزين
    الاستراتيجية: الشبكة أولًا للملاحة (تحديث دائم)، وذاكرة-أولًا للأصول الثابتة. */
-const CACHE = 'mualimi-v3';
+const CACHE = 'mualimi-v4';
 // ملفات ثابتة الأسماء في بناء الإنتاج فقط. أصول JS/CSS تحمل أسماءً
 // مُجزّأة (hashed) بعد بناء Vite، لذا تُخزَّن وقت التشغيل في معالج fetch
 // بدل التخزين المسبق — وإلا سيفشل addAll ويُكسر التخزين كله بصمت.
@@ -31,6 +31,10 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
 
+  // API responses are always live and must never share a cache entry with
+  // another session or mask a server error with stale JSON/HTML.
+  if (url.pathname.startsWith('/api/')) return;
+
   // الملاحة (طلبات HTML): الشبكة أولًا دائمًا — حتى لا تُخدَم نسخة قديمة.
   if (e.request.mode === 'navigate') {
     e.respondWith(
@@ -57,7 +61,7 @@ self.addEventListener('fetch', (e) => {
               if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
               return res;
             })
-            .catch(() => caches.match('/'))
+             .catch(() => caches.match(e.request))
       )
     );
   }

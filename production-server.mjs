@@ -9,13 +9,8 @@ try { process.loadEnvFile(path.join(process.cwd(), '.env')) } catch (error) {
   if (error.code !== 'ENOENT') throw error
 }
 
-// فك تشفير بسيط للمفتاح: يدعم base64 (بادئة b64:) أو نص عادي
-if (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith('b64:')) {
-  process.env.AI_API_KEY = Buffer.from(process.env.AI_API_KEY.slice(4), 'base64').toString('utf8')
-}
-
 const port = Number(process.env.PORT || 3000)
-if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT must be a valid TCP port')
+if (!Number.isInteger(port) || port < 1 || port > 65_535) throw new Error('PORT must be a valid TCP port')
 
 const app = connect()
 app.use((req, res, next) => {
@@ -24,36 +19,32 @@ app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
   next()
 })
-
 installAgentHttp(app, { env: process.env })
 app.use(sirv(path.join(process.cwd(), 'dist'), {
   etag: true,
   gzip: true,
   brotli: true,
   single: true,
-  maxAge: process.env.NODE_ENV === 'production' ? 3600 : 0,
+  maxAge: process.env.NODE_ENV === 'production' ? 3_600 : 0,
 }))
 app.use((req, res) => {
   res.statusCode = 404
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
-  res.end(JSON.stringify({ error: 'not_found' }))
+  res.end(JSON.stringify({ error: 'NOT_FOUND' }))
 })
 
 const server = http.createServer(app)
-// مهلة الطلب يجب أن تتجاوز AgentRunner.maxRuntimeMs (300 ثانية) + هامش
 server.requestTimeout = 360_000
-server.headersTimeout = 10_000
+server.headersTimeout = 15_000
 server.keepAliveTimeout = 620_000
-server.listen(port, '0.0.0.0', () => {
-  console.log(`Mualimi server listening on port ${port}`)
-})
+server.listen(port, '0.0.0.0', () => console.log(`Mualimi server listening on port ${port}`))
 
 function shutdown(signal) {
-  console.log(`${signal} received, closing server`)
   server.close((error) => {
-    if (error) { console.error(error); process.exit(1) }
-    process.exit(0)
+    if (error) process.exitCode = 1
+    process.exit()
   })
+  if (signal) setTimeout(() => process.exit(0), 5_000).unref()
 }
 
 process.on('SIGTERM', () => shutdown('SIGTERM'))

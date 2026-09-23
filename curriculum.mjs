@@ -1,56 +1,54 @@
-import { mkdir, readFile, writeFile, unlink } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { mkdir, readFile, stat, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { PDFParse } from 'pdf-parse'
+import { arabicTokens, cleanArabicText, normalizeArabic } from './lib/arabic-text.mjs'
 
-const DATA_DIR = path.join(process.cwd(), 'curriculum-data')
+const DATA_DIR = path.resolve(process.env.CURRICULUM_DATA_DIR || path.join(process.cwd(), 'curriculum-data'))
 const INDEX_FILE = path.join(DATA_DIR, 'index.json')
 const MAX_FILE_BYTES = 60 * 1024 * 1024
-const MAX_CONTEXT_CHARS = 12000
+const MAX_CONTEXT_CHARS = 24_000
+const INDEX_SCHEMA_VERSION = 2
 
 let cached = null
 
-function normalize(value) {
-  return String(value || '')
-    .replace(/[\u064B-\u065F\u0670]/g, '')
-    .replace(/[إأآٱ]/g, 'ا')
-    .replace(/ة/g, 'ه')
-    .replace(/ى/g, 'ي')
-    .replace(/ؤ/g, 'و')
-    .replace(/ئ/g, 'ي')
-    .replace(/[ـ]/g, '')
-    .toLowerCase()
-}
+function digest(value) { return createHash('sha256').update(value).digest('hex') }
 
-function tokens(value) {
-  return normalize(value).split(/[^\p{L}\p{N}]+/u).filter((word) => word.length > 1)
-}
+function tokens(value) { return [...new Set(arabicTokens(value))] }
 
 function chunkText(text) {
-  const clean = text.replace(/\r/g, '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
-  const paragraphs = clean.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
+  const clean = cleanArabicText(text)
+  const paragraphs = clean.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean)
   const chunks = []
   let current = ''
   for (const paragraph of paragraphs) {
-    if ((current + '\n\n' + paragraph).length > 1500 && current) {
+    if (current && current.length + paragraph.length + 2 > 1_800) {
       chunks.push(current)
       current = ''
     }
-    current += (current ? '\n\n' : '') + paragraph
+    current += `${current ? '\n\n' : ''}${paragraph}`
   }
   if (current) chunks.push(current)
-  return chunks.length ? chunks : clean.match(/.{1,1500}/gs) || []
+  return chunks.length ? chunks : clean.match(/.{1,1800}/gs) || []
 }
 
 async function loadIndex() {
   if (cached) return cached
   await mkdir(DATA_DIR, { recursive: true })
-  try { cached = JSON.parse(await readFile(INDEX_FILE, 'utf8')) } catch { cached = { documents: [], chunks: [] } }
+  try {
+    const parsed = JSON.parse(await readFile(INDEX_FILE, 'utf8'))
+    cached = parsed.schemaVersion === INDEX_SCHEMA_VERSION ? parsed : { schemaVersion: INDEX_SCHEMA_VERSION, documents: [], chunks: [] }
+  } catch { cached = { schemaVersion: INDEX_SCHEMA_VERSION, documents: [], chunks: [] } }
   return cached
 }
 
 async function saveIndex(index) {
   cached = index
-  await writeFile(INDEX_FILE, JSON.stringify(index), 'utf8')
+  await mkdir(DATA_DIR, { recursive: true })
+  const temporary = `${INDEX_FILE}.${process.pid}.tmp`
+  await writeFile(temporary, `${JSON.stringify(index, null, 2)}\n`, 'utf8')
+  const { rename } = await import('node:fs/promises')
+  await rename(temporary, INDEX_FILE)
 }
 
 async function extractText(filePath, extension) {
@@ -63,57 +61,81 @@ async function extractText(filePath, extension) {
 }
 
 export async function addDocument({ filePath, originalName, mime }) {
-  const stat = await import('node:fs/promises').then((fs) => fs.stat(filePath))
-  if (stat.size > MAX_FILE_BYTES) throw new Error('FILE_TOO_LARGE')
-  const extension = path.extname(originalName).toLowerCase()
-  if (!['.pdf', '.txt', '.md'].includes(extension)) throw new Error('UNSUPPORTED_FILE')
+  const info = await stat(filePath)
+  if (info.size > MAX_FILE_BYTES) throw new Error('FILE_TOO_LARGE')
+  const name = String(originalName || '').trim().slice(0, 180)
+  const extension = path.extname(name).toLowerCase()
+  if (!name || !['.pdf', '.txt', '.md'].includes(extension)) throw new Error('UNSUPPORTED_FILE')
   const text = await extractText(filePath, extension)
   if (text.replace(/\s/g, '').length < 20) throw new Error('NO_TEXT')
+
   const index = await loadIndex()
-  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
-  index.documents = index.documents.filter((doc) => doc.name !== originalName)
-  index.chunks = index.chunks.filter((chunk) => chunk.documentName !== originalName)
-  const chunks = chunkText(text).map((content, position) => ({ id: `${id}-${position}`, documentName: originalName, content, terms: [...new Set(tokens(content))] }))
-  index.documents.push({ id, name: originalName, mime, size: stat.size, chunks: chunks.length, addedAt: new Date().toISOString() })
+  const sourceHash = digest(await readFile(filePath))
+  const id = `upload_${sourceHash.slice(0, 20)}`
+  const chunks = chunkText(text).map((content, position) => ({
+    id: `${id}_${position + 1}`,
+    documentId: id,
+    documentName: name,
+    content,
+    terms: tokens(content),
+    sourceProvenance: { type: 'uploaded-material', name, authority: 'supporting-reference' },
+  }))
+  index.documents = (index.documents || []).filter((document) => document.name !== name)
+  index.chunks = (index.chunks || []).filter((chunk) => chunk.documentName !== name)
+  const document = {
+    id,
+    name,
+    mime: String(mime || 'application/octet-stream').slice(0, 120),
+    size: info.size,
+    checksum: sourceHash,
+    chunks: chunks.length,
+    sourceProvenance: { type: 'uploaded-material', name, authority: 'supporting-reference' },
+  }
+  index.documents.push(document)
   index.chunks.push(...chunks)
+  index.documents.sort((a, b) => a.name.localeCompare(b.name, 'ar'))
   await saveIndex(index)
-  return index.documents.at(-1)
+  return document
 }
 
 export async function removeDocument(name) {
   const index = await loadIndex()
-  index.documents = index.documents.filter((doc) => doc.name !== name)
-  index.chunks = index.chunks.filter((chunk) => chunk.documentName !== name)
+  const value = String(name || '')
+  index.documents = (index.documents || []).filter((document) => document.name !== value)
+  index.chunks = (index.chunks || []).filter((chunk) => chunk.documentName !== value)
   await saveIndex(index)
 }
 
-export async function listDocuments() {
-  return (await loadIndex()).documents
-}
+export async function listDocuments() { return (await loadIndex()).documents || [] }
 
 export async function searchCurriculum(query, limit = 6) {
-  const queryTerms = [...new Set(tokens(query))]
+  const normalizedQuery = normalizeArabic(query)
+  const queryTerms = tokens(query)
   if (!queryTerms.length) return { context: '', results: [] }
   const index = await loadIndex()
-  const scored = index.chunks.map((chunk) => {
-    const body = normalize(chunk.content)
+  const ranked = (index.chunks || []).map((chunk) => {
+    const body = normalizeArabic(chunk.content)
     const hits = queryTerms.reduce((count, term) => count + (body.includes(term) ? 1 : 0), 0)
-    const phrase = normalize(query).length > 4 && body.includes(normalize(query)) ? 3 : 0
+    const phrase = normalizedQuery.length > 4 && body.includes(normalizedQuery) ? 3 : 0
     return { chunk, score: hits + phrase }
-  }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, limit)
+  }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, Math.max(1, Math.min(20, Number(limit) || 6)))
+
   let used = 0
   const results = []
-  for (const item of scored) {
-    const block = `\n[${item.chunk.documentName}]\n${item.chunk.content}`
+  for (const { chunk, score } of ranked) {
+    const block = `\n[${chunk.documentName}]\n${chunk.content}`
     if (used + block.length > MAX_CONTEXT_CHARS) break
     used += block.length
-    results.push(item.chunk)
+    results.push({ ...chunk, score: Number(score.toFixed(4)) })
   }
-  return { context: results.length ? results.map((item) => `[${item.documentName}]\n${item.content}`).join('\n\n') : '', results }
+  return {
+    context: results.map((result) => `[${result.documentName}]\n${result.content}`).join('\n\n'),
+    results,
+  }
 }
 
 export async function clearDocumentFile(filePath) {
-  try { await unlink(filePath) } catch { /* formidable temporary file may already be gone */ }
+  try { await unlink(filePath) } catch { /* الملف المؤقت قد يكون حُذف بعد انتهاء multipart */ }
 }
 
 export { MAX_FILE_BYTES }

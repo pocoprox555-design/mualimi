@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { normalizeArabic, cleanArabicText, pageLineRange, repairWordInitialAml } from '../lib/arabic-text.mjs'
 import { assertSafeBookId, listBooks, openPage, parseNumberedBook, searchLibrary } from '../lib/curriculum-library.mjs'
+import { getPdfIndex, locatePdfPage, locatePdfPages } from '../lib/pdf-curriculum.mjs'
 
 test('Arabic normalization repairs common PDF extraction errors', () => {
   assert.equal(normalizeArabic('بِسْمِ اﷲ'), normalizeArabic('بسم الله'))
@@ -55,4 +56,21 @@ test('imported Islamic book is available page-by-page and searchable', async () 
   const results = await searchLibrary('ما أسباب الغضب وأضراره وعلاجه', { bookId: book.id, limit: 6 })
   assert.ok(results.some((result) => [41, 42, 44].includes(result.citation.pageNumber)))
   assert.ok(results.every((result) => result.citation.title && result.citation.subject))
+})
+
+test('PDF index exposes physical/printed mapping and stable provenance', async () => {
+  const index = await getPdfIndex()
+  assert.equal(index.schemaVersion, 2)
+  const book = index.books.find((item) => (item.book?.id || item.id) === 'islamic-sixth-preparatory-2025')
+  assert.ok(book)
+  const page = book.pages.find((item) => (item.physicalPage || item.pageNumber) === 41)
+  assert.equal(page.physicalPage, 41)
+  assert.equal(page.printedPage, 41)
+  assert.equal(page.ocr.required, false)
+  assert.equal(page.sourceProvenance.type, 'pdf')
+  const single = await locatePdfPage('islamic-sixth-preparatory-2025', 41)
+  assert.equal(single.matches[0].physicalPage, 41)
+  const batch = await locatePdfPages('islamic-sixth-preparatory-2025', [41, 42, 999])
+  assert.deepEqual(batch.mappings.map((item) => item.printedPageNumber), [41, 42])
+  assert.deepEqual(batch.notFound, [999])
 })

@@ -87,6 +87,28 @@ test("streaming tool turn collects text when no tool calls", async () => {
   assert.equal(result.finishReason, "stop")
 })
 
+test("finishes a stream when the provider omits the DONE sentinel", async () => {
+  let cancelled = false
+  const sseText = [
+    "data: " + "{\"choices\":[{\"delta\":{\"content\":\"رد سريع\"},\"finish_reason\":null}]}",
+    "data: " + "{\"choices\":[{\"delta\":{},\"finish_reason\":\"stop\"}]}",
+  ].join("\n\n") + "\n\n"
+  const fetchImpl = async () => ({
+    ok: true,
+    status: 200,
+    headers: { get: () => 'text/event-stream' },
+    body: new ReadableStream({
+      start(controller) { controller.enqueue(new TextEncoder().encode(sseText)) },
+      cancel() { cancelled = true },
+    }),
+  })
+  const provider = createProviderAdapter({ fetchImpl, endpoint: "https://example.test", key: "secret", model: "model" })
+  const result = await provider.requestToolTurn({ messages: [{ role: "user", content: "hi" }], tools: [], maxTokens: 200 })
+  assert.equal(result.content, "رد سريع")
+  assert.equal(result.finishReason, "stop")
+  assert.equal(cancelled, true)
+})
+
 test("classifies retries, unsupported tools, and context overflow", async () => {
   assert.equal(isRetryableProviderError(new Error("fetch failed")), true)
   assert.equal(isRetryableProviderError(new Error("boom")), false)

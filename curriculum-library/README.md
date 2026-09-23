@@ -1,6 +1,6 @@
 # مكتبة منهج «معلمي»
 
-هذه المكتبة هي المرجع المحلي القابل للبحث للنموذج. كل كتاب يملك `manifest.json`، نسخة مصدر للتدقيق، وملف UTF-8 مستقل لكل صفحة.
+هذه المكتبة هي المرجع المحلي القابل للبحث للنموذج. ملفات PDF وملفات النص المرقمة هي مصدر الحقيقة، أما `pdf-index.json` و`pdf-books` و`index` فهي مخرجات مشتقة قابلة لإعادة البناء.
 
 ## استيراد ملف نصي مرقّم
 
@@ -18,8 +18,16 @@ npm run curriculum:import -- "D:/path/book.txt" \
 
 ## الأوامر
 
-- `npm run curriculum:reindex` — إعادة بناء فهرس البحث.
-- `npm run curriculum:validate` — فحص manifests والصفحات والبصمات.
+- `npm run curriculum:pdf-index` — استخراج فهرس PDF schema v2 من `pdf-sources` مع المطابقة المطبوعة/الفيزيائية.
+- `npm run curriculum:reindex` — إعادة بناء الفهارس المشتقة للكتب المرقمة وPDF.
+- `npm run curriculum:rebuild` — إعادة بناء كاملة متسلسلة: PDF ثم الخرائط والملخصات والبحث.
+- `npm run curriculum:validate` — فحص manifests والصفحات والبصمات ومخرجات schema v2.
+
+## شكل الفهرس المشتق
+
+`pdf-index.json` وملف كل كتاب في `pdf-books` يستخدمان `schemaVersion: 2`. لكل كتاب توجد هوية المادة ومصدر PDF وبصمته وحالته المرجعية، ولكل صفحة `physicalPage` و`printedPage` و`fullText` و`searchable` و`ocr` و`title` و`summary` و`section` و`unit` و`pageType` و`educationalPurpose` و`neighbors` و`sourceProvenance`. رقم الصفحة المطبوع قد يكون `null` عندما لا يثبت من النص أو من الاستمرارية؛ لا يُخمنه الفهرس.
+
+الفهرس النصي الموحد في `index/search-index.json` يحتفظ بإحصاءات البحث ومرجع الصفحة ومعاينة قصيرة فقط. فتح النص الكامل أو صورة PDF يتم عند الطلب لصفحات محددة، ولا تُرسل ملفات PDF كاملة إلى النموذج.
 - `npm test` — اختبارات parser والتطبيع والبحث والأمان.
 
 ## حقوق المحتوى

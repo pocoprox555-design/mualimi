@@ -1,103 +1,56 @@
-/* ─────────────────────────────────────────────────────────────
-   معلمي — تتبع التقدم
-   يرسم أداء رحما في كل مادة عبر الوقت (من نتائج الاختبارات
-   المحفوظة محليًا) باستخدام canvas — دون استدعاء النموذج.
-   ───────────────────────────────────────────────────────────── */
+const PALETTE = ['#d69a58', '#3b9b9b', '#7b78b6', '#c66e72', '#6f9d72', '#9c7a55']
 
-;(function () {
-  const PALETTE = ['#c9a24b', '#7fb3c9', '#9f8fca', '#7fbf7f', '#d98c8c', '#e0b96a']
-
-  function render(data, canvas, legendEl) {
-    const ctx = canvas.getContext('2d')
-    const dpr = window.devicePixelRatio || 1
-    const w = canvas.clientWidth || 300
-    const h = canvas.clientHeight || 260
-    canvas.width = w * dpr
-    canvas.height = h * dpr
-    ctx.scale(dpr, dpr)
-
-    ctx.clearRect(0, 0, w, h)
-    legendEl.innerHTML = ''
-
-    const subjects = Object.keys(data).filter((s) => Array.isArray(data[s]) && data[s].length)
-    if (!subjects.length) {
-      ctx.fillStyle = '#8b94a3'
-      ctx.font = '15px Tajawal, sans-serif'
-      ctx.textAlign = 'center'
-      ctx.fillText('لا توجد نتائج اختبارات بعد — أكملي أول اختبار لتظهر هنا.', w / 2, h / 2)
-      return
-    }
-
-    const pad = { top: 24, right: 16, bottom: 34, left: 34 }
-    const plotW = w - pad.left - pad.right
-    const plotH = h - pad.top - pad.bottom
-
-    // القيمة القصوى
-    let max = 100
-    subjects.forEach((s) => {
-      data[s].forEach((p) => {
-        if (p.total && p.score) max = Math.max(max, Math.round((p.score / p.total) * 100))
-      })
-    })
-    max = Math.ceil(max / 10) * 10
-
-    // شبكة + محاور
-    ctx.strokeStyle = 'rgba(201,162,75,0.15)'
-    ctx.fillStyle = '#8b94a3'
-    ctx.font = '11px Tajawal, sans-serif'
-    ctx.textAlign = 'right'
-    for (let i = 0; i <= 4; i++) {
-      const y = pad.top + plotH - (plotH * i) / 4
-      const val = Math.round((max * i) / 4)
-      ctx.beginPath()
-      ctx.moveTo(pad.left, y)
-      ctx.lineTo(w - pad.right, y)
-      ctx.stroke()
-      ctx.fillText(String(val), pad.left - 6, y + 4)
-    }
-
-    let colorIndex = 0
-    subjects.forEach((subject) => {
-      const pts = data[subject]
-      if (pts.length < 1) return
-      const color = PALETTE[colorIndex++ % PALETTE.length]
-
-      const xs = pts.map((_, i) => pad.left + (pts.length === 1 ? plotW / 2 : (plotW * i) / (pts.length - 1)))
-      const ys = pts.map((p) => {
-        const pct = p.total ? Math.round((p.score / p.total) * 100) : p.score
-        return pad.top + plotH - (Math.min(pct, max) / max) * plotH
-      })
-
-      ctx.strokeStyle = color
-      ctx.lineWidth = 2.5
-      ctx.lineJoin = 'round'
-      ctx.beginPath()
-      xs.forEach((x, i) => (i === 0 ? ctx.moveTo(x, ys[i]) : ctx.lineTo(x, ys[i])))
-      ctx.stroke()
-
-      // نقاط
-      pts.forEach((p, i) => {
-        ctx.fillStyle = color
-        ctx.beginPath()
-        ctx.arc(xs[i], ys[i], 4, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.strokeStyle = '#0e1a2e'
-        ctx.lineWidth = 2
-        ctx.stroke()
-      })
-
-      // وسيلة الإيضاح — اسم المادة يأتي من النموذج، لذا ندرجه كنص لا HTML.
-      const chip = document.createElement('div')
-      chip.className = 'legend-item'
-      const swatch = document.createElement('i')
-      swatch.style.background = color
-      const label = document.createElement('span')
-      label.textContent = subject
-      chip.appendChild(swatch)
-      chip.appendChild(label)
-      legendEl.appendChild(chip)
-    })
+function render(data, canvas, legend) {
+  if (!canvas || !legend) return
+  const context = canvas.getContext('2d')
+  const ratio = window.devicePixelRatio || 1
+  const width = canvas.clientWidth || 320
+  const height = canvas.clientHeight || 270
+  canvas.width = width * ratio
+  canvas.height = height * ratio
+  context.setTransform(ratio, 0, 0, ratio, 0, 0)
+  context.clearRect(0, 0, width, height)
+  legend.innerHTML = ''
+  const subjects = Object.keys(data || {}).filter((subject) => Array.isArray(data[subject]) && data[subject].length)
+  if (!subjects.length) {
+    context.fillStyle = '#718395'
+    context.font = '15px Tajawal, sans-serif'
+    context.textAlign = 'center'
+    context.fillText('ستظهر نتائجكِ هنا بعد أول اختبار.', width / 2, height / 2)
+    return
   }
+  const padding = { top: 24, right: 18, bottom: 34, left: 38 }
+  const plotWidth = Math.max(40, width - padding.left - padding.right)
+  const plotHeight = Math.max(40, height - padding.top - padding.bottom)
+  const max = 100
+  context.font = '11px Tajawal, sans-serif'
+  context.textAlign = 'right'
+  context.fillStyle = '#7890a1'
+  context.strokeStyle = 'rgba(59, 155, 155, .16)'
+  for (let step = 0; step <= 4; step += 1) {
+    const y = padding.top + plotHeight - (plotHeight * step) / 4
+    context.beginPath(); context.moveTo(padding.left, y); context.lineTo(width - padding.right, y); context.stroke()
+    context.fillText(String(step * 25), padding.left - 8, y + 4)
+  }
+  subjects.forEach((subject, subjectIndex) => {
+    const color = PALETTE[subjectIndex % PALETTE.length]
+    const points = data[subject]
+    const x = (index) => padding.left + (points.length === 1 ? plotWidth / 2 : (plotWidth * index) / (points.length - 1))
+    const y = (point) => padding.top + plotHeight - Math.max(0, Math.min(100, (point.score / Math.max(1, point.total)) * 100)) / 100 * plotHeight
+    context.strokeStyle = color; context.lineWidth = 2.5; context.lineJoin = 'round'; context.beginPath()
+    points.forEach((point, index) => index ? context.lineTo(x(index), y(point)) : context.moveTo(x(index), y(point)))
+    context.stroke()
+    points.forEach((point, index) => { context.fillStyle = color; context.beginPath(); context.arc(x(index), y(point), 4, 0, Math.PI * 2); context.fill() })
+    const item = document.createElement('span')
+    item.className = 'legend-item'
+    const swatch = document.createElement('i')
+    swatch.style.background = color
+    const label = document.createElement('span')
+    label.textContent = subject
+    item.append(swatch, label)
+    legend.appendChild(item)
+  })
+}
 
-  window.Progress = { render }
-})()
+const Progress = { render }
+export { Progress }

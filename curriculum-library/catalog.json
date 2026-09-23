@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
-  "updatedAt": "2026-08-14T01:10:26.430Z",
+  "schemaVersion": 2,
+  "sourceOfTruth": "curriculum-library/books",
   "books": []
 }

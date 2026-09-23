@@ -1,190 +1,93 @@
-/* ─────────────────────────────────────────────────────────────
-   معلمي — عميل النموذج (Teacher)
-   - يستدعي /api/chat عبر الوكيل الآمن مع Streaming.
-   - يقرأ SSE باسم الحدث ويحافظ على الحمولة JSON.
-   - يعتمد كليًا على مزوّد الذكاء الاصطناعي عبر الوكيل (لا ردود محلية).
-   - تحديد معدل طلبات محلي + لا تقليل سياق في العميل.
-   ───────────────────────────────────────────────────────────── */
+import { parseSseStream } from './lib/sse-protocol.mjs'
+import { Memory } from './memory.js'
 
-;(function () {
-  const MIN_GAP = 800
+const RETRY_DELAYS = [1_500, 3_500]
+const REQUEST_TIMEOUT_MS = 310_000
+let cachedConfig = null
+let configPromise = null
 
-  let config = null
-  let configPromise = null
-  let lastSent = 0
+function abortError() { return new DOMException('Aborted', 'AbortError') }
 
-  function getConfig(force) {
-    if (config && !force) return Promise.resolve(config)
-    if (configPromise) return configPromise
-    configPromise = fetch('/api/config', { cache: 'no-store', headers: Memory.getApiHeaders() })
-      .then((r) => r.json())
-      .then((c) => {
-        config = { hasKey: !!c.hasKey, model: c.model || 'MiMo-V2.6-Flash', streaming: !!c.streaming }
-        return config
-      })
-      .catch(() => {
-        config = { hasKey: false, model: 'MiMo-V2.6-Flash', streaming: false }
-        return config
-      })
-      .finally(() => { configPromise = null })
-    return configPromise
+function delay(milliseconds, signal) {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) { reject(abortError()); return }
+    const timer = setTimeout(resolve, milliseconds)
+    signal?.addEventListener('abort', () => { clearTimeout(timer); reject(abortError()) }, { once: true })
+  })
+}
+
+async function fetchWithTimeout(url, options, timeoutMs, signal) {
+  const controller = new AbortController()
+  const onAbort = () => controller.abort()
+  const timer = setTimeout(() => controller.abort(), timeoutMs)
+  if (signal?.aborted) controller.abort()
+  else signal?.addEventListener('abort', onAbort, { once: true })
+  try {
+    return await fetch(url, { ...options, signal: controller.signal })
+  } catch (error) {
+    if (error?.name === 'AbortError') throw signal?.aborted ? abortError() : new Error('TIMEOUT')
+    throw error
+  } finally {
+    clearTimeout(timer)
+    signal?.removeEventListener('abort', onAbort)
   }
+}
 
-  function canSend() {
-    return Date.now() - lastSent >= MIN_GAP
-  }
+function retryable(error) {
+  if (!error || error.name === 'AbortError') return false
+  return ['TIMEOUT', 'NETWORK', 'SERVER_BUSY', 'rate_limit'].includes(error.message) || /fetch failed|network|failed to fetch|5\d\d/.test(String(error.message || ''))
+}
 
-  function markSent() {
-    lastSent = Date.now()
-  }
-
-  const RETRY_DELAYS = [2000, 4000]
-  // مهلة العميل يجب أن تغطي كامل وقت الوكيل (300 ثانية) + هامش للاتصال
-  const REQUEST_TIMEOUT_MS = 310000
-
-  function delay(ms, signal) {
-    return new Promise((resolve, reject) => {
-      if (signal?.aborted) { reject(new DOMException('Aborted', 'AbortError')); return }
-      const onAbort = () => { clearTimeout(timer); reject(new DOMException('Aborted', 'AbortError')) }
-      const timer = setTimeout(() => { signal?.removeEventListener('abort', onAbort); resolve() }, ms)
-      signal?.addEventListener('abort', onAbort, { once: true })
+async function getConfig(force = false) {
+  if (cachedConfig && !force) return cachedConfig
+  if (configPromise) return configPromise
+  configPromise = fetch('/api/config', { cache: 'no-store', headers: Memory.getApiHeaders() })
+    .then(async (response) => {
+      if (!response.ok) throw new Error('CONFIG_FAILED')
+      return response.json()
     })
-  }
-
-  async function fetchWithTimeout(url, options, timeoutMs, signal) {
-    const controller = new AbortController()
-    const onUserAbort = () => controller.abort()
-    if (signal) signal.addEventListener('abort', onUserAbort, { once: true })
-    const timer = setTimeout(() => controller.abort(), timeoutMs)
-    try {
-      return await fetch(url, { ...options, signal: controller.signal })
-    } catch (error) {
-      if (error?.name === 'AbortError') {
-        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
-        throw new Error('TIMEOUT')
-      }
-      throw error
-    } finally {
-      clearTimeout(timer)
-      if (signal) signal.removeEventListener('abort', onUserAbort)
-    }
-  }
-
-  function isNetworkError(error) {
-    if (!error) return false
-    if (error instanceof TypeError) return true
-    return /fetch failed|failed to fetch|networkerror|load failed|econnreset|etimedout|net::err/i.test(String(error.message || ''))
-  }
-
-  function classifyError(error) {
-    if (!error) return 'no_retry'
-    if (error.name === 'AbortError') return 'abort'
-    const message = String(error.message || '')
-    if (message === 'NO_KEY') return 'no_key'
-    if (message === 'rate_limit') return 'retry'
-    if (message === 'TIMEOUT') return 'retry'
-    if (/^http_5\d\d$/.test(message)) return 'retry'
-    if (/^http_4\d\d$/.test(message)) return 'no_retry'
-    if (isNetworkError(error)) return 'retry'
-    return 'no_retry'
-  }
-
-  function parseEventBlock(block) {
-    const event = { event: 'message', data: '' }
-    for (const line of String(block || '').split(/\r?\n/)) {
-      if (line.startsWith('event:')) event.event = line.slice(6).trim() || 'message'
-      else if (line.startsWith('data:')) event.data += (event.data ? '\n' : '') + line.slice(5).replace(/^\s/, '')
-    }
-    if (!event.data) return null
-    if (event.data === '[DONE]') return { event: 'done', data: null }
-    try {
-      event.data = JSON.parse(event.data)
-    } catch {
-      // keep raw string
-    }
-    return event
-  }
-
-  async function* parseStream(res, { signal } = {}) {
-    const reader = res.body.getReader()
-    const decoder = new TextDecoder()
-    let buffer = ''
-    try {
-      while (true) {
-        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
-        const { done, value } = await reader.read()
-        if (done) break
-        buffer += decoder.decode(value, { stream: true })
-        const blocks = buffer.split(/\r?\n\r?\n/)
-        buffer = blocks.pop() || ''
-        for (const block of blocks) {
-          const event = parseEventBlock(block)
-          if (event) yield event
-        }
-      }
-      const tail = buffer.trim()
-      if (tail) {
-        const event = parseEventBlock(`${tail}\n\n`)
-        if (event) yield event
-      }
-    } finally {
-      reader.releaseLock()
-    }
-  }
-
-  async function requestWithRetry(messages, opts) {
-    const { signal } = opts
-    const body = JSON.stringify({
-      messages,
-      memory: opts.memory || '',
-      branch: opts.branch || '',
-      mode: opts.mode || 'normal',
+    .then((data) => {
+      cachedConfig = { hasKey: Boolean(data.hasKey), model: data.model || Memory.settings.apiModel || 'MiMo-V2.6-Flash', streaming: data.streaming !== false }
+      return cachedConfig
     })
-    for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt += 1) {
-      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
-      try {
-        const res = await fetchWithTimeout('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...Memory.getApiHeaders() },
-          body,
-        }, REQUEST_TIMEOUT_MS, signal)
+    .catch(() => {
+      cachedConfig = { hasKey: Boolean(Memory.settings.apiKey), model: Memory.settings.apiModel || 'MiMo-V2.6-Flash', streaming: false }
+      return cachedConfig
+    })
+    .finally(() => { configPromise = null })
+  return configPromise
+}
 
-        if (res.status === 501) {
-          const json = await res.json().catch(() => ({}))
-          if (json.code === 'NO_KEY') throw new Error('NO_KEY')
-          throw new Error('http_501')
-        }
-        if (res.status === 429) throw new Error('rate_limit')
-        if (!res.ok) throw new Error('http_' + res.status)
-        return res
-      } catch (error) {
-        const kind = classifyError(error)
-        if (kind === 'abort' || kind === 'no_key' || kind === 'no_retry') throw error
-        if (attempt === RETRY_DELAYS.length) break
-        await delay(RETRY_DELAYS[attempt], signal)
-      }
-    }
-    if (typeof navigator !== 'undefined' && navigator.onLine === false) throw new Error('offline')
-    throw new Error('server_busy')
-  }
-
-  async function* callProxy(messages, opts) {
-    const res = await requestWithRetry(messages, opts)
+async function request(messages, options) {
+  const body = JSON.stringify({ messages, memory: options.memory || '', branch: options.branch || '', mode: options.mode || 'normal' })
+  for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt += 1) {
+    if (options.signal?.aborted) throw abortError()
     try {
-      yield* parseStream(res, { signal: opts.signal })
+      const response = await fetchWithTimeout('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json', ...Memory.getApiHeaders() }, body }, REQUEST_TIMEOUT_MS, options.signal)
+      if (response.status === 501) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.code === 'NO_KEY' ? 'NO_KEY' : 'SERVER_BUSY')
+      }
+      if (response.status === 429) throw new Error('rate_limit')
+      if (!response.ok) throw new Error(`HTTP_${response.status}`)
+      return response
     } catch (error) {
-      if (error?.name === 'AbortError') throw error
-      throw new Error('stream_interrupted')
+      if (!retryable(error) || attempt === RETRY_DELAYS.length) throw error
+      await delay(RETRY_DELAYS[attempt], options.signal)
     }
   }
+  throw new Error('SERVER_BUSY')
+}
 
-  window.Teacher = {
-    canSend,
-    getConfig,
-
-    async *stream(userMessage, { memory, branch, messages, mode, signal }) {
-      markSent()
-      yield* callProxy(messages, { memory, branch, mode, signal })
-    },
+async function* stream(messages, options = {}) {
+  const response = await request(messages, options)
+  try {
+    for await (const event of parseSseStream(response, { signal: options.signal })) yield event
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error
+    throw new Error('STREAM_INTERRUPTED')
   }
-})()
+}
+
+const Teacher = { getConfig, stream }
+export { Teacher }

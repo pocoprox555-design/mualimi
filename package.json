@@ -16,7 +16,8 @@
     "curriculum:import": "node scripts/import-numbered-book.mjs",
     "curriculum:reindex": "node scripts/rebuild-curriculum-index.mjs",
     "curriculum:pdf-index": "node scripts/rebuild-pdf-index.mjs",
-    "curriculum:validate": "node scripts/validate-curriculum.mjs"
+    "curriculum:validate": "node scripts/validate-curriculum.mjs",
+    "curriculum:rebuild": "node scripts/rebuild-curriculum.mjs"
   },
   "devDependencies": {
     "vite": "^6.3.0"

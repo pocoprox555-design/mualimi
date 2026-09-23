@@ -105,3 +105,22 @@ test('aborts before invoking provider', async () => {
   })
   await assert.rejects(() => runner.run({ messages: [{ role: 'user', content: 'سؤال' }], systemPrompt: 'تعليمات', writer: writer([]), signal: controller.signal }), /AbortError/)
 })
+
+test('cancellation reaches a provider that is still generating', async () => {
+  const controller = new AbortController()
+  let called = false
+  const provider = {
+    requestToolTurn: async ({ signal }) => {
+      called = true
+      await new Promise((resolve, reject) => {
+        signal.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true })
+      })
+      return { content: '', finishReason: 'stop', toolCalls: [] }
+    },
+  }
+  const runner = new AgentRunner({ provider, toolDefinitions: [], toolHandlers: [], maxRuntimeMs: 2_000 })
+  const promise = runner.run({ messages: [{ role: 'user', content: 'سؤال' }], systemPrompt: 'تعليمات', writer: writer([]), signal: controller.signal })
+  setTimeout(() => controller.abort(), 15)
+  await assert.rejects(promise, /AbortError/)
+  assert.equal(called, true)
+})
