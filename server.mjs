@@ -88,6 +88,7 @@ async function handleChat(req, res) {
   try { ctx = await buildContext(lastUser); } catch { /* بدون سياق — لا نفشل */ }
 
   const branch = clean(body.branch, 40);
+  const session = clean(req.headers['x-session'], 64) || `mualimi-${Date.now().toString(36)}`;
   const images = [];
   const rawLast = (Array.isArray(body.messages) ? body.messages : []).filter((m) => m?.role === 'user').at(-1)?.content;
   if (Array.isArray(rawLast)) {
@@ -112,7 +113,7 @@ async function handleChat(req, res) {
     let full = '';
     for await (const ev of streamCompletion({
       endpoint: cfg.endpoint, key: cfg.key, model: cfg.model, messages: msgs,
-      maxTokens: 3000, signal: abort.signal, onFirstToken: () => { firstTokenAt = Date.now(); },
+      maxTokens: 3000, signal: abort.signal, session, onFirstToken: () => { firstTokenAt = Date.now(); },
     })) {
       if (ev.type === 'text') { full += ev.text; sseSend(res, 'delta', { text: ev.text }); }
       else sseSend(res, 'done', { finish: ev.finish, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : 0 });

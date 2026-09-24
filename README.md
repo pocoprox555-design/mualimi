@@ -29,4 +29,4 @@ node server.mjs                # http://localhost:3000
 
 ## النشر (Render)
 
-انظر `AGENTS.md`. المهم: اضبط `AI_MODEL=mimo-v2.6-flash` (بحالة صغيرة) و`AI_API_KEY` صالحًا.
+انظر `AGENTS.md`. المهم: اضبط `AI_MODEL=MiMo-V2.6-Flash` (بالحالة الأصلية) و`AI_API_KEY` صالحًا.

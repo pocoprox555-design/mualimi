@@ -161,7 +161,7 @@ async function* sseEvents(res, signal) {
   } finally { await reader.cancel().catch(() => {}); }
 }
 
-async function streamOnce(payload, signal, onEvent) {
+async function streamOnce(payload, signal, onEvent, extraHeaders = {}) {
   const c = new AbortController();
   const t = setTimeout(() => c.abort(new Error('TIMEOUT')), 100000);
   const link = () => { c.abort(signal?.reason); };
@@ -169,7 +169,7 @@ async function streamOnce(payload, signal, onEvent) {
   try {
     const r = await fetch('/api/chat', {
       method: 'POST', signal: signal?.aborted ? signal : c.signal,
-      headers: { 'Content-Type': 'application/json', ...headers() },
+      headers: { 'Content-Type': 'application/json', ...headers(), ...extraHeaders },
       body: JSON.stringify(payload),
     });
     if (r.status === 501) throw new Error('NO_KEY');
@@ -185,7 +185,8 @@ let pendingImages = [];
 
 function getConv() {
   let c = store.convs.find((x) => x.id === cur);
-  if (!c) { c = { id: uid('c'), title: 'محادثة جديدة', at: Date.now(), messages: [] }; store.convs.unshift(c); cur = c.id; }
+  if (!c) { c = { id: uid('c'), sid: uid('s'), title: 'محادثة جديدة', at: Date.now(), messages: [] }; store.convs.unshift(c); cur = c.id; }
+  if (!c.sid) c.sid = uid('s');
   return c;
 }
 function apiMessages(conv) {
@@ -285,7 +286,7 @@ async function send(text, images, attempt = 1) {
       else if (ev === 'delta') { full += data.text || ''; if (!raf) raf = requestAnimationFrame(paint); }
       else if (ev === 'done') done = true;
       else if (ev === 'error') throw new Error(data.error || 'UPSTREAM_FAILED');
-    });
+    }, { 'X-Session': conv.sid || conv.id });
     if (raf) cancelAnimationFrame(raf);
     if (!done && !full) throw new Error('EMPTY_REPLY');
     conv.messages.push({ role: 'assistant', content: full, cites });
