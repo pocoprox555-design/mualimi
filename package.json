@@ -1,33 +1,15 @@
 {
-  "name": "app-chat",
+  "name": "mualimi",
   "private": true,
-  "version": "1.0.0",
-  "description": "مشروع APP CHAT مبني بـ Code Agent",
+  "version": "2.0.0",
+  "description": "معلمي — مساعد دراسي عربي للسادس الإعدادي (بناء جديد مبسط وسريع)",
   "type": "module",
   "engines": {
     "node": ">=22.3.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "node production-server.mjs",
-    "preview": "vite preview",
-    "test": "node --test",
-    "curriculum:import": "node scripts/import-numbered-book.mjs",
-    "curriculum:reindex": "node scripts/rebuild-curriculum-index.mjs",
-    "curriculum:pdf-index": "node scripts/rebuild-pdf-index.mjs",
-    "curriculum:validate": "node scripts/validate-curriculum.mjs",
-    "curriculum:rebuild": "node scripts/rebuild-curriculum.mjs"
-  },
-  "devDependencies": {
-    "vite": "^6.3.0"
-  },
-  "dependencies": {
-    "@napi-rs/canvas": "^1.0.6",
-    "connect": "^3.7.0",
-    "formidable": "^3.5.4",
-    "pdf-parse": "^2.4.5",
-    "pdfjs-dist": "^6.2.108",
-    "sirv": "^3.0.2"
+    "start": "node server.mjs",
+    "build-index": "node scripts/build-index.mjs",
+    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs"
   }
 }

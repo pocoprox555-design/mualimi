@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a3d">
+<meta name="description" content="معلمي — مساعد رحما الدراسي للسادس الإعدادي العراقي">
+<title>معلمي | رفيق رحما الدراسي</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="offlineBar" class="offline-bar" hidden>انقطع الاتصال بالإنترنت — سأحاول تلقائيًا عند عودته</div>
+
+<!-- شاشة الترحيب -->
+<section id="welcome" class="welcome" hidden>
+  <div class="welcome-card">
+    <div class="logo">م</div>
+    <p class="eyebrow">رفيقك في السادس الإعدادي</p>
+    <h1>أهلاً بكِ يا رحما</h1>
+    <p class="muted">أنا المعلم. أشرح لكِ من كتبك المدرسية، وأتذكر طريقنا معًا.</p>
+    <div class="branch-grid" role="group" aria-label="الفرع الدراسي">
+      <button class="branch" data-b="أحيائي"><b>أحيائي</b><small>علوم الحياة والمواد الأساسية</small></button>
+      <button class="branch" data-b="تطبيقي"><b>تطبيقي</b><small>الرياضيات والعلوم التطبيقية</small></button>
+      <button class="branch" data-b="أدبي"><b>أدبي</b><small>اللغة والإنسان والمجتمع</small></button>
+    </div>
+    <button id="startBtn" class="btn primary big" disabled>ابدئي مع المعلم ←</button>
+  </div>
+</section>
+
+<!-- التطبيق -->
+<div id="app" class="app" hidden>
+  <header class="top">
+    <div class="brand"><span class="logo sm">م</span><div><b>المعلم</b><span id="status" class="status"><i></i><em>جارٍ إيقاظ الخادم…</em></span></div></div>
+    <div class="top-actions">
+      <span id="branchPill" class="pill"></span>
+      <button id="settingsBtn" class="icon-btn" aria-label="الإعدادات">⚙</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="side">
+      <button class="btn primary" id="newChatSide">＋ محادثة جديدة</button>
+      <nav class="tabs">
+        <button data-v="chat" class="tab on">◒ الدرس</button>
+        <button data-v="history" class="tab">▤ محادثاتي</button>
+        <button data-v="exams" class="tab">◷ مواعيدي</button>
+      </nav>
+      <div id="sideHistory" class="side-history"></div>
+      <footer class="side-foot">معلمي · يعمل من كتبك المدرسية</footer>
+    </aside>
+
+    <main class="main">
+      <section id="v-chat" class="view">
+        <div class="chat-head"><div><h2 id="chatTitle">محادثة جديدة</h2><p id="srcLine" class="muted small"></p></div>
+          <button id="newChatBtn" class="btn ghost">＋ جديدة</button></div>
+        <div id="msgs" class="msgs" aria-live="polite"></div>
+        <div id="imgPrev" class="img-prev" hidden></div>
+        <div class="composer">
+          <input id="imgInput" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+          <button id="attachBtn" class="icon-btn" title="إرفاق صورة">⊕</button>
+          <textarea id="input" rows="1" maxlength="6000" placeholder="اكتبي سؤالك… (مثال: اشرح درس الاستعارة صفحة 42)"></textarea>
+          <button id="sendBtn" class="send" aria-label="إرسال">↑</button>
+          <button id="stopBtn" class="send stop" aria-label="إيقاف" hidden>■</button>
+        </div>
+        <div class="hints"><span>Enter للإرسال</span><span>·</span><button data-q="حضّري لي اختبارًا قصيرًا">اختبار</button><button data-q="لخّصي لي آخر درس">ملخص</button><button data-q="اصنعي لي خطة مذاكرة لهذا الأسبوع">خطة مذاكرة</button></div>
+      </section>
+
+      <section id="v-history" class="view" hidden>
+        <h2>محادثاتي</h2>
+        <input id="hSearch" class="field" type="search" placeholder="ابحثي في المحادثات…">
+        <div id="hList" class="h-list"></div>
+      </section>
+
+      <section id="v-exams" class="view" hidden>
+        <h2>مواعيدي</h2>
+        <form id="examForm" class="exam-form">
+          <input id="examTitle" class="field" maxlength="120" placeholder="مثال: امتحان الفيزياء" required>
+          <input id="examDate" class="field" type="date" required>
+          <button class="btn primary" type="submit">إضافة</button>
+        </form>
+        <div id="examList" class="exam-list"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- الإعدادات: المزود يُضبط من هنا -->
+<div id="settings" class="modal" hidden>
+  <div class="modal-card">
+    <div class="modal-head"><h2>الإعدادات</h2><button id="setClose" class="icon-btn">×</button></div>
+    <label>الفرع الدراسي
+      <select id="setBranch" class="field"><option value="">—</option><option>أحيائي</option><option>تطبيقي</option><option>أدبي</option></select>
+    </label>
+    <h3>مزوّد الذكاء الاصطناعي</h3>
+    <p class="muted small">اتركيها فارغة لاستخدام إعدادات الخادم. المفتاح يبقى على جهازك فقط.</p>
+    <label>مفتاح API <input id="setKey" class="field" type="password" dir="ltr" placeholder="اختياري" autocomplete="new-password"></label>
+    <label>الرابط (Endpoint) <input id="setEndpoint" class="field" type="url" dir="ltr" placeholder="https://…/v1"></label>
+    <label>النموذج (Model) <input id="setModel" class="field" dir="ltr" placeholder="mimo-v2.6-flash"></label>
+    <div class="row"><button id="testConn" class="btn ghost">اختبار الاتصال</button><span id="testRes" class="muted small"></span></div>
+    <div class="row end"><button id="setSave" class="btn primary">حفظ</button></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="/app.js" defer></script>
+</body>
+</html>
