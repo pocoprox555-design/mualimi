@@ -244,6 +244,8 @@ function errorCard(shell, msg, retryFn) {
 
 const errText = (e) => {
   const m = String(e?.message || e);
+  const d = String(e?.detail || '');
+  if (/subscription/i.test(d)) return 'مفتاح المزود يحتاج اشتراك Go نشطًا. حدّثي المفتاح من الإعدادات ⚙.';
   if (m.includes('NO_KEY')) return 'لا يوجد مفتاح. أضيفيه من الإعدادات ⚙ أو استخدمي إعدادات الخادم.';
   if (m.includes('TIMEOUT')) return 'استغرق الرد وقتًا طويلًا. أعيدي المحاولة.';
   if (m.includes('UPSTREAM_AUTH')) return 'المفتاح مرفوض من المزود. تحققي من المفتاح في الإعدادات ⚙.';
@@ -285,7 +287,7 @@ async function send(text, images, attempt = 1) {
       if (ev === 'citations') cites = data.items || [];
       else if (ev === 'delta') { full += data.text || ''; if (!raf) raf = requestAnimationFrame(paint); }
       else if (ev === 'done') done = true;
-      else if (ev === 'error') throw new Error(data.error || 'UPSTREAM_FAILED');
+      else if (ev === 'error') { const ex = new Error(data.error || 'UPSTREAM_FAILED'); ex.detail = data.detail || ''; throw ex; }
     }, { 'X-Session': conv.sid || conv.id });
     if (raf) cancelAnimationFrame(raf);
     if (!done && !full) throw new Error('EMPTY_REPLY');
