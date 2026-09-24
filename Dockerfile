@@ -5,6 +5,7 @@ COPY package.json ./
 COPY server.mjs ./server.mjs
 COPY lib ./lib
 COPY scripts ./scripts
+COPY test ./test
 COPY public ./public
 COPY curriculum-library ./curriculum-library
 RUN node scripts/build-index.mjs && npm test

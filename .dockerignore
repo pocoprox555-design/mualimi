@@ -4,6 +4,9 @@
 node_modules
 dist
 curriculum-data
+# ملفات PDF الخام (171MB) لا يحتاجها السيرفر الجديد — الفهارس المبنية تكفي
+curriculum-library/pdf-sources
+curriculum-library/legacy-text-sources
 .mimosa
 *.log
 .git
