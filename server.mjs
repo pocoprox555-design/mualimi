@@ -127,7 +127,7 @@ async function handleChat(req, res) {
         : st === 400 ? 'UPSTREAM_BAD_REQUEST'
         : st === 429 ? 'UPSTREAM_BUSY'
         : st ? `UPSTREAM_HTTP_${st}` : 'UPSTREAM_FAILED';
-      sseSend(res, 'error', { error: code });
+      sseSend(res, 'error', { error: code, detail: String(e?.detail || '').slice(0, 200) });
       res.end();
     }
   } finally {
