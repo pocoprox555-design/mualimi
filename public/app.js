@@ -332,7 +332,7 @@ function fillAssistantBubble(element, content, streaming = false) {
   if (streaming && quizPending(content)) {
     const loading = document.createElement('div');
     loading.className = 'quiz-loading';
-    loading.textContent = 'جارِ تجهيز الاختبار، لحظة من فضلك…';
+    loading.innerHTML = '<span class="status-orb"></span><span>جارِ تجهيز الاختبار، لحظة من فضلك…</span>';
     element.appendChild(loading);
     const typing = document.createElement('span');
     typing.className = 'typing';
@@ -606,49 +606,9 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status" data-phase="wait"><span class="typing"><i></i><i></i><i></i></span></div></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status"><span class="status-orb"></span><span class="status-text">جاري تجهيز الرد…</span></div></div><div class="inline-sources source-tray"></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
-}
-
-function statusPhrase(data) {
-  const detail = String(data?.detail || '').trim();
-  const book = (detail.split('—')[0] || '').trim();
-  switch (data?.phase) {
-    case 'outline': return `أفتح فهرس كتاب ${book || 'مادتك'}…`;
-    case 'search': return detail.startsWith('لم أجد') ? 'أوسع البحث في كتبك…' : 'أبحث في كتبك عن إجابتك…';
-    case 'page': {
-      const page = detail.match(/صفحة (\d+)/)?.[1];
-      return page ? `أقرأ صفحة ${page} من ${book}…` : 'أقرأ من كتابك…';
-    }
-    case 'compose': return 'قرأت المطلوب، بجهز لك الرد…';
-    case 'write': return 'بجهز لك الشرح…';
-    case 'fallback': return 'أعرضك مواضع كتابك الموثقة…';
-    default: return 'أفكر في سؤالك…';
-  }
-}
-
-function traceStep(shell, data) {
-  const status = shell?.querySelector('.teacher-status');
-  if (!status || !data) return;
-  showStatus(status, data);
-}
-
-function showStatus(status, data) {
-  if (status.dataset.phase === 'wait') status.innerHTML = '<span class="status-orb"></span><span class="status-text"></span>';
-  status.dataset.phase = data.phase || 'think';
-  status.title = String(data.detail || '').trim();
-  const text = status.querySelector('.status-text');
-  const phrase = statusPhrase(data);
-  if (text.textContent === phrase) return;
-  text.textContent = phrase;
-  text.classList.remove('swap');
-  void text.offsetWidth;
-  text.classList.add('swap');
-}
-
-function traceFinish(shell) {
-  shell?.querySelector('.teacher-status')?.remove();
 }
 
 function renderStream(shell, content) {
@@ -672,8 +632,7 @@ async function requestReply(conversation, question, images, shell) {
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
     }
     for await (const packet of sseEvents(response, abort.signal)) {
-      if (packet.event === 'step') traceStep(shell, packet.data);
-      if (packet.event === 'citations') { citations = packet.data.items || []; sourceCards(citations, $('#sourceTray')); traceStep(shell, { phase: 'compose' }); }
+      if (packet.event === 'citations') { citations = packet.data.items || []; sourceCards(citations, $('#sourceTray')); }
       if (packet.event === 'delta') {
         full += packet.data.text || '';
         if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
@@ -687,12 +646,10 @@ async function requestReply(conversation, question, images, shell) {
     conversation.updatedAt = Date.now();
     fillAssistantBubble(shell.querySelector('.message-bubble'), full);
     sourceCards(citations, shell.querySelector('.inline-sources'), true);
-    traceFinish(shell);
     clearSourceTray();
     saveState(); renderRecent();
   } catch (error) {
     if (paint) cancelAnimationFrame(paint);
-    traceFinish(shell);
     if (abort.signal.aborted) {
       if (full.trim()) {
         const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
