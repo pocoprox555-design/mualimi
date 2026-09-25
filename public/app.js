@@ -10,22 +10,17 @@ const MAX_CONVERSATIONS = 30;
 const uid = (prefix) => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
 
 const state = {
-  settings: { branch: '', apiKey: '' },
+  settings: { branch: '', apiKey: '', studentName: '' },
   books: [],
-  subjects: [],
   curriculum: null,
   ai: { configured: false },
   conversations: [],
   exams: [],
   activeId: null,
   view: 'learn',
-  selectedSubject: '',
-  libraryQuery: '',
-  libraryResults: [],
   pendingImages: [],
   request: null,
   composing: false,
-  searchTimer: null,
   booted: false,
 };
 
@@ -59,6 +54,7 @@ function loadState() {
     state.exams = Array.isArray(oldExams) ? oldExams : [];
   }
   if (!['أحيائي', 'تطبيقي', 'أدبي'].includes(state.settings.branch)) state.settings.branch = '';
+  state.settings.studentName = String(state.settings.studentName || '').trim().slice(0, 40);
   state.conversations = state.conversations.filter((conversation) => Array.isArray(conversation.messages)).slice(0, MAX_CONVERSATIONS);
   state.exams = state.exams.filter((exam) => exam?.title && exam?.date).slice(0, 80);
 }
@@ -135,7 +131,6 @@ function newChat() {
   state.activeId = null;
   state.composing = false;
   state.pendingImages = [];
-  state.libraryResults = [];
   state.view = 'learn';
   renderAll();
   $('#messageInput')?.focus();
@@ -143,15 +138,6 @@ function newChat() {
 
 function displayDate(timestamp) {
   try { return new Intl.DateTimeFormat('ar-IQ', { day: 'numeric', month: 'short' }).format(new Date(timestamp)); } catch { return ''; }
-}
-
-function bookInitial(book) {
-  return String(book?.subject || book?.title || 'م').replace(/^ال/, '').trim().slice(0, 1) || 'م';
-}
-
-function visibleBooks() {
-  const branch = state.settings.branch;
-  return state.books.filter((book) => !branch || branch === 'أدبي' || book.branch === 'عام' || book.branch === branch);
 }
 
 function providerHeaders() {
@@ -180,13 +166,10 @@ async function loadBootstrap() {
   try {
     const data = await fetchJson('/api/bootstrap', {}, 20_000);
     state.books = Array.isArray(data.books) ? data.books : [];
-    state.subjects = Array.isArray(data.subjects) ? data.subjects : [];
     state.curriculum = data.curriculum || null;
     state.ai = data;
     renderProviderStatus();
     setConnection('online', data.configured ? 'المعلم جاهز' : 'الكتب جاهزة · الذكاء غير مضبوط');
-    renderBooks();
-    renderLibrary();
   } catch (error) {
     setConnection('offline', 'تعذر الوصول للخادم');
     toast('تعذر تحميل الكتب الآن، حاولي تحديث الصفحة');
@@ -352,95 +335,6 @@ function renderRecent() {
   });
 }
 
-function renderBooks() {
-  const books = visibleBooks();
-  const featured = $('#featuredBooks');
-  if (!featured) return;
-  featured.innerHTML = '';
-  books.slice(0, 3).forEach((book) => {
-    const button = document.createElement('button');
-    button.className = 'book-tile';
-    button.innerHTML = `<div class="book-tile-top"><span class="book-label">${escapeHtml(bookInitial(book))}</span><span class="book-arrow">↗</span></div><h3>${escapeHtml(book.title)}</h3><small>${escapeHtml(book.subject)} · ${book.pageCount || 0} صفحة</small>`;
-    button.addEventListener('click', () => openLibraryForBook(book));
-    featured.appendChild(button);
-  });
-  if (!books.length) featured.innerHTML = '<div class="empty-state">لم تصل قائمة الكتب بعد.</div>';
-}
-
-function renderSubjectFilters() {
-  const element = $('#subjectFilters');
-  element.innerHTML = '';
-  const subjects = [...new Set(visibleBooks().map((book) => book.subject).filter(Boolean))];
-  [['', 'كل المواد'], ...subjects.map((subject) => [subject, subject])].forEach(([value, label]) => {
-    const button = document.createElement('button');
-    button.className = `filter-chip${state.selectedSubject === value ? ' active' : ''}`;
-    button.textContent = label;
-    button.addEventListener('click', () => { state.selectedSubject = value; renderLibrary(); });
-    element.appendChild(button);
-  });
-}
-
-function renderResultCards() {
-  const element = $('#libraryResults');
-  element.innerHTML = '';
-  if (!state.libraryQuery || state.libraryQuery.trim().length < 2) return;
-  if (!state.libraryResults.length) { element.innerHTML = '<div class="empty-state">لم أعثر على صفحة مطابقة. جربي اسم الدرس أو كلمة أقرب.</div>'; return; }
-  state.libraryResults.forEach((result) => {
-    const card = document.createElement('article');
-    card.className = 'result-card';
-    card.innerHTML = `<span class="result-book-mark">${escapeHtml(bookInitial(result))}</span><div class="result-content"><h3>${escapeHtml(result.pageTitle || result.title)}</h3><p>${escapeHtml(result.summary || result.preview || '')}</p><div class="result-meta"><span>${escapeHtml(result.subject)}</span><span>${escapeHtml(result.printedPage ? `صفحة ${result.printedPage}` : `صفحة ${result.physicalPage}`)}</span>${result.needsOcr ? '<span>مصورة</span>' : ''}</div></div><button class="result-open" type="button" aria-label="فتح الصفحة">←</button>`;
-    card.querySelector('.result-open').addEventListener('click', () => openPage(result.bookId, result.physicalPage));
-    card.addEventListener('click', (event) => { if (!event.target.closest('button')) openPage(result.bookId, result.physicalPage); });
-    element.appendChild(card);
-  });
-}
-
-function renderLibraryBooks() {
-  const element = $('#libraryBooks');
-  element.innerHTML = '';
-  const books = visibleBooks().filter((book) => !state.selectedSubject || book.subject === state.selectedSubject);
-  if (!books.length) { element.innerHTML = '<div class="empty-state">لا توجد كتب لهذا الاختيار.</div>'; return; }
-  books.forEach((book) => {
-    const card = document.createElement('article');
-    card.className = 'library-book-card';
-    const kind = book.kind === 'teacher-guide' ? 'دليل مدرس' : book.kind === 'official-exercises' ? 'تمارين' : 'كتاب رسمي';
-    card.innerHTML = `<header><div><h3>${escapeHtml(book.title)}</h3><p>${escapeHtml(book.subject)} · ${escapeHtml(book.branch || 'عام')}</p></div><span class="book-kind">${kind}</span></header><div class="book-card-foot"><span>${book.pageCount || 0} صفحة · ${book.searchablePageCount || 0} قابلة للبحث</span><b>ابحثي فيه ←</b></div>`;
-    card.addEventListener('click', () => openLibraryForBook(book));
-    element.appendChild(card);
-  });
-}
-
-function renderLibrary() {
-  if (!$('#libraryBooks')) return;
-  $('#librarySearch').value = state.libraryQuery;
-  $('#clearLibrarySearch').hidden = !state.libraryQuery;
-  $('#libraryStats').textContent = state.curriculum ? `${state.curriculum.books} كتب · ${state.curriculum.pages} صفحة` : '';
-  renderSubjectFilters();
-  renderResultCards();
-  renderLibraryBooks();
-}
-
-function openLibraryForBook(book) {
-  state.view = 'library';
-  state.selectedSubject = book.subject || '';
-  state.libraryQuery = book.subject || book.title || '';
-  state.libraryResults = [];
-  renderAll();
-  searchLibrary();
-}
-
-async function searchLibrary() {
-  const query = state.libraryQuery.trim();
-  if (query.length < 2) { state.libraryResults = []; renderResultCards(); return; }
-  try {
-    const params = new URLSearchParams({ q: query, limit: '10', branch: state.settings.branch });
-    if (state.selectedSubject) params.set('subject', state.selectedSubject);
-    const data = await fetchJson(`/api/search?${params}`);
-    state.libraryResults = data.results || [];
-  } catch { state.libraryResults = []; }
-  if (state.view === 'library') renderResultCards();
-}
-
 function renderPlan() {
   const list = $('#examList');
   list.innerHTML = '';
@@ -486,15 +380,14 @@ function renderHistory() {
 }
 
 function setView(view) {
-  if (!['learn', 'library', 'plan', 'history'].includes(view)) view = 'learn';
+  if (!['learn', 'plan', 'history'].includes(view)) view = 'learn';
   state.view = view;
-  ['learn', 'library', 'plan', 'history'].forEach((name) => {
+  ['learn', 'plan', 'history'].forEach((name) => {
     const section = $(`#view-${name}`);
     if (section) section.hidden = name !== view;
   });
   $$('.nav-item, .mobile-nav-item').forEach((button) => button.classList.toggle('active', button.dataset.view === view));
   if (view === 'learn') showLearnPanel();
-  if (view === 'library') renderLibrary();
   if (view === 'plan') renderPlan();
   if (view === 'history') renderHistory();
   $('#sidebar').classList.remove('open');
@@ -502,9 +395,8 @@ function setView(view) {
 
 function renderAll() {
   $('#branchBadge').textContent = state.settings.branch ? `الفرع ${state.settings.branch}` : '';
-  $('#studentName').textContent = state.settings.branch ? `طالبة ${state.settings.branch}` : 'طالبة';
+  $('#studentName').textContent = state.settings.studentName || (state.settings.branch ? `طالبة ${state.settings.branch}` : 'طالبة');
   renderRecent();
-  renderBooks();
   setView(state.view);
 }
 
@@ -625,7 +517,7 @@ async function requestReply(conversation, question, images, shell) {
   if (images.length && last?.role === 'user') last.content = [{ type: 'text', text: question || 'اشرحي الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))];
   let full = ''; let citations = []; let finished = false; let paint = 0;
   try {
-    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, branch: state.settings.branch }) });
+    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, branch: state.settings.branch, studentName: state.settings.studentName || '' }) });
     if (!response.ok) {
       let data = {}; try { data = await response.json(); } catch { /* ignore */ }
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
@@ -697,7 +589,6 @@ function closeModal(id) { const element = $(`#${id}`); element.hidden = true; el
 
 function bindEvents() {
   $$('.nav-item, .mobile-nav-item').forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
-  $$('[data-go-view]').forEach((button) => button.addEventListener('click', () => setView(button.dataset.goView)));
   $$('.quick-action').forEach((button) => button.addEventListener('click', () => openComposer(button.dataset.prompt || '')));
   bindPromptButtons();
   $('#newChatButton').addEventListener('click', newChat); $('#chatNewButton').addEventListener('click', newChat); $('#mobileNewChat').addEventListener('click', newChat); $('#heroStartButton').addEventListener('click', () => openComposer());
@@ -710,11 +601,9 @@ function bindEvents() {
   $('#stopButton').addEventListener('click', () => state.request?.abort.abort(new DOMException('stopped', 'AbortError')));
   $('#attachButton').addEventListener('click', () => $('#imageInput').click());
   $('#imageInput').addEventListener('change', async (event) => { const file = event.target.files?.[0]; event.target.value = ''; if (!file) return; try { state.pendingImages = [await compressImage(file)]; renderPendingImages(); } catch { toast('تعذرت قراءة الصورة'); } });
-  $('#librarySearch').addEventListener('input', (event) => { state.libraryQuery = event.target.value; $('#clearLibrarySearch').hidden = !state.libraryQuery; clearTimeout(state.searchTimer); state.searchTimer = setTimeout(searchLibrary, 260); renderResultCards(); });
-  $('#clearLibrarySearch').addEventListener('click', () => { state.libraryQuery = ''; state.libraryResults = []; renderLibrary(); });
   $('#historySearch').addEventListener('input', renderHistory);
   $('#examForm').addEventListener('submit', (event) => { event.preventDefault(); const title = $('#examTitle').value.trim(); const date = $('#examDate').value; if (!title || !date) return; state.exams.push({ id: uid('e'), title, date }); saveState(); event.target.reset(); renderPlan(); toast('أُضيف الموعد إلى خطتك'); });
-  $('#settingsButton').addEventListener('click', () => { $('#settingsBranch').value = state.settings.branch || 'أحيائي'; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
+  $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#settingsBranch').value = state.settings.branch || 'أدبي'; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
   $('#saveProvider').addEventListener('click', async () => {
     const apiKey = $('#providerKey').value.trim();
     const result = $('#providerResult');
@@ -725,7 +614,7 @@ function bindEvents() {
     toast(apiKey ? 'حُفظ المفتاح' : 'حُذف المفتاح');
     warmup();
   });
-  $('#saveSettings').addEventListener('click', () => { state.settings.branch = $('#settingsBranch').value; saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظ الفرع الدراسي'); });
+  $('#saveSettings').addEventListener('click', () => { state.settings.branch = $('#settingsBranch').value; state.settings.studentName = $('#settingsName').value.trim().slice(0, 40); saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظت إعداداتك'); });
   $('#resetData').addEventListener('click', () => { if (!confirm('سيتم حذف المحادثات والخطة من هذا الجهاز. هل أنت متأكدة؟')) return; state.conversations = []; state.exams = []; state.activeId = null; saveState(); closeModal('settingsModal'); renderAll(); toast('تم مسح البيانات المحلية'); });
   $$('[data-close-modal]').forEach((button) => button.addEventListener('click', () => closeModal(button.dataset.closeModal)));
   $$('.modal').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal.id); }));
@@ -734,16 +623,14 @@ function bindEvents() {
 }
 
 function enterApp() {
-  $('#onboarding').hidden = true; $('#app').hidden = false; state.booted = true; renderAll();
+  $('#app').hidden = false; state.booted = true; renderAll();
 }
 
 function boot() {
   loadState();
-  let chosen = state.settings.branch;
-  $$('.branch-choice').forEach((button) => button.addEventListener('click', () => { chosen = button.dataset.branch; $$('.branch-choice').forEach((item) => item.classList.toggle('selected', item === button)); $('#startButton').disabled = false; }));
-  $('#startButton').addEventListener('click', () => { if (!chosen) return; state.settings.branch = chosen; saveState(); enterApp(); });
+  if (!state.settings.branch) { state.settings.branch = 'أدبي'; saveState(); }
   bindEvents();
-  if (state.settings.branch) enterApp(); else $('#onboarding').hidden = false;
+  enterApp();
   if (!navigator.onLine) $('#offlineBar').hidden = false;
   loadBootstrap();
   warmup();

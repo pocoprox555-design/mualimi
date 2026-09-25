@@ -13,29 +13,6 @@
 <body>
   <div id="offlineBar" class="offline-bar" hidden>لا يوجد اتصال حاليا. ستبقى كتبك ومحادثاتك المتاحة على الجهاز.</div>
 
-  <section id="onboarding" class="onboarding" hidden>
-    <div class="onboarding-orbit orbit-one"></div>
-    <div class="onboarding-orbit orbit-two"></div>
-    <div class="onboarding-card">
-      <div class="brand-lockup brand-lockup-large">
-        <span class="brand-mark">م</span>
-        <span><strong>معلمي</strong><small>رفيق الفهم، لا الحفظ فقط</small></span>
-      </div>
-      <div class="welcome-copy">
-        <span class="kicker">بداية هادئة</span>
-        <h1>من أي فرع<br><em>نبدأ اليوم؟</em></h1>
-        <p>أخبريني بفرعك لأرتب لك الكتب، وأعثر على الدرس الصحيح قبل أن أجيب.</p>
-      </div>
-      <div id="branchChoices" class="branch-choices" role="group" aria-label="اختيار الفرع الدراسي">
-        <button class="branch-choice" data-branch="أحيائي"><span class="choice-symbol">◌</span><span><b>أحيائي</b><small>العلوم والحياة</small></span><i>←</i></button>
-        <button class="branch-choice" data-branch="تطبيقي"><span class="choice-symbol">⌁</span><span><b>تطبيقي</b><small>الرياضيات والتطبيق</small></span><i>←</i></button>
-        <button class="branch-choice" data-branch="أدبي"><span class="choice-symbol">✦</span><span><b>أدبي</b><small>اللغة والإنسان</small></span><i>←</i></button>
-      </div>
-      <button id="startButton" class="button button-primary button-wide" disabled>ابدئي رحلتك <span>←</span></button>
-      <p class="privacy-note"><span>●</span> محادثاتك تحفظ على جهازك، ومفتاح الذكاء يبقى في الخادم.</p>
-    </div>
-  </section>
-
   <div id="app" class="app-shell" hidden>
     <header class="app-header">
       <button id="mobileMenuButton" class="icon-button mobile-only" aria-label="فتح القائمة">☰</button>
@@ -55,7 +32,6 @@
         <button id="newChatButton" class="button button-primary new-chat-button"><span>＋</span> جلسة جديدة</button>
         <nav class="side-nav" aria-label="التنقل الرئيسي">
           <button class="nav-item active" data-view="learn"><span class="nav-icon">◈</span> جلسة التعلم</button>
-          <button class="nav-item" data-view="library"><span class="nav-icon">▤</span> مكتبة الكتب</button>
           <button class="nav-item" data-view="plan"><span class="nav-icon">◇</span> خطتي</button>
           <button class="nav-item" data-view="history"><span class="nav-icon">◷</span> محادثاتي</button>
         </nav>
@@ -85,8 +61,6 @@
               <button class="quick-action action-summary" data-prompt="لخص لي موضوعا من كتابي في نقاط واضحة مع أهم ما يجب حفظه."><span class="action-icon">≋</span><b>لخص لي</b><small>خلاصة لا تضيع الوقت</small></button>
               <button class="quick-action action-plan" data-prompt="ساعدني في وضع خطة مذاكرة عملية لهذا الأسبوع حسب مواد السادس."><span class="action-icon">◷</span><b>خطط لوقتي</b><small>خطة قابلة للتنفيذ</small></button>
             </div>
-            <div class="section-heading books-heading"><div><span class="kicker">كتبك القريبة</span><h2>ابدئي من مادة</h2></div><button class="text-button" data-go-view="library">عرض الكل <span>←</span></button></div>
-            <div id="featuredBooks" class="featured-books"></div>
           </div>
 
           <div id="chatPanel" class="chat-panel" hidden>
@@ -109,14 +83,6 @@
           </div>
         </section>
 
-        <section id="view-library" class="view" hidden>
-          <div class="view-heading"><div><span class="kicker">المصدر قبل الجواب</span><h1>مكتبة كتبك</h1><p>ابحثي عن درس أو افتحي صفحة مباشرة من الكتاب.</p></div><span id="libraryStats" class="stat-pill"></span></div>
-          <div class="library-search"><span>⌕</span><input id="librarySearch" type="search" placeholder="ابحثي: الاستفهام، أحكام التلاوة..." autocomplete="off"><button id="clearLibrarySearch" type="button" hidden>×</button></div>
-          <div id="subjectFilters" class="filter-row"></div>
-          <div id="libraryResults" class="library-results"></div>
-          <div id="libraryBooks" class="library-books"></div>
-        </section>
-
         <section id="view-plan" class="view" hidden>
           <div class="view-heading"><div><span class="kicker">خطوة كل يوم</span><h1>خطة مذاكرتك</h1><p>ضعي مواعيدك هنا ليبقى الطريق واضحا أمامك.</p></div><span class="plan-sun">☼</span></div>
           <div class="plan-highlight"><div><span class="kicker light">الموعد الأقرب</span><strong id="nextExamLabel">لا توجد مواعيد بعد</strong><small id="nextExamMeta">أضيفي امتحانا أو هدفا دراسيا.</small></div><span id="nextExamDays" class="days-badge">—</span></div>
@@ -135,7 +101,6 @@
 
     <nav class="mobile-nav" aria-label="تنقل الجوال">
       <button class="mobile-nav-item active" data-view="learn"><span>◈</span><small>التعلم</small></button>
-      <button class="mobile-nav-item" data-view="library"><span>▤</span><small>الكتب</small></button>
       <button id="mobileNewChat" class="mobile-new-chat" aria-label="جلسة جديدة">＋</button>
       <button class="mobile-nav-item" data-view="plan"><span>◇</span><small>خطتي</small></button>
       <button class="mobile-nav-item" data-view="history"><span>◷</span><small>جلساتي</small></button>
@@ -152,6 +117,7 @@
   <div id="settingsModal" class="modal" hidden aria-hidden="true">
     <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="modal-header"><div><span class="kicker">مساحتك</span><h2 id="settingsTitle">الإعدادات</h2></div><button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button></div>
+      <label for="settingsName">اسمك</label><input id="settingsName" class="field" maxlength="40" placeholder="شلون منناديچ؟ (اختياري)" autocomplete="nickname">
       <label for="settingsBranch">الفرع الدراسي</label><select id="settingsBranch" class="field"><option>أحيائي</option><option>تطبيقي</option><option>أدبي</option></select>
       <div class="settings-note"><span>i</span><p>معلمي يبحث في الكتب محليا. يمكنك تغيير الفرع والمفتاح من هنا في أي وقت.</p></div>
       <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق من الخادم...</span></div>

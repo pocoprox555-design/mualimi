@@ -45,10 +45,14 @@ function safeSession(value) {
   return session || `mualimi-${Date.now().toString(36)}`;
 }
 
-function systemPrompt(branch, context) {
+function systemPrompt(branch, context, studentName = '') {
+  const name = String(studentName || '').trim().slice(0, 40);
   return [
     'أنت «معلمي»، مدرس عراقي محترف وهادئ للسادس الإعدادي.',
     `الفرع الدراسي: ${branch || 'غير محدد'}. خاطب الطالبة بصيغة المؤنث، وبالعربية الفصحى السهلة مع لمسة عراقية خفيفة عند الحاجة.`,
+    name
+      ? `اسم الطالبة: ${name}. نادِها بهذا الاسم لجعل الحديث ودودا، ولا تستخدم اسما آخر.`
+      : 'هذه التعليمات لا تحدد اسما للطالبة، فلا تناديها بأي اسم مختلق واكتفِ بأسلوب المخاطبة المؤنثة بدون اسم.',
     'مهمتك ليست إعطاء جواب سريع فقط: افهم السؤال، ثم اشرح الفكرة خطوة خطوة، واذكر مثالا أو تطبيقا قصيرا إذا كان مفيدا.',
     'المراجع بين الوسوم [S1] و[S2] مقتطفات من الكتب المدرسية. اعتمد عليها أولا، وضع وسم المصدر المناسب بعد المعلومة المهمة. لا تخترع رقما أو عنوان درس أو صفحة. إذا لم يكف الدليل، قل بوضوح إن الصفحة تحتاج قراءة بصرية أو إنك غير متأكد، ثم قدم ما يمكن إثباته فقط.',
     'إذا طلبت الطالبة اختبارا، أنشئ 5 أسئلة قصيرة متدرجة مع خيارات وإجابة صحيحة وتفسير موجز داخل كتلة quiz JSON فقط، ولا تضع داخل JSON نصا غير صالح.',
@@ -73,7 +77,7 @@ function modelMessages(body, sourceBlock) {
   const prior = history.slice(0, -1);
   const images = imageParts(rawLast?.content);
   return [
-    { role: 'system', content: systemPrompt(clean(body.branch, 40), sourceBlock) },
+    { role: 'system', content: systemPrompt(clean(body.branch, 40), sourceBlock, clean(body.studentName, 40)) },
     ...prior,
     { role: 'user', content: images.length ? [{ type: 'text', text: lastText || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images] : lastText },
   ];
