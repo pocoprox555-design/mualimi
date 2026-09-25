@@ -605,41 +605,43 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="teacher-trace" hidden></div><div class="message-bubble"><span class="typing"><i></i><i></i><i></i></span></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status" data-phase="think"><span class="status-orb"></span><span class="status-text">أفكر في سؤالك…</span></div></div><div class="inline-sources source-tray"></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
 }
 
+function statusPhrase(data) {
+  const detail = String(data?.detail || '').trim();
+  switch (data?.phase) {
+    case 'outline': return 'فتحت فهرس الكتاب…';
+    case 'search': return detail.startsWith('لم أجد') ? 'أوسع البحث في كتبك…' : 'بحثت في الكتب…';
+    case 'page': {
+      const page = detail.match(/صفحة (\d+)/)?.[1];
+      const book = (detail.split('—')[0] || '').trim();
+      return page ? `أقرأ صفحة ${page} من ${book}…` : 'أقرأ من كتابك…';
+    }
+    case 'write': return 'أكتب الشرح الآن…';
+    case 'fallback': return 'أعرضك مواضع كتابك الموثقة…';
+    default: return detail ? `${detail}…` : 'أفكر في سؤالك…';
+  }
+}
+
 function traceStep(shell, data) {
-  const trace = shell?.querySelector('.teacher-trace');
-  if (!trace || !data) return;
-  trace.hidden = false;
-  const current = trace.querySelector('.trace-step.active');
-  if (current) { current.classList.remove('active'); current.classList.add('done'); current.querySelector('.trace-mark').textContent = '✓'; }
-  const item = document.createElement('div');
-  item.className = `trace-step active phase-${data.phase || ''}`;
-  item.innerHTML = `<span class="trace-mark"></span><span class="trace-text"><b>${escapeHtml(data.label || '')}</b><small>${escapeHtml(data.detail || '')}</small></span>`;
-  trace.appendChild(item);
-  $('#messageList').scrollTop = $('#messageList').scrollHeight;
+  const status = shell?.querySelector('.teacher-status');
+  if (!status || !data) return;
+  status.dataset.phase = data.phase || 'think';
+  status.title = String(data.detail || '').trim();
+  const text = status.querySelector('.status-text');
+  const phrase = statusPhrase(data);
+  if (text.textContent === phrase) return;
+  text.textContent = phrase;
+  text.classList.remove('swap');
+  void text.offsetWidth;
+  text.classList.add('swap');
 }
 
 function traceFinish(shell) {
-  const trace = shell?.querySelector('.teacher-trace');
-  if (!trace || trace.hidden) return;
-  const current = trace.querySelector('.trace-step.active');
-  if (current) { current.classList.remove('active'); current.classList.add('done'); current.querySelector('.trace-mark').textContent = '✓'; }
-  const steps = trace.querySelectorAll('.trace-step').length;
-  if (steps >= 3) {
-    trace.classList.add('collapsed');
-    const toggle = document.createElement('button');
-    toggle.type = 'button'; toggle.className = 'trace-toggle';
-    toggle.textContent = `مسار المعلم · ${steps} خطوات`;
-    toggle.addEventListener('click', () => {
-      trace.classList.toggle('collapsed');
-      toggle.textContent = trace.classList.contains('collapsed') ? `مسار المعلم · ${steps} خطوات` : 'إخفاء مسار المعلم';
-    });
-    trace.prepend(toggle);
-  }
+  shell?.querySelector('.teacher-status')?.remove();
 }
 
 function renderStream(shell, content) {
