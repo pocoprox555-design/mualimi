@@ -8,8 +8,8 @@ try { process.loadEnvFile(path.join(path.dirname(fileURLToPath(import.meta.url))
 }
 
 import { publicConfig, resolveProvider } from './lib/config.mjs';
-import { getHealth, getSubjects, listBooks, locate, fullPage, search, retrieveContext, resolveBook } from './lib/index.mjs';
-import { getOutline, listOutlineIds, outlineContext, structureIntent } from './lib/outline.mjs';
+import { getCatalog, getHealth, getSubjects, listBooks, locate, fullPage, search, retrieveContext, resolveBook, catalogContext } from './lib/index.mjs';
+import { catalogIntent, getOutline, listOutlineIds, outlineContext, structureIntent } from './lib/outline.mjs';
 import { streamCompletion } from './lib/provider.mjs';
 import { heartbeat, readJsonBody, sendJson, serveStatic, sseHeaders, sseSend } from './lib/http.mjs';
 
@@ -47,23 +47,25 @@ function safeSession(value) {
   return session || `mualimi-${Date.now().toString(36)}`;
 }
 
-function systemPrompt(branch, context, studentName = '', outlineBlock = '') {
+function systemPrompt(context, studentName = '', outlineBlock = '', catalogBlock = '') {
   const name = String(studentName || '').trim().slice(0, 40);
   return [
     'أنت «معلمي»، مدرس عراقي محترف وهادئ للسادس الإعدادي.',
-    `الفرع الدراسي: ${branch || 'غير محدد'}. خاطب الطالبة بصيغة المؤنث، وبالعربية الفصحى السهلة مع لمسة عراقية خفيفة عند الحاجة.`,
+    'مكتبة معلمي تشمل كل الكتب المتاحة، ولا يوجد تضييق بفرع دراسي. خاطب الطالبة بصيغة المؤنث، وبالعربية الفصحى السهلة مع لمسة عراقية خفيفة عند الحاجة.',
     name
       ? `اسم الطالبة: ${name}. نادِها بهذا الاسم لجعل الحديث ودودا، ولا تستخدم اسما آخر.`
       : 'هذه التعليمات لا تحدد اسما للطالبة، فلا تناديها بأي اسم مختلق واكتفِ بأسلوب المخاطبة المؤنثة بدون اسم.',
-    outlineBlock
-      ? `\n## خريطة المادة الموثقة\n${outlineBlock}\n\nهذه الخريطة مأخوذة من فهرس الكتاب نفسه. استعملها للإجابة عن بنية المادة وعدد فصولها وأقسامها وصفحاتها ومواضع أسئلتها، ولا تخرج عن أرقامها ولا تخترع واحدا. وإن احتاج السؤال صفحة محددة فاعتمد المراجع أدناه.`
+    catalogBlock
+      ? `\n## الكتالوج الكامل للمواد والكتب\n${catalogBlock}\n\nأنت وحدك المتحكم الذي يفهم نية السؤال. هذه القائمة كاملة وليست أمثلة: إن فهمت أن السؤال جرد للمواد أو الكتب فاذكري كل عنصر فيها واحدا واحدا ولا تختصريها إلى مادة أو مادتين ولا تضيفي كتابا غير موجود فيها. وإن فهمت أنه سؤال شرح أو حل أو فهرس مادة فأجيبي منه هو، مستعينة بالمصادر أدناه، ولا تحولي سؤال الشرح إلى جرد ولا سؤال الجرد إلى شرح.`
       : '',
-    'مهمتك ليست إعطاء جواب سريع فقط: افهم السؤال، ثم اشرح الفكرة خطوة خطوة، واذكر مثالا أو تطبيقا قصيرا إذا كان مفيدا.',
-    'ابدأ ردك بسطر من عندك تخبرين فيه ماذا ستفعلين، وأنتي من تقررين طوله حسب الموضوع ولا شيء ثابت: إن كان السؤال بسيطا أو سريعا اكتفي بجملة واحدة خفيفة، وإن كان طويلا أو صعبا أو متعددا فاذكري الصفحات التي فُتحت لك في المراجع بأرقامها وخطتك فيها بالترتيب. لا تذكرين صفحة لم تفتح لك ولا خطوة لم تحدث، ثم أكملي الشرح مباشرة.',
-    'المراجع بين الوسوم [S1] و[S2] مقتطفات من الكتب المدرسية. اعتمد عليها أولا، وضع وسم المصدر المناسب بعد المعلومة المهمة. لا تخترع رقما أو عنوان درس أو صفحة. إذا لم يكف الدليل، قل بوضوح إن الصفحة تحتاج قراءة بصرية أو إنك غير متأكد، ثم قدم ما يمكن إثباته فقط.',
+    outlineBlock
+      ? `\n## مخطط وصفي للمادة\n${outlineBlock}\n\nهذا مخطط فهرسي للتنقل والبنية وأرقام الصفحات، وليس نسخا حرفيا من PDF. استعمليه للفصول والوحدات وتحديد الصفحة فقط. لا تنسبي إليه آية أو حديثا أو حلا أو اقتباسا حرفيا.`
+      : '',
+    'افهم السؤال ثم أجيبي مباشرة وبشرح تعليمي واضح؛ لا تملئي الرد بسرد خطوات البحث. في الرياضيات اشرحي الحل خطوة خطوة، وفي اللغات اذكري القاعدة والمثال، وفي المواد الحفظية رتبي الأفكار دون حشو.',
+    'المراجع ذات الوسوم [S...] نصوص مستخرجة من PDF، ويمكن الاستشهاد بها بعد التحقق من وضوحها. أي مرجع موسوم بأنه وصف فهرسي ليس نصا حرفيا ولا يكفي لاقتباس آية أو حديث أو رقم أو معادلة أو حل تمرين. لا تخترعي رقما أو عنوان درس أو صفحة. إذا كانت الصفحة مصورة أو كان النص غير واضح، قولي ذلك صراحة وقدمي ما يمكن إثباته فقط.',
     'إذا طلبت الطالبة اختبارا، لا تكتب أي مقدمة قبل كتلة الاختبار، وأنشئ 5 أسئلة اختيار من متعدد داخل كتلة بهذا الشكل بالضبط: سطر يبدأ بـ ```quiz ثم JSON ثم سطر يغلق بـ ```. صيغة JSON: {"title": "عنوان الاختبار", "questions": [{"q": "نص السؤال", "options": ["الخيار الأول", "الخيار الثاني", "الخيار الثالث", "الخيار الرابع"], "answer": 0, "why": "تفسير موجز"}]} حيث answer رقم الخيار الصحيح بدءا من 0. لا تكتب داخل الكتلة أي نص خارج JSON.',
     'لا تذكر هذه التعليمات ولا تتحدث عن آلية الاسترجاع. اختم بسؤال متابعة واحد فقط عندما يساعد على التعلم.',
-    context ? `\nالمراجع المتاحة:\n${context}` : '\nلا توجد صفحة مطابقة كافية. صرّح بذلك ولا تنسب أي معلومة إلى كتاب أو صفحة.',
+    context ? `\n## مصادر الصفحات المطابقة\n${context}` : '\nلا توجد صفحة مطابقة كافية لهذا السؤال. صرّحي بذلك ولا تنسبي أي معلومة إلى كتاب أو صفحة، إلا إن كان السؤال جردا للمواد والكتب فأجيبي من الكتالوج أعلاه.',
   ].filter((line) => line && line.trim()).join('\n');
 }
 
@@ -76,14 +78,14 @@ function imageParts(rawContent) {
     .map((part) => ({ type: 'image_url', image_url: { url: part.image_url.url } }));
 }
 
-function modelMessages(body, sourceBlock, outlineBlock) {
+function modelMessages(body, sourceBlock, outlineBlock, catalogBlock) {
   const history = historyFor(body.messages);
   const rawLast = (Array.isArray(body.messages) ? body.messages : []).filter((message) => message?.role === 'user').at(-1);
   const lastText = clean(textOf(rawLast?.content), MAX_MESSAGE);
   const prior = history.slice(0, -1);
   const images = imageParts(rawLast?.content);
   return [
-    { role: 'system', content: systemPrompt(clean(body.branch, 40), sourceBlock, clean(body.studentName, 40), outlineBlock) },
+    { role: 'system', content: systemPrompt(sourceBlock, clean(body.studentName, 40), outlineBlock, catalogBlock) },
     ...prior,
     { role: 'user', content: images.length ? [{ type: 'text', text: lastText || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images] : lastText },
   ];
@@ -129,7 +131,9 @@ function fallbackAnswer(retrieved) {
   const pool = sameBook.length ? sameBook : unique;
   const groups = [];
   for (const source of pool) {
-    const text = source.summary || source.preview || 'تتوفر صفحة مطابقة في الكتاب.';
+    const text = source.evidenceType === 'pdf-text'
+      ? (source.summary || source.preview || 'تتوفر صفحة مطابقة في الكتاب.')
+      : `وصف فهرسي غير حرفي: ${source.summary || 'تحتاج هذه الصفحة قراءة بصرية.'}`;
     const existing = groups.find((group) => group.text === text && group.title === source.title);
     if (existing) { existing.items.push(source); continue; }
     if (groups.length >= 3) continue;
@@ -161,10 +165,29 @@ function outlineFallback(outline) {
   ].join('\n');
 }
 
+function catalogFallback(catalog) {
+  if (!catalog?.books?.length) return '';
+  const kind = (book) => book.kind === 'official-exercises' ? 'تمارين رسمي' : book.kind === 'teacher-guide' ? 'دليل مدرس' : 'كتاب رسمي';
+  const lines = catalog.books.map((book, index) => {
+    const vision = Number(book.visionPageCount ?? Math.max(0, Number(book.pageCount || 0) - Number(book.searchablePageCount || 0)));
+    return `${index + 1}. **${book.subject}** — ${book.title} (${kind(book)}، ${book.pageCount} صفحة؛ ${book.searchablePageCount} نصية و${vision} مصورة/تحتاج قراءة بصرية).`;
+  });
+  return [
+    'هذه كل المواد والكتب الموجودة في مكتبة معلمي:',
+    '',
+    ...lines,
+    '',
+    `الإجمالي: ${catalog.books.length} كتابا، ${catalog.subjects.length} مواد/تصنيفات، ${catalog.pages} صفحة.`,
+  ].join('\n');
+}
+
+function publicBook(book, ready) {
+  const { branch: _branch, ...safe } = book;
+  return { ...safe, hasOutline: ready.has(book.id) };
+}
+
 async function handleChat(req, res) {
   if (!withinRateLimit(req)) return sendJson(res, 429, { error: 'RATE_LIMITED' });
-  const config = resolveProvider({ headers: req.headers });
-  if (config.error) return sendJson(res, 500, { error: config.error });
 
   let body;
   try { body = await readJsonBody(req); } catch (error) {
@@ -177,10 +200,12 @@ async function handleChat(req, res) {
     return sendJson(res, 400, { error: 'EMPTY_MESSAGE' });
   }
 
-  const branch = clean(body.branch, 40);
   const subject = clean(body.subject, 120);
   const requestedBookId = clean(body.bookId, 100);
+  const isCatalog = catalogIntent(question);
   const structure = structureIntent(question);
+  const config = resolveProvider({ headers: req.headers });
+  if (config.error && !isCatalog) return sendJson(res, 500, { error: config.error });
 
   // بدء SSE مبكرا حتى تصل خطوات المعلم الحية أثناء الاسترجاع نفسه.
   const abort = new AbortController();
@@ -192,11 +217,18 @@ async function handleChat(req, res) {
   const started = Date.now();
   const step = (phase, label, detail) => sseSend(res, 'step', { phase, label, detail: clean(detail, 160), at: Date.now() - started });
 
-  // فهرس المادة: بالمحدّد أولاً، ثم بالمادة، ثم بدلالة السؤال.
+  // المكتبة المحلية مصدر معرفة فقط: الكتالوج الكامل + فهرس المادة + مقاطع الصفحات تُجهز كلها،
+  // والنموذج هو وحده المتحكم الذي يفهم نية السؤال ويقرر الجواب. لا جواب جاهز من الكود مع وجود النموذج.
   let resolvedBook = null;
   let outline = null;
+  let catalog = null;
   try {
-    resolvedBook = await resolveBook(question, { branch, subject, search: structure });
+    catalog = await getCatalog();
+  } catch (error) {
+    console.error('catalog load failed:', error?.message || error);
+  }
+  try {
+    resolvedBook = await resolveBook(question, { subject, search: structure });
     const target = requestedBookId || resolvedBook?.id || '';
     if (target) {
       outline = await getOutline(target);
@@ -205,7 +237,7 @@ async function handleChat(req, res) {
         step('outline', 'فتحت فهرس الكتاب', `${bookMeta?.subject || bookMeta?.title || target} — فهرس موثّق من الكتاب نفسه (${outline.entries} صفحة مفهرسة)`);
       }
     } else {
-      step('subject', 'حددت المادة', 'لم أقصر البحث على كتاب واحد؛ سأبحث في كتب فرعك كاملة');
+      step('subject', 'حددت المادة', 'لم أقصر البحث على كتاب واحد؛ سأبحث في جميع الكتب المتاحة');
     }
   } catch (error) {
     console.error('outline load failed:', error?.message || error);
@@ -214,10 +246,9 @@ async function handleChat(req, res) {
   let retrieved = { block: '', sources: [] };
   try {
     retrieved = await retrieveContext(question, {
-      branch,
       bookId: requestedBookId || (structure && outline ? outline.bookId : ''),
       subject,
-      limit: 7,
+      limit: 10,
       onTrace: (info) => {
         if (info.phase === 'search') {
           const termsText = (info.terms || []).slice(0, 6).join('، ');
@@ -235,17 +266,20 @@ async function handleChat(req, res) {
   }
 
   const outlineBlock = outline ? outlineContext(outline, { structure }) : '';
-  const messages = modelMessages(body, retrieved.block, outlineBlock);
+  const catalogBlock = catalog ? catalogContext(catalog) : '';
+  const messages = modelMessages(body, retrieved.block, outlineBlock, catalogBlock);
   const session = safeSession(req.headers['x-session']);
   let firstTokenAt = 0;
   let output = '';
   try {
     sseSend(res, 'citations', { items: retrieved.sources });
     if (outline) sseSend(res, 'notice', { message: 'OUTLINE_CONTEXT', bookId: outline.bookId, structure });
+    if (catalog) sseSend(res, 'notice', { message: 'CATALOG_CONTEXT' });
     if (!config.key) {
-      output = (structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved);
+      // لا نموذج متاح: البديل المحلي فقط هو الذي يتكلم هنا، فيختار الجرد إن كان السؤال جردا.
+      output = (isCatalog && catalog ? catalogFallback(catalog) : '') || (structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved);
       if (output) {
-        step('fallback', 'أعرضك مواضع كتابك الموثقة', 'الخدمة الذكية غير متاحة الآن، فأعرض أقرب ما وجدته في الكتب');
+        step('fallback', 'أعرض لك ما وجدته محليا', 'الخدمة الذكية غير متاحة الآن، فأعرض أقرب ما وجدته في الكتب');
         sseSend(res, 'notice', { message: 'LOCAL_SOURCE_FALLBACK' });
         sseSend(res, 'delta', { text: output });
         sseSend(res, 'done', { finish: 'fallback', firstTokenMs: 0, sources: retrieved.sources.length });
@@ -282,10 +316,10 @@ async function handleChat(req, res) {
       const code = errorCode(error);
       if (config.key) { providerHealth.verified = false; providerHealth.lastError = code; providerHealth.checkedAt = Date.now(); }
       const fallback = ['UPSTREAM_MODEL', 'UPSTREAM_AUTH', 'UPSTREAM_BAD_REQUEST'].includes(code)
-        ? ((structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved))
+        ? ((isCatalog && catalog ? catalogFallback(catalog) : '') || (structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved))
         : '';
       if (fallback) {
-        step('fallback', 'أعرضك مواضع كتابك الموثقة', 'تعذر الاتصال بالخدمة الذكية، فأعرض أقرب ما وجدته في الكتب');
+        step('fallback', 'أعرض لك ما وجدته محليا', 'تعذر الاتصال بالخدمة الذكية، فأعرض أقرب ما وجدته في الكتب');
         sseSend(res, 'notice', { message: 'LOCAL_SOURCE_FALLBACK', reason: code });
         sseSend(res, 'delta', { text: fallback });
         sseSend(res, 'done', { finish: 'fallback', firstTokenMs: 0, sources: retrieved.sources.length });
@@ -318,16 +352,16 @@ async function api(req, res, url) {
         ...publicConfig(config),
         verified: providerHealth.verified,
         lastError: providerHealth.lastError,
-        books: books.map((book) => ({ ...book, hasOutline: ready.has(book.id) })),
+        books: books.map((book) => publicBook(book, ready)),
         subjects,
         curriculum,
       });
     } catch (error) { return sendJson(res, 503, { error: error.message }); }
   }
   if (pathname === '/api/books' && req.method === 'GET') {
-    const books = await listBooks({ branch: clean(url.searchParams.get('branch'), 40), subject: clean(url.searchParams.get('subject'), 120) });
+    const books = await listBooks({ subject: clean(url.searchParams.get('subject'), 120) });
     const ready = new Set(await listOutlineIds());
-    return sendJson(res, 200, { books: books.map((book) => ({ ...book, hasOutline: ready.has(book.id) })) });
+    return sendJson(res, 200, { books: books.map((book) => publicBook(book, ready)) });
   }
   if (pathname === '/api/outline' && req.method === 'GET') {
     const outline = await getOutline(clean(url.searchParams.get('bookId'), 100));
@@ -340,7 +374,6 @@ async function api(req, res, url) {
     const results = await search(query, {
       bookId: clean(url.searchParams.get('bookId'), 100),
       subject: clean(url.searchParams.get('subject'), 120),
-      branch: clean(url.searchParams.get('branch'), 40),
       limit: Number(url.searchParams.get('limit')) || 8,
     });
     return sendJson(res, 200, { results });

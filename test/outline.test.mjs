@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
-import { getOutline, listOutlineIds, outlineContext, structureIntent } from '../lib/outline.mjs';
+import { catalogIntent, getOutline, listOutlineIds, outlineContext, structureIntent } from '../lib/outline.mjs';
 import { resolveBook } from '../lib/index.mjs';
 
 test('كشف نية أسئلة بنية المادة', () => {
@@ -13,6 +13,16 @@ test('كشف نية أسئلة بنية المادة', () => {
   assert.equal(structureIntent('اشرح لي قانون الطلب'), false);
   assert.equal(structureIntent('من هو جون أوستن'), false);
   assert.equal(structureIntent(''), false);
+});
+
+test('كشف سؤال الكتالوج الكامل', () => {
+  assert.equal(catalogIntent('ما عندك من مواد'), true);
+  assert.equal(catalogIntent('ماهي المواد المتاحة؟'), true);
+  assert.equal(catalogIntent('وش عندكم من الكتب'), true);
+  assert.equal(catalogIntent('اعطني كل المواد'), true);
+  assert.equal(catalogIntent('ماذا كتب المؤلف؟'), false);
+  assert.equal(catalogIntent('ما كتب الطالب في الدرس؟'), false);
+  assert.equal(catalogIntent('ماذا يحتوي كتاب التاريخ'), false);
 });
 
 test('تحميل فهرس مادة موجودة', async () => {
@@ -38,7 +48,7 @@ test('كتلة السياق تكبر مع نية البنية وتبقى محد�
   assert.ok(rich.length > plain.length);
   assert.match(rich, /خريطة الصفحات/);
   assert.match(rich, /ص63/);
-  assert.ok(rich.length < 8000, `rich=${rich.length}`);
+  assert.ok(rich.length < 70_000, `rich=${rich.length}`);
 });
 
 test('قائمة الفهارس المتاحة', async () => {
@@ -48,19 +58,29 @@ test('قائمة الفهارس المتاحة', async () => {
   assert.ok(ids.includes('history-sixth-literary-pdf'));
 });
 
+test('كل فهرس وصفي يغطي صفحات كتابه دون فجوات', async () => {
+  const ids = await listOutlineIds();
+  for (const id of ids) {
+    const outline = await getOutline(id);
+    assert.ok(outline);
+    assert.equal(outline.pages.length, outline.entries);
+    assert.deepEqual(outline.pages.map((page) => page.physicalPage), Array.from({ length: outline.entries }, (_, index) => index + 1));
+  }
+});
+
 test('تحديد كتاب المادة من السؤال أو من المادة المحددة', async () => {
-  const byQuery = await resolveBook('اسئلة الاقتصاد والعرض والطلب', { branch: 'أدبي' });
+  const byQuery = await resolveBook('اسئلة الاقتصاد والعرض والطلب');
   assert.equal(byQuery?.id, 'economics-sixth-literary-pdf');
-  const byChapter = await resolveBook('اسئلة فصل التخلف والتنمية', { branch: 'أدبي', search: true });
+  const byChapter = await resolveBook('اسئلة فصل التخلف والتنمية', { search: true });
   assert.equal(byChapter?.id, 'economics-sixth-literary-pdf');
-  const bySubject = await resolveBook('سؤال عشوائي', { branch: 'أدبي', subject: 'التاريخ' });
+  const bySubject = await resolveBook('سؤال عشوائي', { subject: 'التاريخ' });
   assert.equal(bySubject?.id, 'history-sixth-literary-pdf');
-  const outsideBranch = await resolveBook('القرآن', { branch: 'أدبي', subject: 'الاقتصاد' });
-  assert.equal(outsideBranch?.id, 'economics-sixth-literary-pdf');
-  const weak = await resolveBook('سؤال لا يحدد مادة', { branch: 'أدبي', search: true });
+  const unrestricted = await resolveBook('القرآن');
+  assert.equal(unrestricted?.id, 'islamic-sixth-preparatory-2025');
+  const weak = await resolveBook('سؤال لا يحدد مادة', { search: true });
   assert.equal(weak ?? null, null);
   // الكتاب الرسمي يسبق دليل المدرس وكتاب التمارين عند تقارب التطابق
-  assert.equal((await resolveBook('فهرس الأدب الإنكليزي', { branch: 'أدبي' }))?.id, 'english-literature-sixth-pdf');
-  assert.equal((await resolveBook('خطة دليل مدرس الأدب الإنكليزي', { branch: 'أدبي' }))?.id, 'english-literature-teacher-guide-95722f85-pdf');
-  assert.equal((await resolveBook('محتويات تمارين الأدب الإنكليزي', { branch: 'أدبي' }))?.id, 'english-literature-exercises-sixth-pdf');
+  assert.equal((await resolveBook('فهرس الأدب الإنكليزي'))?.id, 'english-literature-sixth-pdf');
+  assert.equal((await resolveBook('خطة دليل مدرس الأدب الإنكليزي'))?.id, 'english-literature-teacher-guide-95722f85-pdf');
+  assert.equal((await resolveBook('محتويات تمارين الأدب الإنكليزي'))?.id, 'english-literature-exercises-sixth-pdf');
 });

@@ -27,7 +27,7 @@ npm run curriculum:import -- "D:/path/book.txt" \
 
 `pdf-index.json` وملف كل كتاب في `pdf-books` يستخدمان `schemaVersion: 2`. لكل كتاب توجد هوية المادة ومصدر PDF وبصمته وحالته المرجعية، ولكل صفحة `physicalPage` و`printedPage` و`fullText` و`searchable` و`ocr` و`title` و`summary` و`section` و`unit` و`pageType` و`educationalPurpose` و`neighbors` و`sourceProvenance`. رقم الصفحة المطبوع قد يكون `null` عندما لا يثبت من النص أو من الاستمرارية؛ لا يُخمنه الفهرس.
 
-الفهرس النصي الموحد في `index/search-index.json` يحتفظ بإحصاءات البحث ومرجع الصفحة ومعاينة قصيرة فقط. فتح النص الكامل أو صورة PDF يتم عند الطلب لصفحات محددة، ولا تُرسل ملفات PDF كاملة إلى النموذج.
+الفهرس النصي الموحد في `search-index.json` يبني postings من كامل `fullText`، ويحتفظ بمعاينة ووصف فهرسي مساعد للصفحات المصورة. فتح النص الكامل يتم عند الطلب لصفحات محددة، ولا يُعامل الوصف الفهرسي كاقتباس من PDF ولا تُرسل ملفات PDF كاملة إلى النموذج.
 - `npm test` — اختبارات parser والتطبيع والبحث والأمان.
 
 ## حقوق المحتوى

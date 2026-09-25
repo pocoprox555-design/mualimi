@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
-import { getHealth, getIndex, getSubjects, listBooks, locate, fullPage, retrieveContext, search } from '../lib/index.mjs';
+import { getCatalog, getHealth, getIndex, getSubjects, listBooks, locate, fullPage, retrieveContext, search } from '../lib/index.mjs';
 
 test('الفهرس canonical متكامل', async () => {
   const index = await getIndex();
@@ -11,6 +11,10 @@ test('الفهرس canonical متكامل', async () => {
   assert.ok(index.postings.size >= 10_000);
   assert.equal(health.pages, index.documents.length);
   assert.ok(index.documents.every((page) => page.title.length > 2 && page.summary.length >= 20));
+  assert.equal(health.searchablePages, 1241);
+  assert.equal(health.visionPages, 215);
+  assert.equal(health.outlinePages, 1456);
+  assert.equal(health.printedPageGaps, 16);
 });
 
 test('البحث المقلوب سريع ودقيق', async () => {
@@ -36,11 +40,45 @@ test('الصفحة المصورة ترجع ملخصا بدل الفراغ', asyn
 
 test('خريطة المطبوع إلى الفيزيائي والمصادر تعمل', async () => {
   assert.equal(await locate('islamic-sixth-preparatory-2025', 6), 6);
-  const books = await listBooks({ branch: 'أدبي' });
+  assert.equal(await locate('student-book-sixth-pdf', 5), 1);
+  assert.equal(await locate('student-activity-sixth-pdf', 4), 1);
+  assert.equal(await locate('history-sixth-literary-pdf', 204), 204);
+  const books = await listBooks();
   assert.ok(books.some((book) => book.subject === 'التاريخ'));
+  assert.equal(books.length, (await listBooks()).length);
   const subjects = await getSubjects();
   assert.ok(subjects.includes('الرياضيات'));
   const context = await retrieveContext('اشرح أسلوب الاستفهام', { limit: 3 });
   assert.ok(context.sources.length > 0);
   assert.match(context.block, /\[S1\]/);
+});
+
+test('الكتالوج يعيد كل الكتب ولا يتحول إلى بحث صفحات', async () => {
+  const catalog = await getCatalog();
+  assert.equal(catalog.books.length, 12);
+  assert.equal(catalog.pages, 1456);
+  assert.equal(catalog.searchablePages, 1241);
+  assert.equal(new Set(catalog.subjects).size, 10);
+  assert.ok(catalog.books.some((book) => book.id === 'student-activity-sixth-pdf'));
+});
+
+test('البحث يصل إلى نص الصفحة بعد أول 700 حرف', async () => {
+  const results = await search('المستنصرية', { limit: 10 });
+  assert.ok(results.some((result) => result.bookId === 'arabic-sixth-preparatory-part-1-2025' && result.physicalPage === 6));
+});
+
+test('كل صفحة PDF لها سجل قابل للفتح', async () => {
+  const index = await getIndex();
+  for (const document of index.documents) {
+    const page = await fullPage(document.bookId, document.physicalPage);
+    assert.equal(page.bookId, document.bookId);
+    assert.equal(page.physicalPage, document.physicalPage);
+  }
+});
+
+test('الصفحة المصورة تظل معلّمة حتى مع وجود وصف فهرسي', async () => {
+  const page = await fullPage('islamic-sixth-preparatory-2025', 2);
+  assert.equal(page.searchable, false);
+  assert.equal(page.needsVision, true);
+  assert.equal(page.evidenceType, 'outline-description');
 });

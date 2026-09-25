@@ -10,7 +10,7 @@ const MAX_CONVERSATIONS = 30;
 const uid = (prefix) => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
 
 const state = {
-  settings: { branch: '', apiKey: '', studentName: '' },
+  settings: { apiKey: '', studentName: '' },
   books: [],
   curriculum: null,
   ai: { configured: false },
@@ -32,13 +32,13 @@ function loadState() {
   const saved = readJson(STORAGE_KEY, null);
   if (saved && typeof saved === 'object') {
     Object.assign(state.settings, saved.settings || {});
+    delete state.settings.branch;
     state.conversations = Array.isArray(saved.conversations) ? saved.conversations : [];
     state.exams = Array.isArray(saved.exams) ? saved.exams : [];
   } else {
     const oldSettings = readJson(LEGACY_SETTINGS, {});
     const oldConversations = readJson(LEGACY_CONVERSATIONS, []);
     const oldExams = readJson(LEGACY_EXAMS, []);
-    state.settings.branch = oldSettings.branch || '';
     state.settings.apiKey = oldSettings.key || '';
     state.conversations = Array.isArray(oldConversations) ? oldConversations.map((conversation) => ({
       id: conversation.id || uid('c'),
@@ -53,7 +53,6 @@ function loadState() {
     })) : [];
     state.exams = Array.isArray(oldExams) ? oldExams : [];
   }
-  if (!['أحيائي', 'تطبيقي', 'أدبي'].includes(state.settings.branch)) state.settings.branch = '';
   state.settings.studentName = String(state.settings.studentName || '').trim().slice(0, 40);
   state.conversations = state.conversations.filter((conversation) => Array.isArray(conversation.messages)).slice(0, MAX_CONVERSATIONS);
   state.exams = state.exams.filter((exam) => exam?.title && exam?.date).slice(0, 80);
@@ -368,7 +367,7 @@ function sourceCards(sources, target, compact = false) {
   target.innerHTML = '';
   if (!sources?.length) { target.hidden = true; return; }
   target.hidden = false;
-  sources.slice(0, 6).forEach((source) => {
+  sources.slice(0, 8).forEach((source) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = `source-card${source.needsOcr ? ' vision' : ''}`;
@@ -517,8 +516,7 @@ function setView(view) {
 }
 
 function renderAll() {
-  $('#branchBadge').textContent = state.settings.branch ? `الفرع ${state.settings.branch}` : '';
-  $('#studentName').textContent = state.settings.studentName || (state.settings.branch ? `طالبة ${state.settings.branch}` : 'طالبة');
+  $('#studentName').textContent = state.settings.studentName || 'طالبة';
   renderRecent();
   setView(state.view);
 }
@@ -645,7 +643,7 @@ async function requestReply(conversation, question, images, shell) {
   if (images.length && last?.role === 'user') last.content = [{ type: 'text', text: question || 'اشرحي الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))];
   let full = ''; let citations = []; let finished = false; let paint = 0;
   try {
-    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, branch: state.settings.branch, studentName: state.settings.studentName || '', subject: state.selectedSubject || '' }) });
+    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, studentName: state.settings.studentName || '' }) });
     if (!response.ok) {
       let data = {}; try { data = await response.json(); } catch { /* ignore */ }
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
@@ -711,7 +709,10 @@ function openPage(bookId, physicalPage) {
     const book = state.books.find((value) => value.id === bookId);
     $('#pageModalBook').textContent = book?.subject || 'كتاب مدرسي'; $('#pageModalTitle').textContent = page.title || 'صفحة من الكتاب';
     $('#pageModalMeta').innerHTML = `<span>${escapeHtml(book?.title || '')}</span><span>${escapeHtml(page.printedPage ? `الصفحة ${page.printedPage}` : `الصفحة ${page.physicalPage}`)}</span>${page.needsVision ? '<span>تحتاج قراءة بصرية</span>' : ''}`;
-    $('#pageModalBody').innerHTML = `${page.summary ? `<div class="page-summary">${escapeHtml(page.summary)}</div>` : ''}${page.needsVision && !page.searchable ? '<div class="vision-note">هذه الصفحة مصورة أو لا تحتوي نصا مستخرجا بالكامل. الملخص الظاهر هو المتاح الموثوق حاليا.</div>' : ''}<div>${escapeHtml(page.text || 'لا يوجد نص متاح لهذه الصفحة.')}</div>`;
+    const visionNote = page.needsVision && !page.searchable
+      ? '<div class="vision-note">هذه الصفحة مصورة ولا يوجد لها نص PDF قابل للتحقق. الوصف الظاهر فهرسي للتنقل فقط، ولا يكفي لاقتباس آية أو حل أو رقم قبل القراءة البصرية.</div>'
+      : '';
+    $('#pageModalBody').innerHTML = `${page.summary ? `<div class="page-summary">${escapeHtml(page.summary)}</div>` : ''}${visionNote}<div>${escapeHtml(page.text || 'لا يوجد نص متاح لهذه الصفحة.')}</div>`;
   }).catch(() => { $('#pageModalTitle').textContent = 'تعذر فتح الصفحة'; $('#pageModalBody').textContent = 'حاولي مرة أخرى بعد لحظة.'; });
 }
 
@@ -733,7 +734,7 @@ function bindEvents() {
   $('#imageInput').addEventListener('change', async (event) => { const file = event.target.files?.[0]; event.target.value = ''; if (!file) return; try { state.pendingImages = [await compressImage(file)]; renderPendingImages(); } catch { toast('تعذرت قراءة الصورة'); } });
   $('#historySearch').addEventListener('input', renderHistory);
   $('#examForm').addEventListener('submit', (event) => { event.preventDefault(); const title = $('#examTitle').value.trim(); const date = $('#examDate').value; if (!title || !date) return; state.exams.push({ id: uid('e'), title, date }); saveState(); event.target.reset(); renderPlan(); toast('أُضيف الموعد إلى خطتك'); });
-  $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#settingsBranch').value = state.settings.branch || 'أدبي'; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
+  $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
   $('#saveProvider').addEventListener('click', async () => {
     const apiKey = $('#providerKey').value.trim();
     const result = $('#providerResult');
@@ -744,7 +745,7 @@ function bindEvents() {
     toast(apiKey ? 'حُفظ المفتاح' : 'حُذف المفتاح');
     warmup();
   });
-  $('#saveSettings').addEventListener('click', () => { state.settings.branch = $('#settingsBranch').value; state.settings.studentName = $('#settingsName').value.trim().slice(0, 40); saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظت إعداداتك'); });
+  $('#saveSettings').addEventListener('click', () => { state.settings.studentName = $('#settingsName').value.trim().slice(0, 40); saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظت إعداداتك'); });
   $('#resetData').addEventListener('click', () => { if (!confirm('سيتم حذف المحادثات والخطة من هذا الجهاز. هل أنت متأكدة؟')) return; state.conversations = []; state.exams = []; state.activeId = null; saveState(); closeModal('settingsModal'); renderAll(); toast('تم مسح البيانات المحلية'); });
   $$('[data-close-modal]').forEach((button) => button.addEventListener('click', () => closeModal(button.dataset.closeModal)));
   $$('.modal').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal.id); }));
@@ -758,7 +759,6 @@ function enterApp() {
 
 function boot() {
   loadState();
-  if (!state.settings.branch) { state.settings.branch = 'أدبي'; saveState(); }
   bindEvents();
   enterApp();
   if (!navigator.onLine) $('#offlineBar').hidden = false;

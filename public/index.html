@@ -8,7 +8,7 @@
   <title>معلمي | من كتبك إلى فهمك</title>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style.css?v=3.92">
+  <link rel="stylesheet" href="/style.css?v=4.0">
 </head>
 <body>
   <div id="offlineBar" class="offline-bar" hidden>لا يوجد اتصال حاليا. ستبقى كتبك ومحادثاتك المتاحة على الجهاز.</div>
@@ -29,7 +29,6 @@
       </div>
       <div id="headerCenter" class="header-center"><span class="connection-dot"></span><span id="connectionText">جار التحقق...</span></div>
       <div class="header-actions">
-        <span id="branchBadge" class="branch-badge"></span>
         <button id="chatNewButton" class="icon-button header-new-chat" aria-label="جلسة جديدة" hidden>＋</button>
         <button id="settingsButton" class="icon-button" aria-label="الإعدادات">⚙</button>
       </div>
@@ -120,8 +119,7 @@
     <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="modal-header"><div><span class="kicker">مساحتك</span><h2 id="settingsTitle">الإعدادات</h2></div><button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button></div>
       <label for="settingsName">اسمك</label><input id="settingsName" class="field" maxlength="40" placeholder="شلون منناديچ؟ (اختياري)" autocomplete="nickname">
-      <label for="settingsBranch">الفرع الدراسي</label><select id="settingsBranch" class="field"><option>أحيائي</option><option>تطبيقي</option><option>أدبي</option></select>
-      <div class="settings-note"><span>i</span><p>معلمي يبحث في الكتب محليا. يمكنك تغيير الفرع والمفتاح من هنا في أي وقت.</p></div>
+       <div class="settings-note"><span>i</span><p>معلمي يبحث في جميع الكتب المتاحة محليا، ولا يقيّدك بفرع دراسي.</p></div>
       <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق من الخادم...</span></div>
       <div class="provider-panel">
         <div class="provider-panel-head"><div><span class="kicker">الذكاء الاصطناعي</span><h3>مفتاح المعلم</h3></div><span id="providerState" class="provider-state">غير معروف</span></div>
@@ -137,6 +135,6 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=3.9" defer></script>
+  <script src="/app.js?v=4.0" defer></script>
 </body>
 </html>
