@@ -327,6 +327,8 @@ function quizPending(text) {
 }
 
 function fillAssistantBubble(element, content, streaming = false) {
+  const status = element.querySelector('.teacher-status');
+  if (status) { status._textArrived = true; clearTimeout(status._timer); status._timer = null; status.remove(); }
   element.innerHTML = '';
   if (streaming && quizPending(content)) {
     const loading = document.createElement('div');
@@ -605,30 +607,47 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status" data-phase="think"><span class="status-orb"></span><span class="status-text">أفكر في سؤالك…</span></div></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status" data-phase="wait"><span class="typing"><i></i><i></i><i></i></span></div></div><div class="inline-sources source-tray"></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
 }
 
 function statusPhrase(data) {
   const detail = String(data?.detail || '').trim();
+  const book = (detail.split('—')[0] || '').trim();
   switch (data?.phase) {
-    case 'outline': return 'فتحت فهرس الكتاب…';
-    case 'search': return detail.startsWith('لم أجد') ? 'أوسع البحث في كتبك…' : 'بحثت في الكتب…';
+    case 'outline': return `أفتح فهرس كتاب ${book || 'مادتك'}…`;
+    case 'search': return detail.startsWith('لم أجد') ? 'أوسع البحث في كتبك…' : 'أبحث في كتبك عن إجابتك…';
     case 'page': {
       const page = detail.match(/صفحة (\d+)/)?.[1];
-      const book = (detail.split('—')[0] || '').trim();
       return page ? `أقرأ صفحة ${page} من ${book}…` : 'أقرأ من كتابك…';
     }
-    case 'write': return 'أكتب الشرح الآن…';
+    case 'compose': return 'قرأت المطلوب، بجهز لك الرد…';
+    case 'write': return 'بجهز لك الشرح…';
     case 'fallback': return 'أعرضك مواضع كتابك الموثقة…';
-    default: return detail ? `${detail}…` : 'أفكر في سؤالك…';
+    default: return 'أفكر في سؤالك…';
   }
 }
 
 function traceStep(shell, data) {
   const status = shell?.querySelector('.teacher-status');
   if (!status || !data) return;
+  const queue = status._queue || (status._queue = []);
+  queue.push(data);
+  if (!status._timer) {
+    const tick = () => {
+      if (!status.isConnected) return;
+      const next = status._queue.shift();
+      if (next) showStatus(status, next);
+      if (status._queue.length || !status._textArrived) status._timer = setTimeout(tick, 700);
+      else finishStatus(shell);
+    };
+    status._timer = setTimeout(tick, status.dataset.phase === 'wait' ? 500 : 0);
+  }
+}
+
+function showStatus(status, data) {
+  if (status.dataset.phase === 'wait') status.innerHTML = '<span class="status-orb"></span><span class="status-text"></span>';
   status.dataset.phase = data.phase || 'think';
   status.title = String(data.detail || '').trim();
   const text = status.querySelector('.status-text');
@@ -641,7 +660,11 @@ function traceStep(shell, data) {
 }
 
 function traceFinish(shell) {
-  shell?.querySelector('.teacher-status')?.remove();
+  const status = shell?.querySelector('.teacher-status');
+  if (!status) return;
+  clearTimeout(status._timer);
+  status._timer = null;
+  status.remove();
 }
 
 function renderStream(shell, content) {
@@ -666,7 +689,7 @@ async function requestReply(conversation, question, images, shell) {
     }
     for await (const packet of sseEvents(response, abort.signal)) {
       if (packet.event === 'step') traceStep(shell, packet.data);
-      if (packet.event === 'citations') { citations = packet.data.items || []; sourceCards(citations, $('#sourceTray')); }
+      if (packet.event === 'citations') { citations = packet.data.items || []; sourceCards(citations, $('#sourceTray')); traceStep(shell, { phase: 'compose' }); }
       if (packet.event === 'delta') {
         full += packet.data.text || '';
         if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
