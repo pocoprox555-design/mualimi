@@ -8,7 +8,7 @@ COPY scripts ./scripts
 COPY test ./test
 COPY public ./public
 COPY curriculum-library ./curriculum-library
-RUN node scripts/build-index.mjs && npm test
+RUN npm run verify
 RUN addgroup -S app && adduser -S app -G app && chown -R app:app /app
 USER app
 EXPOSE 3000

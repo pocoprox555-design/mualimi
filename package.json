@@ -1,8 +1,8 @@
 {
   "name": "mualimi",
   "private": true,
-  "version": "2.0.0",
-  "description": "معلمي — مساعد دراسي عربي للسادس الإعدادي (بناء جديد مبسط وسريع)",
+  "version": "3.0.0",
+  "description": "معلمي — منصة تعلم عربية موثقة من كتب السادس الإعدادي",
   "type": "module",
   "engines": {
     "node": ">=22.3.0"
@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node server.mjs",
     "build-index": "node scripts/build-index.mjs",
-    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs"
+    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs",
+    "verify": "npm run build-index && npm test"
   }
 }

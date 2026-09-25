@@ -25,10 +25,9 @@ Render يعيد البناء تلقائيًا (~2-3 دقائق). لا حاجة �
 |---------|--------|
 | `AI_API_KEY` | b64:... (من ملف .env) |
 | `AI_ENDPOINT` | `https://opencode.ai/zen/go/v1` |
-| `AI_MODEL` | `MiMo-V2.6-Flash` (بالحالة الأصلية كما في توثيق المزود) |
+| `AI_MODEL` | `mimo-v2.6-flash` (والاسم القديم يُحوّل تلقائيا) |
 | `AI_CONTEXT_WINDOW` | `1000000` |
 | `AI_MAX_OUTPUT_TOKENS` | `131000` |
-| `CURRICULUM_ADMIN_TOKEN` | رمز عشوائي |
 
 ## ملاحظات تقنية
 - Dockerfile يستخدم `node:22-alpine`
