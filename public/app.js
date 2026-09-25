@@ -418,16 +418,27 @@ function clearSourceTray() {
   tray.hidden = true;
 }
 
+function updateHeaderSession(chatting, conversation) {
+  const session = $('#headerSession');
+  if (!session) return;
+  const brand = $('#headerBrand');
+  const center = $('#headerCenter');
+  const newButton = $('#chatNewButton');
+  session.hidden = !chatting;
+  if (brand) brand.hidden = chatting;
+  if (center) center.hidden = chatting;
+  if (newButton) newButton.hidden = !chatting;
+  if (chatting) $('#headerSessionTitle').textContent = conversation?.title || 'جلسة جديدة';
+}
+
 function showLearnPanel() {
   clearSourceTray();
   const conversation = currentConversation();
   const chatting = Boolean(conversation?.messages?.length || state.composing);
   $('#homePanel').hidden = chatting;
   $('#chatPanel').hidden = !chatting;
-  if (chatting) {
-    $('#chatTitle').textContent = conversation.title;
-    renderMessages();
-  }
+  updateHeaderSession(chatting, conversation);
+  if (chatting) renderMessages();
   renderPendingImages();
 }
 
@@ -501,6 +512,7 @@ function setView(view) {
   if (view === 'learn') showLearnPanel();
   if (view === 'plan') renderPlan();
   if (view === 'history') renderHistory();
+  if (view !== 'learn') updateHeaderSession(false, null);
   $('#sidebar').classList.remove('open');
 }
 
@@ -613,9 +625,14 @@ function assistantShell() {
   return article;
 }
 
+let lastStreamPaint = 0;
 function renderStream(shell, content) {
+  const now = Date.now();
+  if (now - lastStreamPaint < 130) return;
+  lastStreamPaint = now;
   fillAssistantBubble(shell.querySelector('.message-bubble'), content, true);
-  $('#messageList').scrollTop = $('#messageList').scrollHeight;
+  const list = $('#messageList');
+  if (list.scrollHeight - list.scrollTop - list.clientHeight < 140) list.scrollTop = list.scrollHeight;
 }
 
 async function requestReply(conversation, question, images, shell) {

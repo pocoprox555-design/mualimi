@@ -1,6 +1,6 @@
 /* معلمي 3 — الواجهة قابلة للعمل أثناء ضعف الشبكة، والـ API حي دائما */
-const CACHE = 'mualimi-v3-9';
-const CORE = ['/', '/index.html', '/style.css?v=3.8', '/app.js?v=3.7', '/manifest.webmanifest', '/icons/icon.svg'];
+const CACHE = 'mualimi-v3-11';
+const CORE = ['/', '/index.html', '/style.css?v=3.92', '/app.js?v=3.9', '/manifest.webmanifest', '/icons/icon.svg'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).catch(() => {}));
   self.skipWaiting();

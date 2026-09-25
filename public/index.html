@@ -8,7 +8,7 @@
   <title>معلمي | من كتبك إلى فهمك</title>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style.css?v=3.8">
+  <link rel="stylesheet" href="/style.css?v=3.92">
 </head>
 <body>
   <div id="offlineBar" class="offline-bar" hidden>لا يوجد اتصال حاليا. ستبقى كتبك ومحادثاتك المتاحة على الجهاز.</div>
@@ -16,13 +16,21 @@
   <div id="app" class="app-shell" hidden>
     <header class="app-header">
       <button id="mobileMenuButton" class="icon-button mobile-only" aria-label="فتح القائمة">☰</button>
-      <div class="brand-lockup">
+      <div id="headerBrand" class="brand-lockup">
         <span class="brand-mark">م</span>
         <span><strong>معلمي</strong><small>تعلم من المصدر</small></span>
       </div>
-      <div class="header-center"><span class="connection-dot"></span><span id="connectionText">جار التحقق...</span></div>
+      <div id="headerSession" class="header-session" hidden>
+        <button id="chatBackButton" class="header-back" aria-label="رجوع للرئيسية">→</button>
+        <div class="header-session-text">
+          <span class="kicker">جلسة تعلم</span>
+          <strong id="headerSessionTitle">جلسة جديدة</strong>
+        </div>
+      </div>
+      <div id="headerCenter" class="header-center"><span class="connection-dot"></span><span id="connectionText">جار التحقق...</span></div>
       <div class="header-actions">
         <span id="branchBadge" class="branch-badge"></span>
+        <button id="chatNewButton" class="icon-button header-new-chat" aria-label="جلسة جديدة" hidden>＋</button>
         <button id="settingsButton" class="icon-button" aria-label="الإعدادات">⚙</button>
       </div>
     </header>
@@ -64,11 +72,6 @@
           </div>
 
           <div id="chatPanel" class="chat-panel" hidden>
-            <div class="chat-toolbar">
-              <button id="chatBackButton" class="back-button"><span>→</span> الجلسة</button>
-              <div class="chat-title-wrap"><span class="kicker">جلسة تعلم</span><h1 id="chatTitle">جلسة جديدة</h1></div>
-              <button id="chatNewButton" class="button button-soft">＋ جديدة</button>
-            </div>
             <div id="messageList" class="message-list" aria-live="polite"></div>
             <div id="sourceTray" class="source-tray" hidden></div>
             <div id="imagePreview" class="image-preview" hidden></div>
@@ -79,7 +82,6 @@
               <button id="sendButton" class="send-button" type="submit" aria-label="إرسال">↑</button>
               <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف" hidden>■</button>
             </form>
-            <div class="composer-hint"><span>Enter للإرسال · Shift + Enter لسطر جديد</span><span id="sourceStatus">أجيب من كتبك المدرسية</span></div>
           </div>
         </section>
 
@@ -135,6 +137,6 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=3.7" defer></script>
+  <script src="/app.js?v=3.9" defer></script>
 </body>
 </html>
