@@ -236,10 +236,49 @@ function markdownHtml(source) {
   return html;
 }
 
-function quizElement(raw) {
+function quizFromJson(raw) {
   let quiz;
   try { quiz = JSON.parse(raw); } catch { return null; }
-  if (!quiz || !Array.isArray(quiz.questions) || !quiz.questions.length) return null;
+  if (!quiz || typeof quiz !== 'object') return null;
+  const list = Array.isArray(quiz.questions) ? quiz.questions : Array.isArray(quiz.quiz) ? quiz.quiz : null;
+  if (!list || !list.length) return null;
+  const questions = list.map((question) => {
+    const options = Array.isArray(question.options) ? question.options.map(String) : [];
+    let answer = question.answer;
+    if (typeof answer === 'string') {
+      const found = options.findIndex((option) => option.trim() === answer.trim());
+      answer = found >= 0 ? found : Number(answer);
+    }
+    return { q: question.q || question.question || '', options, answer: Number(answer), why: question.why || question.explanation || '' };
+  }).filter((question) => question.q && question.options.length >= 2);
+  if (!questions.length) return null;
+  return { title: quiz.title, subject: quiz.subject, questions };
+}
+
+function extractQuiz(part) {
+  const trimmed = String(part || '').trim();
+  if (!trimmed) return null;
+  const fence = trimmed.match(/```(?:quiz|json)\s*([\s\S]*?)```/);
+  if (fence) {
+    const quiz = quizFromJson(fence[1].trim());
+    if (quiz) return { quiz, rest: trimmed.replace(fence[0], '').trim() };
+  }
+  if (trimmed.startsWith('{')) {
+    const direct = quizFromJson(trimmed);
+    if (direct) return { quiz: direct, rest: '' };
+    const start = trimmed.indexOf('{');
+    const end = trimmed.lastIndexOf('}');
+    if (start >= 0 && end > start) {
+      const inner = quizFromJson(trimmed.slice(start, end + 1));
+      if (inner) return { quiz: inner, rest: (trimmed.slice(0, start) + ' ' + trimmed.slice(end + 1)).trim() };
+    }
+  }
+  return null;
+}
+
+function quizElement(raw) {
+  const quiz = typeof raw === 'object' && raw !== null && raw.questions ? raw : quizFromJson(String(raw || ''));
+  if (!quiz) return null;
   const wrapper = document.createElement('div');
   wrapper.className = 'quiz-card';
   wrapper.innerHTML = `<h3>${escapeHtml(quiz.title || 'اختبار قصير')}</h3><small>${escapeHtml(quiz.subject || '')}</small>`;
@@ -274,12 +313,45 @@ function quizElement(raw) {
   return wrapper;
 }
 
+function quizPending(text) {
+  const t = String(text || '');
+  const fenceCount = (t.match(/```/g) || []).length;
+  if (fenceCount % 2 === 1) {
+    const lastFence = t.lastIndexOf('```');
+    if (/```(?:quiz|json)?\s*\{?\s*"?[a-z]*"?/.test(t.slice(lastFence, lastFence + 30)) && /```(?:quiz|json)\s*\{|```json\s*\{/.test(t.slice(lastFence)) ) return true;
+    if (/"quiz"\s*:|"(?:q|question)"\s*:|"(?:options|questions)"\s*:/.test(t.slice(lastFence))) return true;
+  }
+  const trimmed = t.trimStart();
+  if (trimmed.startsWith('{') && /"(?:quiz|questions)"\s*:/.test(trimmed.slice(0, 300))) return true;
+  return false;
+}
+
 function fillAssistantBubble(element, content, streaming = false) {
   element.innerHTML = '';
+  if (streaming && quizPending(content)) {
+    const loading = document.createElement('div');
+    loading.className = 'quiz-loading';
+    loading.textContent = 'جارِ تجهيز الاختبار، لحظة من فضلك…';
+    element.appendChild(loading);
+    const typing = document.createElement('span');
+    typing.className = 'typing';
+    typing.innerHTML = '<i></i><i></i><i></i>';
+    element.appendChild(typing);
+    return;
+  }
   const parts = String(content || '').split(/```quiz\s*([\s\S]*?)```/g);
   parts.forEach((part, index) => {
     if (index % 2 === 1) { const quiz = quizElement(part.trim()); if (quiz) element.appendChild(quiz); return; }
-    if (part.trim()) { const block = document.createElement('div'); block.innerHTML = markdownHtml(part); element.appendChild(block); }
+    if (part.trim()) {
+      const found = extractQuiz(part);
+      if (found) {
+        if (found.rest) { const text = document.createElement('div'); text.innerHTML = markdownHtml(found.rest); element.appendChild(text); }
+        const card = quizElement(found.quiz);
+        if (card) element.appendChild(card);
+        return;
+      }
+      const block = document.createElement('div'); block.innerHTML = markdownHtml(part); element.appendChild(block);
+    }
   });
   if (streaming) {
     const typing = document.createElement('span');
