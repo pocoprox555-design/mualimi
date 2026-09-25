@@ -5,6 +5,7 @@
   --shadow:0 10px 30px rgba(10,30,45,.12);
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html,body{height:100%}
 body{margin:0;font-family:"Tajawal",system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);-webkit-font-smoothing:antialiased}
 .muted{color:var(--muted)} .small{font-size:.82rem}
