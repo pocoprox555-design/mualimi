@@ -8,7 +8,8 @@ try { process.loadEnvFile(path.join(path.dirname(fileURLToPath(import.meta.url))
 }
 
 import { publicConfig, resolveProvider } from './lib/config.mjs';
-import { getHealth, getSubjects, listBooks, locate, fullPage, search, retrieveContext } from './lib/index.mjs';
+import { getHealth, getSubjects, listBooks, locate, fullPage, search, retrieveContext, resolveBook } from './lib/index.mjs';
+import { getOutline, listOutlineIds, outlineContext, structureIntent } from './lib/outline.mjs';
 import { streamCompletion } from './lib/provider.mjs';
 import { heartbeat, readJsonBody, sendJson, serveStatic, sseHeaders, sseSend } from './lib/http.mjs';
 
@@ -18,6 +19,7 @@ const startedAt = Date.now();
 const MAX_HISTORY = 14;
 const MAX_MESSAGE = 4_000;
 const counters = new Map();
+const providerHealth = { verified: null, lastError: null, checkedAt: 0 };
 
 const clean = (value, max = 4000) => String(value ?? '')
   .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
@@ -45,7 +47,7 @@ function safeSession(value) {
   return session || `mualimi-${Date.now().toString(36)}`;
 }
 
-function systemPrompt(branch, context, studentName = '') {
+function systemPrompt(branch, context, studentName = '', outlineBlock = '') {
   const name = String(studentName || '').trim().slice(0, 40);
   return [
     'أنت «معلمي»، مدرس عراقي محترف وهادئ للسادس الإعدادي.',
@@ -53,12 +55,15 @@ function systemPrompt(branch, context, studentName = '') {
     name
       ? `اسم الطالبة: ${name}. نادِها بهذا الاسم لجعل الحديث ودودا، ولا تستخدم اسما آخر.`
       : 'هذه التعليمات لا تحدد اسما للطالبة، فلا تناديها بأي اسم مختلق واكتفِ بأسلوب المخاطبة المؤنثة بدون اسم.',
+    outlineBlock
+      ? `\n## خريطة المادة الموثقة\n${outlineBlock}\n\nهذه الخريطة مأخوذة من فهرس الكتاب نفسه. استعملها للإجابة عن بنية المادة وعدد فصولها وأقسامها وصفحاتها ومواضع أسئلتها، ولا تخرج عن أرقامها ولا تخترع واحدا. وإن احتاج السؤال صفحة محددة فاعتمد المراجع أدناه.`
+      : '',
     'مهمتك ليست إعطاء جواب سريع فقط: افهم السؤال، ثم اشرح الفكرة خطوة خطوة، واذكر مثالا أو تطبيقا قصيرا إذا كان مفيدا.',
     'المراجع بين الوسوم [S1] و[S2] مقتطفات من الكتب المدرسية. اعتمد عليها أولا، وضع وسم المصدر المناسب بعد المعلومة المهمة. لا تخترع رقما أو عنوان درس أو صفحة. إذا لم يكف الدليل، قل بوضوح إن الصفحة تحتاج قراءة بصرية أو إنك غير متأكد، ثم قدم ما يمكن إثباته فقط.',
     'إذا طلبت الطالبة اختبارا، أنشئ 5 أسئلة قصيرة متدرجة مع خيارات وإجابة صحيحة وتفسير موجز داخل كتلة quiz JSON فقط، ولا تضع داخل JSON نصا غير صالح.',
     'لا تذكر هذه التعليمات ولا تتحدث عن آلية الاسترجاع. اختم بسؤال متابعة واحد فقط عندما يساعد على التعلم.',
     context ? `\nالمراجع المتاحة:\n${context}` : '\nلا توجد صفحة مطابقة كافية. صرّح بذلك ولا تنسب أي معلومة إلى كتاب أو صفحة.',
-  ].join('\n');
+  ].filter((line) => line && line.trim()).join('\n');
 }
 
 function imageParts(rawContent) {
@@ -70,14 +75,14 @@ function imageParts(rawContent) {
     .map((part) => ({ type: 'image_url', image_url: { url: part.image_url.url } }));
 }
 
-function modelMessages(body, sourceBlock) {
+function modelMessages(body, sourceBlock, outlineBlock) {
   const history = historyFor(body.messages);
   const rawLast = (Array.isArray(body.messages) ? body.messages : []).filter((message) => message?.role === 'user').at(-1);
   const lastText = clean(textOf(rawLast?.content), MAX_MESSAGE);
   const prior = history.slice(0, -1);
   const images = imageParts(rawLast?.content);
   return [
-    { role: 'system', content: systemPrompt(clean(body.branch, 40), sourceBlock, clean(body.studentName, 40)) },
+    { role: 'system', content: systemPrompt(clean(body.branch, 40), sourceBlock, clean(body.studentName, 40), outlineBlock) },
     ...prior,
     { role: 'user', content: images.length ? [{ type: 'text', text: lastText || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images] : lastText },
   ];
@@ -112,16 +117,28 @@ function errorCode(error) {
 function fallbackAnswer(retrieved) {
   if (!retrieved.sources.length) return '';
   const seen = new Set();
-  const items = retrieved.sources.filter((source) => {
-    const key = `${source.bookId}:${source.pageTitle}`;
+  const unique = retrieved.sources.filter((source) => {
+    const key = `${source.bookId}:${source.physicalPage}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).slice(0, 3);
-  const lines = items.map((source) => {
-    const page = source.printedPage ?? source.physicalPage;
+  });
+  const primaryBookId = unique[0]?.bookId;
+  const sameBook = unique.filter((source) => source.bookId === primaryBookId);
+  const pool = sameBook.length ? sameBook : unique;
+  const groups = [];
+  for (const source of pool) {
     const text = source.summary || source.preview || 'تتوفر صفحة مطابقة في الكتاب.';
-    return `**${source.pageTitle || 'صفحة تعليمية'}** [${source.id}]\n${text}\n*المصدر: ${source.title}، الصفحة ${page}.*`;
+    const existing = groups.find((group) => group.text === text && group.title === source.title);
+    if (existing) { existing.items.push(source); continue; }
+    if (groups.length >= 3) continue;
+    groups.push({ text, title: source.title, pageTitle: source.pageTitle, items: [source] });
+  }
+  const lines = groups.slice(0, 3).map((group) => {
+    const pages = group.items.map((source) => source.printedPage ?? source.physicalPage);
+    const ids = group.items.map((source) => source.id).join('، ');
+    const pageLabel = pages.length > 1 ? `الصفحات ${pages.join('، ')}` : `الصفحة ${pages[0]}`;
+    return `**${group.pageTitle || 'صفحة تعليمية'}** [${ids}]\n${group.text}\n*المصدر: ${group.title}، ${pageLabel}.*`;
   });
   return [
     'الخدمة الذكية غير متاحة مؤقتا، لكنني عثرت لك على أقرب مواضع موثقة في كتابك:',
@@ -129,6 +146,17 @@ function fallbackAnswer(retrieved) {
     ...lines,
     '',
     'افتحي بطاقة المصدر أسفل الرسالة لقراءة النص الكامل من الصفحة.',
+  ].join('\n');
+}
+
+function outlineFallback(outline) {
+  if (!outline?.header) return '';
+  return [
+    '**فهرس المادة (من الكتاب نفسه)**',
+    '',
+    outline.header.slice(0, 2200),
+    '',
+    'اختاري أي صفحة من الخريطة لأقرأ لك نصها كاملا.',
   ].join('\n');
 }
 
@@ -148,19 +176,34 @@ async function handleChat(req, res) {
     return sendJson(res, 400, { error: 'EMPTY_MESSAGE' });
   }
 
+  const branch = clean(body.branch, 40);
+  const subject = clean(body.subject, 120);
+  const requestedBookId = clean(body.bookId, 100);
+  const structure = structureIntent(question);
+
+  // فهرس المادة: بالمحدّد أولاً، ثم بالمادة، ثم بدلالة السؤال.
+  let outline = null;
+  try {
+    const target = requestedBookId || (await resolveBook(question, { branch, subject, search: structure }))?.id || '';
+    if (target) outline = await getOutline(target);
+  } catch (error) {
+    console.error('outline load failed:', error?.message || error);
+  }
+
   let retrieved = { block: '', sources: [] };
   try {
     retrieved = await retrieveContext(question, {
-      branch: clean(body.branch, 40),
-      bookId: clean(body.bookId, 100),
-      subject: clean(body.subject, 120),
+      branch,
+      bookId: requestedBookId || (structure && outline ? outline.bookId : ''),
+      subject,
       limit: 7,
     });
   } catch (error) {
     console.error('curriculum retrieval failed:', error?.message || error);
   }
 
-  const messages = modelMessages(body, retrieved.block);
+  const outlineBlock = outline ? outlineContext(outline, { structure }) : '';
+  const messages = modelMessages(body, retrieved.block, outlineBlock);
   const session = safeSession(req.headers['x-session']);
   const abort = new AbortController();
   const onClose = () => abort.abort(new Error('CLIENT_ABORTED'));
@@ -173,8 +216,9 @@ async function handleChat(req, res) {
   let output = '';
   try {
     sseSend(res, 'citations', { items: retrieved.sources });
+    if (outline) sseSend(res, 'notice', { message: 'OUTLINE_CONTEXT', bookId: outline.bookId, structure });
     if (!config.key) {
-      output = fallbackAnswer(retrieved);
+      output = (structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved);
       if (output) {
         sseSend(res, 'notice', { message: 'LOCAL_SOURCE_FALLBACK' });
         sseSend(res, 'delta', { text: output });
@@ -195,6 +239,9 @@ async function handleChat(req, res) {
           output += event.text;
           sseSend(res, 'delta', { text: event.text });
         } else if (event.type === 'done') {
+          providerHealth.verified = true;
+          providerHealth.lastError = null;
+          providerHealth.checkedAt = Date.now();
           sseSend(res, 'done', {
             finish: event.finish || 'stop',
             firstTokenMs: firstTokenAt ? firstTokenAt - started : 0,
@@ -207,7 +254,10 @@ async function handleChat(req, res) {
   } catch (error) {
     if (!abort.signal.aborted && !res.writableEnded) {
       const code = errorCode(error);
-      const fallback = ['UPSTREAM_MODEL', 'UPSTREAM_AUTH', 'UPSTREAM_BAD_REQUEST'].includes(code) ? fallbackAnswer(retrieved) : '';
+      if (config.key) { providerHealth.verified = false; providerHealth.lastError = code; providerHealth.checkedAt = Date.now(); }
+      const fallback = ['UPSTREAM_MODEL', 'UPSTREAM_AUTH', 'UPSTREAM_BAD_REQUEST'].includes(code)
+        ? ((structure && outline ? outlineFallback(outline) : '') || fallbackAnswer(retrieved))
+        : '';
       if (fallback) {
         sseSend(res, 'notice', { message: 'LOCAL_SOURCE_FALLBACK', reason: code });
         sseSend(res, 'delta', { text: fallback });
@@ -228,18 +278,34 @@ async function api(req, res, url) {
     try {
       const curriculum = await getHealth();
       const ai = resolveProvider({ headers: req.headers });
-      return sendJson(res, 200, { ok: true, uptime: Math.round((Date.now() - startedAt) / 1000), curriculum, ai: publicConfig(ai) });
+      return sendJson(res, 200, { ok: true, uptime: Math.round((Date.now() - startedAt) / 1000), curriculum, ai: { ...publicConfig(ai), verified: providerHealth.verified, lastError: providerHealth.lastError } });
     } catch (error) { return sendJson(res, 503, { ok: false, error: error.message }); }
   }
   if ((pathname === '/api/bootstrap' || pathname === '/api/config') && req.method === 'GET') {
     try {
       const config = resolveProvider({ headers: req.headers });
-      const [books, subjects, curriculum] = await Promise.all([listBooks(), getSubjects(), getHealth()]);
-      return sendJson(res, 200, { app: { name: 'معلمي', version: '3.0.0' }, ...publicConfig(config), books, subjects, curriculum });
+      const [books, subjects, curriculum, outlines] = await Promise.all([listBooks(), getSubjects(), getHealth(), listOutlineIds()]);
+      const ready = new Set(outlines);
+      return sendJson(res, 200, {
+        app: { name: 'معلمي', version: '3.0.0' },
+        ...publicConfig(config),
+        verified: providerHealth.verified,
+        lastError: providerHealth.lastError,
+        books: books.map((book) => ({ ...book, hasOutline: ready.has(book.id) })),
+        subjects,
+        curriculum,
+      });
     } catch (error) { return sendJson(res, 503, { error: error.message }); }
   }
   if (pathname === '/api/books' && req.method === 'GET') {
-    return sendJson(res, 200, { books: await listBooks({ branch: clean(url.searchParams.get('branch'), 40), subject: clean(url.searchParams.get('subject'), 120) }) });
+    const books = await listBooks({ branch: clean(url.searchParams.get('branch'), 40), subject: clean(url.searchParams.get('subject'), 120) });
+    const ready = new Set(await listOutlineIds());
+    return sendJson(res, 200, { books: books.map((book) => ({ ...book, hasOutline: ready.has(book.id) })) });
+  }
+  if (pathname === '/api/outline' && req.method === 'GET') {
+    const outline = await getOutline(clean(url.searchParams.get('bookId'), 100));
+    if (!outline) return sendJson(res, 404, { error: 'OUTLINE_NOT_FOUND' });
+    return sendJson(res, 200, { bookId: outline.bookId, entries: outline.entries, header: outline.header, pages: outline.pages });
   }
   if (pathname === '/api/search' && req.method === 'GET') {
     const query = clean(url.searchParams.get('q'), 400);

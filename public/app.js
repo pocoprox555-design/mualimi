@@ -101,10 +101,21 @@ function renderProviderStatus() {
   const status = $('#providerState');
   if (!status) return;
   const configured = Boolean(state.ai?.configured);
-  status.textContent = state.settings.apiKey ? 'مفتاح هذا الجهاز' : configured ? 'مفتاح الخادم فعال' : 'لا يوجد مفتاح';
-  status.classList.toggle('offline', !configured);
+  const verified = state.ai?.verified;
+  status.textContent = state.settings.apiKey
+    ? 'مفتاح هذا الجهاز'
+    : !configured
+      ? 'لا يوجد مفتاح'
+      : verified === false ? 'المفتاح مرفوض من المزود' : 'مفتاح الخادم فعال';
+  status.classList.toggle('offline', !configured || verified === false);
   if ($('#providerModel')) $('#providerModel').textContent = state.ai?.model || '—';
   if ($('#providerEndpoint')) $('#providerEndpoint').textContent = state.ai?.endpoint ? state.ai.endpoint.replace(/^https?:\/\//, '').replace(/\/.*$/, '') : '—';
+}
+
+function statusText(data) {
+  if (!data?.configured) return 'الكتب جاهزة · الذكاء غير مضبوط';
+  if (data.verified === false) return 'الكتب جاهزة · الذكاء متعطل مؤقتا';
+  return 'المعلم جاهز';
 }
 
 function currentConversation() {
@@ -169,7 +180,7 @@ async function loadBootstrap() {
     state.curriculum = data.curriculum || null;
     state.ai = data;
     renderProviderStatus();
-    setConnection('online', data.configured ? 'المعلم جاهز' : 'الكتب جاهزة · الذكاء غير مضبوط');
+    setConnection('online', statusText(data));
   } catch (error) {
     setConnection('offline', 'تعذر الوصول للخادم');
     toast('تعذر تحميل الكتب الآن، حاولي تحديث الصفحة');
@@ -179,8 +190,8 @@ async function loadBootstrap() {
 async function warmup() {
   try {
     const data = await fetchJson('/api/health', {}, 12_000);
-    setConnection('online', data.ai?.configured ? 'المعلم جاهز' : 'الكتب جاهزة · الذكاء غير مضبوط');
     state.ai = { ...state.ai, ...(data.ai || {}) };
+    setConnection('online', statusText(state.ai));
     renderProviderStatus();
   } catch { setConnection('offline', 'تحققي من الاتصال'); }
 }
@@ -196,8 +207,25 @@ function markdownHtml(source) {
   let html = '';
   let list = '';
   const closeList = () => { if (list) { html += list === 'ul' ? '</ul>' : '</ol>'; list = ''; } };
-  for (const line of lines) {
+  const isTableLine = (line) => /^\s*\|.*\|\s*$/.test(line);
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     if (!line.trim()) { closeList(); continue; }
+    if (isTableLine(line)) {
+      closeList();
+      const rows = [];
+      while (i < lines.length && isTableLine(lines[i])) {
+        const cells = lines[i].trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+        if (!cells.every((cell) => /^:?-{2,}:?$/.test(cell))) rows.push(cells);
+        i++;
+      }
+      i--;
+      if (rows.length) {
+        const [head, ...body] = rows;
+        html += `<div class="table-scroll"><table><thead><tr>${head.map((cell) => `<th>${cell}</th>`).join('')}</tr></thead>${body.length ? `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>` : ''}</table></div>`;
+      }
+      continue;
+    }
     if (line.startsWith('<pre>') || line.startsWith('<h2>') || line.startsWith('<h3>')) { closeList(); html += line; continue; }
     if (/^\s*[-*]\s+/.test(line)) { if (list !== 'ul') { closeList(); html += '<ul>'; list = 'ul'; } html += `<li>${line.replace(/^\s*[-*]\s+/, '')}</li>`; continue; }
     if (/^\s*\d+[.)]\s+/.test(line)) { if (list !== 'ol') { closeList(); html += '<ol>'; list = 'ol'; } html += `<li>${line.replace(/^\s*\d+[.)]\s+/, '')}</li>`; continue; }
@@ -308,7 +336,15 @@ function renderMessages() {
   list.scrollTop = list.scrollHeight;
 }
 
+function clearSourceTray() {
+  const tray = $('#sourceTray');
+  if (!tray) return;
+  tray.innerHTML = '';
+  tray.hidden = true;
+}
+
 function showLearnPanel() {
+  clearSourceTray();
   const conversation = currentConversation();
   const chatting = Boolean(conversation?.messages?.length || state.composing);
   $('#homePanel').hidden = chatting;
@@ -517,7 +553,7 @@ async function requestReply(conversation, question, images, shell) {
   if (images.length && last?.role === 'user') last.content = [{ type: 'text', text: question || 'اشرحي الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))];
   let full = ''; let citations = []; let finished = false; let paint = 0;
   try {
-    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, branch: state.settings.branch, studentName: state.settings.studentName || '' }) });
+    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, branch: state.settings.branch, studentName: state.settings.studentName || '', subject: state.selectedSubject || '' }) });
     if (!response.ok) {
       let data = {}; try { data = await response.json(); } catch { /* ignore */ }
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
@@ -537,6 +573,7 @@ async function requestReply(conversation, question, images, shell) {
     conversation.updatedAt = Date.now();
     fillAssistantBubble(shell.querySelector('.message-bubble'), full);
     sourceCards(citations, shell.querySelector('.inline-sources'), true);
+    clearSourceTray();
     saveState(); renderRecent();
   } catch (error) {
     if (paint) cancelAnimationFrame(paint);
@@ -544,7 +581,7 @@ async function requestReply(conversation, question, images, shell) {
       if (full.trim()) {
         const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
         conversation.messages.push({ role: 'assistant', content: partial, cites: citations });
-        fillAssistantBubble(shell.querySelector('.message-bubble'), partial); sourceCards(citations, shell.querySelector('.inline-sources'), true); saveState();
+        fillAssistantBubble(shell.querySelector('.message-bubble'), partial); sourceCards(citations, shell.querySelector('.inline-sources'), true); clearSourceTray(); saveState();
       } else shell.remove();
     } else {
       shell.querySelector('.message-bubble').innerHTML = `<div class="error-box">${escapeHtml(apiErrorMessage(error))}<br><button class="retry-button" type="button">إعادة المحاولة</button></div>`;
@@ -552,7 +589,8 @@ async function requestReply(conversation, question, images, shell) {
     }
   } finally {
     state.request = null; $('#sendButton').hidden = false; $('#stopButton').hidden = true;
-    setConnection(navigator.onLine ? 'online' : 'offline', navigator.onLine ? (state.ai.configured ? 'المعلم جاهز' : 'الكتب جاهزة') : 'تحققي من الاتصال');
+    setConnection(navigator.onLine ? 'online' : 'offline', navigator.onLine ? statusText(state.ai) : 'تحققي من الاتصال');
+    if (navigator.onLine) warmup();
     saveState();
   }
 }

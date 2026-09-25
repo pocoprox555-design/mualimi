@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server.mjs",
     "build-index": "node scripts/build-index.mjs",
-    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs",
+    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs test/outline.test.mjs",
     "verify": "npm run build-index && npm test"
   }
 }
