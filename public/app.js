@@ -328,8 +328,9 @@ function quizPending(text) {
 
 function fillAssistantBubble(element, content, streaming = false) {
   element.querySelector('.teacher-status')?.remove();
-  element.innerHTML = '';
   if (streaming && quizPending(content)) {
+    if (element.querySelector('.quiz-loading')) return;
+    element.innerHTML = '';
     const loading = document.createElement('div');
     loading.className = 'quiz-loading';
     loading.innerHTML = '<span class="status-orb"></span><span>جارِ تجهيز الاختبار، لحظة من فضلك…</span>';
@@ -340,6 +341,7 @@ function fillAssistantBubble(element, content, streaming = false) {
     element.appendChild(typing);
     return;
   }
+  element.innerHTML = '';
   const parts = String(content || '').split(/```quiz\s*([\s\S]*?)```/g);
   parts.forEach((part, index) => {
     if (index % 2 === 1) { const quiz = quizElement(part.trim()); if (quiz) element.appendChild(quiz); return; }
