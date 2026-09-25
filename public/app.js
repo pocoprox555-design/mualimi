@@ -605,9 +605,41 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><span class="typing"><i></i><i></i><i></i></span></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label">المعلم</div><div class="teacher-trace" hidden></div><div class="message-bubble"><span class="typing"><i></i><i></i><i></i></span></div><div class="inline-sources source-tray"></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
+}
+
+function traceStep(shell, data) {
+  const trace = shell?.querySelector('.teacher-trace');
+  if (!trace || !data) return;
+  trace.hidden = false;
+  const current = trace.querySelector('.trace-step.active');
+  if (current) { current.classList.remove('active'); current.classList.add('done'); current.querySelector('.trace-mark').textContent = '✓'; }
+  const item = document.createElement('div');
+  item.className = `trace-step active phase-${data.phase || ''}`;
+  item.innerHTML = `<span class="trace-mark"></span><span class="trace-text"><b>${escapeHtml(data.label || '')}</b><small>${escapeHtml(data.detail || '')}</small></span>`;
+  trace.appendChild(item);
+  $('#messageList').scrollTop = $('#messageList').scrollHeight;
+}
+
+function traceFinish(shell) {
+  const trace = shell?.querySelector('.teacher-trace');
+  if (!trace || trace.hidden) return;
+  const current = trace.querySelector('.trace-step.active');
+  if (current) { current.classList.remove('active'); current.classList.add('done'); current.querySelector('.trace-mark').textContent = '✓'; }
+  const steps = trace.querySelectorAll('.trace-step').length;
+  if (steps >= 3) {
+    trace.classList.add('collapsed');
+    const toggle = document.createElement('button');
+    toggle.type = 'button'; toggle.className = 'trace-toggle';
+    toggle.textContent = `مسار المعلم · ${steps} خطوات`;
+    toggle.addEventListener('click', () => {
+      trace.classList.toggle('collapsed');
+      toggle.textContent = trace.classList.contains('collapsed') ? `مسار المعلم · ${steps} خطوات` : 'إخفاء مسار المعلم';
+    });
+    trace.prepend(toggle);
+  }
 }
 
 function renderStream(shell, content) {
@@ -631,6 +663,7 @@ async function requestReply(conversation, question, images, shell) {
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
     }
     for await (const packet of sseEvents(response, abort.signal)) {
+      if (packet.event === 'step') traceStep(shell, packet.data);
       if (packet.event === 'citations') { citations = packet.data.items || []; sourceCards(citations, $('#sourceTray')); }
       if (packet.event === 'delta') {
         full += packet.data.text || '';
@@ -645,10 +678,12 @@ async function requestReply(conversation, question, images, shell) {
     conversation.updatedAt = Date.now();
     fillAssistantBubble(shell.querySelector('.message-bubble'), full);
     sourceCards(citations, shell.querySelector('.inline-sources'), true);
+    traceFinish(shell);
     clearSourceTray();
     saveState(); renderRecent();
   } catch (error) {
     if (paint) cancelAnimationFrame(paint);
+    traceFinish(shell);
     if (abort.signal.aborted) {
       if (full.trim()) {
         const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
