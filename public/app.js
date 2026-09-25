@@ -327,8 +327,7 @@ function quizPending(text) {
 }
 
 function fillAssistantBubble(element, content, streaming = false) {
-  const status = element.querySelector('.teacher-status');
-  if (status) { status._textArrived = true; clearTimeout(status._timer); status._timer = null; status.remove(); }
+  element.querySelector('.teacher-status')?.remove();
   element.innerHTML = '';
   if (streaming && quizPending(content)) {
     const loading = document.createElement('div');
@@ -632,18 +631,7 @@ function statusPhrase(data) {
 function traceStep(shell, data) {
   const status = shell?.querySelector('.teacher-status');
   if (!status || !data) return;
-  const queue = status._queue || (status._queue = []);
-  queue.push(data);
-  if (!status._timer) {
-    const tick = () => {
-      if (!status.isConnected) return;
-      const next = status._queue.shift();
-      if (next) showStatus(status, next);
-      if (status._queue.length || !status._textArrived) status._timer = setTimeout(tick, 700);
-      else finishStatus(shell);
-    };
-    status._timer = setTimeout(tick, status.dataset.phase === 'wait' ? 500 : 0);
-  }
+  showStatus(status, data);
 }
 
 function showStatus(status, data) {
@@ -660,11 +648,7 @@ function showStatus(status, data) {
 }
 
 function traceFinish(shell) {
-  const status = shell?.querySelector('.teacher-status');
-  if (!status) return;
-  clearTimeout(status._timer);
-  status._timer = null;
-  status.remove();
+  shell?.querySelector('.teacher-status')?.remove();
 }
 
 function renderStream(shell, content) {
