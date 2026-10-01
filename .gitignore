@@ -25,3 +25,8 @@ Thumbs.db
 .server-*.log
 .server-pid
 .chat-out.sse
+
+# مخرجات معالجة مؤقتة لا تُرفع
+.ocr-tmp/
+.pdfverify/
+curriculum-library/_tmp_*

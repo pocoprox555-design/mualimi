@@ -1,0 +1,32 @@
+[
+  {
+    "bookId": "student-book-sixth-pdf",
+    "physicalPage": 53,
+    "fullText": "",
+    "title": "Full-page photo of an Assyrian winged lamassu relief",
+    "summary": "A full-page magenta-tinted photograph of an Assyrian lamassu relief: a winged bull with a human head in profile, a tall patterned tiara, a long curled beard and rows of carved feathers on stone. White margins frame it and it has no text.",
+    "educationalPurpose": "Image-only source page: students identify the lamassu as a palace guardian and link Assyrian art, religion and royal power in ancient Mesopotamia.",
+    "vision": true,
+    "note": "تفريغ بصري يدوي"
+  },
+  {
+    "bookId": "student-book-sixth-pdf",
+    "physicalPage": 65,
+    "fullText": "",
+    "title": "Full-page photo of an Assyrian lamassu relief in orange tones",
+    "summary": "A full-page orange-tinted photograph of an Assyrian lamassu relief in profile: a bearded human head under a decorated cap, huge feathered wings and a bull's forequarters carved on stone. White margins frame it and no text appears.",
+    "educationalPurpose": "Observation page for visual analysis: learners describe carving detail, wings and protective symbolism of Assyrian monumental art.",
+    "vision": true,
+    "note": "تفريغ بصري يدوي"
+  },
+  {
+    "bookId": "student-book-sixth-pdf",
+    "physicalPage": 77,
+    "fullText": "",
+    "title": "Full-page purple-toned photo of an Assyrian lamassu",
+    "summary": "A full-page violet-tinted photograph of an Assyrian lamassu relief: a winged bull with a human head, curled beard, crested tiara and rows of carved feathers against a plain stone wall. White margins frame it and no text appears.",
+    "educationalPurpose": "Supports study of Mesopotamian sculpture: students describe materials, meaning and function of guardian figures at Assyrian palace entrances.",
+    "vision": true,
+    "note": "تفريغ بصري يدوي"
+  }
+]

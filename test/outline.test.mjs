@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
-import { catalogIntent, getOutline, listOutlineIds, outlineContext, structureIntent } from '../lib/outline.mjs';
+import { getOutline, listOutlineIds, outlineContext, structureIntent } from '../lib/outline.mjs';
 import { resolveBook } from '../lib/index.mjs';
 
 test('كشف نية أسئلة بنية المادة', () => {
@@ -13,16 +13,6 @@ test('كشف نية أسئلة بنية المادة', () => {
   assert.equal(structureIntent('اشرح لي قانون الطلب'), false);
   assert.equal(structureIntent('من هو جون أوستن'), false);
   assert.equal(structureIntent(''), false);
-});
-
-test('كشف سؤال الكتالوج الكامل', () => {
-  assert.equal(catalogIntent('ما عندك من مواد'), true);
-  assert.equal(catalogIntent('ماهي المواد المتاحة؟'), true);
-  assert.equal(catalogIntent('وش عندكم من الكتب'), true);
-  assert.equal(catalogIntent('اعطني كل المواد'), true);
-  assert.equal(catalogIntent('ماذا كتب المؤلف؟'), false);
-  assert.equal(catalogIntent('ما كتب الطالب في الدرس؟'), false);
-  assert.equal(catalogIntent('ماذا يحتوي كتاب التاريخ'), false);
 });
 
 test('تحميل فهرس مادة موجودة', async () => {
@@ -75,8 +65,8 @@ test('تحديد كتاب المادة من السؤال أو من المادة 
   assert.equal(byChapter?.id, 'economics-sixth-literary-pdf');
   const bySubject = await resolveBook('سؤال عشوائي', { subject: 'التاريخ' });
   assert.equal(bySubject?.id, 'history-sixth-literary-pdf');
-  const unrestricted = await resolveBook('القرآن');
-  assert.equal(unrestricted?.id, 'islamic-sixth-preparatory-2025');
+  const unrestricted = await resolveBook('القرآن', { track: 'ديني' });
+  assert.equal(unrestricted?.id, 'quran-readings-deni-sixth');
   const weak = await resolveBook('سؤال لا يحدد مادة', { search: true });
   assert.equal(weak ?? null, null);
   // الكتاب الرسمي يسبق دليل المدرس وكتاب التمارين عند تقارب التطابق

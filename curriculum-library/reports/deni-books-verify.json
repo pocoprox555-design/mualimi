@@ -1,0 +1,74 @@
+[
+  {
+    "file": "كتاب مباحث القراءات القرانية السادس الاعدادي.pdf",
+    "bytes": 9606949,
+    "sha256": "3fb3cb479bf4f39bb8a4cfa2ef19df8896424707b5e91a94498241ebfbec50d8",
+    "pages": 63,
+    "header": "%PDF-",
+    "size": "9.16 MB"
+  },
+  {
+    "file": "كتاب الفقه السادس الاعدادي.pdf",
+    "bytes": 11964709,
+    "sha256": "7d876cd6d1401633a626d499234694297f1b20f36c9c2d334ac88ba2878a6d36",
+    "pages": 106,
+    "header": "%PDF-",
+    "size": "11.41 MB"
+  },
+  {
+    "file": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+    "bytes": 33249001,
+    "sha256": "617c5d8efb394a2cf91ecc7e75ce700921d4c5528e006e6e54dccae5585653a5",
+    "pages": 45,
+    "header": "%PDF-",
+    "size": "31.71 MB"
+  },
+  {
+    "file": "كتاب التاريخ والسيرة السادس الاعدادي.pdf",
+    "bytes": 1721771,
+    "sha256": "e582c6f1d4ca60699cea412259d5a365561025679f6e4bdad6c309a36f40b785",
+    "pages": 140,
+    "header": "%PDF-",
+    "size": "1.64 MB"
+  },
+  {
+    "file": "كتاب النحو والتطبيق السادس الاعدادي.pdf",
+    "bytes": 2550665,
+    "sha256": "9cfc49514b4978eacee074e91709969b349a205b94ca4dbf42eabe650ac716d9",
+    "pages": 105,
+    "header": "%PDF-",
+    "size": "2.43 MB"
+  },
+  {
+    "file": "كتاب البلاغة السادس الاعدادي.pdf",
+    "bytes": 6335830,
+    "sha256": "1775e172f013c3991410402175b8f8c3c39d3cb77757c8f086687ff21bf8c66c",
+    "pages": 59,
+    "header": "%PDF-",
+    "size": "6.04 MB"
+  },
+  {
+    "file": "كتاب اللغة الانكليزية السادس الاعدادي.pdf",
+    "bytes": 11860266,
+    "sha256": "f55f8a37d744d6777726c5b93fed9c26562f662c1e63d74af074852007ae1f6b",
+    "pages": 129,
+    "header": "%PDF-",
+    "size": "11.31 MB"
+  },
+  {
+    "file": "كتاب الرياضيات السادس الاعدادي.pdf",
+    "bytes": 3282351,
+    "sha256": "ac4646e7e4ba2430cb4a6cd43c481b5fead3df08265bee5726338b3800bfc331",
+    "pages": 80,
+    "header": "%PDF-",
+    "size": "3.13 MB"
+  },
+  {
+    "file": "كتاب الحديث السادس الاعدادي.pdf",
+    "bytes": 14382675,
+    "sha256": "db65314579d6d3a469fe80e7524bb347eed44e6fb2af2f8581bb7efb2d95be92",
+    "pages": 159,
+    "header": "%PDF-",
+    "size": "13.72 MB"
+  }
+]

@@ -1,12 +1,14 @@
-.env
+﻿.env
 .env.*
 !.env.example
 node_modules
 dist
 curriculum-data
-# ملفات PDF الخام (171MB) لا يحتاجها السيرفر الجديد — الفهارس المبنية تكفي
+# ملفات PDF الخام (171MB) لا يحتاجها السيرفر — الفهارس المبنية تكفي
 curriculum-library/pdf-sources
 curriculum-library/legacy-text-sources
+# النص الكامل صار داخل search-index.json؛ هذه نسخة بناء فقط
+curriculum-library/pdf-books
 .mimosa
 *.log
 .git

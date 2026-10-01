@@ -1,0 +1,5405 @@
+{
+ "builtAt": "2026-09-26T02:27:41.325Z",
+ "stats": {
+  "books": 12,
+  "pages": 1456,
+  "searchable": 1298,
+  "vision": 156,
+  "noText": 158,
+  "placeholders": 312,
+  "weakSummaries": 158,
+  "weakTitles": 156,
+  "junkMeta": 0,
+  "dumpTitles": 2,
+  "dumpSummaries": 1,
+  "flagMismatches": 0,
+  "dupSummaries": 150,
+  "dupTitles": 138,
+  "indexMismatches": 1,
+  "missingDocs": 0,
+  "weakDocs": 0,
+  "missingOutlines": 0,
+  "expectedPages": 1456,
+  "searchIndexDocuments": 1456,
+  "searchIndexStats": {
+   "books": 12,
+   "pages": 1456,
+   "indexedPages": 1456,
+   "searchablePages": 1241,
+   "visionPages": 215,
+   "outlinePages": 1456,
+   "terms": 47605
+  },
+  "issues": 884
+ },
+ "byCode": {
+  "SEARCH_DOC_FLAG_MISMATCH": 59,
+  "SEARCH_DOC_EMPTY_PREVIEW": 59,
+  "NO_TEXT_BUT_NOT_FLAGGED": 2,
+  "WEAK_SUMMARY": 2,
+  "NO_TEXT": 156,
+  "PLACEHOLDER_TITLE": 156,
+  "PLACEHOLDER_SUMMARY": 156,
+  "DUMP_SUMMARY": 1,
+  "DUMP_TITLE": 2,
+  "INDEX_PAGE_STALE": 1,
+  "TITLE_EQUALS_SUMMARY": 2,
+  "DUP_SUMMARY_SAME_BOOK": 150,
+  "DUP_TITLE_SAME_BOOK": 138
+ },
+ "byBook": {
+  "economics-sixth-literary-pdf": {
+   "SEARCH_DOC_FLAG_MISMATCH": 4,
+   "SEARCH_DOC_EMPTY_PREVIEW": 4,
+   "NO_TEXT_BUT_NOT_FLAGGED": 1,
+   "WEAK_SUMMARY": 1,
+   "TITLE_EQUALS_SUMMARY": 1
+  },
+  "geography-sixth-literary-pdf": {
+   "SEARCH_DOC_FLAG_MISMATCH": 1,
+   "SEARCH_DOC_EMPTY_PREVIEW": 1,
+   "NO_TEXT_BUT_NOT_FLAGGED": 1,
+   "WEAK_SUMMARY": 1,
+   "TITLE_EQUALS_SUMMARY": 1
+  },
+  "islamic-sixth-preparatory-2025": {
+   "SEARCH_DOC_FLAG_MISMATCH": 54,
+   "SEARCH_DOC_EMPTY_PREVIEW": 54,
+   "NO_TEXT": 46,
+   "PLACEHOLDER_TITLE": 46,
+   "PLACEHOLDER_SUMMARY": 46,
+   "DUMP_SUMMARY": 1,
+   "DUMP_TITLE": 2,
+   "INDEX_PAGE_STALE": 1,
+   "DUP_SUMMARY_SAME_BOOK": 40,
+   "DUP_TITLE_SAME_BOOK": 28
+  },
+  "mathematics-sixth-literary-pdf": {
+   "NO_TEXT": 14,
+   "PLACEHOLDER_TITLE": 14,
+   "PLACEHOLDER_SUMMARY": 14,
+   "DUP_SUMMARY_SAME_BOOK": 14,
+   "DUP_TITLE_SAME_BOOK": 14
+  },
+  "student-activity-sixth-pdf": {
+   "NO_TEXT": 58,
+   "PLACEHOLDER_TITLE": 58,
+   "PLACEHOLDER_SUMMARY": 58,
+   "DUP_SUMMARY_SAME_BOOK": 58,
+   "DUP_TITLE_SAME_BOOK": 58
+  },
+  "student-book-sixth-pdf": {
+   "NO_TEXT": 38,
+   "PLACEHOLDER_TITLE": 38,
+   "PLACEHOLDER_SUMMARY": 38,
+   "DUP_SUMMARY_SAME_BOOK": 38,
+   "DUP_TITLE_SAME_BOOK": 38
+  }
+ },
+ "issues": [
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 220 حرف"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 14,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1675 حرف"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 14,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 41,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1133 حرف"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 41,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 42,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 764 حرف"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 42,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 112,
+   "code": "NO_TEXT_BUT_NOT_FLAGGED",
+   "detail": "نص فارغ أو قصير (18 حرف)"
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 112,
+   "code": "WEAK_SUMMARY",
+   "detail": "112 تم بحمده تعالى | 112 تم بحمده تعالى"
+  },
+  {
+   "bookId": "geography-sixth-literary-pdf",
+   "physicalPage": 10,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 133 حرف"
+  },
+  {
+   "bookId": "geography-sixth-literary-pdf",
+   "physicalPage": 10,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "geography-sixth-literary-pdf",
+   "physicalPage": 172,
+   "code": "NO_TEXT_BUT_NOT_FLAGGED",
+   "detail": "نص فارغ أو قصير (18 حرف)"
+  },
+  {
+   "bookId": "geography-sixth-literary-pdf",
+   "physicalPage": 172,
+   "code": "WEAK_SUMMARY",
+   "detail": "تم بحمده تعالى 172 | تم بحمده تعالى 172"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 2,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 332 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 2,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 4,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1120 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 4,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 5,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1382 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 5,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 6,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1663 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 6,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 7,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1743 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 7,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 8,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1111 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 8,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 10,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1422 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 10,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 11,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1626 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 11,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 14,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1348 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 14,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 15,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1716 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 15,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 16,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1667 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 16,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 17,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2306 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 17,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 19,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 395 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 19,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 20,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1321 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 20,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 21,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1927 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 21,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 22,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2351 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 22,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 24,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 24,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "أصحاب الكهف — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «أصحاب الكهف» في الوحدة الأولى، لكن النص غير قابل للاستخر"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 24,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "أصحاب الكهف — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «أصحاب الكهف» في الوحدة الأولى، لكن النص غير قابل للاستخر"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 26,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 508 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 26,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 27,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1389 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 27,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 28,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1413 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 28,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 29,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2036 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 29,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 30,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 534 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 30,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 31,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 31,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "نظام الأسرة في الإسلام — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نظام الأسرة في الإسلام» في الوحدة الأولى، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 31,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "نظام الأسرة في الإسلام — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نظام الأسرة في الإسلام» في الوحدة الأولى، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 32,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1520 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 32,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 33,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1556 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 33,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 34,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1754 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 34,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 35,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1657 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 35,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 36,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1403 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 36,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 37,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2155 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 37,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 38,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1266 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 38,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 39,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1320 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 39,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 40,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 553 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 40,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 43,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2181 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 43,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 45,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 826 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 45,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 46,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1344 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 46,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 47,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 989 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 47,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 48,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1676 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 48,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 49,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 49,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة آل عمران (90–97) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة آل عمران (90–97)» في الوحدة الثانية، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 49,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة آل عمران (90–97) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة آل عمران (90–97)» في الوحدة الثانية، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 52,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1643 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 52,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 53,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 53,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "مريم بنت عمران (عليها السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثانية، لكن ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 53,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "مريم بنت عمران (عليها السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثانية، لكن ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 54,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 54,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "مريم بنت عمران (عليها السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثانية، لكن ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 54,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "مريم بنت عمران (عليها السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثانية، لكن ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 59,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1360 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 59,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 60,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2104 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 60,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 64,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1340 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 64,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 65,
+   "code": "DUMP_SUMMARY",
+   "detail": "{\"text\":\"وقد ورد في الحديث الشريف قوله ﴿ص﴾ (خيرُكم خيرُكم لأ | {\"text\":\"وقد ورد في الحديث الشريف قوله ﴿ص﴾ (خيرُكم خيرُكم لأهلِه) كما يجب على ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 65,
+   "code": "DUMP_TITLE",
+   "detail": "{\"text\":\"وقد ورد في الحديث الشريف قوله ﴿ص﴾ (خيرُكم خيرُكم لأ | {\"text\":\"وقد ورد في الحديث الشريف قوله ﴿ص﴾ (خيرُكم خيرُكم لأهلِه) كما يجب على ال"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 65,
+   "code": "INDEX_PAGE_STALE",
+   "detail": "الصفحة في pdf-index.json تختلف عن pdf-books"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 65,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1506 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 65,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 71,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1583 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 71,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 72,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 827 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 72,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 73,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1096 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 73,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 75,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 75,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة النساء (1–10) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 75,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة النساء (1–10) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 76,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1447 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 76,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 77,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 77,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة النساء (1–10) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 77,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة النساء (1–10) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن النص غير ق"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 78,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 536 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 78,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 81,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1465 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 81,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 82,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1574 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 82,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 93,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1416 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 93,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 94,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1542 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 94,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 95,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 95,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "نظرة عامة للنظام الاقتصادي في الإسلام — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نظرة عامة للنظام الاقتصادي في الإسلام» في الوحدة الثالثة"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 95,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "نظرة عامة للنظام الاقتصادي في الإسلام — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نظرة عامة للنظام الاقتصادي في الإسلام» في الوحدة الثالثة"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 96,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 2010 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 96,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 98,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1644 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 98,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 102,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1260 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 102,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 103,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 103,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 103,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 105,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1705 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 105,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 106,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 106,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 106,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 107,
+   "code": "DUMP_TITLE",
+   "detail": "إِنَّ رَبَّكَ يَبْسُطُ الرِّزْقَ لِمَنْ يَشَاءُ وَيَقْدِرُ إ | الصفحة تحتوي على ثلاث آيات قرآنية (60-62) تتحدث عن بسط الرزق من الله، تحريم التك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 107,
+   "code": "SEARCH_DOC_FLAG_MISMATCH",
+   "detail": "doc.searchable=false مع نص 1964 حرف"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 107,
+   "code": "SEARCH_DOC_EMPTY_PREVIEW",
+   "detail": "preview فارغ مع وجود نص"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 108,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 108,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 108,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 109,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 109,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 109,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 110,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 110,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 110,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الإسراء (23–39) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 113,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 113,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 113,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 114,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 114,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 114,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 115,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 115,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 115,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 116,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 116,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 116,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 117,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 117,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 117,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 118,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 118,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 118,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "النبي شعيب (عليه السلام) — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 120,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 120,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "في الجهاد وكرامة المجاهد — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 120,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "في الجهاد وكرامة المجاهد — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 121,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 121,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "في الجهاد وكرامة المجاهد — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 121,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "في الجهاد وكرامة المجاهد — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، لكن النص غي"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 123,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 123,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 123,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 125,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 125,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 125,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 128,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 128,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 128,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "الوظائف الاقتصادية للدولة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، لكن النص غ"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 129,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 129,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "التكبر — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التكبر» في الوحدة الرابعة، لكن النص غير قابل للاستخراج و"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 129,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "التكبر — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التكبر» في الوحدة الرابعة، لكن النص غير قابل للاستخراج و"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 132,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 132,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 132,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 133,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 133,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 133,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 135,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 135,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 135,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 136,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 136,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 136,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 137,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 137,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 137,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 138,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 138,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 138,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 139,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 139,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 139,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 140,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 140,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 140,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "من سورة الأنبياء — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص غير قابل ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 141,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 141,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "نبأ الفاسق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نبأ الفاسق» في الوحدة الخامسة، لكن النص غير قابل للاستخر"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 141,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "نبأ الفاسق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «نبأ الفاسق» في الوحدة الخامسة، لكن النص غير قابل للاستخر"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 143,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 143,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 143,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 144,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 144,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 144,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 147,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 147,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 147,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "حسن الخلق — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قابل للاستخرا"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 148,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 148,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 148,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 149,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 149,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 149,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 150,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 150,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 150,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 154,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 154,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 154,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "التسامح والتعايش السلمي — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لكن النص غير"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 156,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 156,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 156,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 157,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 157,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 157,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 158,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 158,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 158,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 160,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 160,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 160,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 163,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 163,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 163,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "القناعة — صفحة تحتاج OCR | تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل للاستخراج "
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 2,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 2,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 2,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 9,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 9,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 9,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 11,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 11,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 11,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 17,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 17,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 17,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 28,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 28,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 28,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 38,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 38,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 38,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 49,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 49,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 49,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 63,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 63,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 63,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 74,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 74,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 74,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 80,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 80,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 80,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 86,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 86,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 86,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 87,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 87,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 87,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 97,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 97,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 97,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 107,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 107,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 107,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 108,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 108,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 108,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 109,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 109,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 109,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 110,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 110,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 110,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 111,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 111,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 111,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 112,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 112,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 112,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 113,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 113,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 113,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 114,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 114,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 114,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 115,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 115,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 115,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 116,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 116,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 116,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 117,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 117,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 117,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 118,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 118,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 118,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 119,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 119,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 119,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 120,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 120,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 120,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 121,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 121,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 121,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 122,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 122,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 122,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 123,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 123,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 123,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 124,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 124,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 124,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 125,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 125,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 125,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 126,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 126,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 126,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 127,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 127,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 127,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 128,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 128,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 128,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 129,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 129,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 129,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 130,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 130,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 130,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 131,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 131,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 131,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 132,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 132,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 132,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 133,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 133,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 133,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 134,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 134,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 134,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 135,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 135,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 135,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 136,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 136,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 136,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 137,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 137,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 137,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 138,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 138,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 138,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 139,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 139,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 139,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 140,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 140,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 140,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 141,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 141,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 141,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 142,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 142,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 142,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 143,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 143,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 143,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 144,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 144,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 144,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 145,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 145,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 145,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 146,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 146,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 146,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 147,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 147,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 147,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 148,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 148,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 148,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 149,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 149,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 149,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 150,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 150,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 150,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 151,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 151,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 151,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 152,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 152,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 152,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 153,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 153,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 153,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 154,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 154,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 154,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 155,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 155,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 155,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 156,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 156,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 156,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 157,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 157,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 157,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 158,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 158,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 158,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 159,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 159,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 159,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 160,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 160,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 160,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 161,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 161,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 161,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 162,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 162,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 162,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 163,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 163,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 163,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 164,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 164,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 164,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 54,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 54,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 54,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 55,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 55,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 55,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 56,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 56,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 56,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 57,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 57,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 57,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 58,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 58,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 58,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 59,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 59,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 59,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 60,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 60,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 60,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 61,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 61,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 61,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 62,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 62,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 62,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 63,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 63,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 63,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 64,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 64,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 64,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 66,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 66,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 66,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 67,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 67,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 67,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 68,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 68,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 68,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 69,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 69,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 69,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 70,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 70,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 70,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 71,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 71,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 71,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 72,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 72,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 72,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 73,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 73,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 73,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 74,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 74,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 74,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 75,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 75,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 75,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 76,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 76,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 76,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 78,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 78,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 78,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 79,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 79,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 79,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 80,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 80,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 80,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 81,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 81,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 81,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 82,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 82,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 82,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 83,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 83,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 83,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 84,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 84,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 84,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 85,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 85,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 85,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 86,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 86,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 86,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 87,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 87,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 87,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 88,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 88,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 88,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 89,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 89,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 89,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 90,
+   "code": "NO_TEXT",
+   "detail": "نص فارغ أو قصير (0 حرف)"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 90,
+   "code": "PLACEHOLDER_TITLE",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 90,
+   "code": "PLACEHOLDER_SUMMARY",
+   "detail": "صفحة مصورة | تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "economics-sixth-literary-pdf",
+   "physicalPage": 112,
+   "code": "TITLE_EQUALS_SUMMARY",
+   "detail": "112 تم بحمده تعالى"
+  },
+  {
+   "bookId": "geography-sixth-literary-pdf",
+   "physicalPage": 172,
+   "code": "TITLE_EQUALS_SUMMARY",
+   "detail": "تم بحمده تعالى 172"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 53,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54 · تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثان"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 54,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54 · تقع هذه الصفحة ضمن درس «مريم بنت عمران (عليها السلام)» في الوحدة الثان"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 75,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 75,77 · تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 77,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 75,77 · تقع هذه الصفحة ضمن درس «من سورة النساء (1–10)» في الوحدة الثالثة، لكن "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 103,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 103,106,108,109,110 · تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 106,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 103,106,108,109,110 · تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 108,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 103,106,108,109,110 · تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 109,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 103,106,108,109,110 · تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 110,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 103,106,108,109,110 · تقع هذه الصفحة ضمن درس «من سورة الإسراء (23–39)» في الوحدة الرابعة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 113,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 114,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 115,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 116,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 117,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 118,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 113,114,115,116,117,118 · تقع هذه الصفحة ضمن درس «النبي شعيب (عليه السلام)» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 120,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 120,121 · تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 121,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 120,121 · تقع هذه الصفحة ضمن درس «في الجهاد وكرامة المجاهد» في الوحدة الرابعة، ل"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 123,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 123,125,128 · تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 125,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 123,125,128 · تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 128,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 123,125,128 · تقع هذه الصفحة ضمن درس «الوظائف الاقتصادية للدولة» في الوحدة الرابعة، "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 132,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 133,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 135,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 136,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 137,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 138,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 139,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 140,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 132,133,135,136,137,138,139,140 · تقع هذه الصفحة ضمن درس «من سورة الأنبياء» في الوحدة الخامسة، لكن النص "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 143,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 143,144,147 · تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قاب"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 144,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 143,144,147 · تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قاب"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 147,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 143,144,147 · تقع هذه الصفحة ضمن درس «حسن الخلق» في الوحدة الخامسة، لكن النص غير قاب"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 148,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 148,149,150,154 · تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 149,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 148,149,150,154 · تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 150,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 148,149,150,154 · تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 154,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 148,149,150,154 · تقع هذه الصفحة ضمن درس «التسامح والتعايش السلمي» في الوحدة الخامسة، لك"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 156,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 156,157,158,160,163 · تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 157,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 156,157,158,160,163 · تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 158,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 156,157,158,160,163 · تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 160,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 156,157,158,160,163 · تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 163,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 156,157,158,160,163 · تقع هذه الصفحة ضمن درس «القناعة» في الوحدة الخامسة، لكن النص غير قابل "
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 103,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: من سورة الإسراء (23–39) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 106,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: من سورة الإسراء (23–39) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 108,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: من سورة الإسراء (23–39) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 109,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: من سورة الإسراء (23–39) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 110,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: من سورة الإسراء (23–39) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 113,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 114,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 115,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 116,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 117,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 118,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "6 صفحات بعنوان واحد: النبي شعيب (عليه السلام) — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 132,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 133,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 135,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 136,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 137,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 138,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 139,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 140,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "8 صفحات بعنوان واحد: من سورة الأنبياء — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 148,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "4 صفحات بعنوان واحد: التسامح والتعايش السلمي — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 149,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "4 صفحات بعنوان واحد: التسامح والتعايش السلمي — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 150,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "4 صفحات بعنوان واحد: التسامح والتعايش السلمي — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 154,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "4 صفحات بعنوان واحد: التسامح والتعايش السلمي — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 156,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: القناعة — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 157,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: القناعة — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 158,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: القناعة — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 160,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: القناعة — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "islamic-sixth-preparatory-2025",
+   "physicalPage": 163,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "5 صفحات بعنوان واحد: القناعة — صفحة تحتاج OCR"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 2,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 9,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 11,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 17,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 28,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 38,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 49,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 63,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 74,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 80,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 86,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 87,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 97,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 1,2,9,11,17,28,38,49,63,74,80,86,87,97 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 1,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 2,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 9,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 11,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 17,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 28,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 38,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 49,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 63,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 74,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 80,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 86,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 87,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 97,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "14 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 107,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 108,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 109,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 110,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 111,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 112,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 113,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 114,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 115,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 116,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 117,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 118,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 119,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 120,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 121,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 122,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 123,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 124,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 125,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 126,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 127,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 128,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 129,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 130,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 131,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 132,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 133,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 134,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 135,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 136,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 137,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 138,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 139,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 140,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 141,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 142,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 143,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 144,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 145,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 146,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 147,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 148,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 149,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 150,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 151,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 152,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 153,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 154,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 155,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 156,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 157,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 158,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 159,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 160,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 161,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 162,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 163,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 164,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 107,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 108,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 109,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 110,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 111,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 112,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 113,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 114,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 115,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 116,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 117,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 118,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 119,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 120,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 121,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 122,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 123,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 124,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 125,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 126,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 127,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 128,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 129,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 130,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 131,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 132,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 133,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 134,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 135,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 136,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 137,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 138,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 139,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 140,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 141,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 142,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 143,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 144,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 145,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 146,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 147,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 148,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 149,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 150,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 151,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 152,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 153,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 154,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 155,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 156,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 157,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 158,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 159,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 160,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 161,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 162,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 163,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-activity-sixth-pdf",
+   "physicalPage": 164,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "58 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 54,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 55,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 56,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 57,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 58,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 59,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 60,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 61,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 62,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 63,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 64,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 66,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 67,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 68,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 69,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 70,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 71,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 72,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 73,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 74,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 75,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 76,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 78,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 79,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 80,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 81,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 82,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 83,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 84,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 85,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 86,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 87,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 88,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 89,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 90,
+   "code": "DUP_SUMMARY_SAME_BOOK",
+   "detail": "صفحات 53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90 · تحتاج هذه الصفحة إلى القراءة البصرية من صورة PDF."
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 54,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 55,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 56,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 57,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 58,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 59,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 60,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 61,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 62,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 63,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 64,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 66,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 67,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 68,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 69,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 70,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 71,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 72,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 73,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 74,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 75,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 76,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 78,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 79,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 80,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 81,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 82,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 83,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 84,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 85,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 86,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 87,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 88,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 89,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  },
+  {
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 90,
+   "code": "DUP_TITLE_SAME_BOOK",
+   "detail": "38 صفحات بعنوان واحد: صفحة مصورة"
+  }
+ ]
+}

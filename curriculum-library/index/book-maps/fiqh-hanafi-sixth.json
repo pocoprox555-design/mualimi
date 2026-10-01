@@ -1,0 +1,1468 @@
+{
+  "schemaVersion": 2,
+  "books": [
+    {
+      "bookId": "fiqh-hanafi-sixth-pdf",
+      "book": {
+        "id": "fiqh-hanafi-sixth-pdf",
+        "title": "الحدود والجنايات والأيمان والسير في الفقه الحنفي",
+        "subject": "التربية الإسلامية - الفقه الحنفي",
+        "edition": null,
+        "year": 2025,
+        "grade": "السادس الإعدادي",
+        "branch": "علمي",
+        "source": {
+          "type": "pdf",
+          "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+          "bytes": 33247232,
+          "checksum": null,
+          "publisher": null,
+          "authoritative": true
+        }
+      },
+      "pageCount": 45,
+      "pages": [
+        {
+          "physicalPage": 1,
+          "printedPage": null,
+          "pageNumber": 1,
+          "printedPageNumber": null,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "الغلاف",
+          "summary": "غلاف كتاب الحدود والجنايات والأيمان والسير في الفقه الحنفي للالسادس الإعدادي - الفرع العلمي",
+          "section": null,
+          "unit": null,
+          "pageType": "cover",
+          "kind": "cover",
+          "educationalPurpose": "غلاف الكتاب",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 1,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": null,
+            "next": 2
+          }
+        },
+        {
+          "physicalPage": 2,
+          "printedPage": null,
+          "pageNumber": 2,
+          "printedPageNumber": null,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "المقدمة",
+          "summary": "مقدمة كتاب الحدود والجنايات والأيمان والسير في الفقه الحنفي",
+          "section": "المقدمة",
+          "unit": null,
+          "pageType": "introduction",
+          "kind": "introduction",
+          "educationalPurpose": "مقدمة في علم الفقه وأهميته",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 2,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 1,
+            "next": 3
+          }
+        },
+        {
+          "physicalPage": 3,
+          "printedPage": 1,
+          "pageNumber": 3,
+          "printedPageNumber": 1,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الحدود - تعريف الحد",
+          "summary": "بداية كتاب الحدود - تعريف الحد وأهميته في الشريعة الإسلامية",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الحد وأحكامه في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 3,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 2,
+            "next": 4
+          }
+        },
+        {
+          "physicalPage": 4,
+          "printedPage": 2,
+          "pageNumber": 4,
+          "printedPageNumber": 2,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "ثبوت الزنا",
+          "summary": "طرق ثبوت الزنا وشروطه في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "معرفة طرق ثبوت الزنا وأحكامه",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 4,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 3,
+            "next": 5
+          }
+        },
+        {
+          "physicalPage": 5,
+          "printedPage": 3,
+          "pageNumber": 5,
+          "printedPageNumber": 3,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "حد القذف",
+          "summary": "حد القذف وشروطه وأحكامه في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام حد القذف وشروطه",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 5,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 4,
+            "next": 6
+          }
+        },
+        {
+          "physicalPage": 6,
+          "printedPage": 4,
+          "pageNumber": 6,
+          "printedPageNumber": 4,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط المقذوف",
+          "summary": "شروط المقذوف في حد القذف في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط المقذوف في حد القذف",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 6,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 5,
+            "next": 7
+          }
+        },
+        {
+          "physicalPage": 7,
+          "printedPage": 5,
+          "pageNumber": 7,
+          "printedPageNumber": 5,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "حد شرب الخمر",
+          "summary": "حد شرب الخمر وشروطه وأحكامه في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام حد شرب الخمر",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 7,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 6,
+            "next": 8
+          }
+        },
+        {
+          "physicalPage": 8,
+          "printedPage": 6,
+          "pageNumber": 8,
+          "printedPageNumber": 6,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "الرجوع عن الإقرار وإقامة الحد",
+          "summary": "الرجوع عن الإقرار وإقامة الحد في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الرجوع عن الإقرار وإقامة الحد",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 8,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 7,
+            "next": 9
+          }
+        },
+        {
+          "physicalPage": 9,
+          "printedPage": 7,
+          "pageNumber": 9,
+          "printedPageNumber": 7,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط المسروق",
+          "summary": "شروط المسروق في حد السرقة في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط المسروق في حد السرقة",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 9,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 8,
+            "next": 10
+          }
+        },
+        {
+          "physicalPage": 10,
+          "printedPage": 8,
+          "pageNumber": 10,
+          "printedPageNumber": 8,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "ثبوت السرقة",
+          "summary": "طرق ثبوت السرقة وشروطه في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "معرفة طرق ثبوت السرقة وأحكامه",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 10,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 9,
+            "next": 11
+          }
+        },
+        {
+          "physicalPage": 11,
+          "printedPage": 9,
+          "pageNumber": 11,
+          "printedPageNumber": 9,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط القواطع وأحكامهم",
+          "summary": "شروط القواطع وأحكامهم في المذهب الحنفي",
+          "section": "كتاب الحدود",
+          "unit": "كتاب الحدود",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط القواطع وأحكامهم",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 11,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 10,
+            "next": 12
+          }
+        },
+        {
+          "physicalPage": 12,
+          "printedPage": 10,
+          "pageNumber": 12,
+          "printedPageNumber": 10,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الجنايات - تعريف الجناية",
+          "summary": "بداية كتاب الجنايات - تعريف الجناية وأهميتها",
+          "section": "كتاب الجنايات",
+          "unit": "كتاب الجنايات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الجناية وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 12,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 11,
+            "next": 13
+          }
+        },
+        {
+          "physicalPage": 13,
+          "printedPage": 11,
+          "pageNumber": 13,
+          "printedPageNumber": 11,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "الجناية على النفس",
+          "summary": "الجناية على النفس وأحكامها في المذهب الحنفي",
+          "section": "كتاب الجنايات",
+          "unit": "كتاب الجنايات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الجناية على النفس",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 13,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 12,
+            "next": 14
+          }
+        },
+        {
+          "physicalPage": 14,
+          "printedPage": 12,
+          "pageNumber": 14,
+          "printedPageNumber": 12,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "القتل العمد",
+          "summary": "القتل العمد وأحكامه في المذهب الحنفي",
+          "section": "كتاب الجنايات",
+          "unit": "كتاب الجنايات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام القتل العمد",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 14,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 13,
+            "next": 15
+          }
+        },
+        {
+          "physicalPage": 15,
+          "printedPage": 13,
+          "pageNumber": 15,
+          "printedPageNumber": 13,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "تطبيق القصاص",
+          "summary": "تطبيق القصاص وأحكامه في المذهب الحنفي",
+          "section": "كتاب الجنايات",
+          "unit": "كتاب الجنايات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام تطبيق القصاص",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 15,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 14,
+            "next": 16
+          }
+        },
+        {
+          "physicalPage": 16,
+          "printedPage": 14,
+          "pageNumber": 16,
+          "printedPageNumber": 14,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الديات - تعريف الدية",
+          "summary": "بداية كتاب الديات - تعريف الدية وأهميتها",
+          "section": "كتاب الديات",
+          "unit": "كتاب الديات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الدية وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 16,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 15,
+            "next": 17
+          }
+        },
+        {
+          "physicalPage": 17,
+          "printedPage": 15,
+          "pageNumber": 17,
+          "printedPageNumber": 15,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "دية الأعضاء",
+          "summary": "دية الأعضاء وأحكامها في المذهب الحنفي",
+          "section": "كتاب الديات",
+          "unit": "كتاب الديات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام دية الأعضاء",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 17,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 16,
+            "next": 18
+          }
+        },
+        {
+          "physicalPage": 18,
+          "printedPage": 16,
+          "pageNumber": 18,
+          "printedPageNumber": 16,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الشهادات - تعريف الشهادة",
+          "summary": "بداية كتاب الشهادات - تعريف الشهادة وأهميتها",
+          "section": "كتاب الشهادات",
+          "unit": "كتاب الشهادات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الشهادة وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 18,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 17,
+            "next": 19
+          }
+        },
+        {
+          "physicalPage": 19,
+          "printedPage": 17,
+          "pageNumber": 19,
+          "printedPageNumber": 17,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط الشهادة",
+          "summary": "شروط الشهادة في المذهب الحنفي",
+          "section": "كتاب الشهادات",
+          "unit": "كتاب الشهادات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط الشهادة",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 19,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 18,
+            "next": 20
+          }
+        },
+        {
+          "physicalPage": 20,
+          "printedPage": 18,
+          "pageNumber": 20,
+          "printedPageNumber": 18,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "مراتب الشهادة",
+          "summary": "مراتب الشهادة في المذهب الحنفي",
+          "section": "كتاب الشهادات",
+          "unit": "كتاب الشهادات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "مراتب الشهادة",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 20,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 19,
+            "next": 21
+          }
+        },
+        {
+          "physicalPage": 21,
+          "printedPage": 19,
+          "pageNumber": 21,
+          "printedPageNumber": 19,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "الشهادة على الشهادة والرجوع عن الشهادة",
+          "summary": "الشهادة على الشهادة والرجوع عن الشهادة في المذهب الحنفي",
+          "section": "كتاب الشهادات",
+          "unit": "كتاب الشهادات",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الشهادة على الشهادة والرجوع عن الشهادة",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 21,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 20,
+            "next": 22
+          }
+        },
+        {
+          "physicalPage": 22,
+          "printedPage": 20,
+          "pageNumber": 22,
+          "printedPageNumber": 20,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الإقرار - تعريف الإقرار",
+          "summary": "بداية كتاب الإقرار - تعريف الإقرار وأهميته",
+          "section": "كتاب الإقرار",
+          "unit": "كتاب الإقرار",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الإقرار وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 22,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 21,
+            "next": 23
+          }
+        },
+        {
+          "physicalPage": 23,
+          "printedPage": 21,
+          "pageNumber": 23,
+          "printedPageNumber": 21,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط الإقرار",
+          "summary": "شروط الإقرار في المذهب الحنفي",
+          "section": "كتاب الإقرار",
+          "unit": "كتاب الإقرار",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط الإقرار",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 23,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 22,
+            "next": 24
+          }
+        },
+        {
+          "physicalPage": 24,
+          "printedPage": 22,
+          "pageNumber": 24,
+          "printedPageNumber": 22,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "الاستثناء في الإقرار",
+          "summary": "الاستثناء في الإقرار وأحكامها في المذهب الحنفي",
+          "section": "كتاب الإقرار",
+          "unit": "كتاب الإقرار",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الاستثناء في الإقرار",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 24,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 23,
+            "next": 25
+          }
+        },
+        {
+          "physicalPage": 25,
+          "printedPage": 23,
+          "pageNumber": 25,
+          "printedPageNumber": 23,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب القضاء - تعريف القضاء",
+          "summary": "بداية كتاب القضاء - تعريف القضاء وأهميته",
+          "section": "كتاب القضاء",
+          "unit": "كتاب القضاء",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف القضاء وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 25,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 24,
+            "next": 26
+          }
+        },
+        {
+          "physicalPage": 26,
+          "printedPage": 24,
+          "pageNumber": 26,
+          "printedPageNumber": 24,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط القاضي",
+          "summary": "شروط القاضي في المذهب الحنفي",
+          "section": "كتاب القضاء",
+          "unit": "كتاب القضاء",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط القاضي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 26,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 25,
+            "next": 27
+          }
+        },
+        {
+          "physicalPage": 27,
+          "printedPage": 25,
+          "pageNumber": 27,
+          "printedPageNumber": 25,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "أدب القاضي والتحكيم",
+          "summary": "أدب القاضي والتحكيم في المذهب الحنفي",
+          "section": "كتاب القضاء",
+          "unit": "كتاب القضاء",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أدب القاضي والتحكيم",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 27,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 26,
+            "next": 28
+          }
+        },
+        {
+          "physicalPage": 28,
+          "printedPage": 26,
+          "pageNumber": 28,
+          "printedPageNumber": 26,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب السير - الجهاد والمغازية",
+          "summary": "بداية كتاب السير - الجهاد والمغازية",
+          "section": "كتاب السير",
+          "unit": "كتاب السير",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الجهاد والمغازية وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 28,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 27,
+            "next": 29
+          }
+        },
+        {
+          "physicalPage": 29,
+          "printedPage": 27,
+          "pageNumber": 29,
+          "printedPageNumber": 27,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كيفية فرض الجهاد",
+          "summary": "كيفية فرض الجهاد في المذهب الحنفي",
+          "section": "كتاب السير",
+          "unit": "كتاب السير",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "كيفية فرض الجهاد",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 29,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 28,
+            "next": 30
+          }
+        },
+        {
+          "physicalPage": 30,
+          "printedPage": 28,
+          "pageNumber": 30,
+          "printedPageNumber": 28,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الإيمان والنذور - تعريف الإيمان والنذور",
+          "summary": "بداية كتاب الإيمان والنذور - تعريف الإيمان والنذور",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الإيمان والنذور وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 30,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 29,
+            "next": 31
+          }
+        },
+        {
+          "physicalPage": 31,
+          "printedPage": 29,
+          "pageNumber": 31,
+          "printedPageNumber": 29,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "حروف القسم",
+          "summary": "حروف القسم في المذهب الحنفي",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "حروف القسم",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 31,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 30,
+            "next": 32
+          }
+        },
+        {
+          "physicalPage": 32,
+          "printedPage": 30,
+          "pageNumber": 32,
+          "printedPageNumber": 30,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "حلف اليمين",
+          "summary": "حلف اليمين وأحكامه في المذهب الحنفي",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام حلف اليمين",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 32,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 31,
+            "next": 33
+          }
+        },
+        {
+          "physicalPage": 33,
+          "printedPage": 31,
+          "pageNumber": 33,
+          "printedPageNumber": 31,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كفارة اليمين",
+          "summary": "كفارة اليمين وأحكامها في المذهب الحنفي",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام كفارة اليمين",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 33,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 32,
+            "next": 34
+          }
+        },
+        {
+          "physicalPage": 34,
+          "printedPage": 32,
+          "pageNumber": 34,
+          "printedPageNumber": 32,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "اليمين في الكلام والعمل",
+          "summary": "اليمين في الكلام والعمل وأحكامها في المذهب الحنفي",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام اليمين في الكلام والعمل",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 34,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 33,
+            "next": 35
+          }
+        },
+        {
+          "physicalPage": 35,
+          "printedPage": 33,
+          "pageNumber": 35,
+          "printedPageNumber": 33,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الإيمان والنذور - أحكام ختامية",
+          "summary": "أحكام ختامية في كتاب الإيمان والنذور في المذهب الحنفي",
+          "section": "كتاب الإيمان والنذور",
+          "unit": "كتاب الإيمان والنذور",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام ختامية في الإيمان والنذور",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 35,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 34,
+            "next": 36
+          }
+        },
+        {
+          "physicalPage": 36,
+          "printedPage": 34,
+          "pageNumber": 36,
+          "printedPageNumber": 34,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الصيد - تعريف الصيد",
+          "summary": "بداية كتاب الصيد - تعريف الصيد وأهميته",
+          "section": "كتاب الصيد",
+          "unit": "كتاب الصيد",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الصيد وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 36,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 35,
+            "next": 37
+          }
+        },
+        {
+          "physicalPage": 37,
+          "printedPage": 35,
+          "pageNumber": 37,
+          "printedPageNumber": 35,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط الصيد",
+          "summary": "شروط الصيد في المذهب الحنفي",
+          "section": "كتاب الصيد",
+          "unit": "كتاب الصيد",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط الصيد",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 37,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 36,
+            "next": 38
+          }
+        },
+        {
+          "physicalPage": 38,
+          "printedPage": 36,
+          "pageNumber": 38,
+          "printedPageNumber": 36,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "أحكام الصيد",
+          "summary": "أحكام الصيد في المذهب الحنفي",
+          "section": "كتاب الصيد",
+          "unit": "كتاب الصيد",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الصيد",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 38,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 37,
+            "next": 39
+          }
+        },
+        {
+          "physicalPage": 39,
+          "printedPage": 37,
+          "pageNumber": 39,
+          "printedPageNumber": 37,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الذكاة - تعريف الذكاة",
+          "summary": "بداية كتاب الذكاة - تعريف الذكاة وأهميتها",
+          "section": "كتاب الذكاة",
+          "unit": "كتاب الذكاة",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الذكاة وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 39,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 38,
+            "next": 40
+          }
+        },
+        {
+          "physicalPage": 40,
+          "printedPage": 38,
+          "pageNumber": 40,
+          "printedPageNumber": 38,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط الذكاة",
+          "summary": "شروط الذكاة في المذهب الحنفي",
+          "section": "كتاب الذكاة",
+          "unit": "كتاب الذكاة",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط الذكاة",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 40,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 39,
+            "next": 41
+          }
+        },
+        {
+          "physicalPage": 41,
+          "printedPage": 39,
+          "pageNumber": 41,
+          "printedPageNumber": 39,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الأضحية - تعريف الأضحية",
+          "summary": "بداية كتاب الأضحية - تعريف الأضحية وأهميتها",
+          "section": "كتاب الأضحية",
+          "unit": "كتاب الأضحية",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "تعريف الأضحية وأحكامها في المذهب الحنفي",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 41,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 40,
+            "next": 42
+          }
+        },
+        {
+          "physicalPage": 42,
+          "printedPage": 40,
+          "pageNumber": 42,
+          "printedPageNumber": 40,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "شروط الأضحية",
+          "summary": "شروط الأضحية في المذهب الحنفي",
+          "section": "كتاب الأضحية",
+          "unit": "كتاب الأضحية",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "شروط الأضحية",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 42,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 41,
+            "next": 43
+          }
+        },
+        {
+          "physicalPage": 43,
+          "printedPage": 41,
+          "pageNumber": 43,
+          "printedPageNumber": 41,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "أحكام الأضحية",
+          "summary": "أحكام الأضحية في المذهب الحنفي",
+          "section": "كتاب الأضحية",
+          "unit": "كتاب الأضحية",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام الأضحية",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 43,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 42,
+            "next": 44
+          }
+        },
+        {
+          "physicalPage": 44,
+          "printedPage": 42,
+          "pageNumber": 44,
+          "printedPageNumber": 42,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "كتاب الأضحية - أحكام ختامية",
+          "summary": "أحكام ختامية في كتاب الأضحية في المذهب الحنفي",
+          "section": "كتاب الأضحية",
+          "unit": "كتاب الأضحية",
+          "pageType": "lesson_content",
+          "kind": "lesson_content",
+          "educationalPurpose": "أحكام ختامية في الأضحية",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 44,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 43,
+            "next": 45
+          }
+        },
+        {
+          "physicalPage": 45,
+          "printedPage": 43,
+          "pageNumber": 45,
+          "printedPageNumber": 43,
+          "searchable": false,
+          "ocr": {
+            "required": true,
+            "status": "pending"
+          },
+          "needsOcr": true,
+          "title": "فهرس المحتويات",
+          "summary": "فهرس محتويات كتاب الحدود والجنايات والأيمان والسير في الفقه الحنفي",
+          "section": "الفهرس",
+          "unit": null,
+          "pageType": "table_of_contents",
+          "kind": "table_of_contents",
+          "educationalPurpose": "فهرس المحتويات",
+          "lessonRange": null,
+          "reviewed": true,
+          "lineRange": null,
+          "sourceProvenance": {
+            "type": "pdf",
+            "fileName": "كتاب الفقه الحنفي السادس الاعدادي.pdf",
+            "physicalPage": 45,
+            "authority": "official-reference"
+          },
+          "neighbors": {
+            "previous": 44,
+            "next": null
+          }
+        }
+      ]
+    }
+  ]
+}

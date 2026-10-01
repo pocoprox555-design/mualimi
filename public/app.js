@@ -10,7 +10,7 @@ const MAX_CONVERSATIONS = 30;
 const uid = (prefix) => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
 
 const state = {
-  settings: { apiKey: '', studentName: '' },
+  settings: { apiKey: '', studentName: 'رحمة', curriculumTrack: 'ديني' },
   books: [],
   curriculum: null,
   ai: { configured: false },
@@ -53,7 +53,8 @@ function loadState() {
     })) : [];
     state.exams = Array.isArray(oldExams) ? oldExams : [];
   }
-  state.settings.studentName = String(state.settings.studentName || '').trim().slice(0, 40);
+  state.settings.studentName = String(state.settings.studentName || 'رحمة').trim().slice(0, 40);
+  state.settings.curriculumTrack = 'ديني';
   state.conversations = state.conversations.filter((conversation) => Array.isArray(conversation.messages)).slice(0, MAX_CONVERSATIONS);
   state.exams = state.exams.filter((exam) => exam?.title && exam?.date).slice(0, 80);
 }
@@ -199,7 +200,7 @@ function markdownHtml(source) {
   let text = escapeHtml(source);
   text = text.replace(/```[\w-]*\n?([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
   text = text.replace(/`([^`\n]+)`/g, '<code>$1</code>');
-  text = text.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>').replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+  text = text.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>').replace(/^###\s+(.+)$/gm, '<h3>$1</h3>').replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
   text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/(^|\s)(S\d+)(?=\s|$|[،.؛])/g, '$1<span class="reference-mark">$2</span>');
   const lines = text.split('\n');
@@ -225,7 +226,9 @@ function markdownHtml(source) {
       }
       continue;
     }
-    if (line.startsWith('<pre>') || line.startsWith('<h2>') || line.startsWith('<h3>')) { closeList(); html += line; continue; }
+    if (/^\s*(?:-{3,}|\*{3,}|_{3,})\s*$/.test(line)) { closeList(); html += '<hr>'; continue; }
+    if (line.startsWith('&gt;')) { closeList(); html += `<blockquote>${line.replace(/^&gt;\s?/, '')}</blockquote>`; continue; }
+    if (line.startsWith('<pre>') || line.startsWith('<h1>') || line.startsWith('<h2>') || line.startsWith('<h3>')) { closeList(); html += line; continue; }
     if (/^\s*[-*]\s+/.test(line)) { if (list !== 'ul') { closeList(); html += '<ul>'; list = 'ul'; } html += `<li>${line.replace(/^\s*[-*]\s+/, '')}</li>`; continue; }
     if (/^\s*\d+[.)]\s+/.test(line)) { if (list !== 'ol') { closeList(); html += '<ol>'; list = 'ol'; } html += `<li>${line.replace(/^\s*\d+[.)]\s+/, '')}</li>`; continue; }
     closeList();
@@ -371,7 +374,7 @@ function sourceCards(sources, target, compact = false) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = `source-card${source.needsOcr ? ' vision' : ''}`;
-    button.innerHTML = `<span>${escapeHtml(source.id || 'S')} · ${escapeHtml(source.subject || source.title || 'كتاب')}</span><small>${escapeHtml(source.printedPage ? `صفحة ${source.printedPage}` : `صفحة ${source.physicalPage}`)}${source.needsOcr ? ' · صفحة مصورة' : ''}</small>`;
+     button.innerHTML = `<span>${escapeHtml(source.id || 'S')} · ${escapeHtml(source.subject || source.title || 'كتاب')}</span><small>${escapeHtml(source.printedPage ? `الصفحة المطبوعة ${source.printedPage}` : `صفحة PDF ${source.physicalPage}`)}${source.needsOcr ? ' · صفحة مصورة' : ''}</small>`;
     button.addEventListener('click', () => openPage(source.bookId, source.physicalPage));
     target.appendChild(button);
   });
@@ -456,6 +459,22 @@ function renderRecent() {
   });
 }
 
+// صيغ العدد العربية: المفرد والمثنى ثم جمع القلة ثم المفرد المنقوص.
+function countLabel(count, forms) {
+  if (count === 1) return forms.one;
+  if (count === 2) return forms.two;
+  if (count <= 10) return `${count} ${forms.few}`;
+  return `${count} ${forms.many}`;
+}
+
+function daysLabel(days) {
+  if (days <= 0) return 'اليوم';
+  if (days === 1) return 'غدا';
+  if (days === 2) return 'بعد يومين';
+  if (days <= 10) return `بعد ${days} أيام`;
+  return `بعد ${days} يوما`;
+}
+
 function renderPlan() {
   const list = $('#examList');
   list.innerHTML = '';
@@ -466,7 +485,7 @@ function renderPlan() {
     const days = Math.ceil((new Date(`${next.date}T00:00:00`) - today) / 86_400_000);
     $('#nextExamLabel').textContent = next.title;
     $('#nextExamMeta').textContent = new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(`${next.date}T00:00:00`));
-    $('#nextExamDays').textContent = days === 0 ? 'اليوم' : days === 1 ? 'غدا' : `بعد ${days}\nيوما`;
+    $('#nextExamDays').textContent = daysLabel(days);
   } else {
     $('#nextExamLabel').textContent = 'لا توجد مواعيد بعد'; $('#nextExamMeta').textContent = 'أضيفي امتحانا أو هدفا دراسيا.'; $('#nextExamDays').textContent = '—';
   }
@@ -475,7 +494,7 @@ function renderPlan() {
     const date = new Date(`${exam.date}T00:00:00`);
     const days = Math.ceil((date - today) / 86_400_000);
     const item = document.createElement('article'); item.className = 'exam-item';
-    item.innerHTML = `<span class="exam-date">${date.getDate()}<small>${new Intl.DateTimeFormat('ar-IQ', { month: 'short' }).format(date)}</small></span><div class="exam-info"><b>${escapeHtml(exam.title)}</b><small>${new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', year: 'numeric' }).format(date)}</small></div><span class="exam-days">${days === 0 ? 'اليوم' : days === 1 ? 'غدا' : `بعد ${days} يوم`}</span><button class="delete-button" type="button" aria-label="حذف الموعد">×</button>`;
+    item.innerHTML = `<span class="exam-date">${date.getDate()}<small>${new Intl.DateTimeFormat('ar-IQ', { month: 'short' }).format(date)}</small></span><div class="exam-info"><b>${escapeHtml(exam.title)}</b><small>${new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', year: 'numeric' }).format(date)}</small></div><span class="exam-days">${daysLabel(days)}</span><button class="delete-button" type="button" aria-label="حذف الموعد">×</button>`;
     item.querySelector('.delete-button').addEventListener('click', () => { state.exams = state.exams.filter((value) => value.id !== exam.id); saveState(); renderPlan(); toast('حُذف الموعد'); });
     list.appendChild(item);
   });
@@ -489,12 +508,12 @@ function renderHistory() {
     if (!query) return true;
     return conversation.title.toLowerCase().includes(query) || conversation.messages.some((message) => String(message.content).toLowerCase().includes(query));
   });
-  $('#historyCount').textContent = `${state.conversations.filter((conversation) => conversation.messages?.length).length} جلسات`;
+  $('#historyCount').textContent = countLabel(state.conversations.filter((conversation) => conversation.messages?.length).length, { one: 'جلسة واحدة', two: 'جلستان', few: 'جلسات', many: 'جلسة' });
   list.innerHTML = '';
   if (!conversations.length) { list.innerHTML = '<div class="empty-state">لا توجد جلسات مطابقة بعد. كل سؤال جيد هو بداية جديدة.</div>'; return; }
   conversations.forEach((conversation) => {
     const item = document.createElement('article'); item.className = 'history-item';
-    item.innerHTML = `<span class="history-icon">◈</span><div class="history-info"><b>${escapeHtml(conversation.title)}</b><small>${conversation.messages.filter((message) => message.role === 'user').length} أسئلة · ${displayDate(conversation.updatedAt || conversation.createdAt)}</small></div><span class="history-arrow">←</span>`;
+    item.innerHTML = `<span class="history-icon">◈</span><div class="history-info"><b>${escapeHtml(conversation.title)}</b><small>${countLabel(conversation.messages.filter((message) => message.role === 'user').length, { one: 'سؤال واحد', two: 'سؤالان', few: 'أسئلة', many: 'سؤالاً' })} · ${displayDate(conversation.updatedAt || conversation.createdAt)}</small></div><span class="history-arrow">←</span>`;
     item.addEventListener('click', () => openConversation(conversation.id));
     list.appendChild(item);
   });
@@ -618,7 +637,7 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status"><span class="status-orb"></span><span class="status-text">جاري تجهيز الرد…</span></div></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label">معلمتك</div><div class="message-bubble"><div class="teacher-status"><span class="status-orb"></span><span class="status-text">جاري تجهيز الرد…</span></div></div><div class="inline-sources source-tray"></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
 }
@@ -643,7 +662,7 @@ async function requestReply(conversation, question, images, shell) {
   if (images.length && last?.role === 'user') last.content = [{ type: 'text', text: question || 'اشرحي الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))];
   let full = ''; let citations = []; let finished = false; let paint = 0;
   try {
-    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, studentName: state.settings.studentName || '' }) });
+    const response = await fetch('/api/chat', { method: 'POST', signal: abort.signal, headers: { 'Content-Type': 'application/json', 'X-Session': conversation.id, ...providerHeaders() }, body: JSON.stringify({ messages, studentName: state.settings.studentName || 'رحمة', curriculumTrack: state.settings.curriculumTrack || 'ديني' }) });
     if (!response.ok) {
       let data = {}; try { data = await response.json(); } catch { /* ignore */ }
       const error = new Error(data.error || `HTTP_${response.status}`); error.detail = data.detail || ''; throw error;
@@ -673,6 +692,20 @@ async function requestReply(conversation, question, images, shell) {
         conversation.messages.push({ role: 'assistant', content: partial, cites: citations });
         fillAssistantBubble(shell.querySelector('.message-bubble'), partial); sourceCards(citations, shell.querySelector('.inline-sources'), true); clearSourceTray(); saveState();
       } else shell.remove();
+    } else if (full.trim()) {
+      // ما وصل قبل انقطاع النموذج مفيد لا يُستبدل؛ نُبقيه ونضيف تحته طريقة إعادة المحاولة.
+      const partial = `${full}\n\n**توقّف الرد قبل اكتماله.**`;
+      conversation.messages.push({ role: 'assistant', content: partial, cites: citations });
+      conversation.updatedAt = Date.now();
+      fillAssistantBubble(shell.querySelector('.message-bubble'), partial);
+      sourceCards(citations, shell.querySelector('.inline-sources'), true);
+      clearSourceTray();
+      const notice = document.createElement('div');
+      notice.className = 'error-box';
+      notice.innerHTML = `${escapeHtml(apiErrorMessage(error))}<br><button class="retry-button" type="button">إعادة المحاولة</button>`;
+      notice.querySelector('.retry-button').addEventListener('click', () => { shell.remove(); requestReply(conversation, question, images, assistantShell()); });
+      shell.appendChild(notice);
+      saveState();
     } else {
       shell.querySelector('.message-bubble').innerHTML = `<div class="error-box">${escapeHtml(apiErrorMessage(error))}<br><button class="retry-button" type="button">إعادة المحاولة</button></div>`;
       shell.querySelector('.retry-button').addEventListener('click', () => { shell.remove(); requestReply(conversation, question, images, assistantShell()); });
@@ -708,7 +741,7 @@ function openPage(bookId, physicalPage) {
   fetchJson(`/api/page?bookId=${encodeURIComponent(bookId)}&page=${encodeURIComponent(physicalPage)}`, {}, 15_000).then((page) => {
     const book = state.books.find((value) => value.id === bookId);
     $('#pageModalBook').textContent = book?.subject || 'كتاب مدرسي'; $('#pageModalTitle').textContent = page.title || 'صفحة من الكتاب';
-    $('#pageModalMeta').innerHTML = `<span>${escapeHtml(book?.title || '')}</span><span>${escapeHtml(page.printedPage ? `الصفحة ${page.printedPage}` : `الصفحة ${page.physicalPage}`)}</span>${page.needsVision ? '<span>تحتاج قراءة بصرية</span>' : ''}`;
+     $('#pageModalMeta').innerHTML = `<span>${escapeHtml(book?.title || '')}</span><span>${escapeHtml(page.printedPage ? `الصفحة المطبوعة ${page.printedPage}` : `صفحة PDF ${page.physicalPage} · المطبوع غير متحقق`)}</span>${page.needsVision ? '<span>تحتاج قراءة بصرية</span>' : ''}`;
     const visionNote = page.needsVision && !page.searchable
       ? '<div class="vision-note">هذه الصفحة مصورة ولا يوجد لها نص PDF قابل للتحقق. الوصف الظاهر فهرسي للتنقل فقط، ولا يكفي لاقتباس آية أو حل أو رقم قبل القراءة البصرية.</div>'
       : '';

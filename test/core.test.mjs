@@ -6,10 +6,12 @@ import { publicConfig, resolveProvider } from '../lib/config.mjs';
 test('تطبيع عربي: تشكيل وهمزات وتاء مربوطة', () => {
   assert.equal(normalizeAr('أحكامُ التِّلاوة'), 'احكام التلاوه');
   assert.equal(normalizeAr('القرآن الكريم'), 'القران الكريم');
+  assert.equal(normalizeAr('ﻳﺘوﻗﻊ'), 'يتوقع');
 });
 
 test('إصلاح OCR والأرقام العربية', () => {
   assert.match(cleanText('املديرية العامة'), /المديرية/);
+  assert.match(cleanText('ﻳﺘوﻗﻊ ﻣﻨﻚ'), /يتوقع منك/);
   assert.equal(pageReference('اشرح صفحة ٤٢ من الكتاب'), 42);
 });
 

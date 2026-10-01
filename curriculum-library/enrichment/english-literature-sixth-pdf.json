@@ -1,0 +1,2196 @@
+{
+ "schemaVersion": 1,
+ "bookId": "english-literature-sixth-pdf",
+ "pages": {
+  "1": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus",
+   "actScene": null,
+   "pageType": "divider",
+   "title": "صفحة فاصلة: Literature Focus يقدّم عملَي Pride and Prejudice وAs You Like It",
+   "titleEn": "Unit divider: Literature Focus introducing Pride and Prejudice and As You Like It",
+   "summary": "صفحة فاصلة بلا رقم مطبوع وبلا تمارين: شريط عنوان Literature Focus وتحته نقطتان بحقلكم: Pride and Prejudice ثم As You Like It. لا نص تعليمي ولا مفردات، وتبدأ في الصفحة 98 مقدمة الرواية.",
+   "summaryEn": "A full-page divider with no printed folio and no exercises: the heading Literature Focus above two bullet titles, Pride and Prejudice and As You Like It. No teaching text, no vocabulary and no figure; the Pride and Prejudice introduction starts on the next page.",
+   "figures": [],
+   "activities": [],
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "الخلفية الزخرفية التي تملأ الصفحة (رسم بلون فيروزي سماوي يجمع شخصيات بملابس قديمة) عنصر زخرفي لفاصل الوحدة فقط ولا يحمل معنى تعليميًا، لذلك لم أدرجه ضمن figures. لا رقم صفحة مطبوع على الصفحة (بيانات الطباعة IRAQ_G12_SB_2024.indb 97 في أسفلها)."
+  },
+  "2": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus > Pride and Prejudice",
+   "actScene": null,
+   "pageType": "matching",
+   "title": "مقدمة الرواية: تمرين مطابقة عناوين مع نصّي سيرة المؤلفة والكتاب",
+   "titleEn": "Novel introduction: matching headings with the texts about the author and the book",
+   "summary": "تبدأ المقدمة بالتمرين 1 «Match the headings below with the texts» مع العناوين a–c، وبجوار نقش Jane Austen يقع النص 1 عن سيرتها، ثم النص 2 عن نشر الرواية سنة 1813 باسم مجهول، ويكمل عند الصفحة 99.",
+   "summaryEn": "The Pride and Prejudice introduction opens with exercise 1, Match the headings below with the texts, and headings a to c. Beside an engraving of Jane Austen, text 1 gives her biography, and text 2 covers the 1813 anonymous publication, First Impressions and the £110 sale; text 2 runs on to printed page 99.",
+   "figures": [
+    {
+     "id": "p2-fig1",
+     "kind": "engraving",
+     "caption": null,
+     "description": "نقش خطي بالأبيض والأسود يصوّر شابة في مقتبل العمر هي Jane Austen، معروضة من الصدر إلى أعلى الرأس وهي جالسة في كرسيّ يمتد ظهره خلف كتفها الأيسر. ترتدي غطاء رأس أبيض ذا حافة مسنّنة من الكسرات يحيط بجبهتها وتسدل فوق أذنيها خصلات ملتوية صغيرة، وتحيط بعنقها ياقة بيضاء من الكشكشة تعلو فستانًا بأكمام منفوخة. تنظر إلى الأمام مائلة قليلًا نحو اليمين بعينين هادئتين وفم مغلق بشفة عليا رفيعة، على خلفية بيضاء خالية من أي تفاصيل مع تظليل خفيف يحيط بصورتها.",
+     "figureText": [],
+     "questionIds": []
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "match",
+     "instruction": "Match the headings below with the texts.",
+     "questions": [
+      "a  About the story",
+      "b  About the author",
+      "c  About the book",
+      "1  Jane Austen was an English writer, born on 16th December 1775, in the village of Steventon, in Hampshire. The seventh child in a family of eight, she was the daughter of reverend George Austen, and Cassandra (Leigh) Austen. George loved learning, and his children shared his passion, while Cassandra Leigh was known for her improvised stories. Both were big influences on Jane's love for writing. Jane had six brothers and one other sister she was extremely close to, also named Cassandra. The family would move a lot throughout Jane's life, living most famously in Bath, which she used as background to her novels. In 1816, Jane started feeling unwell. Her health worsened* as the years passed, and by 1817, she could not leave her bed. She moved to Winchester with her sister to receive treatment but, unfortunately, passed away on 18th July, 1817. Austen was never married, and little is known about her love life, as her sister burnt all her letters on that matter.",
+      "2  Pride and Prejudice is one of six novels written by Austen and generally considered the most popular. It was published anonymously* in 1813, and its author would only be revealed after her death, by her own brother. Austen began writing the novel as a short story in 1796 with the title First Impressions. The title Pride and Prejudice would be taken from a quote from the novel Cecelia, by fellow author Fanny Burney. While it would later become her most famous novel, Austen did not receive much money for it at the time – she asked the publisher for £150 but, in the end, sold the rights for £110. Austen also worried that the book was not serious enough but wrote to her sister Cassandra that she was 'satisfied enough' with the"
+     ],
+     "figureIds": [],
+     "answerFormat": "two_column_match"
+    }
+   ],
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "worsened*",
+     "term": "worsened",
+     "definedOnPrintedPage": 99
+    },
+    {
+     "marker": "anonymously*",
+     "term": "anonymously",
+     "definedOnPrintedPage": 99
+    }
+   ],
+   "vocabulary": [
+    "worsened",
+    "anonymously"
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": {
+    "printedPage": 99,
+    "kind": "match_texts"
+   },
+   "recapOf": [],
+   "notes": "النص 2 مطبوع حتى عبارة «she was 'satisfied enough' with the» ويكمل في الصفحة المطبوعة 99 مع النص 3؛ لذلك لا يمكن إتمام المطابقة (a، b، c) من هذه الصفحة وحدها. العلامتان worsened* و anonymously* مُعرّفتان في Glossary بالصفحة المطبوعة 99. لا تعليق مطبوع أسفل نقش Jane Austen."
+  },
+  "3": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus > Pride and Prejudice",
+   "actScene": null,
+   "pageType": "glossary",
+   "title": "تكملة نصوص المطابقة: نهاية حدّة الكتاب وقصّة الرواية ومسرد المفردات",
+   "titleEn": "Matching texts continued: the book's success, the plot of the novel and the glossary",
+   "summary": "تكملة النص 2 عن نجاح الرواية وتكييفاتها، ثم النص 3 عن بنات Bennet وحفلة Mr Bingley ورفض Mr Darcy الرقص، وبجواره صورة غلاف طبعة Penguin، ويختم بكتلة Glossary بأربع مفردات.",
+   "summaryEn": "Text 2 finishes with the novel's success and its adaptations, then text 3 tells the plot of the Bennet sisters, the ball, Mr Bingley and Mr Darcy's refusal to dance. A photograph of the Penguin Classics cover sits beside text 3, and a Glossary block defines worsened, anonymously, delightful and chaotic.",
+   "figures": [
+    {
+     "id": "p3-fig1",
+     "kind": "book_cover",
+     "caption": null,
+     "description": "صورة فوتوغرافية لغلاف كتاب من طبعة Penguin Classics، ويُرى فيه الكتاب من جهة الكعب والوجه الأمامي معًا: كعب داكن تزيّنه زخارف ذهبية داخل إطار مزدوج يحمل عنوان PRIDE and PREJUDICE ثم by Jane Austen ثم Illustrated by Hugh Thomson وفي أسفله اسم الناشر George Allen. والوجه الأمامي من قماش أخضر داكن تغطيه زخرفة كثيفة من ريشات الطاووس الذهبية، وفي وسطه مزهرية ذهبية يقف بجوارها طائر مطليّ، وتحتها العنوان PRIDE AND PREJUDICE بخط ذهبي كبير متبوعًا ب by Jane Austen و Illustrated by Hugh Thomson.",
+     "figureText": [
+      "PRIDE and PREJUDICE",
+      "by Jane Austen",
+      "Illustrated by Hugh Thomson",
+      "George Allen"
+     ],
+     "questionIds": []
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "match",
+     "instruction": "",
+     "questions": [
+      "story. She would also call the character of Elizabeth Bennet 'as delightful* a creature as ever appeared in print'. It seems that many agree with her, as Pride and Prejudice became a classic in literature and was adapted multiple times, including films, five TV series from the BBC alone and many rewritings using modern themes.",
+      "3  Elizabeth Bennet is one of five unmarried daughters in the Bennet house, and their mother is obsessed with finding suitable husbands for her daughters. When a young bachelor, by the name of Charles Bingley, moves into town, Mrs Bennet sees an opportunity to marry one of her daughters. The girls attend a ball where Mr Bingley is present, along with his best friend Fitzwilliam Darcy. Mr Bingley shows interest in Jane Bennet, the eldest Bennet sister, and encourages Mr Darcy to dance with Elizabeth. The man refuses, letting out a rude comment on Elizabeth's appearance and class, loud enough for her to hear. What follows is a chaotic* relationship between the two young people, as they must both work on their pride and prejudice to be with one another."
+     ],
+     "figureIds": [],
+     "answerFormat": "two_column_match"
+    }
+   ],
+   "glossary": [
+    {
+     "term": "worsened",
+     "pos": "v",
+     "definition": "something became worse"
+    },
+    {
+     "term": "anonymously",
+     "pos": "adv",
+     "definition": "published by an author who is not known to the public"
+    },
+    {
+     "term": "delightful",
+     "pos": "adj",
+     "definition": "very nice"
+    },
+    {
+     "term": "chaotic",
+     "pos": "adj",
+     "definition": "messy, crazy"
+    }
+   ],
+   "glossaryRefs": [
+    {
+     "marker": "delightful*",
+     "term": "delightful",
+     "definedOnPrintedPage": 99
+    },
+    {
+     "marker": "chaotic*",
+     "term": "chaotic",
+     "definedOnPrintedPage": 99
+    }
+   ],
+   "vocabulary": [
+    "worsened",
+    "anonymously",
+    "delightful",
+    "chaotic"
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "لا يطبع رقم تمرين جديد على هذه الصفحة: العنصر الأول تكملة النص 2 والعنصر الثاني هو النص 3 المطبوع برقمه، وهما معًا بقية مواد التمرين 1 «Match the headings below with the texts.» الذي بدأ في الصفحة المطبوعة 98. لذلك تركت instruction فارغًا في النشاط. كتلة Glossary هنا كاملة ولا تنتقل إلى صفحة أخرى."
+  },
+  "4": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 1",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 1",
+   "actScene": null,
+   "pageType": "boxed_recap",
+   "title": "القسم 1: صندوق ملخّص القصة وصورة حديث Mr و Mrs Bennet عن القادم الجديد",
+   "titleEn": "Section 1: The story so far box and the picture of Mr and Mrs Bennet talking about the new arrival",
+   "summary": "القسم 1: سؤال عن سبب حديث السيد والسيدة Bennet عن القادم الجديد، ثم صندوق The story so far عن Mr Bingley وعقار Netherfield Park، ثم صورة للسيدين، وإحالة إلى تمارين كتاب الأنشطة 168–169.",
+   "summaryEn": "Section 1 opens with a question about why the Bennets are talking about the new arrival, then a The story so far box about Mr Bingley taking the Netherfield Park estate, then the picture of the couple by the fire, and a pointer to Exercises A to E on pages 168–169 of the Activity Book.",
+   "figures": [
+    {
+     "id": "p4-fig1",
+     "kind": "cartoon",
+     "caption": "Mr and Mrs Bennet are talking about a new arrival.",
+     "description": "رسم كرتوني ملوّن للحديث بين Mr Bennet و Mrs Bennet وهما جالسان في غرفة الجلوس: السيد ذو الشعر الأبيض المُجعّد يرتدي سترة بنفسجية ذات ياقة حمراء وقفازين بيضيين منفوختين وجزمة بيضاء وجوارب بيضاء مربوطة بشريط أزرق عند الكاحل، وقد مدّ يده اليمنى نحو زوجته وهو يستدير في كرسيه المكسو بالمخضر والمزين بأرجل ذهبية. Mrs Bennet ترتدي فستانًا ورديًا فاتحًا فوقه سترة خضراء، ولفحة قميص بيضاء، وقلادة ذهبية، وشعرها مرفوع في كعكة وردية، وهي ترفع إصبعها المتّسعة وقد فتحت كتابًا على حِجرها. بينهما مدفأة حديدية تشتعل فيها نيران برتقالية، وفوقها شمعتان مضاءتان على المنارة، وخلفها نافذة سماوية وضباب ستارة بنفسجية وأرضية فرش بنفسجية.",
+     "figureText": [],
+     "questionIds": [
+      "p4-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "Why would the Bennets be talking about the new arrival? Give a possible reason."
+     ],
+     "figureIds": [
+      "p4-fig1"
+     ],
+     "answerFormat": ""
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 168–169 in the Activity Book.",
+     "questions": [
+      "Now do Exercises A to E on pages 168–169 in the Activity Book."
+     ],
+     "figureIds": [],
+     "answerFormat": "activity_book_A_to_E"
+    }
+   ],
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "exercises": [],
+   "answerKeyLocation": "في كتاب الأنشطة (Activity Book) في الصفحتين 168–169",
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "صندوق The story so far يلخّص افتتاح الرواية خارج الصفحات المقتبسة من هذا الكتاب، ولذلك تركت recapOf قائمة فارغة. لا خطوط إجابة مطبوعة على الصفحة، لذا answerFormat فارغ في النشاط 1."
+  },
+  "5": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 1",
+   "actScene": null,
+   "pageType": "lesson_content",
+   "title": "نص حوار Mr و Mrs Bennet عن زيارة Mr Bingley مع المسرد",
+   "titleEn": "Story text: Mr and Mrs Bennet argue about visiting Mr Bingley, with the glossary",
+   "summary": "نص بلا بنود مرقّمة: Mrs Bennet تلحّ على زيارة Mr Bingley و Mr Bennet يمازحها في جمالها وأعصابها، ثم Glossary بست مفردات من nonsense إلى sympathy.",
+   "summaryEn": "A story-text page with no numbered items: Mrs Bennet urges a visit to the wealthy bachelor Mr Bingley while Mr Bennet teases her about her looks and her nerves, and the page closes with a six-word glossary.",
+   "figures": [],
+   "activities": [],
+   "glossary": [
+    {
+     "term": "nonsense",
+     "pos": "n",
+     "definition": "something silly, crazy"
+    },
+    {
+     "term": "flatter",
+     "pos": "v",
+     "definition": "to compliment something or someone"
+    },
+    {
+     "term": "share",
+     "pos": "n",
+     "definition": "the amount of something that is acceptable for one person"
+    },
+    {
+     "term": "newcomers",
+     "pos": "n",
+     "definition": "people who are new to a place"
+    },
+    {
+     "term": "ignorant",
+     "pos": "adj",
+     "definition": "someone who is not educated or does not know much"
+    },
+    {
+     "term": "sympathy",
+     "pos": "n",
+     "definition": "understanding someone's feelings"
+    }
+   ],
+   "glossaryRefs": [
+    {
+     "marker": "Nonsense*",
+     "term": "nonsense",
+     "definedOnPrintedPage": 101
+    },
+    {
+     "marker": "flatter*",
+     "term": "flatter",
+     "definedOnPrintedPage": 101
+    },
+    {
+     "marker": "share*",
+     "term": "share",
+     "definedOnPrintedPage": 101
+    },
+    {
+     "marker": "newcomers*",
+     "term": "newcomers",
+     "definedOnPrintedPage": 101
+    },
+    {
+     "marker": "ignorant*",
+     "term": "ignorant",
+     "definedOnPrintedPage": 101
+    },
+    {
+     "marker": "sympathy*",
+     "term": "sympathy",
+     "definedOnPrintedPage": 101
+    }
+   ],
+   "vocabulary": [
+    "nonsense",
+    "flatter",
+    "share",
+    "newcomers",
+    "ignorant",
+    "sympathy"
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "عنوان «Section 1» مطبوع في الصفحة السابقة (المطبوعة 100) وليس على هذه الصفحة، ولذلك تركت section فارغًا وسمّيت sectionPath بالقسم الذي تنتمي إليه. الصفحة نص متصل بلا عنوان ورأس فارغ."
+  },
+  "6": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 2",
+   "actScene": null,
+   "pageType": "boxed_recap",
+   "title": "القسم 2: حفلة Netherfield و Elizabeth تلتقط حديث Mr Bingley و Mr Darcy",
+   "titleEn": "Section 2: The Netherfield ball and Elizabeth overhearing Mr Bingley and Mr Darcy",
+   "summary": "القسم 2: سؤال عن حديث Mr Bingley و Mr Darcy، ثم صندوق The story so far عن الأخوات Bennet الخمس وحفلة Netherfield التي رقص فيها Bingley مع Jane، ثم صورة Elizabeth تصغي، وإحالة إلى 170–171.",
+   "summaryEn": "Section 2 opens with a question about what Mr Bingley and Mr Darcy are talking about, then a The story so far box introducing the five Bennet sisters and describing the Netherfield ball, then the picture of Elizabeth eavesdropping, and a pointer to Exercises A to E on pages 170–171 of the Activity Book.",
+   "figures": [
+    {
+     "id": "p6-fig1",
+     "kind": "cartoon",
+     "caption": "Elizabeth overhears a conversation.",
+     "description": "رسم كرتوني ملوّن لمشهد في حفلة: يقف على اليسار Mr Darcy بشعره البنّي المجعّد في سترة رسمية زرقاء داكنة بفيستو أزرق وقميص أبيض وربطة عنق كحلية، وماسكًا ياقته بإحدى يديه، ويقول لصاحبه، ويقف بجواره Mr Bingley بشعره الأشقر المصفوف في سترة خضراء داكنة بقميص أحمر وجزمة بيضاء وربطة عنق حمراء، ويضمّ يديه على صدره مبتسمًا. وفي المقدمة على اليمين Elizabeth بشعرها الأشقر المرفوع في كعكة على كتف مفكوك، بفستان سماوي مفتوح الأكمام ذا حزام وردي وقفاز أبيض طويل تلامس به خدّها، تنظر إليهما بانتباه من خلف أرجوحة بنفسجية مطرّزة. وعلى طاولة صغيرة بيضاء أطباق تحمل برتقالة، وعلى الجدار الوردي لوحة لممّرّ طريق تتخلله بوابة خشبية، وباليمين باب خشبي داكن.",
+     "figureText": [],
+     "questionIds": [
+      "p6-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think Mr Bingley and Mr Darcy are talking about?"
+     ],
+     "figureIds": [
+      "p6-fig1"
+     ],
+     "answerFormat": ""
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 170–171 in the Activity Book.",
+     "questions": [
+      "Now do Exercises A to E on pages 170–171 in the Activity Book."
+     ],
+     "figureIds": [],
+     "answerFormat": "activity_book_A_to_E"
+    }
+   ],
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "exercises": [],
+   "answerKeyLocation": "في كتاب الأنشطة (Activity Book) في الصفحتين 170–171",
+   "continuesOn": null,
+   "recapOf": [
+    100,
+    101
+   ],
+   "notes": "الصندوق يلخّص أحداث القسم الأول (الصفحتان المطبوعتان 100 و101). لا خطوط إجابة مطبوعة على الصفحة."
+  },
+  "7": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 2",
+   "actScene": null,
+   "pageType": "lesson_content",
+   "title": "نص مشهد الحفلة: Mr Darcy يرفض الرقص ويصف Elizabeth بـ pleasant مع المسرد",
+   "titleEn": "Story text: Mr Darcy refuses to dance and calls Elizabeth pleasant, with the glossary",
+   "summary": "نص بلا بنود مرقّمة: Mr Bingley يطلب من Darcy أن يرقص فيرفض فيصف Elizabeth بأنها pleasant but not beautiful enough، ثم توبخ Mrs Bennet Darcy بأنه proud and conceited، ويأتي Glossary بإحدى عشرة مفردة.",
+   "summaryEn": "A story-text page with no numbered items: Mr Bingley asks Mr Darcy to dance, Darcy refuses and calls Elizabeth pleasant but not beautiful enough, then the family returns home and Mrs Bennet praises the ball and criticises Darcy as proud and conceited. An eleven-word glossary closes the page.",
+   "figures": [],
+   "activities": [],
+   "glossary": [
+    {
+     "term": "picky",
+     "pos": "adj",
+     "definition": "someone who is hard to please"
+    },
+    {
+     "term": "swear",
+     "pos": "v",
+     "definition": "be sure of something"
+    },
+    {
+     "term": "dare",
+     "pos": "v",
+     "definition": "be brave enough to say something"
+    },
+    {
+     "term": "pleasant",
+     "pos": "adj",
+     "definition": "nice, attractive"
+    },
+    {
+     "term": "ridiculous",
+     "pos": "adj",
+     "definition": "crazy, silly"
+    },
+    {
+     "term": "charming",
+     "pos": "adj",
+     "definition": "very attractive/nice"
+    },
+    {
+     "term": "lace",
+     "pos": "n",
+     "definition": "a thin material tied around a dress"
+    },
+    {
+     "term": "gown",
+     "pos": "n",
+     "definition": "an outfit, usually a dress"
+    },
+    {
+     "term": "interrupt(ed)",
+     "pos": "v",
+     "definition": "to stop someone"
+    },
+    {
+     "term": "exaggeration",
+     "pos": "n",
+     "definition": "something that is bigger, more dramatic than the truth"
+    },
+    {
+     "term": "conceited",
+     "pos": "adj",
+     "definition": "with a very high opinion of oneself"
+    }
+   ],
+   "glossaryRefs": [
+    {
+     "marker": "picky*",
+     "term": "picky",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "swear*",
+     "term": "swear",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "dare*",
+     "term": "dare",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "pleasant*",
+     "term": "pleasant",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "ridiculous*",
+     "term": "ridiculous",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "charming*",
+     "term": "charming",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "lace*",
+     "term": "lace",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "gown*",
+     "term": "gown",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "interrupted*",
+     "term": "interrupt(ed)",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "exaggeration*",
+     "term": "exaggeration",
+     "definedOnPrintedPage": 103
+    },
+    {
+     "marker": "conceited*",
+     "term": "conceited",
+     "definedOnPrintedPage": 103
+    }
+   ],
+   "vocabulary": [
+    "picky",
+    "swear",
+    "dare",
+    "pleasant",
+    "ridiculous",
+    "charming",
+    "lace",
+    "gown",
+    "interrupt(ed)",
+    "exaggeration",
+    "conceited"
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "عنوان «Section 2» مطبوع في الصفحة السابقة (المطبوعة 102) وليس على هذه الصفحة، ولذلك تركت section فارغًا وسمّيت sectionPath بالقسم الذي تنتمي إليه. مفردة interrupt(ed) مطبوعة بهذا الشكل في المسرد بينما العلامة في النص هي interrupted*."
+  },
+  "8": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 3",
+   "actScene": null,
+   "pageType": "boxed_recap",
+   "title": "القسم 3: رومانسية Bingley و Jane ورحلة Elizabeth الموحلة إلى Netherfield",
+   "titleEn": "Section 3: the Bingley–Jane romance and Elizabeth's muddy walk to Netherfield",
+   "summary": "القسم 3: سؤال عن أختَي Bingley، ثم صندوق The story so far عن رومانسية Bingley و Jane وغيار Caroline ومرض Jane ومشية Elizabeth الموحلة، ثم صورة الأختين على طاولة الشاي، وإحالة إلى 172–173.",
+   "summaryEn": "Section 3 opens with a question about the Bingley sisters, then a The story so far box covering the Bingley–Jane romance, Darcy's growing interest in Elizabeth, Caroline's jealousy, Jane's illness and Elizabeth's muddy walk, then the picture of the sisters with Bingley and Darcy at a tea table, and a pointer to pages 172–173 of the Activity Book.",
+   "figures": [
+    {
+     "id": "p8-fig1",
+     "kind": "cartoon",
+     "caption": "The Bingley sisters",
+     "description": "رسم كرتوني ملوّن فيه Mr Darcy و Mr Bingley والأختان على طاولة شاي: يقف على اليسار Mr Darcy بشعره البنّي بسترة زرقاء داكنة وقميص أبيض وجزمة بيضاء وقد وضع يده على ذقنه، ويقف على اليمين Mr Bingley بشعره الأشقر بسترة خضراء بقميص أحمر وجزمة بيضاء يجمع يديه أمام صدره. وفي الوسط تجلس أختا Bingley على كرسيين ذهبيين حول طاولة صغيرة مغطاة بمفرش أبيض عليها إبريق وردي مزخرف بالنقوش وأكواب وردية وطبق صغيرة وملعقة. اليسرى ترتدي فستانًا أحمر بحاشية ذهبية وقلادة صفراء وشعرًا كستنائيًا مربوطًا بشريط أحمر، وهي تمسك منديلًا وتومئ بيدها نحو أختها؛ واليمنى ترتدي قميصًا ورديًا فوق تنّورة خضراء طويلة بحاشية بنفسجية وشعرًا أسود مربوطًا بشريط أزرق، وهي ترفع يدها بابتسامة متعالية. على الجدار المخضرّ معلّقة لوحة لمنظر قصر أبيض، وبجانبها باب خشبي مضلّع.",
+     "figureText": [],
+     "questionIds": [
+      "p8-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think about the Bingley sisters?"
+     ],
+     "figureIds": [
+      "p8-fig1"
+     ],
+     "answerFormat": ""
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 172–173 in the Activity Book.",
+     "questions": [
+      "Now do Exercises A to E on pages 172–173 in the Activity Book."
+     ],
+     "figureIds": [],
+     "answerFormat": "activity_book_A_to_E"
+    }
+   ],
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "estate*",
+     "term": "estate",
+     "definedOnPrintedPage": 105
+    }
+   ],
+   "vocabulary": [
+    "estate"
+   ],
+   "exercises": [],
+   "answerKeyLocation": "في كتاب الأنشطة (Activity Book) في الصفحتين 172–173",
+   "continuesOn": null,
+   "recapOf": [
+    102,
+    103
+   ],
+   "notes": "الصندوق يلخّص أحداث القسم 2 (الصفحتان المطبوعتان 102 و103). العلامة estate* مطبوعة في هذه الصفحة ومعرّفة في Glossary بالصفحة المطبوعة 105. التعليق المطبوع أسفل الصورة هو «The Bingley sisters» بلا نقطة نهاية."
+  },
+  "9": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": null,
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 3",
+   "actScene": null,
+   "pageType": "lesson_content",
+   "title": "نص عشاء Netherfield: نقد Caroline و Louisa لأJane مع المسرد (تسع مفردات)",
+   "titleEn": "Story text: the Netherfield dinner and Caroline's and Louisa's criticism of Jane, with the glossary",
+   "summary": "نص بلا بنود مرقّمة: في عشاء Netherfield لا يلقى Elizabeth سوى تعاطف Mr Bingley، ثم تنتقد Caroline و Louisa مظهر Jane وتنّورها الموحلة، وتختم Mrs Hurst بحديث low connections، و Glossary بتسع مفردات.",
+   "summaryEn": "A story-text page with no numbered items: at the Netherfield dinner only Mr Bingley shows Elizabeth sympathy, then Caroline and Louisa criticise Jane's appearance, muddy petticoat and untidy hair, Bingley and Darcy reply, and Mrs Hurst ends on Jane's low connections. A nine-word glossary closes the page.",
+   "figures": [],
+   "activities": [],
+   "glossary": [
+    {
+     "term": "estate",
+     "pos": "n",
+     "definition": "a large area of land owned by someone or something"
+    },
+    {
+     "term": "intruder",
+     "pos": "n",
+     "definition": "a stranger who wasn't invited"
+    },
+    {
+     "term": "ragout",
+     "pos": "n",
+     "definition": "a type of food with vegetables and meat"
+    },
+    {
+     "term": "petticoat",
+     "pos": "n",
+     "definition": "clothing used underneath a skirt"
+    },
+    {
+     "term": "inches",
+     "pos": "n",
+     "definition": "a unit to measure length or height"
+    },
+    {
+     "term": "inclined",
+     "pos": "adj",
+     "definition": "wanting or feeling you have to do something"
+    },
+    {
+     "term": "half whisper",
+     "pos": "n",
+     "definition": "said in a low voice but loud enough for people to hear"
+    },
+    {
+     "term": "brightened",
+     "pos": "v",
+     "definition": "to become lighter, happier"
+    },
+    {
+     "term": "have regard for",
+     "pos": "v",
+     "definition": "have great respect for"
+    }
+   ],
+   "glossaryRefs": [
+    {
+     "marker": "intruder*",
+     "term": "intruder",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "ragout*",
+     "term": "ragout",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "petticoat*",
+     "term": "petticoat",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "inches*",
+     "term": "inches",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "inclined*",
+     "term": "inclined",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "whisper*",
+     "term": "half whisper",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "brightened*",
+     "term": "brightened",
+     "definedOnPrintedPage": 105
+    },
+    {
+     "marker": "regard*",
+     "term": "have regard for",
+     "definedOnPrintedPage": 105
+    }
+   ],
+   "vocabulary": [
+    "estate",
+    "intruder",
+    "ragout",
+    "petticoat",
+    "inches",
+    "inclined",
+    "half whisper",
+    "brightened",
+    "have regard for"
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [],
+   "notes": "عنوان «Section 3» مطبوع في الصفحة السابقة (المطبوعة 104) وليس على هذه الصفحة، ولذلك تركت section فارغًا وسمّيت sectionPath بالقسم الذي تنتمي إليه. مدخلا المسرد half whisper و have regard for يقابلان علامتي whisper* و regard* في النص."
+  },
+  "10": {
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 4",
+   "actScene": null,
+   "pageType": "boxed_recap",
+   "title": "القسم 4: Elizabeth تلتقي Mr Wickham في حفل عشاء عند عمّ Bennet",
+   "titleEn": "Section 4: Elizabeth meets Mr Wickham at the dinner party at the Bennets' uncle",
+   "summary": "القسم 4: سؤال عن سبب صدمة Elizabeth، ثم صندوق The story so far عن زيارة Mrs Bennet و Mr Collins ولقاء Mr Wickham في حفل عشاء، ثم صورة Elizabeth أمام Wickham بالزيّ العسكري الأزرق، وإحالة إلى 174–175.",
+   "summaryEn": "Section 4 opens with a question about why Elizabeth looks shocked, then a The story so far box covering Mrs Bennet's visit, Mr Collins's arrival and the meeting with Mr Denny and Mr Wickham, then the picture of Elizabeth facing Wickham in his blue uniform, and a pointer to pages 174–175 of the Activity Book.",
+   "figures": [
+    {
+     "id": "p10-fig1",
+     "kind": "cartoon",
+     "caption": "Elizabeth meets Mr Wickham.",
+     "description": "رسم كرتوني ملوّن للقاء Elizabeth بـ Mr Wickham: يقف على اليمين Mr Wickham بشعره الأسود المجعّد مرتديًا فيستو عسكريًا أزرق بصفّ من الأزرار الذهبية وأكتاف ذهبية ذات شراشيب وشرائط ذهبية على الكمّ الأيسر وحزام عاجي متقاطع، وهو يخاطبها ووجهه مائل نحو Elizabeth وفمه مفتوح. وعلى اليسار تقف Elizabeth بشعرها الأشقر المصفوف في كعبة عالية، بفستان أخضر ذات أكمام منفوشة وقميص أبيض طويل من القفازات وشريط وردي على الخصر وقلادة سوداء وحُلي دائرية ذهبية، وقد وضعت يدها على خدّها وعيناها مندهشتان تنظران إلى Wickham. خلفها جدار وردي تعلّقه لوحة لمشهد جسر أحمر فوق مجرى ماء، وفي أعلى اليسار شريط أسود قطري، وبجانبها باب خشبي بني.",
+     "figureText": [],
+     "questionIds": [
+      "p10-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "Why do you think Elizabeth looks so shocked?"
+     ],
+     "figureIds": [
+      "p10-fig1"
+     ],
+     "answerFormat": ""
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 174–175 in the Activity Book.",
+     "questions": [
+      "Now do Exercises A to E on pages 174–175 in the Activity Book."
+     ],
+     "figureIds": [],
+     "answerFormat": "activity_book_A_to_E"
+    }
+   ],
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "exercises": [],
+   "answerKeyLocation": "في كتاب الأنشطة (Activity Book) في الصفحتين 174–175",
+   "continuesOn": null,
+   "recapOf": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105
+   ],
+   "notes": "الصندوق يلخّص أحداث الأقسام 1 إلى 3 (الصفحات المطبوعة 100–105). لا خطوط إجابة مطبوعة على الصفحة."
+  },
+  "11": {
+   "pageType": "lesson_content",
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 4",
+   "actScene": null,
+   "title": "نص Pride and Prejudice: اعتراف Wickham بالميراث الممنوع",
+   "titleEn": "Pride and Prejudice Story Text: Mr Wickham Explains the Lost Inheritance",
+   "summary": "نص قصصي من القسم 4: يروي Mr Wickham أن آباء Mr Darcy وعدوه بالميراث ثم سلّمه إلى رجل آخر، فتصدّقه Elizabeth وتلومه. لا صور ولا تمارين، وتنتهي الصفحة بمسرد من 12 مفردة.",
+   "summaryEn": "Story text of Section 4: Mr Wickham explains that the late Mr Darcy promised him an inheritance that was given to another man; Elizabeth believes him, blames Mr Darcy and asks about his motive. No picture and no numbered exercise; the page ends with a 12-item Glossary.",
+   "glossary": [
+    {
+     "term": "godfather",
+     "pos": "n",
+     "definition": "a man who promised at a Christian church to take care of a child"
+    },
+    {
+     "term": "not do justice to",
+     "pos": "idiom",
+     "definition": "be very thankful for"
+    },
+    {
+     "term": "bequest",
+     "pos": "n",
+     "definition": "money or property that is given to a person at the request of a dying one"
+    },
+    {
+     "term": "extravagance",
+     "pos": "n",
+     "definition": "something that is more than someone can afford or that is necessary"
+    },
+    {
+     "term": "imprudence",
+     "pos": "n",
+     "definition": "acting without thinking"
+    },
+    {
+     "term": "temper",
+     "pos": "n",
+     "definition": "to become angry quickly and easily"
+    },
+    {
+     "term": "disgraced",
+     "pos": "adj",
+     "definition": "someone who lost the respect of others"
+    },
+    {
+     "term": "motivation",
+     "pos": "n",
+     "definition": "the reason for doing something"
+    },
+    {
+     "term": "tolerate",
+     "pos": "v",
+     "definition": "to hide your feelings about someone who does something you do not like"
+    },
+    {
+     "term": "boast",
+     "pos": "v",
+     "definition": "to talk proudly about something you have done or that you own"
+    },
+    {
+     "term": "resentments",
+     "pos": "n",
+     "definition": "feeling angry at something unfair"
+    },
+    {
+     "term": "vouch for",
+     "pos": "phr v",
+     "definition": "show"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "godfather",
+    "not do justice to",
+    "bequest",
+    "extravagance",
+    "imprudence",
+    "temper",
+    "disgraced",
+    "motivation",
+    "tolerate",
+    "boast",
+    "resentments",
+    "vouch for"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "الوحدة والقسم غير مطبوعين على الصفحة: قيمتهما من صفحة القسم 4 في الصفحة المطبوعة 106. كل الكلمات المعلَّمة بنجمة هنا معرَّفة في مسرد الصفحة نفسها، لذلك glossaryRefs فارغ. العلامة في النص تُكتب «boasting*» بينما المسرد يطبع «boast»، وكذلك «resentments*» والمسرد «resentments». النص المطبوع يذكر «Mr. Wickam explained» بسهو."
+  },
+  "12": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 5",
+   "actScene": null,
+   "title": "قسم 5: صندوق ملخص القصة وصورة وسؤال توقّع",
+   "titleEn": "Section 5: The Story so Far Box, a Picture and a Prediction Question",
+   "summary": "قسم 5: سؤال توقّع، ثم صندوق The story so far حتى خطبة Darcy الأولى، وصورة تعليقها «Mr Darcy proposes to Elizabeth»، ثم إحالة إلى تمارين كتاب الأنشطة 176–177.",
+   "summaryEn": "Section 5: a prediction question, then a The story so far box covering the Netherfield ball, Mr Collins's proposal, the visit to the countryside and Darcy's first proposal; below it a picture captioned 'Mr Darcy proposes to Elizabeth.', then a reference to Activity Book pages 176–177.",
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "figures": [
+    {
+     "id": "p12-fig1",
+     "kind": "cartoon",
+     "caption": "Mr Darcy proposes to Elizabeth.",
+     "description": "في غرفة جدرانها بنفسجية فاتحة تجلس إليزابيث على أريكة بنفسجية مذهّبة لها وسادة زرقاء، وهي بشعر أشقر مربوط في كعبة على رأسها وفستان أخضر مائي بحزام وردي وقفازات بيضاء طويلة تمدّ ذراعيها بكفّيها مفتوحتين في إشارة رفض. أمامها يقف رجل بشعر بني مجعّد بسترة زرقاء داكنة وقميص أبيض وربطة عنق سوداء وبنطال أبيض وحزام أزرق، يضع يده على صدره ويمدّ الأخرى نحوها وفمه مفتوح يتكلم. على الجدار لوحة مؤطرة لمشهد نهر وجسر خشبي معلّقة بحبل، وبجانب الباب المفتوح شرّابة حمراء وخضراء معلّقة، وعلى طاولة صغيرة إناء زجاجي أخضر مزخرف، وعلى طاولة أخرى وعاء فضّي كبير ومفتاح، وإلى اليسار إبريق وردي وطبق برتقال أخضر على قاعدة مرتفعة، والأرضية سجادة مخططة.",
+     "figureText": [],
+     "questionIds": [
+      "p12-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think is happening?"
+     ],
+     "figureIds": [
+      "p12-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 176–177 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 176,
+      "printedTo": 177
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107
+   ],
+   "notes": "صندوق The story so far لا يذكر أرقام صفحات؛ نطاق recapOf مستنتج من بنية الكتاب (يلخّص أحداث Pride and Prejudice المطبوعة 98–107). الوحدة «Literature Focus» ليست مطبوعة في هذا القسم، وهي مأخوذة من صفحة توحيدها المطبوعة 98. لا مسرد مفردات في هذه الصفحة ولا خطوط إجابة تحت السؤال."
+  },
+  "13": {
+   "pageType": "lesson_content",
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 5",
+   "actScene": null,
+   "title": "نص Pride and Prejudice: حجّة Elizabeth ورفض خطبة Darcy",
+   "titleEn": "Pride and Prejudice Story Text: Elizabeth’s Defence and Darcy’s First Rejection",
+   "summary": "نص قصصي من القسم 5: تردّ Elizabeth على Mr Darcy فتبرّئ أختها Jane وتستند إلى ما رواه Wickham، فيغضب Darcy ويمشي بخطوات سريعة. لا صور ولا تمارين، وتنتهي الصفحة بمسرد من 5 مفردات.",
+   "summaryEn": "Story text of Section 5: Elizabeth defends Jane against Mr Darcy and relies on what Mr Wickham told her; Darcy answers angrily, walks with quick steps across the room and finally apologises and accepts the refusal. No picture and no numbered exercise; the page ends with a 5-item Glossary.",
+   "glossary": [
+    {
+     "term": "overlook",
+     "pos": "v",
+     "definition": "ignore, not notice something"
+    },
+    {
+     "term": "inclination",
+     "pos": "n",
+     "definition": "the feeling of wanting to do something"
+    },
+    {
+     "term": "gentlemanlike",
+     "pos": "adj",
+     "definition": "very good, polite behaviour"
+    },
+    {
+     "term": "acquaintance",
+     "pos": "n",
+     "definition": "knowing somebody"
+    },
+    {
+     "term": "foundation",
+     "pos": "n",
+     "definition": "the beginning of something"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "overlook",
+    "inclination",
+    "gentlemanlike",
+    "acquaintance",
+    "foundation"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "القسم غير مطبوع على الصفحة (القسم 5 مطبوع في الصفحة 108) وكذا الوحدة. الكلمات النجمية الثلاث المدوّلة في النص (overlooked*, inclination*, gentlemanlike*, acquaintance*, foundation*) معرَّفة كلها في مسرد هذه الصفحة نفسها، لذلك glossaryRefs فارغ."
+  },
+  "14": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 6",
+   "actScene": null,
+   "title": "قسم 6: صندوق ملخص الأحداث حتى الحبّ وسؤال توقّع",
+   "titleEn": "Section 6: The Story so Far Box up to the Romance, with a Prediction Question",
+   "summary": "قسم 6: سؤال توقّع، ثم صندوق The story so far حتى مشهد المشية، وصورة تعليقها «Elizabeth falls in love with Mr Darcy»، ثم إحالة إلى تمارين كتاب الأنشطة 178–179.",
+   "summaryEn": "Section 6: a prediction question, then a The story so far box covering Darcy’s letter, the visit to Pemberley, Lydia’s elopement and Lady Catherine’s visit up to the walk; a picture inside the box is captioned 'Elizabeth falls in love with Mr Darcy.', then a reference to Activity Book pages 178–179.",
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "inn*",
+     "term": "inn",
+     "definedOnPrintedPage": 111
+    }
+   ],
+   "vocabulary": [
+    "inn"
+   ],
+   "figures": [
+    {
+     "id": "p14-fig1",
+     "kind": "cartoon",
+     "caption": "Elizabeth falls in love with Mr Darcy.",
+     "description": "لقطة قريبة لاثنين في العراء: إليزابيث بشعر أشقر مربوط في كعبة عالية مع خصلة على جبينها وأقراط صغيرة وعقدة سوداء عند رقبتها، بفستان أخضر مائي بأكمام قصيرة وحزام وردي وقفازات بيضاء، ترفع كفّها فوق صدره وتبتسم. أمامها السيد دارسي بشعر بني مجعّد وعينين زرقاوين، بمعطف أزرق داكن وقميص أبيض بأزرار ذهبية وربطة عنق سوداء وقفازات بيضاء، يمسك يدها اليمنى بيده. خلفهما أشجار خضراء كثيفة داكنة وسماء زرقاء صافية.",
+     "figureText": [],
+     "questionIds": [
+      "p14-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think Elizabeth and Darcy are talking about?"
+     ],
+     "figureIds": [
+      "p14-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 178–179 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 178,
+      "printedTo": 179
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+   ],
+   "notes": "الكلمة الوحيدة المعلَّمة بنجمة في صندوق الملخص هي «inn*» وهي معرَّفة في مسرد الصفحة المطبوعة 111 (Glossary: inn (n): a country pub that provides accomodation). نطاق recapOf مستنتج من بنية الكتاب لأن الصندوق لا يذكر أرقام صفحات. لا مسرد على هذه الصفحة."
+  },
+  "15": {
+   "pageType": "lesson_content",
+   "unit": "Literature Focus — Pride and Prejudice",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 6",
+   "actScene": null,
+   "title": "نص Pride and Prejudice: قبول Elizabeth لخطبة Darcy الثانية",
+   "titleEn": "Pride and Prejudice Story Text: Elizabeth Accepts Darcy’s Second Proposal",
+   "summary": "آخر صفحة في كتاب Pride and Prejudice: يكرر Mr Darcy عرضه فتقبل Elizabeth وتشكره، ويتحدثان عن زيارة Lady Catherine. لا صور ولا تمارين، وتنتهي الصفحة بمسرد من 8 مفردات.",
+   "summaryEn": "Story text of Section 6 and the last page of Pride and Prejudice: Mr Darcy repeats his proposal and Elizabeth accepts after hesitating; they talk about Lady Catherine’s visit and Darcy says 'It taught me to hope.' No picture and no numbered exercise; the page ends with an 8-item Glossary.",
+   "glossary": [
+    {
+     "term": "inn",
+     "pos": "n",
+     "definition": "a country pub that provides accomodation"
+    },
+    {
+     "term": "embarrassment",
+     "pos": "n",
+     "definition": "feeling shy, guilty"
+    },
+    {
+     "term": "gratitude",
+     "pos": "n",
+     "definition": "wanting to tell or express your thanks to someone"
+    },
+    {
+     "term": "assurance",
+     "pos": "n",
+     "definition": "something that someone is sure of"
+    },
+    {
+     "term": "latter",
+     "pos": "adj",
+     "definition": "the last one"
+    },
+    {
+     "term": "abusing",
+     "pos": "v",
+     "definition": "to hurt someone or something a lot"
+    },
+    {
+     "term": "accusations",
+     "pos": "n",
+     "definition": "say someone did something with no proof"
+    },
+    {
+     "term": "disapproval",
+     "pos": "n",
+     "definition": "not liking someone or someone’s behaviour and thinking they are not good enough for someone"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "inn",
+    "embarrassment",
+    "gratitude",
+    "assurance",
+    "latter",
+    "abusing",
+    "accusations",
+    "disapproval"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "آخر صفحة في نصف Pride and Prejudice؛ تبدأ وحدة As You Like It في الصفحة الفيزيائية 16 (المطبوعة 112). الكلمة «inn» معرَّفة هنا وهي التي تشير إليها علامة «inn*» في صندوق الملخص بالصفحة المطبوعة 110. التعريف مطبوع بخطأ إملائي «accomodation» ونُسخ كما هو."
+  },
+  "16": {
+   "pageType": "matching",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": null,
+   "sectionPath": "As You Like It",
+   "actScene": null,
+   "title": "As You Like It: تمرين مطابقة 1 مع نصّ سيرة Shakespeare",
+   "titleEn": "As You Like It: Matching Exercise 1 with the Text on Shakespeare’s Life",
+   "summary": "بداية وحدة As You Like It: تمرين مطابقة 1 بعناوين a/b/c ونص 1 عن سيرة William Shakespeare، مع بورتريه له ولوحة ملوّنة لمشهد مسرحي؛ ويكمل النصان 2 و3 في الصفحة 113.",
+   "summaryEn": "The As You Like It opener: the title and the three headings a/b/c of matching exercise 1, then text 1 on William Shakespeare’s life – born 1564, once an actor, at least 37 plays and 154 sonnets – beside a portrait of the playwright and a colour illustration of a scene from the play; texts 2 and 3 continue on page 113.",
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "playwright*",
+     "term": "playwright",
+     "definedOnPrintedPage": 113
+    },
+    {
+     "marker": "sonnets*",
+     "term": "sonnet",
+     "definedOnPrintedPage": 113
+    }
+   ],
+   "vocabulary": [
+    "playwright",
+    "sonnet"
+   ],
+   "figures": [
+    {
+     "id": "p16-fig1",
+     "kind": "engraving",
+     "caption": null,
+     "description": "نقش أسود وأبيض لوجه ويليام شيكسبير: رجل في الأربعينيات بشعر مجعّد يحيط بجانبي رأسه مع جبهة عالية وصدغين مكشوفين، ولحية وشارب قصيران، يرتدي قميصًا أبيض بياقة منكسرة عريضة فوق سترة داكنة مزرّرة بصف من الأزرار وأكمام مكسّاة، ويطلّ إلى الأمام بعينين هادئتين وابتسامة خفيفة. الخلفية رمادية معتمة غير مبيّنة التفاصيل، والصورة في مستطيل الصفحة الفاتحة.",
+     "figureText": [],
+     "questionIds": [
+      "p16-act1"
+     ]
+    },
+    {
+     "id": "p16-fig2",
+     "kind": "cartoon",
+     "caption": null,
+     "description": "لوحة ملوّنة لمشهد في غابة فيه خمسة أشخاص بملابس القرن السابع عشر: على اليسار امرأة بفستان أزرق داكن ومريول أبيض وجوارب زرقاء تقرأ خطابًا أبيض بيدين مرفوعتين، وخلف جذع شجرة رجل بلحية بعباءة بنية يطلّ راقبًا، وفي الوسط شابّ بقميص أرجواني وياقة دانتيل بيضاء وحزام أزرق وقبعة حمراء بريشة بيضاء وجوارب كريمية وحذاء أحمر يقود ورقة في يديه، وإلى يمينه رجل بزيّ أحمر وأبيض على هيئة مهرج بقبعة ذات رؤوس بيضاء يحرّك كفّه في إشارات، وإلى آخره رجل مسنّ بعباءة بنية وقفّاز بنّي يمسكه من ذراعه ويتّكئ على عصا. خلفهم جذوع بنية وأوراق خضراء وسماء زرقاء باهتة، وفي الأسفل عشب وزهور حمراء.",
+     "figureText": [],
+     "questionIds": [
+      "p16-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "match",
+     "instruction": "Match the headings below with the texts.",
+     "questions": [
+      "a The story",
+      "b About the author",
+      "c Importance of the play",
+      "1 Considered by many the greatest playwright* of all times, William Shakespeare wrote many world-famous works, including Romeo and Juliet, Hamlet, Macbeth and The Merchant of Venice. William Shakespeare was born in 1564 in Stratford-upon-Avon, in the centre of England. As a young man, Shakespeare worked as an actor before becoming the most popular playwright of his time, having written at least 37 plays, 154 sonnets* and two narrative poems. Nowadays, his plays are performed around the world in many languages, and his poetry has been widely translated, too. It is believed that Shakespeare was born and died on the exact same day, 23 April, 52 years apart."
+     ],
+     "figureIds": [
+      "p16-fig1",
+      "p16-fig2"
+     ],
+     "answerFormat": "two_column_match"
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": {
+    "printedPage": 113,
+    "kind": "match_texts"
+   },
+   "recapOf": null,
+   "notes": "العنوان المطبوع في الصفحة هو «As You Like It» فقط ولا يطبع اسم الوحدة؛ اعتُمد «As You Like It» كاسم وحدة/عمل لأن هذه بداية النصف الثاني. questions يحوي 4 بنود مطبوعة: العناوين a وb وc ثم النص 1. الرسمة الثانية (p16-fig2) بلا تعليق مطبوع، والصفحة لا تذكر أسماء شخصياتها فلا يمكن تحديد هويتهم. الأرقام 1 هنا رقم نص لا رقم سؤال."
+  },
+  "17": {
+   "pageType": "lesson_content",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": null,
+   "sectionPath": "As You Like It",
+   "actScene": null,
+   "title": "As You Like It: النصّان 2 و3 ومسرد 13 مفردة",
+   "titleEn": "As You Like It: Texts 2 and 3 plus a 13-Item Glossary",
+   "summary": "تكملة المطابقة 1: نص 2 عن تاريخ المسرحية ونص 3 عن حبكتها حتى نفي Rosalind، ثم مسرد 13 مفردة، وصورة غلاف New Penguin Shakespeare.",
+   "summaryEn": "The rest of matching exercise 1: text 2 on the play’s writing between 1598 and 1600, its 1599 opening at the Globe Theatre and its adaptations, and text 3 on the plot up to Rosalind’s banishment and Orlando’s flight to the forest of Arden; then a 13-item Glossary from playwright to flees, beside a picture of the New Penguin Shakespeare book cover.",
+   "glossary": [
+    {
+     "term": "playwright",
+     "pos": "n",
+     "definition": "someone who writes plays"
+    },
+    {
+     "term": "sonnet",
+     "pos": "n",
+     "definition": "a poem of 14 lines, in English typically having ten syllables per line"
+    },
+    {
+     "term": "Globe Theatre",
+     "pos": "n",
+     "definition": "Shakespeare’s theatre in London"
+    },
+    {
+     "term": "inspired (by)",
+     "pos": "n",
+     "definition": "used another work for ideas"
+    },
+    {
+     "term": "romance",
+     "pos": "n",
+     "definition": "a genre fiction novel on the theme of romantic love"
+    },
+    {
+     "term": "medieval",
+     "pos": "n",
+     "definition": "from the Middle Ages (1000–1450 CE)"
+    },
+    {
+     "term": "tale",
+     "pos": "n",
+     "definition": "a story"
+    },
+    {
+     "term": "adapted",
+     "pos": "v",
+     "definition": "made into"
+    },
+    {
+     "term": "rebel",
+     "pos": "v",
+     "definition": "to go against someone"
+    },
+    {
+     "term": "forbidden",
+     "pos": "n",
+     "definition": "not allowed to do something"
+    },
+    {
+     "term": "threat",
+     "pos": "n",
+     "definition": "a possible danger"
+    },
+    {
+     "term": "exile",
+     "pos": "n",
+     "definition": "sent away to live on their own"
+    },
+    {
+     "term": "flees",
+     "pos": "v",
+     "definition": "to leave somewhere quickly"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "playwright",
+    "sonnet",
+    "Globe Theatre",
+    "inspired (by)",
+    "romance",
+    "medieval",
+    "tale",
+    "adapted",
+    "rebel",
+    "forbidden",
+    "threat",
+    "exile",
+    "flees"
+   ],
+   "figures": [
+    {
+     "id": "p17-fig1",
+     "kind": "book_cover",
+     "caption": null,
+     "description": "غلاف كتاب أبيض مائل إلى العاجي، في أعلى شريط أبيض مكتوب «New Penguin Shakespeare»، وتحته بخط أسود عريض عنوان «As You Like It». يملأ الغلاف أربع لوحات صغيرة داخل زخارف من أعشاب خضراء وأسواق ذهبية: في الأعلى اليسرى امرأة بفستان أزرق طويل تمسك ذراع رجل بقميص أخضر وقبعة خضراء وجوارب بيضاء، وفي الأعلى اليمنى امرأة بصدرة خضراء وتنّورة ذهبية بقبعة تمثّل أمام رجل بقميص أخضر وقلنسوة زرقاء مدبّبة، وفي الأسفل اليسرى رجل بقميص أزرق وعباءة خضراء وقبعة بنية يمسك فتاة بفستان أخضر، وفي الأسفل اليمنى امرأة بفستان أخضر ومريول أبيض تقابل رجلًا بسترة ذهبية وبنطال أخضر وقبعة زرقاء.",
+     "figureText": [
+      "New Penguin Shakespeare",
+      "As You Like It"
+     ],
+     "questionIds": []
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "match",
+     "instruction": "Match the headings below with the texts.",
+     "questions": [
+      "2 As You Like It was written between 1598 and 1600. It is believed to have been first performed in 1599 as the opening play for the new Globe Theatre* in London. It was published in a collection of Shakespeare’s plays in 1623, and the play was heavily inspired* by the story of Rosalynde, a 1590 romance* by Thomas Lodge. He also took inspiration from the medieval* poem The Tale* of Gamelyn. While not as well known as other Shakespearean plays, As You Like It has been adapted* to TV, musical theatre and films, including performances as Orlando by Laurence Olivier in 1936 and David Oyelowo in 2006.",
+      "3 As You Like It follows the story of Orlando, the youngest son of Sir Rowland de Boys. After his father’s death, he is forced to live in poverty by his older brother, Oliver. As a chance to prove himself and rebel* against Oliver, Orlando decided to fight the court wrestler, Charles. Meanwhile, Duke Senior has been replaced by his own brother, Duke Frederick, in the royal court. While this means Senior is forbidden* from court, Frederick allows his brother’s daughter Rosalind to remain, as she is close friends with his daughter Celia. Rosalind and Orlando meet at the wrestling match and fall in love at first sight. Since this means Rosalind becomes a threat* to his rule, Frederick banishes her to the forest of Arden. Celia follows her cousin into exile* without her father’s knowledge. Orlando, who discovers his brother’s plot to kill him, flees* into the same forest. What follows is an exciting adventure, filled with romance, comedy and many misunderstandings."
+     ],
+     "figureIds": [],
+     "answerFormat": "two_column_match"
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "لا يطبع رقم نشاط جديد على هذه الصفحة؛ الأرقام 2 و3 هما بقية تمرين المطابقة 1 المطبوع في الصفحة المطبوعة 112، ولذلك نُقل نص التعليمات نفسه إلى هذا السجل. الكلمات النجمية في النصين (Globe Theatre*, inspired*, romance*, medieval*, Tale*, adapted*, rebel*, forbidden*, threat*, exile*, flees*) معرَّفة كلها في مسرد هذه الصفحة نفسها، لذلك glossaryRefs فارغ. تعريف romance مطبوع بعبارة «a genre fiction novel on the theme of romantic love» كما هي."
+  },
+  "18": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 1",
+   "sectionPath": "As You Like It > Section 1",
+   "actScene": null,
+   "title": "قسم 1 من As You Like It: صندوق ملخص ما قبل Act 1",
+   "titleEn": "Section 1 of As You Like It: The Story so Far Box before Act 1",
+   "summary": "قسم 1: سؤال توقّع، ثم صندوق The story so far عن موت Sir Rowland de Boys واشتباك الإخوين، وصورة تعليقها «Oliver starts a fight with Orlando»، وإحالة إلى تمارين كتاب الأنشطة 180–181.",
+   "summaryEn": "Section 1: a prediction question, then a The story so far box about Sir Rowland de Boys’ death, Oliver’s inheritance, the refusal to educate Orlando and the brothers’ fight; below it a picture captioned 'Oliver starts a fight with Orlando.', then a reference to Activity Book pages 180–181.",
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "passing*",
+     "term": "passing",
+     "definedOnPrintedPage": 115
+    },
+    {
+     "marker": "pursue*",
+     "term": "pursue",
+     "definedOnPrintedPage": 115
+    },
+    {
+     "marker": "obey*",
+     "term": "obey",
+     "definedOnPrintedPage": 115
+    },
+    {
+     "marker": "swearing*",
+     "term": "swear",
+     "definedOnPrintedPage": 115
+    },
+    {
+     "marker": "grabs*",
+     "term": "grab",
+     "definedOnPrintedPage": 115
+    }
+   ],
+   "vocabulary": [
+    "passing",
+    "pursue",
+    "obey",
+    "swear",
+    "grab"
+   ],
+   "figures": [
+    {
+     "id": "p18-fig1",
+     "kind": "cartoon",
+     "caption": "Oliver starts a fight with Orlando.",
+     "description": "رسم ملوّن على خلفية قوسية زرقاء وأرضية بلاط مربّع أبيض وأزرق: شابّ بشعر أشقر وقميص أرجواني بأكمام حمراء يقف مترنّحًا إلى الخلف بينما يضغط يداه على حنجرة رجل طويل بشعر أسود مجعّد ولحية وشارب ونظارات شمسية، مرتدٍ قميصًا أزرق داكنًا بحاشية ذهبية وحزام بنّي. على اليس رجل أصغر سنًّا أصلع بخصالات رمادية على جانبي رأسه، في قميص زيتوني بأزرار معدنية وكُم أبيض وجزم بنّية، يرفع كفّيه منتفضًا.",
+     "figureText": [],
+     "questionIds": [
+      "p18-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think is going to happen next?"
+     ],
+     "figureIds": [
+      "p18-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 180–181 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 180,
+      "printedTo": 181
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    112,
+    113
+   ],
+   "notes": "الوحدة «As You Like It» ليست مطبوعة في صفحة الأقسام، واسمها من صفحة التوحيد المطبوعة 112. نطاق recapOf (112–113) مستنتج من بنية الكتاب لأن الصندوق لا يذكر أرقام صفحات. العلامات النجمية في الصندوق تشير إلى مفردات المسرد في الصفحة المطبوعة 115: «swearing*» تقابل المفردة swear و«grabs*» تقابل grab. لا خطوط إجابة مطبوعة تحت السؤال."
+  },
+  "19": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 1",
+   "sectionPath": "As You Like It > Section 1",
+   "actScene": [
+    1,
+    1
+   ],
+   "title": "As You Like It: Act 1, Scene 1 بنصّه الأصلي ومترجمته الحديثة",
+   "titleEn": "As You Like It: Act 1, Scene 1 in Original and Modern English",
+   "summary": "صفحة النص المسرحي: مقطعان بعمودين Original و Modern English لحوار Oliver وOrlando، بينهما سرد عن المال ومصارع Charles، ثم مسرد من 8 مفردات. لا أسئلة ولا صور.",
+   "summaryEn": "The play-text page: two extracts in two columns, Original and Modern English, of the exchange between Oliver and Orlando, with narrative paragraphs explaining that Orlando made Oliver promise money for an education and that Oliver then sent for Charles the wrestler; it ends with an 8-item Glossary. No questions and no pictures.",
+   "glossary": [
+    {
+     "term": "passing",
+     "pos": "n",
+     "definition": "someone’s death"
+    },
+    {
+     "term": "pursue",
+     "pos": "v",
+     "definition": "to do something or go after something"
+    },
+    {
+     "term": "obey",
+     "pos": "v",
+     "definition": "to do what someone tells you to"
+    },
+    {
+     "term": "swear",
+     "pos": "v",
+     "definition": "to promise to do something"
+    },
+    {
+     "term": "grab",
+     "pos": "v",
+     "definition": "to take hold of someone in a violent manner"
+    },
+    {
+     "term": "villain",
+     "pos": "adj",
+     "definition": "someone evil"
+    },
+    {
+     "term": "soul",
+     "pos": "n",
+     "definition": "one’s spirit"
+    },
+    {
+     "term": "noble",
+     "pos": "adj",
+     "definition": "of honourable and honest nature"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "passing",
+    "pursue",
+    "obey",
+    "swear",
+    "grab",
+    "villain",
+    "soul",
+    "noble"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "العنوان المطبوع هو «Act 1, Scene 1» فقط؛ الوحدة والقسم غير مطبوعين فقُدّرا من صفحة القسم 1 (المطبوعة 114). الكلمات النجمية (villain*، soul*، noble*) في عمود Modern English معرَّفة في مسرد هذه الصفحة نفسها، لذلك glossaryRefs فارغ. لا رقم نشاط ولا بند تمرين في الصفحة."
+  },
+  "20": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 2",
+   "sectionPath": "As You Like It > Section 2",
+   "actScene": null,
+   "title": "قسم 2 من As You Like It: ملخص حتى تنكّر Rosalind وCelia",
+   "titleEn": "Section 2 of As You Like It: Recap up to the Disguises of Rosalind and Celia",
+   "summary": "قسم 2: سؤال توقّع، ثم صندوق ملخص حتى تنكّر Rosalind باسم Ganymede وCelia باسم Aliena، وصورة في غابة Arden، وبند قراءة يتحقق يحيل إلى الصفحة 117، وإحالة إلى تمارين كتاب الأنشطة 182–183.",
+   "summaryEn": "Section 2: a prediction question, then a recap box running up to Rosalind’s disguise as Ganymede and Celia’s as Aliena, a picture of them in the forest of Arden, a read-and-check item pointing to page 117, and a reference to Activity Book pages 182–183.",
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "figures": [
+    {
+     "id": "p20-fig1",
+     "kind": "cartoon",
+     "caption": "Rosalind and Celia hide in the forest of Arden.",
+     "description": "رسم ملوّن لمكان مكشوف في غابة Arden فيه خمسة أشخاص. على اليس رجل بقبعة زرقاء داكنة وقميص أزرق فاتح وسترة بنفسجية وبنطال كحلي وجزمات بنية يجلس على صخرة رمادية رافعًا كفّيه ليتكلّم، وإلى جانبه رجل مسن بلحية رمادية وقلنسوة بيج يقف ممسكًا عصا راعي وبثوب بيج فوق صدرية بنية. خلف شجيرة خضراء على اليمين شابّ بقبعة داكنة وسترة بنية فوق قميص أبيض يرفع إصبعه، وإلى آخره امرأة بغطاء رأس أبيض وضفيرة طويلة وسترة صفراء فوق تنّورة زرقاء داكنة تتبادل الذراعين، وأمامهم شخص صغير بشعر أشقر يرتدي بدلة مخططة زرقاء وحمراء بياقة صفراء وقفعة مهرج ثلاثية الألوان بجرس، مفردًا ذراعيه وفمه مفتوح. الخلفية أشجار كثيفة وجذع بنّي وسماء زرقاء وأرض ترابية بحجارة.",
+     "figureText": [],
+     "questionIds": [
+      "p20-act1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture.",
+     "questions": [
+      "What do you think the two men are doing in the forest?"
+     ],
+     "figureIds": [
+      "p20-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "predict",
+     "instruction": "Read the extracts on the following page and check if you were right.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 3,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 182–183 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 182,
+      "printedTo": 183
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    112,
+    113,
+    114,
+    115
+   ],
+   "notes": "الوحدة «As You Like It» ليست مطبوعة في صفحة الأقسام، واسمها من صفحة التوحيد المطبوعة 112. البند 2 ليس تمرينًا مستقلاً بل توجيه للطالب للتحقق من تخمينه في البند 1، وصُنّف predict لقلة تطابقه مع أي نوع آخر في المخطط. نطاق recapOf (112–115) مستنتج من بنية الكتاب لأن الصندوق لا يذكر أرقام صفحات. لا مسرد مفردات في هذه الصفحة."
+  },
+  "21": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > As You Like It > Section 2",
+   "actScene": [
+    2,
+    2
+   ],
+   "title": "الفصلان 2 و4: لوحات نصّية أصلية وحديثية تخصّ الراعي Silvius وPhoebe",
+   "titleEn": "Act 2, Scenes 2 and 4: parallel Original and Modern English panels about Silvius and Phoebe",
+   "summary": "لوحتان Original/Modern English: اختفاء مهرج البلاط وتهديد Frederick لأخ Oliver، وتجسس Rosalind (Ganymede) وCelia على حديث Silvius عن حبه Phoebe؛ ثم مشهد انفراد Silvius ينادي Phoebe مراراً، ومسرد من 5 مفردات بلا تمارين.",
+   "summaryEn": "Two Original/Modern English panels: in Act 2, Scene 2 the court's clown has vanished and Duke Frederick threatens Oliver; Rosalind (Ganymede) and Celia (Aliena) then eavesdrop on the shepherd Silvius talking of his love for Phoebe, and the accompanying narrative says his partner Corin tells him he has loved before. Act 2, Scene 4 is a single panel in which Silvius alone calls out to Phoebe. A five-item Glossary closes the page; there are no exercises.",
+   "glossary": [
+    {
+     "term": "overheard",
+     "pos": "v",
+     "definition": "to hear something you are not supposed to"
+    },
+    {
+     "term": "good looks",
+     "pos": "n",
+     "definition": "someone's beauty, good appearance"
+    },
+    {
+     "term": "wherever",
+     "pos": "conj",
+     "definition": "anywhere"
+    },
+    {
+     "term": "shepherd",
+     "pos": "n",
+     "definition": "someone who takes care of sheep"
+    },
+    {
+     "term": "beloved",
+     "pos": "adj",
+     "definition": "someone who is loved very much"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "overheard",
+    "good looks",
+    "wherever",
+    "shepherd",
+    "beloved"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "الصفحة تطبع عنوانين: «Act 2, Scene 2» ثم «Act 2, Scene 4»، وقد أُخذ المشهد الأول في actScene مع وصف المشهدين في العنوان والملخص. لا يُطبع اسم القسم هنا، فـ Section 2 منقول من صفحة مقدمة القسم المطبوعة 116."
+  },
+  "22": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > As You Like It > Section 3",
+   "actScene": null,
+   "title": "قسم 3: صندوق The story so far وصورة لقاء Orlando مع Rosalind متنكرة باسم Ganymede",
+   "titleEn": "Section 3: story recap box and a picture of Orlando meeting Ganymede",
+   "summary": "سؤال توقع عن صورة لقاء Orlando مع Ganymede، ثم صندوق القصة عن وصول Orlando وAdam الى الغابة ومهلة Oliver وقصائده على الاشجار؛ ثم مقتطفات الصفحة التالية، وتمارين كتاب الأنشطة 184–185.",
+   "summaryEn": "A prediction task about the picture of Orlando meeting Rosalind disguised as Ganymede, then the 'The story so far' box on Orlando and Adam's arrival in the forest, Duke Senior's invitation to their meal, the year Sir Frederick grants Oliver, and Orlando's poems hung on the trees. Two further items follow: read the extracts on the following page, and Activity Book Exercises A–E on pages 184–185.",
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "figures": [
+    {
+     "id": "p22-fig1",
+     "kind": "cartoon",
+     "caption": "Orlando meets Rosalind disguised as Ganymede.",
+     "description": "على أرض غابة Arden يواجه شخصان بعضهما: على اليسار Orlando بشعره الأسود المجعّد الطويل وشاربه ولحيته الكثيفة، مرتديًا سترة زرقاء داكنة مطرّزة بالذهبي عند الياقة والأكمام والحاشية، مع حزام أسود بمشبك ذهبي وبنطال داكن مطرّز بخيوط حمراء، رافعًا يده اليمنى قرب وجهه بأصابع مضمومة كأنّه يؤكد نقطة، وممسكًا بيده اليسرى مستوية أمام صدره. وعلى اليمين Rosalind متنكّرةً زيّ رجل اسمه Ganymede: بقمّعة زرقاء داكنة على شعره القصير، وقميص أبيض مفتوح العنق فوق سترة صدرية بنّية بأزرار، وممدودةً كفّها اليمنى نحو Orlando واليسرى عند صدره. خلفهما سماء زرقاء صافية، ومظلّة أشجار خضراء داكنة في الأعلى، وتلّة بنّية في الوسط، وعشب أخضر في الأسفل.",
+     "figureText": [],
+     "questionIds": [
+      "p22-activity-1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture. What do you think Rosalind and Orlando are talking about?",
+     "questions": [
+      "What do you think Rosalind and Orlando are talking about?"
+     ],
+     "figureIds": [
+      "p22-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Read the extracts on the following page and check if you were right.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 3,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 184–185 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 184,
+      "printedTo": 185
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": {
+    "printedPage": 119,
+    "kind": "continued"
+   },
+   "recapOf": [
+    116,
+    117
+   ],
+   "notes": "الجملة الأخيرة «Orlando meets Rosalind disguised as Ganymede.» تعليقٌ مطبوع أسفل الصورة لا خاتمة صندوق The story so far؛ الصندوق ينتهي عند «…on every tree.». البند 2 يشير صراحةً إلى مقتطفات الصفحة التالية (119) وهي continuesOn."
+  },
+  "23": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > As You Like It > Section 3",
+   "actScene": [
+    3,
+    2
+   ],
+   "title": "الفصل 3 المشهد 2: نقش Orlando للأشجار ودرس الحبّ من Ganymede",
+   "titleEn": "Act 3, Scene 2: Orlando carves verses on the trees and takes a love lesson from Ganymede",
+   "summary": "لوحتان Original/Modern English: Orlando ينقش اشجار الغابة كلماته عن Rosalind، ثم وصول Rosalind وCelia الى القصائد وقرارها مخاطبة Orlando ووعده بالعودة كل يوم الى كوخها. ومسرد 3 مفردات، بلا تمارين.",
+   "summaryEn": "Two Original/Modern English panels for Act 3, Scene 2: Orlando turns the forest trees into his books and carves his thoughts of Rosalind on them; a narrative paragraph then tells of Rosalind and Celia finding the poems and of Rosalind's decision, disguised as Ganymede, to visit Orlando every day in her cottage and court him. A three-item Glossary closes the page; there are no exercises.",
+   "glossary": [
+    {
+     "term": "verse",
+     "pos": "n",
+     "definition": "lines from a poem"
+    },
+    {
+     "term": "indescribable",
+     "pos": "adj",
+     "definition": "something or someone that can't be described by any words"
+    },
+    {
+     "term": "court",
+     "pos": "v",
+     "definition": "try to please someone to get their support, approval or affection"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "verse",
+    "indescribable",
+    "court"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "لا يُطبع اسم القسم في هذه الصفحة، فـ Section 3 منقول من صفحة مقدمة القسم المطبوعة 118."
+  },
+  "24": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > As You Like It > Section 4",
+   "actScene": null,
+   "title": "قسم 4: خطوبة Touchstone وAudrey ومصارحة Silvius المرفوضة",
+   "titleEn": "Section 4: Touchstone and Audrey's engagement and Silvius' rejected confession",
+   "summary": "سؤال توقع عن صورة تقابل Silvius وPhoebe، ثم صندوق The story so far عن خطوبة Touchstone وAudrey، ودموع Rosalind لاخفاق Orlando، ومصارحة Silvius المرفوضة. وبند اخير: تمارين A–E في كتاب الأنشطة 186–187.",
+   "summaryEn": "A prediction task about the picture of Silvius facing Phoebe, then the 'The story so far' box on Touchstone and Audrey's engagement, Rosalind's tears because Orlando failed to keep his promise to Ganymede, and Corin's entrance announcing that Silvius will try to win Phoebe's heart and her cruel rejection. The last item sends the student to Activity Book Exercises A–E on pages 186–187.",
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "confesses*",
+     "term": "confess",
+     "definedOnPrintedPage": 121
+    }
+   ],
+   "vocabulary": [
+    "confess"
+   ],
+   "figures": [
+    {
+     "id": "p24-fig1",
+     "kind": "cartoon",
+     "caption": "Silvius confesses to Phoebe.",
+     "description": "في غابة كثيفة الأشجار يقف الراعي Silvius في مقدّمة المشهد: لحية وذقن مشيبان، وقمّعة بلون كريمي، ورداءة سمراء فوق ثوب فاتح مع شريط بنّي عند العنق، يحمل في يده اليمنى عصا راعٍ خشبية طويلة تتوّجها حلقة ملتوية، ويمدّ يده اليسرى راحةً للأعلى وهو يتكلّم. أمامه Phoebe بفستان أبيض تحت سترة زرقاء بلا أكمام، وبزخرفة حمراء وزرقاء عند الصدر، وأذنان ذهبيتان وأساور ذهبية، ترفع يدها اليسرى قرب كتفها وتفتح اليمن نحوه. وعلى اليسار خلف سياج نباتي يقف ثلاثة متفرّجين: امرأة بغطاء رأس أبيض وقميص أصفر وبنطال داكن، ورجل بقمّعة زرقاء داكنة، وصبي بقمّعة زرقاء وسترة صدرية بنّية. والخلفية سماء زرقاء وتلّة خضراء ودرب بنّي وتربة فيها حصى أبيض وأوراق خضراء.",
+     "figureText": [],
+     "questionIds": [
+      "p24-activity-1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture. What do you think is happening?",
+     "questions": [
+      "What do you think is happening?"
+     ],
+     "figureIds": [
+      "p24-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 186–187 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 186,
+      "printedTo": 187
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    119
+   ],
+   "notes": "الجملة الأخيرة «Silvius confesses to Phoebe.» تعليقٌ مطبوع أسفل الصورة؛ صندوق The story so far ينتهي عند «Phoebe is not pleased with his comment.». الكلمة المعلَّمة بـ«confesses*» تُعرَّف في مسرد الصفحة المطبوعة 121."
+  },
+  "25": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > As You Like It > Section 4",
+   "actScene": [
+    3,
+    5
+   ],
+   "title": "الفصل 3 المشهد 5: Phoebe ترفض Silvius ثم تقع في حب Ganymede",
+   "titleEn": "Act 3, Scene 5: Phoebe rejects Silvius and then falls in love with Ganymede",
+   "summary": "لوحتان Original/Modern English: ترفض Phoebe Silvius، ثم تتدخل Rosalind باسم Ganymede فتدافع عنه فتنقلب Phoebe الى حبه. ويختم الصفحة مسرد من تسع مفردات، بلا تمارين.",
+   "summaryEn": "Two Original/Modern English panels: Phoebe rejects Silvius in harsh words, then Rosalind steps in disguised as Ganymede to defend him, and to her surprise Phoebe falls in love with Ganymede, who tries to end the exchange. Stage directions in brackets ([To Celia], [To Silvius], [To Phoebe]) appear in the second panel. A nine-item Glossary closes the page; there are no exercises.",
+   "glossary": [
+    {
+     "term": "confess",
+     "pos": "v",
+     "definition": "to tell someone a secret, in this case, a secret love"
+    },
+    {
+     "term": "executioner",
+     "pos": "n",
+     "definition": "someone who sentences people to death"
+    },
+    {
+     "term": "cowardly",
+     "pos": "adj",
+     "definition": "showing a lack of courage"
+    },
+    {
+     "term": "tyrants, butchers or murderers",
+     "pos": "n",
+     "definition": "criminals, killers, meaning Phoebe's eyes could kill Silvius with their cruel stare"
+    },
+    {
+     "term": "frowning",
+     "pos": "v",
+     "definition": "an expression made when someone is sad or angry"
+    },
+    {
+     "term": "reject",
+     "pos": "v",
+     "definition": "saying no to something or someone"
+    },
+    {
+     "term": "fake",
+     "pos": "adj",
+     "definition": "someone who is not real or truthful"
+    },
+    {
+     "term": "bush",
+     "pos": "n",
+     "definition": "a type of plant"
+    },
+    {
+     "term": "nearby",
+     "pos": "adj",
+     "definition": "close"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "confess",
+    "executioner",
+    "cowardly",
+    "tyrants, butchers or murderers",
+    "frowning",
+    "reject",
+    "fake",
+    "bush",
+    "nearby"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "لا يُطبع اسم القسم في هذه الصفحة، فـ Section 4 منقول من صفحة مقدمة القسم المطبوعة 120."
+  },
+  "26": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > As You Like It > Section 5",
+   "actScene": null,
+   "title": "قسم 5: منديل Orlando الملطّخ بالدم ونجاة أخيه من الأسودة",
+   "titleEn": "Section 5: Orlando's bloody handkerchief and Oliver's rescue from the lioness",
+   "summary": "سؤال توقع عن صورة Orlando في كهف يقاتل اسودة، ثم صندوق The story so far عن دروس الحب ورسالة Phoebe ووصول Oliver بمنديل ملطخ بالدم وقصه الاسودة. وبند اخير: تمارين A–E في كتاب الأنشطة 188–189.",
+   "summaryEn": "A prediction task about the picture of Orlando in the cave fighting the lioness, then the 'The story so far' box on Orlando's love lessons with Ganymede, Phoebe's angry letter, and Oliver's arrival with a bloody handkerchief as he tells how Orlando drove off the snake and killed the lioness that was about to attack him. The last item sends the student to Activity Book Exercises A–E on pages 188–189.",
+   "glossary": [],
+   "glossaryRefs": [
+    {
+     "marker": "warning*",
+     "term": "warning",
+     "definedOnPrintedPage": 123
+    },
+    {
+     "marker": "handkerchief*",
+     "term": "handkerchief",
+     "definedOnPrintedPage": 123
+    },
+    {
+     "marker": "scaring*",
+     "term": "scaring",
+     "definedOnPrintedPage": 123
+    }
+   ],
+   "vocabulary": [
+    "warning",
+    "handkerchief",
+    "scaring"
+   ],
+   "figures": [
+    {
+     "id": "p26-fig1",
+     "kind": "cartoon",
+     "caption": "Orlando defeats the lioness.",
+     "description": "داخل كهف ذي جدران صخرية رمادية متشقّقة وفتح مظلم خلف الشخصيات، يقف Orlando في الوسط بشعره الأسود المجعّد ولحيته الكثيفة، مرتديًا سترة زرقاء داكنة مطرّزة بالذهبي عند الياقة والأكمام مع حزام أسود بمشبك، رافعًا سيفًا ذهبيًا طويلًا بذراعيه بعد أن أزال غمده ومائلًا إياه إلى الأعلى وقدمٌ إلى الأمام. على اليمين تظهر أسودة بلون بنّي فاتح محدّقة بعينين صفراء، وفمها مفتوح يُظهر أسنانًا بيضاء ولسانًا أحمر وشاربًا أبيض، وأذناها الداخليتان ورديّتان، وهي تندفع نحوه بمخلبها الأمامي ممدودة فوق الأرض. وعلى الأرض إلى اليسار مستلقٍّ Oliver بشعره الأشقر، مرتديًا قميصًا بنفسجيًا بياقة خضراء وأساور وأكمام سفلية حمراء وحزام ذهبي، مسندًا نفسه على كوعه وممسحًا الأرض بيده الأخرى.",
+     "figureText": [],
+     "questionIds": [
+      "p26-activity-1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture. Who do you think the men are, and what is happening?",
+     "questions": [
+      "Who do you think the men are, and what is happening?"
+     ],
+     "figureIds": [
+      "p26-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 188–189 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 188,
+      "printedTo": 189
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    121
+   ],
+   "notes": "الجملة الأخيرة «Orlando defeats the lioness.» تعليقٌ مطبوع أسفل الصورة؛ صندوق The story so far ينتهي عند «…his brother, Oliver.». الكلمات الثلاث المعلَّمة بنجمة تُعرَّف في مسرد الصفحة المطبوعة 123."
+  },
+  "27": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > As You Like It > Section 5",
+   "actScene": [
+    4,
+    3
+   ],
+   "title": "الفصل 4 المشهد 3: Oliver يروي أن Orlando غلب الأسودة من أجله",
+   "titleEn": "Act 4, Scene 3: Oliver tells how Orlando defeated the lioness for him",
+   "summary": "لوحتان Original/Modern English لخطاب Oliver: Orlando ترك اخاه مرتين لكن اللطف غلب الثار فقاتل الاسودة، ثم الكهف وجرح الذراع والبكاء على اسم Rosalind. ويختمها سرد غشية Rosalind ومسرد 9 مفردات.",
+   "summaryEn": "Two Original/Modern English panels of Oliver's speech: Orlando turned his back twice, but his kindness overcame his desire for revenge, so he fought the lioness and the noise woke Oliver from sleep; the second panel recounts the desert place, Duke Senior, the cave, the wound on Orlando's arm and his fainting cry for 'Rosalind'. The closing narrative tells of Rosalind's fainting at the story and Oliver's comment on Ganymede's heart. A nine-item Glossary closes the page; there are no exercises.",
+   "glossary": [
+    {
+     "term": "warning",
+     "pos": "v",
+     "definition": "let someone know of something before it happens"
+    },
+    {
+     "term": "handkerchief",
+     "pos": "n",
+     "definition": "a piece of fabric or paper kept in your pocket used for personal hygiene or decoration"
+    },
+    {
+     "term": "scaring",
+     "pos": "v",
+     "definition": "to make someone or something frightened"
+    },
+    {
+     "term": "revenge",
+     "pos": "n",
+     "definition": "to hurt someone who hurt you"
+    },
+    {
+     "term": "deserted",
+     "pos": "adj",
+     "definition": "somewhere with no people"
+    },
+    {
+     "term": "care",
+     "pos": "n",
+     "definition": "to help and look after someone"
+    },
+    {
+     "term": "cave",
+     "pos": "n",
+     "definition": "a large hole under the ground or in the side of a hill"
+    },
+    {
+     "term": "wound",
+     "pos": "n",
+     "definition": "an injury"
+    },
+    {
+     "term": "bleeding",
+     "pos": "v",
+     "definition": "losing blood"
+    }
+   ],
+   "glossaryRefs": [],
+   "vocabulary": [
+    "warning",
+    "handkerchief",
+    "scaring",
+    "revenge",
+    "deserted",
+    "care",
+    "cave",
+    "wound",
+    "bleeding"
+   ],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "لا يُطبع اسم القسم في هذه الصفحة، فـ Section 5 منقول من صفحة مقدمة القسم المطبوعة 122."
+  },
+  "28": {
+   "pageType": "boxed_recap",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > As You Like It > Section 6",
+   "actScene": null,
+   "title": "قسم 6: ترتيب الزيجات الأربعة والاحتفالات في حفل Oliver",
+   "titleEn": "Section 6: four marriages arranged and the wedding celebrations",
+   "summary": "سؤال توقع بسؤالين عن احتفال الزفاف، ثم صندوق The story so far عن خطوبة Oliver من Aliena (Celia) ووعد Ganymede لOrlando بالزواج من Rosalind، وخطوبتان في حفل Oliver. ثم تمارين كتاب الأنشطة 190–191.",
+   "summaryEn": "One prediction item carrying two questions about the wedding-celebration picture, then the 'The story so far' box on Oliver's love for Aliena (actually Celia) and his promise to restore their father's estate, Ganymede's promise to marry Rosalind to Orlando, Phoebe's accusation of Ganymede, and the two betrothals announced at Oliver's wedding. The last item sends the student to Activity Book Exercises A–E on pages 190–191.",
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "figures": [
+    {
+     "id": "p28-fig1",
+     "kind": "cartoon",
+     "caption": "Everybody enjoys the celebrations.",
+     "description": "على درب بنّي بين أشجار داكنة وسماء زرقاء يقف ستة أشخاص راقصين حلقةً متضافين الأيدي حول رجل عجوز في الوسط له لحية بيضاء طويلة، بثوب كريمي بحاشية وحزام خضريين، وعلى رأسه إكليل من أغصان عارية، وقد رفع ذراعيه إلى السماء. إلى يمينه شابّ بشعر أشقر يرتدي سترة بنفسجية بأكمام حمراء وحاشية حمراء وبنطالاً داكناً، وإلى يساره امرأة بشعر بنّي طويل وإكليل من الأوراق الخضراء بثوب فاتح مائل إلى البنفسجي تظهر من الخلف. وعلى الطرف الأيسر امرأة بشعر برتقالي طويل وإكليل أخضر بثوب أبيض وصدرية زرقاء وحذاء أحمر، ومعها رجل يُرى ظهره بشعر أسود قصير بسترة صدرية بنّية فوق قميص أبيض وبنطال أزرق وجزم حذاء، ثم على الطرف الأيمن رجل بشعر أسود وقميص أبيض وصدرية رمادية وبنطال بنّي يرفع ذراعه.",
+     "figureText": [],
+     "questionIds": [
+      "p28-activity-1"
+     ]
+    }
+   ],
+   "activities": [
+    {
+     "number": 1,
+     "type": "look_at_picture",
+     "instruction": "Read The story so far box and look at the picture. What do you think is happening? What are the celebrations for?",
+     "questions": [
+      "What do you think is happening?",
+      "What are the celebrations for?"
+     ],
+     "figureIds": [
+      "p28-fig1"
+     ],
+     "answerFormat": "none_printed"
+    },
+    {
+     "number": 2,
+     "type": "exercises",
+     "instruction": "Now do Exercises A to E on pages 190–191 in the Activity Book.",
+     "questions": [],
+     "figureIds": [],
+     "answerFormat": "none_printed",
+     "dispatch": {
+      "target": "Activity Book",
+      "printedFrom": 190,
+      "printedTo": 191
+     }
+    }
+   ],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": [
+    123
+   ],
+   "notes": "البند 1 سؤالان في بند واحد. الجملة الأخيرة «Everybody enjoys the celebrations.» تعليقٌ مطبوع أسفل الصورة؛ صندوق The story so far ينتهي عند «Duke Senior comments that Ganymede reminded him of his daughter.»"
+  },
+  "29": {
+   "pageType": "parallel_text",
+   "unit": "Literature Focus — As You Like It",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > As You Like It > Section 6",
+   "actScene": [
+    5,
+    4
+   ],
+   "title": "الفصل 5 المشهد 4: Hymen يجمع الأزواج الثمانية ويخبر Jacque de Boys",
+   "titleEn": "Act 5, Scene 4: Hymen joins the eight in marriage and Jacque de Boys brings news",
+   "summary": "لوحتان Original/Modern English: تعود Rosalind بلا تنكر مع إله الزواج Hymen فيجمع الأزواج الثمانية، ثم يخبر Jacque de Boys بتوبة Duke Frederick. وتختم الصفحة بأن Orlando وليّ Duke و Jacques يدخل الدير.",
+   "summaryEn": "Two Original/Modern English panels: Rosalind returns from the forest without her disguise with Celia and Hymen, the god of marriage, who pairs the eight (Rosalind and Orlando, Celia and Oliver, Phoebe and Silvius, Audrey and Touchstone); the celebration is then interrupted by Jacque de Boys, who brings news that Duke Frederick was converted by an old religious man, gave back his crown and lands, and that all is true. The closing paragraph says Orlando becomes Duke Senior's heir, Oliver's lands return to him, Jacques joins Sir Frederick in the monastery, and the play ends.",
+   "glossary": [],
+   "glossaryRefs": [],
+   "vocabulary": [],
+   "figures": [],
+   "activities": [],
+   "exercises": [],
+   "answerKeyLocation": null,
+   "continuesOn": null,
+   "recapOf": null,
+   "notes": "صفحة ختام المسرحية: لا صندوق The story so far ولا مسرد ولا تمارين ولا رسوم، وتنتهي بالجملة المطبوعة «The play ends.». اختير نوع parallel_text لوجود لوحتَي Original وModern English رغم أن الحزمة المولَّدة وصفتها contents. لا يُطبع اسم القسم هنا، فـ Section 6 منقول من صفحة مقدمة القسم المطبوعة 124."
+  }
+ }
+}

@@ -118,7 +118,9 @@ h1, h2, h3, strong, b { font-weight: 800; }
 #homePanel { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 
 /* الصفحة الرئيسية */
-.hero-card { min-height: 244px; position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: clamp(27px, 5vw, 47px); border-radius: 26px; color: #fff; background: var(--deep); box-shadow: var(--shadow); }
+/* clip لا hidden: الدوائر الزخرفية تتجاوز حدود البطاقة فتصير قابلة للتمرير،
+   ويزحزح تركيزُ أي عنصرٍ داخليٍّ المحتوى بمقدار 65px فيُقصّ عنوان البطاقة. */
+.hero-card { min-height: 244px; position: relative; overflow: hidden; overflow: clip; display: flex; justify-content: space-between; align-items: center; padding: clamp(27px, 5vw, 47px); border-radius: 26px; color: #fff; background: var(--deep); box-shadow: var(--shadow); }
 .hero-card::before { content: ""; position: absolute; width: 380px; height: 380px; border: 1px solid rgba(255, 255, 255, .08); border-radius: 50%; left: -130px; bottom: -250px; }
 .hero-card::after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid rgba(226, 190, 132, .15); border-radius: 50%; right: -100px; top: -200px; }
 .hero-copy { position: relative; z-index: 1; max-width: 490px; }
@@ -168,7 +170,9 @@ h1, h2, h3, strong, b { font-weight: 800; }
 .message.assistant .message-bubble { color: var(--ink); border: 1px solid var(--line); background: var(--surface); border-end-end-radius: 5px; box-shadow: 0 4px 14px rgba(22, 47, 52, .035); }
 .message-bubble p { margin: 0 0 9px; }
 .message-bubble p:last-child { margin-bottom: 0; }
-.message-bubble h2, .message-bubble h3 { color: var(--deep); font-size: 1rem; margin: 13px 0 5px; }
+.message-bubble h1, .message-bubble h2, .message-bubble h3 { color: var(--deep); font-size: 1rem; margin: 13px 0 5px; }
+.message-bubble h1 { font-size: 1.12rem; }
+.message-bubble hr { border: 0; border-top: 1px solid rgba(18, 38, 43, .14); margin: 12px 0; }
 .message-bubble ul, .message-bubble ol { margin: 6px 0 10px; padding-inline-start: 1.4em; }
 .message-bubble li { padding: 2px 0; }
 .message-bubble strong { color: var(--deep-3); }
