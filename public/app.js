@@ -202,6 +202,8 @@ function markdownHtml(source) {
   text = text.replace(/`([^`\n]+)`/g, '<code>$1</code>');
   text = text.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>').replace(/^###\s+(.+)$/gm, '<h3>$1</h3>').replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
   text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // المائل قد يمتد على أكثر من سطر داخل اقتباس الكتاب، فلا يُترك نجمةً ظاهرة للطالبة.
+  text = text.replace(/\*([^*]+)\*/g, (_match, inner) => `<em>${String(inner).replace(/\s*\n\s*/g, ' ')}</em>`);
   text = text.replace(/(^|\s)(S\d+)(?=\s|$|[،.؛])/g, '$1<span class="reference-mark">$2</span>');
   const lines = text.split('\n');
   let html = '';
