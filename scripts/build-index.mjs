@@ -1,4 +1,4 @@
-﻿// يبني الفهرس canonical مرة واحدة من pdf-index.json.
+// يبني الفهرس canonical مرة واحدة من pdf-index.json.
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -365,7 +365,7 @@ function applyEnrichment(doc, extra) {
   for (const key of ['unit', 'work', 'author', 'section', 'sectionPath', 'actScene', 'pageType', 'title', 'titleEn', 'summary', 'summaryEn', 'answerKeyLocation', 'continuesOn', 'recapOf', 'notes', 'vocabulary', 'lessonRange', 'educationalPurpose']) {
     assign(key, extra[key]);
   }
-  for (const key of ['glossary', 'glossaryRefs', 'figures', 'activities', 'exercises']) {
+  for (const key of ['glossary', 'glossaryRefs', 'figures', 'activities', 'exercises', 'verifiedNumbers']) {
     assign(key, extra[key]);
   }
   doc.enriched = true;
@@ -551,7 +551,7 @@ console.log(`  full text: ${output.stats.fullTextPages} pages / ${output.stats.f
 // ويكشف أي حقل موجود في الملفات ولم يصل إلى الوثيقة.
 const TRANSFERRED = ['unit', 'work', 'author', 'section', 'sectionPath', 'actScene', 'pageType', 'title', 'titleEn',
   'summary', 'summaryEn', 'glossary', 'glossaryRefs', 'vocabulary', 'figures', 'activities', 'exercises',
-  'answerKeyLocation', 'continuesOn', 'recapOf', 'notes', 'lessonRange', 'educationalPurpose'];
+  'answerKeyLocation', 'continuesOn', 'recapOf', 'notes', 'lessonRange', 'educationalPurpose', 'verifiedNumbers'];
 const transferredCounts = Object.fromEntries(TRANSFERRED.map((key) => [key, 0]));
 for (const doc of documents) {
   for (const key of TRANSFERRED) {

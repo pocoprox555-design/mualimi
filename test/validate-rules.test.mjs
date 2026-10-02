@@ -22,10 +22,22 @@ test('الرقم المثبَت في نص الصفحة ليس فجوة', () => {
   assert.equal(missing.unverified[0].number, '1909');
 });
 
-test('غياب الرقم من صفحة مصوّرة يُحاسَب غير مُثبت لا مُختلق', () => {
-  const result = judgeNumbers([page({ text: '', needsOcr: true, summary: 'الآيات 20 - 26', notes: 'الآيات المرئية كاملة المرقّمة 20-26 كما وردت في صورة الصفحة' })]);
-  assert.equal(result.counts.verified, 2);
+test('غياب الرقم عن صفحة بلا نص طبقة لا يُحاسَب مقارنةً بل كتاباً كله', () => {
+  const result = judgeNumbers([page({ text: '', needsOcr: true, summary: 'آيات 20 و26 من سورة الكهف' })]);
+  assert.equal(result.counts.layerless, 2);
   assert.equal(result.counts.unverified, 0);
+});
+
+test('الملاحظة النصية لا تُبطل الدليل وحدها', () => {
+  const result = judgeNumbers([page({ summary: 'آيتا 20 و26', notes: 'الرقم المقروء بصريا هو 20 و26 كما ورد في صورة الصفحة' })]);
+  assert.equal(result.counts.verified, 0);
+  assert.equal(result.counts.unverified, 2);
+});
+
+test('إحداثي «(1,3)» ترقيم لا رقم مستقل', () => {
+  const result = judgeNumbers([page({ summary: 'الفترة المفتوحة (1,3) تمثّل على خط الأعداد' })]);
+  assert.equal(result.counts.unverified, 0);
+  assert.equal(result.counts.structural, 1);
 });
 
 test('الدليل البصري المسجّل في verifiedNumbers يُغني عن سند النص', () => {

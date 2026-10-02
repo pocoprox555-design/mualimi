@@ -475,7 +475,9 @@ for (const [bookId, book] of searchBooks) {
     for (const field of leakFields) {
       const value = String(doc[field] || '');
       if (!value) continue;
-      const isJson = /^\s*\{/.test(value) || SERIALIZED_ANY.test(value);
+      // JSON المسرَّب = مفتاح مقوَّس يتبعه نقطتان. ومجموعة رياضية تبدأ بـ«{ r,x < − 2 }»
+      // ليست JSON، والحكم عليها اختراقٌ يبنى على شرط خاطئ لا على عيب في البيانات.
+      const isJson = /\{\s*"(?:[^"\\]|\\.)*"\s*:/.test(value) || SERIALIZED_ANY.test(value);
       const isCjk = CJK.test(value);
       const isHebrew = HEBREW.test(value);
       if (!isJson && !isCjk && !isHebrew) continue;

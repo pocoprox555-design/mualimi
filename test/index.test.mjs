@@ -80,9 +80,9 @@ test('الفهرس مكتفي بذاته: نص كل صفحة داخله بلا �
 test('التغذية البصرية تجعل رسومات ومفردات الكتاب مقروءة بلا PDF', async () => {
   const index = await getIndex();
   const enriched = index.documents.filter((doc) => doc.enriched);
-  // 53 صفحة كانت رقمَ كتابين مُغذَّيَين فقط. اليوم 20 كتاباً و1935 صفحة؛ والأرقام
+  // 53 صفحة كانت رقمَ كتابين مُغذَّيَين فقط. اليوم 20 كتاباً و1936 صفحة؛ والأرقام
   // مثبّتة بالحرف لا بعتبة، لأن أي نقص في التغذية يجب أن يُسقط الاختبار لا أن يمرّ.
-  assert.equal(enriched.length, 1935);
+  assert.equal(enriched.length, 1936);
   for (const doc of enriched) {
     assert.ok(doc.title.length > 3, `${doc.id} عنوان فارغ`);
     assert.ok(!/لا عنوان|لا يوجد عنوان|يحتاج قراءة بصرية|وصف مولّد/.test(`${doc.title} ${doc.summary}`), `${doc.id} نص استخراجي`);
@@ -108,6 +108,16 @@ test('التغذية البصرية تجعل رسومات ومفردات الك�
     assert.ok(book, `${id} غير موجود`);
     assert.equal(book.enriched, true, `${id} ما زال بلا تغذية`);
     assert.ok(book.enrichedPageCount > 0, `${id} enrichedPageCount=0`);
+  }
+});
+
+test('كل رقم مُتحقَّق منه مرفق بملاحظة مراجعة تذكر ما قُرئ', async () => {
+  const index = await getIndex();
+  const verified = index.documents.filter((doc) => Array.isArray(doc.verifiedNumbers) && doc.verifiedNumbers.length);
+  assert.ok(verified.length >= 40, `صفحات بدليل بصري=${verified.length}`);
+  for (const doc of verified) {
+    assert.match(String(doc.notes || ''), /مراجعة بصرية/, `${doc.id} رقم بلا ملاحظة مراجعة`);
+    for (const number of doc.verifiedNumbers) assert.ok(/^\d+$/.test(String(number)), `${doc.id} مدخل غير رقمي: ${number}`);
   }
 });
 

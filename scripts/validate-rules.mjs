@@ -9,10 +9,10 @@ import { normalizeDigits } from '../lib/text.mjs';
 const DIGIT_RUN = /[0-9٠-٩۰-۹]+(?:[.,٫][0-9٠-٩۰-۹]+)*/g;
 const WEIRD = /[\uFFFD\uE000-\uF8FF]/g;
 const PERSIAN = /[پچژگیک]/g;
-// «قُرئ من صورة الصفحة» دليل بصري صريح؛ رقمٌ ذُكر مع مثل هذه العبارة لا يُطالب بسند من النص.
-const VISUAL_EVIDENCE = /(?:بصري[ًا]?|معاينة|مقروء[ةه]?\s+من|كما\s+ورد|قُرئت|قرأت|مراجعة\s+الصفح|image|ocr)/i;
 const STRUCTURE_BEFORE = /(?:unit|chapter|lesson|exercise|part|section|activity|form|الفصل|الوحدة|الدرس|التمرين|البند|المبحث|الجزء|الباب|المحاضرة|الصفحة|رقم|ص)\s*[:\-\s]*$/i;
 const RANGE_AROUND = /[0-9٠-٩]\s*[-–—]\s*[0-9٠-٩]/;
+// إحداثي أو زوج مرقّم «(1,3)» أو «(2، 5)»: رقمان معاً لا رقم واحد.
+const COORDINATE_AROUND = /[0-9٠-٩]\s*[,،]\s*[0-9٠-٩]/;
 const UNIT_STOPWORDS = new Set(['of', 'the', 'and', 'في', 'من', 'الى', 'على', 'و']);
 
 export const TEXT_MIN = 20;
@@ -45,12 +45,12 @@ export function pageIntegrity(doc) {
   return { state: 'intact', length: size, weirdRate: round(weirdRate) };
 }
 
+// دليل التحقق لا يُقبل من الملاحظة النصية: ملاحظة قد تُثبت رقماً خاطئاً بثقة
+// (سُجّل في كتاب التاريخ أن «١٩٥٦» هي ١٩٥٢ ووُثِّق خطؤه لاحقاً).
+// فلا يُرفع-flag إلا بverifiedNumbers، وهي كتابة آلية بعد مراجعة بصرية محدّدة.
 function visualEvidence(doc, number) {
   const declared = Array.isArray(doc?.verifiedNumbers) ? doc.verifiedNumbers.map((value) => normalizeDigits(String(value))) : [];
-  if (declared.includes(number)) return 'verifiedNumbers';
-  const notes = String(doc?.notes || '');
-  if (notes.includes(number) && VISUAL_EVIDENCE.test(notes)) return 'notes';
-  return '';
+  return declared.includes(number) ? 'verifiedNumbers' : '';
 }
 
 // تسمية بنيوية («3-10»، «Unit 3»، «الفصل الثاني») رقم ترقيم لا ادّعاء واقعة؛
@@ -58,10 +58,11 @@ function visualEvidence(doc, number) {
 function structuralLabel(fieldValue, number) {
   const value = String(fieldValue || '');
   const at = value.indexOf(number);
-  if (at < 0) return false;
+  // «(1,3)» تُقرأ رقماً واحداً بعد حذف الفاصلة، فلا يطابقها بحث النص المباشر.
+  if (at < 0) return value.replace(/[,،]/g, '').includes(number) && COORDINATE_AROUND.test(value);
   const before = value.slice(Math.max(0, at - 24), at);
   const around = value.slice(Math.max(0, at - 12), at + number.length + 12);
-  return STRUCTURE_BEFORE.test(before) || RANGE_AROUND.test(around);
+  return STRUCTURE_BEFORE.test(before) || RANGE_AROUND.test(around) || COORDINATE_AROUND.test(around);
 }
 
 /**
