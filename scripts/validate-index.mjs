@@ -13,6 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanText } from '../lib/text.mjs';
 import { normalizeDigits } from '../lib/text.mjs';
+import { crossBookDuplicates, deadLayers, foreignUnits, judgeNumbers, noTextPages, titleRepetition } from './validate-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LIB = path.join(ROOT, 'curriculum-library');
@@ -148,10 +149,43 @@ function duplicateShareOf(values) {
   return Math.max(...counts.values()) / list.length;
 }
 
+function summarizeIntegrity(items) {
+  const counts = {};
+  for (const item of items) {
+    if (item.verdict !== 'unverified') continue;
+    counts[item.integrity] = (counts[item.integrity] || 0) + 1;
+  }
+  return counts;
+}
+
+// الدليل على أن طبقة ما حيّة: من يشير إليها في كود المشروع. نتيجة سالبة = موت.
+// هذا الملف نفسه مستثنى، وإلا صار قارئاً لنفسه فكل طبقة تبدو حيّة.
+const CODE_FILES = ['server.mjs'];
+let codeFileList = null;
+async function codeReaders(pattern) {
+  if (!codeFileList) {
+    codeFileList = [
+      ...CODE_FILES,
+      ...await listFiles(path.join(ROOT, 'lib'), '.mjs'),
+      ...await listFiles(path.join(ROOT, 'public'), '.js'),
+      ...await listFiles(path.join(ROOT, 'scripts'), '.mjs'),
+    ].map((file) => path.resolve(ROOT, file));
+  }
+  const self = path.resolve(fileURLToPath(import.meta.url));
+  const readers = [];
+  for (const file of codeFileList) {
+    if (file === self) continue;
+    const text = await readFile(file, 'utf8').catch(() => '');
+    if (pattern.test(text)) readers.push(path.relative(ROOT, file).replace(/\\/g, '/'));
+  }
+  return readers;
+}
+
 // ── التحميل ──────────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
 const asJson = args.includes('--json') ? args[args.indexOf('--json') + 1] : null;
 const noExit = args.includes('--no-exit');
+const gate = args.includes('--gate');
 
 const searchIndex = await readJson(SEARCH_INDEX);
 if (!searchIndex?.documents) {
@@ -211,8 +245,9 @@ const CHECKS = [
   { id: 'A4', title: 'تلف النص: U+FFFD / رموز PUA / فارسية / «هللا» / محارف غريبة' },
   { id: 'A5', title: 'النص غير المرئي المكرر: نسبة تكرار الأسطر داخل الصفحة' },
   { id: 'A6', title: 'خلط الأعمدة وكسر الأقواس والأسس' },
+  { id: 'A7', title: 'صفحة بلا نص في الـPDF، وهي تحمل وصفاً في الفهرس' },
   { id: 'B7', title: 'محتوى مخترق/مسرَّب: JSON / CJK / عبري داخل الحقول' },
-  { id: 'B8', title: 'أرقام بلا سند في title/summary/outlineSummary' },
+  { id: 'B8', title: 'أرقام لا يثبتها نص الصفحة (غير مُثبتة ⇒ تحتاج عيناً لا حذفاً)' },
   { id: 'B9', title: 'pageType خارج التعداد' },
   { id: 'B10', title: 'إسناد خاطئ: summary/educationalPurpose يذكر كتاباً آخر' },
   { id: 'B11', title: 'اقتباس ديني يحتاج مراجعة (PUA/U+FFFD ⇒ غير صالح للاستشهاد)' },
@@ -221,10 +256,13 @@ const CHECKS = [
   { id: 'C14', title: 'educationalPurpose فارغ/قصير/مكرر' },
   { id: 'C15', title: 'unit فارغ أو وارد من كتاب آخر' },
   { id: 'C16', title: 'section ثابتة على كل الصفحات' },
+  { id: 'C21', title: 'عنوان الصفحة هو عنوان الكتاب ⇒ الصفحة بلا هوية في الاسترجاع' },
   { id: 'D17', title: 'printedPage مخمَّن خلاف README (قاعدة ثوابت build-index.mjs)' },
   { id: 'D18', title: 'طبقة أقدم من مصدرها أو متناقضة معه' },
   { id: 'D19', title: 'enrichment غائب و figures/glossary/activities/exercises صفر' },
   { id: 'D20', title: 'سلامة البصمة: source.checksum و source.bytes مقابل الملف الفعلي' },
+  { id: 'D21', title: 'طبقة ميتة: ملف لا يشير إليه أي كود في المشروع' },
+  { id: 'D22', title: 'تكرار حرفي بين الكتب (نسخ مقصود أم خطأ فهرسة؟)' },
 ].map((entry) => ({ ...entry, findings: [], critical: 0 }));
 const record = (code, bookId, severity, detail) => {
   const entry = CHECKS.find((item) => item.id === code);
@@ -235,6 +273,7 @@ const record = (code, bookId, severity, detail) => {
 
 // ── فحوص الكتب ───────────────────────────────────────────────────────────────
 const bookReports = [];
+const unverifiedNumbers = [];
 const allUnits = new Map();
 const foreignUnitOwners = new Map();
 for (const [bookId, book] of searchBooks) {
@@ -297,6 +336,17 @@ for (const [bookId, book] of searchBooks) {
   if (lostPages.length) {
     report.add('critical', 'A2', `${lostPages.length} صفحة نصّها في PDF وساقط من search-index`, { pages: lostPages.slice(0, 12) });
     for (const page of lostPages) record('A2', bookId, 'critical', `ص${page} بلا نص في الفهرس`);
+  }
+
+  // A7 ── صفحة بلا نص وهي محملة بوصف: الوصف يقرأه النموذج كأنه من الصفحة،
+  // فالصفحة التي لا نصّ لها يجب أن تصله مصحوبةً بوسم لا بوصف يُقتطع كدليل.
+  const blind = noTextPages(docs);
+  report.notes.noText = { empty: blind.empty.length, share: blind.share, withClaims: blind.claims.length };
+  if (blind.empty.length) {
+    const severity = blind.share > 0.1 || blind.claims.length ? 'high' : 'medium';
+    const claimNote = blind.claims.length ? ` · ${blind.claims.length} منها تحمل title/summary بلا سند نصي` : '';
+    report.add(severity, 'A7', `${blind.empty.length} من ${docs.length} صفحة بلا نص (${pct(blind.share)})${claimNote}`, { pages: blind.empty.slice(0, 12) });
+    record('A7', bookId, severity, `${blind.empty.length} بلا نص${blind.claims.length ? ` · ${blind.claims.length} بوصف` : ''}`);
   }
 
   // A3 ── الاقتطاع: نقيس النص المتوقَّع بعد التنقية نفسها التي يطبّقها البناء (scripts/build-index.mjs)
@@ -443,28 +493,18 @@ for (const [bookId, book] of searchBooks) {
     record('B7', bookId, severity, `${leakTotal} حقل مخترق (JSON ${leaks.json})`);
   }
 
-  // B8 ── أرقام بلا سند
-  const unsupported = [];
-  const unsupportedPages = new Set();
-  for (const doc of docs) {
-    const text = String(doc.text || '');
-    if (!text) continue;
-    const proven = new Set(digits(text));
-    const own = new Set([String(doc.physicalPage), String(doc.printedPage ?? '')]);
-    for (const field of ['title', 'summary', 'outlineSummary']) {
-      for (const digit of new Set(digits(doc[field] || ''))) {
-        if (digit.length < 2 || own.has(digit) || proven.has(digit)) continue;
-        unsupported.push({ page: doc.physicalPage, field, digit });
-        unsupportedPages.add(doc.physicalPage);
-      }
-    }
-  }
-  const titleHits = unsupported.filter((item) => item.field === 'title').length;
-  report.notes.unsupportedNumbers = { total: unsupported.length, inTitle: titleHits, pages: unsupportedPages.size, samples: unsupported.slice(0, 8) };
-  if (unsupported.length) {
-    const severity = titleHits ? 'critical' : unsupportedPages.size / Math.max(1, docs.length) > 0.2 ? 'high' : 'medium';
-    report.add(severity, 'B8', `${unsupported.length} رقم بلا سند في ${unsupportedPages.size} صفحة (${titleHits} منها في title)`, { samples: unsupported.slice(0, 8) });
-    record('B8', bookId, severity, `${unsupported.length} رقم · ${titleHits} في title`);
+  // B8 ── أرقام لا يثبتها نص الصفحة
+  // ثلاثتها مقصودة: غياب الرقم من النص ليس دليل اختلاق، والنص قد يكون ناقصاً
+  // (صفحة مصوّرة، أو رقم داخل جدول أو صورة أو صفحة مقابلة). فالمنفصل هنا
+  // «غير مُثبت» بعينه لا «مُختلق»، والتصعيد إلى حرج يبقى عمل مراجعة بصرية.
+  const numbers = judgeNumbers(docs);
+  report.notes.numbers = { ...numbers.counts, integrity: summarizeIntegrity(numbers.items) };
+  for (const item of numbers.unverified) unverifiedNumbers.push({ bookId, ...item });
+  if (numbers.unverified.length || numbers.counts.layerless) {
+    const pages = new Set(numbers.unverified.map((item) => item.page));
+    const layerless = numbers.counts.layerless ? ` · ${numbers.counts.layerless} رقماً في ${blind.empty.length} صفحة بلا طبقة نصّ أصلاً (انظر A7)` : '';
+    report.add('high', 'B8', `${numbers.unverified.length} رقم في ${pages.size} صفحة لا يثبته نص الصفحة ⇒ يحتاج مراجعة بصرية لا حذفاً (${numbers.counts.verified} بدليل بصري · ${numbers.counts.structural} ترقيم بنيوي${layerless})`, { samples: numbers.unverified.slice(0, 8) });
+    record('B8', bookId, 'high', `${numbers.unverified.length} غير مُثبت${numbers.counts.layerless ? ` · ${numbers.counts.layerless} بلا طبقة نص` : ''}`);
   }
 
   // B9 ── pageType
@@ -523,10 +563,11 @@ for (const [bookId, book] of searchBooks) {
   }
 
   // C12 ── تكرار حرفي
+  const titles = titleRepetition(docs, book?.title || '');
   const boiler = {
     summary: duplicateShareOf(docs.map((doc) => squeeze(doc.summary || ''))),
     purpose: duplicateShareOf(docs.map((doc) => squeeze(doc.purpose || ''))),
-    title: duplicateShareOf(docs.map((doc) => squeeze(doc.title || ''))),
+    title: titles.boilerplateShare,
   };
   report.notes.boilerplate = { summary: round(boiler.summary * 100), purpose: round(boiler.purpose * 100), title: round(boiler.title * 100) };
   const worstBoiler = Math.max(boiler.summary, boiler.purpose, boiler.title);
@@ -534,6 +575,13 @@ for (const [bookId, book] of searchBooks) {
     const severity = worstBoiler > 0.9 ? 'high' : 'medium';
     report.add(severity, 'C12', `تكرار حرفي: summary ${pct(boiler.summary)} · purpose ${pct(boiler.purpose)} · title ${pct(boiler.title)}`);
     record('C12', bookId, severity, `${pct(worstBoiler)} تكرار حرفي`);
+  }
+
+  // C21 ── عنوان الصفحة هو عنوان الكتاب: لا عيب في الوصف بل في هوية الصفحة.
+  if (titles.bookTitlePages.length) {
+    const severity = titles.bookTitleShare > 0.3 ? 'high' : 'medium';
+    report.add(severity, 'C21', `${titles.bookTitlePages.length} من ${docs.length} صفحة تحمل عنوان الكتاب («${(book?.title || '').slice(0, 40)}») فلا تُميَّز في الاسترجاع`, { pages: titles.bookTitlePages.slice(0, 10).map((item) => item.page) });
+    record('C21', bookId, severity, `${titles.bookTitlePages.length} صفحة بعنوان الكتاب`);
   }
 
   // C13 ── تغطية summary
@@ -559,20 +607,10 @@ for (const [bookId, book] of searchBooks) {
     record('C14', bookId, severity, `${purposeEmpty} فارغ · تكرار ${pct(boiler.purpose)}`);
   }
 
-  // C15 ── unit: فارغ، أو اسم وحدة مختلق لا يثبته نص الصفحة ويشترك فيه كتاب آخر
+  // C15 ── unit: فارغ، أو اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر
   const unitEmpty = docs.filter((doc) => !squeeze(doc.unit || '')).length;
   const distinctUnits = new Set(docs.map((doc) => squeeze(doc.unit || '')).filter(Boolean));
-  const foreign = [];
-  for (const doc of docs) {
-    const unit = squeeze(doc.unit || '');
-    if (!unit || GENERIC_UNIT.test(unit)) continue;
-    const owners = allUnits.get(unit) || new Set();
-    const other = [...owners].find((id) => id !== bookId);
-    if (!other) continue;
-    const pageText = arabicFold(doc.text || '');
-    if (pageText.includes(arabicFold(unit))) continue; // مثبت في الصفحة نفسها
-    foreign.push({ page: doc.physicalPage, unit: unit.slice(0, 40), alsoIn: other });
-  }
+  const foreign = foreignUnits(docs, allUnits, bookId, (value) => GENERIC_UNIT.test(String(value || '').trim()));
   report.notes.units = { empty: unitEmpty, distinct: distinctUnits.size, foreign: foreign.length, samples: foreign.slice(0, 4) };
   if (unitEmpty / Math.max(1, docs.length) > 0.3 || foreign.length) {
     const severity = foreign.length ? 'high' : 'medium';
@@ -693,14 +731,7 @@ if (fastIndex) {
   const noiseRows = rows.filter((row) => new RegExp(PRESS_FILE_SRC, 'i').test(`${row.n || ''}${row.p || ''}${row.s || ''}`)).length;
   const noTextRows = rows.filter((row) => /صفحة مصورة/.test(String(row.t || '')) || !String(row.p || '').trim()).length;
   const hours = olderByHours(stamps['fast-index.json']);
-  // الدليل على الموت: هل يقرأ أحد هذه الطبقة وقت التشغيل؟
-  const readers = [];
-  const SELF = 'scripts/validate-index.mjs'.split('/');
-  for (const file of ['server.mjs', ...await listFiles(path.join(ROOT, 'lib'), '.mjs'), ...await listFiles(path.join(ROOT, 'public'), '.js'), ...await listFiles(path.join(ROOT, 'scripts'), '.mjs')]) {
-    if (file === SELF.join('/') || file === SELF.join('\\')) continue; // هذا الملف نفسه
-    const text = await readFile(path.join(ROOT, file), 'utf8').catch(() => '');
-    if (/fast[-_ ]?index/i.test(text)) readers.push(file);
-  }
+  const readers = await codeReaders(/fast[-_ ]?index/i);
   library.notes.fastIndex = {
     version: fastIndex.version, builtAt: fastIndex.builtAt,
     books: Array.isArray(fastIndex.books) ? fastIndex.books.length : 0,
@@ -709,15 +740,38 @@ if (fastIndex) {
     noiseRows, noTextRows, readers,
   };
   if (hours > 0) {
-    addLibrary('high', 'D18', `fast-index.json أقدم من search-index بـ${hours} ساعة · ${library.notes.fastIndex.books} كتاب · ${rows.length} صفحة (مقابل ${searchIndex.documents.length}) · ${missingBooks.length} كتاب غائب${readers.length ? ` · يقرأه: ${readers.join('، ')}` : ' · لا يقرأه أي كود (طبقة ميتة)'}`, { layer: 'fast-index.json' });
-  }
-  if (!readers.length) {
-    addLibrary('high', 'D18', 'fast-index.json طبقة ميتة: لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ — ملف 3.2MB يضلّل ولا يُستهلك', { layer: 'fast-index.json', dead: true });
+    addLibrary('high', 'D18', `fast-index.json أقدم من search-index بـ${hours} ساعة · ${library.notes.fastIndex.books} كتاب · ${rows.length} صفحة (مقابل ${searchIndex.documents.length}) · ${missingBooks.length} كتاب غائب${readers.length ? ` · يقرأه: ${readers.join('، ')}` : ' · لا يقرأه أي كود (انظر D21)'}`, { layer: 'fast-index.json' });
   }
   if (noiseRows) addLibrary('medium', 'A4', `fast-index.json فيه ${noiseRows} صف حاملة لحروف المصنع IRAQ_*.indb`, { layer: 'fast-index.json' });
   if (noTextRows) addLibrary('medium', 'A2', `fast-index.json فيه ${noTextRows} صف بلا نص («صفحة مصورة»)` , { layer: 'fast-index.json' });
 } else {
   library.notes.fastIndex = null;
+}
+
+// D21 ── الطبقات الميتة: الحكم بالبحث في الكود لا بتاريخ الملف.
+// طبقة لا يقرأها أحد تبقى في المستودع تضلّل القياس وتوهم بوجود مصدر ثانٍ للحقيقة.
+const deadCandidates = [
+  { layer: 'fast-index.json', stamp: stamps['fast-index.json'], pattern: /fast[-_ ]?index/i },
+  { layer: 'index/search-index.json', stamp: stamps['index/search-index.json'], pattern: /index\/search-index|legacy[-_ ]?index/i },
+  { layer: 'index/materials.json', stamp: stamps['index/materials.json'], pattern: /materials\.json/i },
+  { layer: 'catalog.json', stamp: stamps['catalog.json'], pattern: /catalog\.json/i },
+];
+for (const candidate of deadCandidates) {
+  candidate.exists = Boolean(candidate.stamp.exists);
+  candidate.readers = candidate.exists ? await codeReaders(candidate.pattern) : [];
+  candidate.bytes = candidate.stamp.bytes;
+  candidate.olderByHours = olderByHours(candidate.stamp);
+}
+library.notes.deadLayers = deadLayers(deadCandidates);
+for (const layer of library.notes.deadLayers) {
+  addLibrary('high', 'D21', `${layer.layer} طبقة ميتة: ${(layer.bytes / 1_048_576).toFixed(1)}MB لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ (أقدم بـ${layer.olderByHours} ساعة)`, { layer: layer.layer, dead: true });
+}
+
+// D22 ── تكرار حرفي بين الكتب: يُعرف قبل أن يُحتسب مرتين في جواب واحد.
+const duplicates = crossBookDuplicates(docsByBook);
+library.notes.duplicates = duplicates;
+for (const pair of duplicates) {
+  addLibrary('medium', 'D22', `${pair.shared} صفحة متطابقة بين «${pair.left}» و«${pair.right}» (إزاحة ${pair.offset})`, { layer: pair.left, pair: pair.right });
 }
 
 const enrichedBooks = [...searchBooks.keys()].filter((id) => enrichmentStamps.has(id));
@@ -800,7 +854,7 @@ console.log(`  fast-index: ${library.notes.fastIndex ? `${library.notes.fastInde
 console.log(`  catalog.json books=${library.notes.catalog.books} · materials.json entries=${library.notes.materials.entries} (ناقص ${library.notes.materialsMissing.length} كتاباً)`);
 console.log(`  الطبقات الأقدم من search-index: ${Object.entries(library.notes.layers).filter(([layer]) => layer !== 'search-index.json' && library.notes.layers[layer].olderByHours > 0).map(([layer, stamp]) => `${layer} (${stamp.olderByHours}س)`).join('، ') || 'لا شيء'}`);
 
-console.log('\n▌ نتائج الفحوص العشرين (رقم على البيانات الحالية)\n');
+console.log('\n▌ نتائج الفحوص (رقم على البيانات الحالية)\n');
 for (const entry of CHECKS) {
   const books = new Set(entry.findings.map((item) => item.bookId));
   const bySeverity = (severity) => entry.findings.filter((item) => item.severity === severity).length;
@@ -809,6 +863,14 @@ for (const entry of CHECKS) {
   for (const item of entry.findings.slice(0, 22)) console.log(`        · ${item.bookId}: ${item.detail}`);
   if (entry.findings.length > 22) console.log(`        · …(+${entry.findings.length - 22})`);
 }
+
+// طابور المراجعة البصرية: كل رقم لم يثبته نص الصفحة ولا وُجد له دليل بصري مسجّل.
+// لا يُحذف من هذا الطابور رقمٌ إلا بعد النظر في صورة الصفحة وتسجيل الحكم.
+const queue = [...unverifiedNumbers].sort((a, b) => a.bookId.localeCompare(b.bookId) || a.page - b.page);
+console.log(`\n▌ طابور المراجعة البصرية (${queue.length} رقماً)\n`);
+if (!queue.length) console.log('  لا أرقام بلا سند نصي ولا دليل بصري.');
+for (const item of queue.slice(0, 60)) console.log(`  ${item.bookId} ص${item.page} ${item.field}: ${item.number} (نص الصفحة ${item.integrity})`);
+if (queue.length > 60) console.log(`  …(+${queue.length - 60})`);
 
 console.log('\n▌ الفجوات الحرجة (المرتّبة)\n');
 if (!criticals.length) console.log('  لا فجوة حرجة.');
@@ -829,13 +891,22 @@ const payload = {
   checks: CHECKS.map((entry) => ({ id: entry.id, title: entry.title, books: new Set(entry.findings.map((item) => item.bookId)).size, findings: entry.findings })),
   books: bookReports.map((report) => ({ id: report.id, title: report.title, pages: report.pages, score: report.score(), counts: report.counts(), notes: report.notes, findings: report.findings })),
   criticals,
+  visualReviewQueue: queue,
+  deadLayers: library.notes.deadLayers,
+  duplicates: library.notes.duplicates,
 };
 if (asJson) {
   await writeFile(asJson, JSON.stringify(payload, null, 2), 'utf8');
   console.log(`\n  (JSON: ${asJson})`);
 }
 
-process.exitCode = criticals.length && !noExit ? 1 : 0;
+// البوابة: الفحص الحرج يوقف البناء، والرقم غير المُثبت يوقّفه أيضاً لأنه وصفٌ
+// ينتظر عيناً، والنشر قبل مراجعته نشرٌ لادّعاء بلا برهان.
+const gateBlocked = Boolean(criticals.length) || Boolean(queue.length);
+process.exitCode = gateBlocked && !noExit ? 1 : 0;
+if (gate && !noExit && gateBlocked) {
+  console.log(`\n  البوابة مغلقة: حرج ${criticals.length} · بانتظار مراجعة بصرية ${queue.length}. لا يُنشر الفهرس قبل تصفيرهما.`);
+}
 
 function contradictingOutlinePages(rawText, docByPage) {
   const pages = [];
