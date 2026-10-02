@@ -13,7 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanText } from '../lib/text.mjs';
 import { normalizeDigits } from '../lib/text.mjs';
-import { crossBookDuplicates, deadLayers, foreignUnits, judgeNumbers, noTextPages, titleRepetition } from './validate-rules.mjs';
+import { crossBookDuplicates, deadLayers, driftedDescriptions, foreignUnits, judgeNumbers, noTextPages, titleRepetition } from './validate-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LIB = path.join(ROOT, 'curriculum-library');
@@ -248,6 +248,7 @@ const CHECKS = [
   { id: 'A7', title: 'صفحة بلا نص في الـPDF، وهي تحمل وصفاً في الفهرس' },
   { id: 'B7', title: 'محتوى مخترق/مسرَّب: JSON / CJK / عبري داخل الحقول' },
   { id: 'B8', title: 'أرقام لا يثبتها نص الصفحة (غير مُثبتة ⇒ تحتاج عيناً لا حذفاً)' },
+  { id: 'B14', title: 'وصف صفحة يخصّ صفحة أخرى (كشف لا حكم)' },
   { id: 'B9', title: 'pageType خارج التعداد' },
   { id: 'B10', title: 'إسناد خاطئ: summary/educationalPurpose يذكر كتاباً آخر' },
   { id: 'B11', title: 'اقتباس ديني يحتاج مراجعة (PUA/U+FFFD ⇒ غير صالح للاستشهاد)' },
@@ -507,6 +508,14 @@ for (const [bookId, book] of searchBooks) {
     const layerless = numbers.counts.layerless ? ` · ${numbers.counts.layerless} رقماً في ${blind.empty.length} صفحة بلا طبقة نصّ أصلاً (انظر A7)` : '';
     report.add('high', 'B8', `${numbers.unverified.length} رقم في ${pages.size} صفحة لا يثبته نص الصفحة ⇒ يحتاج مراجعة بصرية لا حذفاً (${numbers.counts.verified} بدليل بصري · ${numbers.counts.structural} ترقيم بنيوي${layerless})`, { samples: numbers.unverified.slice(0, 8) });
     record('B8', bookId, 'high', `${numbers.unverified.length} غير مُثبت${numbers.counts.layerless ? ` · ${numbers.counts.layerless} بلا طبقة نص` : ''}`);
+  }
+
+  // B14 ── انزياح الوصف: مكتشف لا حَكَم، فيُعرض ولا يُحذف
+  const drifted = driftedDescriptions(docs);
+  report.notes.drifted = drifted.length;
+  if (drifted.length) {
+    report.add('medium', 'B14', `${drifted.length} صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (${drifted.slice(0, 3).map((item) => `ص${item.page}`).join('، ')})`, { pages: drifted.slice(0, 10) });
+    record('B14', bookId, 'medium', `${drifted.length} صفحة`);
   }
 
   // B9 ── pageType

@@ -1,0 +1,5682 @@
+{
+  "generatedAt": "2026-10-02T23:18:17.679Z",
+  "searchIndexBuiltAt": "2026-10-02T23:17:36.014Z",
+  "libraryScore": 78,
+  "bookMean": 78.1,
+  "counts": {
+    "critical": 0,
+    "high": 54,
+    "medium": 80,
+    "low": 2
+  },
+  "layers": {
+    "search-index.json": {
+      "exists": true,
+      "mtime": "2026-10-02T23:17:37.294Z",
+      "bytes": 36089232,
+      "olderByHours": 0
+    },
+    "pdf-index.json": {
+      "exists": true,
+      "mtime": "2026-10-02T23:17:20.012Z",
+      "bytes": 7585441,
+      "olderByHours": 0
+    },
+    "outlines": {
+      "exists": true,
+      "mtime": "2026-10-02T23:03:37.701Z",
+      "bytes": 0,
+      "olderByHours": 0.23
+    },
+    "enrichment": {
+      "exists": true,
+      "mtime": "2026-10-01T21:31:16.067Z",
+      "bytes": 0,
+      "olderByHours": 25.77
+    },
+    "fast-index.json": {
+      "exists": true,
+      "mtime": "2026-09-24T20:15:42.139Z",
+      "bytes": 3248808,
+      "olderByHours": 195.03
+    },
+    "catalog.json": {
+      "exists": true,
+      "mtime": "2026-09-24T02:52:53.674Z",
+      "bytes": 87,
+      "olderByHours": 212.41
+    },
+    "index/materials.json": {
+      "exists": true,
+      "mtime": "2026-09-24T02:52:53.691Z",
+      "bytes": 9907,
+      "olderByHours": 212.41
+    },
+    "index/search-index.json": {
+      "exists": true,
+      "mtime": "2026-09-24T02:52:53.762Z",
+      "bytes": 4347744,
+      "olderByHours": 212.41
+    }
+  },
+  "fastIndex": {
+    "version": 1,
+    "builtAt": "2026-09-24T20:15:42.065Z",
+    "books": 12,
+    "pages": 1456,
+    "olderByHours": 195.03,
+    "missingBooks": 9,
+    "chars": 1764056,
+    "indexChars": 2687214,
+    "noiseRows": 21,
+    "noTextRows": 215,
+    "readers": []
+  },
+  "enrichedBooks": 20,
+  "catalog": {
+    "books": 0,
+    "schemaVersion": 2
+  },
+  "materials": {
+    "entries": 12,
+    "schemaVersion": 2
+  },
+  "checks": [
+    {
+      "id": "A1",
+      "title": "اكتمال الصفحات: pagesMissingFromIndex / pagesBeyondPdf",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "A2",
+      "title": "صفحة فيها نص في PDF وفارغة في search-index (عتبة 20 حرفاً)",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "library",
+          "detail": "fast-index.json فيه 215 صف بلا نص («صفحة مصورة»)",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "اقتطاع search-index.text مقابل fullText (حروف مصنع ≠ محتوى)",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "A4",
+      "title": "تلف النص: U+FFFD / رموز PUA / فارسية / «هللا» / محارف غريبة",
+      "books": 17,
+      "findings": [
+        {
+          "bookId": "economics-sixth-literary-pdf",
+          "detail": "5 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "history-sixth-literary-pdf",
+          "detail": "14 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "history-sixth-literary-pdf",
+          "detail": "4 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "geography-sixth-literary-pdf",
+          "detail": "15 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "157 U+FFFD",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "2.5% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "94 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "12.3% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-1-2025",
+          "detail": "6 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-1-2025",
+          "detail": "20.7% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-2-2025",
+          "detail": "5 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-2-2025",
+          "detail": "20.8% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "64 PUA",
+          "severity": "high"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "18 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "2.7% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "3 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "14 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "4.4% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "history-deni-sixth",
+          "detail": "27 PUA",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "6.9% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "2 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "54 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "13.8% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-deni-sixth",
+          "detail": "25 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "84 U+FFFD",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "271 PUA",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "1 الله مشوّه",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "18 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "2855 حرف فارسي",
+          "severity": "medium"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "7.5% محارف غريبة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "fast-index.json فيه 21 صف حاملة لحروف المصنع IRAQ_*.indb",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "A5",
+      "title": "النص غير المرئي المكرر: نسبة تكرار الأسطر داخل الصفحة",
+      "books": 3,
+      "findings": [
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "1 صفحة · ذروة 14.7%",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-1-2025",
+          "detail": "1 صفحة · ذروة 12.5%",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-deni-sixth",
+          "detail": "2 صفحة · ذروة 33.2%",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "A6",
+      "title": "خلط الأعمدة وكسر الأقواس والأسس",
+      "books": 7,
+      "findings": [
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "83 صفحة · 284 كسر",
+          "severity": "high"
+        },
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "3 صفحة · 15 كسر",
+          "severity": "low"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-1-2025",
+          "detail": "38 صفحة · 67 كسر",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-2-2025",
+          "detail": "18 صفحة · 51 كسر",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "52 صفحة · 144 كسر",
+          "severity": "high"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "2 صفحة · 5 كسر",
+          "severity": "low"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "23 صفحة · 45 كسر",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "A7",
+      "title": "صفحة بلا نص في الـPDF، وهي تحمل وصفاً في الفهرس",
+      "books": 7,
+      "findings": [
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "10 بلا نص · 10 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "4 بلا نص · 4 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "1 بلا نص · 1 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-hanafi-deni-sixth",
+          "detail": "45 بلا نص · 45 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "1 بلا نص · 1 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "english-deni-sixth",
+          "detail": "1 بلا نص · 1 بوصف",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "2 بلا نص · 2 بوصف",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "B7",
+      "title": "محتوى مخترق/مسرَّب: JSON / CJK / عبري داخل الحقول",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "B8",
+      "title": "أرقام لا يثبتها نص الصفحة (غير مُثبتة ⇒ تحتاج عيناً لا حذفاً)",
+      "books": 2,
+      "findings": [
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "0 غير مُثبت · 17 بلا طبقة نص",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-hanafi-deni-sixth",
+          "detail": "0 غير مُثبت · 45 بلا طبقة نص",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "title": "وصف صفحة يخصّ صفحة أخرى (كشف لا حكم)",
+      "books": 5,
+      "findings": [
+        {
+          "bookId": "geography-sixth-literary-pdf",
+          "detail": "1 صفحة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-2-2025",
+          "detail": "1 صفحة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "3 صفحة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "1 صفحة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "2 صفحة",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "B9",
+      "title": "pageType خارج التعداد",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "B10",
+      "title": "إسناد خاطئ: summary/educationalPurpose يذكر كتاباً آخر",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "library",
+          "detail": "catalog.json فارغ (books: 0) ولا سكربت في المستودع يولّده",
+          "severity": "high"
+        },
+        {
+          "bookId": "library",
+          "detail": "materials.json لا يذكر 9 كتاباً من 21 (quran-readings-deni-sixth، fiqh-shafii-deni-sixth، fiqh-hanafi-deni-sixth…)",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "title": "اقتباس ديني يحتاج مراجعة (PUA/U+FFFD ⇒ غير صالح للاستشهاد)",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "C12",
+      "title": "تكرار حرفي في summary / educationalPurpose / title",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "C13",
+      "title": "summary قصير جداً مقابل text (نسبة التغطية)",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "C14",
+      "title": "educationalPurpose فارغ/قصير/مكرر",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "C15",
+      "title": "unit فارغ أو وارد من كتاب آخر",
+      "books": 7,
+      "findings": [
+        {
+          "bookId": "english-literature-sixth-pdf",
+          "detail": "0 فارغ · 27 مختلقة",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "7 فارغ · 29 مختلقة",
+          "severity": "high"
+        },
+        {
+          "bookId": "english-literature-teacher-guide-95722f85-pdf",
+          "detail": "0 فارغ · 1 مختلقة",
+          "severity": "high"
+        },
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "2 فارغ · 27 مختلقة",
+          "severity": "high"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "0 فارغ · 12 مختلقة",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "105 فارغ · 0 مختلقة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "10 فارغ · 1 مختلقة",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "title": "section ثابتة على كل الصفحات",
+      "books": 3,
+      "findings": [
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "قيمة واحدة",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "قيمة واحدة",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-hanafi-deni-sixth",
+          "detail": "قيمة واحدة",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "C21",
+      "title": "عنوان الصفحة هو عنوان الكتاب ⇒ الصفحة بلا هوية في الاسترجاع",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "1 صفحة بعنوان الكتاب",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "D17",
+      "title": "printedPage مخمَّن خلاف README (قاعدة ثوابت build-index.mjs)",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "6 صفحة مخمَّنة",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "D18",
+      "title": "طبقة أقدم من مصدرها أو متناقضة معه",
+      "books": 22,
+      "findings": [
+        {
+          "bookId": "english-literature-sixth-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-literature-sixth-pdf",
+          "detail": "1 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "economics-sixth-literary-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "economics-sixth-literary-pdf",
+          "detail": "4 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "history-sixth-literary-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "geography-sixth-literary-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "geography-sixth-literary-pdf",
+          "detail": "3 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-sixth-literary-pdf",
+          "detail": "16 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "islamic-sixth-preparatory-2025",
+          "detail": "93 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-1-2025",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-sixth-preparatory-part-2-2025",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-literature-exercises-sixth-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-literature-teacher-guide-95722f85-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "39 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "pdf-books+outlines",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "60 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "1 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "2 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "fiqh-hanafi-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "history-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "history-deni-sixth",
+          "detail": "1 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "1 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "4 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "english-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "1 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "pdf-books+outlines+enrichment",
+          "severity": "medium"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "2 صفحة متناقضة",
+          "severity": "high"
+        },
+        {
+          "bookId": "library",
+          "detail": "outlines أقدم من search-index بـ0.23 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "enrichment أقدم من search-index بـ25.77 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "fast-index.json أقدم من search-index بـ195.03 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "catalog.json أقدم من search-index بـ212.41 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "index/materials.json أقدم من search-index بـ212.41 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "index/search-index.json أقدم من search-index بـ212.41 ساعة",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "fast-index.json أقدم من search-index بـ195.03 ساعة · 12 كتاب · 1456 صفحة (مقابل 2342) · 9 كتاب غائب · لا يقرأه أي كود (انظر D21)",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "D19",
+      "title": "enrichment غائب و figures/glossary/activities/exercises صفر",
+      "books": 17,
+      "findings": [
+        {
+          "bookId": "english-literature-sixth-pdf",
+          "detail": "exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "history-sixth-literary-pdf",
+          "detail": "figures+glossary+activities+exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "geography-sixth-literary-pdf",
+          "detail": "exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-literature-exercises-sixth-pdf",
+          "detail": "figures+glossary",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-literature-teacher-guide-95722f85-pdf",
+          "detail": "figures+glossary+exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-book-sixth-pdf",
+          "detail": "glossary+activities+exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "enrichment غائب",
+          "severity": "medium"
+        },
+        {
+          "bookId": "student-activity-sixth-pdf",
+          "detail": "figures+glossary+activities+exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "quran-readings-deni-sixth",
+          "detail": "figures+activities",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-shafii-deni-sixth",
+          "detail": "figures+glossary",
+          "severity": "medium"
+        },
+        {
+          "bookId": "fiqh-hanafi-deni-sixth",
+          "detail": "figures+glossary",
+          "severity": "medium"
+        },
+        {
+          "bookId": "history-deni-sixth",
+          "detail": "glossary+activities+exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "arabic-grammar-deni-sixth",
+          "detail": "activities",
+          "severity": "medium"
+        },
+        {
+          "bookId": "balagha-deni-sixth",
+          "detail": "activities",
+          "severity": "medium"
+        },
+        {
+          "bookId": "english-deni-sixth",
+          "detail": "exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "mathematics-deni-sixth",
+          "detail": "figures",
+          "severity": "medium"
+        },
+        {
+          "bookId": "hadith-deni-sixth",
+          "detail": "exercises",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "enrichment يغطي 20 كتاباً من 21 (ناقص 1)",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "id": "D20",
+      "title": "سلامة البصمة: source.checksum و source.bytes مقابل الملف الفعلي",
+      "books": 0,
+      "findings": []
+    },
+    {
+      "id": "D21",
+      "title": "طبقة ميتة: ملف لا يشير إليه أي كود في المشروع",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "library",
+          "detail": "fast-index.json طبقة ميتة: 3.1MB لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ (أقدم بـ195.03 ساعة)",
+          "severity": "high"
+        },
+        {
+          "bookId": "library",
+          "detail": "index/search-index.json طبقة ميتة: 4.1MB لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ (أقدم بـ212.41 ساعة)",
+          "severity": "high"
+        },
+        {
+          "bookId": "library",
+          "detail": "index/materials.json طبقة ميتة: 0.0MB لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ (أقدم بـ212.41 ساعة)",
+          "severity": "high"
+        },
+        {
+          "bookId": "library",
+          "detail": "catalog.json طبقة ميتة: 0.0MB لا يشير إليها أي كود في server.mjs أو lib/ أو public/ أو scripts/ (أقدم بـ212.41 ساعة)",
+          "severity": "high"
+        }
+      ]
+    },
+    {
+      "id": "D22",
+      "title": "تكرار حرفي بين الكتب (نسخ مقصود أم خطأ فهرسة؟)",
+      "books": 1,
+      "findings": [
+        {
+          "bookId": "library",
+          "detail": "28 صفحة متطابقة بين «english-literature-sixth-pdf» و«student-book-sixth-pdf» (إزاحة 90)",
+          "severity": "medium"
+        },
+        {
+          "bookId": "library",
+          "detail": "24 صفحة متطابقة بين «english-literature-exercises-sixth-pdf» و«student-activity-sixth-pdf» (إزاحة 164)",
+          "severity": "medium"
+        }
+      ]
+    }
+  ],
+  "books": [
+    {
+      "id": "english-literature-sixth-pdf",
+      "title": "الأدب الإنكليزي للسادس الإعدادي",
+      "pages": 29,
+      "score": 83,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 29,
+          "index": 29,
+          "declared": 29
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 336,
+          "chars": 56999,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 157,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 0,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 3.45,
+          "purpose": 3.45,
+          "title": 3
+        },
+        "summaryCoverage": {
+          "median": 10.12,
+          "thinPages": 0,
+          "pages": 29
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 3.45
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 2,
+          "foreign": 27,
+          "samples": [
+            {
+              "page": 3,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 75
+            },
+            {
+              "page": 4,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 5,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 6,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 7,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 1,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 28.69
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 187.43
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 31.64
+          }
+        ],
+        "outlineContradiction": 1,
+        "enrichment": {
+          "file": true,
+          "pages": 29,
+          "structured": {
+            "figures": 17,
+            "glossary": 102,
+            "activities": 30,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "a96446f54642",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 0/29 فارغ · 27 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (Literature Focus — Pride and Prejudice | Literature Focus — Pride and Prejudice)",
+          "samples": [
+            {
+              "page": 3,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 75
+            },
+            {
+              "page": 4,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 5,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 6,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (28.69س)، outlines (187.43س)، enrichment (31.64س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "1 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            1
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: exercises"
+        }
+      ]
+    },
+    {
+      "id": "economics-sixth-literary-pdf",
+      "title": "الاقتصاد للصف السادس الإعدادي الأدبي",
+      "pages": 112,
+      "score": 85.5,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 1,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 112,
+          "index": 112,
+          "declared": 112
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 5,
+          "other": 761,
+          "chars": 144372,
+          "pages": 5,
+          "samples": [
+            {
+              "page": 3,
+              "snippet": "المقدمة انطالقا ً من رؤية الفلسفة التربوية الحديثة، تسعى وزا"
+            },
+            {
+              "page": 21,
+              "snippet": "ت- تسهيل انفتاح االقتصادات بعضها على بعض، من خالل تحرير التج"
+            },
+            {
+              "page": 23,
+              "snippet": "المبحث الثالث المفاهيم االقتصادية المعاصرة وهي استعمال مجموع"
+            },
+            {
+              "page": 64,
+              "snippet": "المبحث األول عناصر المالية العامة ودور الحكومة المطلب األول:"
+            },
+            {
+              "page": 108,
+              "snippet": ": ASEAN ثالثاً: رابطة دول جنوب شرق آسيا (آسيان) وهي منظمة اق"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 420,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 6,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.89,
+          "purpose": 0.89,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 11.46,
+          "thinPages": 0,
+          "pages": 111
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 1,
+          "boilerplate": 0.89
+        },
+        "units": {
+          "empty": 6,
+          "distinct": 6,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 33,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 24.58
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 180.95
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 24.67
+          }
+        ],
+        "outlineContradiction": 4,
+        "enrichment": {
+          "file": true,
+          "pages": 112,
+          "structured": {
+            "figures": 34,
+            "glossary": 19,
+            "activities": 23,
+            "exercises": 37
+          }
+        },
+        "checksum": {
+          "recorded": "eb8c8888827e",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "5 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (24.58س)، outlines (180.95س)، enrichment (24.67س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "4 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            1,
+            14,
+            41,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history-sixth-literary-pdf",
+      "title": "التاريخ للصف السادس الإعدادي الأدبي",
+      "pages": 204,
+      "score": 86.5,
+      "counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 3,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 204,
+          "index": 204,
+          "declared": 204
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 4,
+          "allah": 14,
+          "other": 564,
+          "chars": 291383,
+          "pages": 16,
+          "samples": [
+            {
+              "page": 40,
+              "snippet": "٢ - جمعية اإلخاء العربي العثماني :\nبعد انقالب عام 8 ٠ 19م ال"
+            },
+            {
+              "page": 41,
+              "snippet": "4 - الجمعية القحطانية :\nتأسست هذه الجمعية السياسية السرية في"
+            },
+            {
+              "page": 72,
+              "snippet": "وفي أثناء الحصار عمل البريطانيون على اتباع سياسة فرق تسد ، م"
+            },
+            {
+              "page": 77,
+              "snippet": "وإرتأت أن يكون نظام الحكم في العراق ملكي دستوري يتقلد العرش "
+            },
+            {
+              "page": 78,
+              "snippet": "العوامل التي عجلت بقيام ثورة العشرين في العراق :\n1 . الوعود "
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 667,
+          "verified": 43,
+          "structural": 1,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 52,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.49,
+          "purpose": 0.49,
+          "title": 0
+        },
+        "summaryCoverage": {
+          "median": 14.84,
+          "thinPages": 0,
+          "pages": 204
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.49
+        },
+        "units": {
+          "empty": 3,
+          "distinct": 8,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 30,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 2,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.01
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 179.06
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.01
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 204,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 0,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "2974593964f7",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "14 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "4 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.01س)، outlines (179.06س)، enrichment (0.01س)"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary، activities، exercises"
+        }
+      ]
+    },
+    {
+      "id": "geography-sixth-literary-pdf",
+      "title": "الجغرافية للصف السادس الإعدادي الأدبي",
+      "pages": 172,
+      "score": 80.5,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 3,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 172,
+          "index": 172,
+          "declared": 172
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 15,
+          "other": 636,
+          "chars": 284882,
+          "pages": 11,
+          "samples": [
+            {
+              "page": 3,
+              "snippet": "بسم الله الرحمن الرحيم بسم الله الرحمن الرحيم مقـدمـــة ان ت"
+            },
+            {
+              "page": 58,
+              "snippet": "أسئلـــة الفصل الثاني ما العوامل التي تسهم اكثر من غيرها في "
+            },
+            {
+              "page": 62,
+              "snippet": "وعليه كلما طال النهار حصل النبات على الطاقة القصوى من طاقة ا"
+            },
+            {
+              "page": 72,
+              "snippet": "المحاصيل، والسائد من بينها الحبوب التي تختلف باختالف الظروف "
+            },
+            {
+              "page": 77,
+              "snippet": "ولهذا العامل أثره على قلة ما تضيفه تربية الثروة الحيوانية 2-"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 992,
+          "verified": 1,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 1,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 96,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.58,
+          "purpose": 1.16,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 12.42,
+          "thinPages": 0,
+          "pages": 171
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 1.16
+        },
+        "units": {
+          "empty": 7,
+          "distinct": 6,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 21,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 4,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 175.24
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 3,
+        "enrichment": {
+          "file": true,
+          "pages": 172,
+          "structured": {
+            "figures": 26,
+            "glossary": 13,
+            "activities": 9,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "67c3fc0be0bb",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "15 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "B14",
+          "message": "1 صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (ص164)",
+          "pages": [
+            {
+              "page": 164,
+              "title": "مناطق السياحة البيئية في شمال وجنوب العراق",
+              "own": 33.33,
+              "near": 100
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (175.24س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "3 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            10,
+            79,
+            80
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: exercises"
+        }
+      ]
+    },
+    {
+      "id": "mathematics-sixth-literary-pdf",
+      "title": "الرياضيات للصف السادس الإعدادي الأدبي",
+      "pages": 140,
+      "score": 71,
+      "counts": {
+        "critical": 0,
+        "high": 4,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 140,
+          "index": 140,
+          "declared": 140
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 157,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 2326,
+          "chars": 93894,
+          "pages": 33,
+          "samples": [
+            {
+              "page": 5,
+              "snippet": "الف� س ل ا ل ول\nمربهنة ذات احلدين\nBINOMIAL THEOREM\nCOUNTING "
+            },
+            {
+              "page": 7,
+              "snippet": "مثال 2\nاعلن علي احد بائعي البدالت الرجالية ان لديه اكبر تشكي"
+            },
+            {
+              "page": 12,
+              "snippet": "[ 2 - 1 ] ] م�ضروب العدد Factorial\nمثال 1\nليكن لدينا ( n ) ط"
+            },
+            {
+              "page": 31,
+              "snippet": "الف� س ل الثاين\nالغايات وا ل �ستمرارية\nLimits And Continuity"
+            },
+            {
+              "page": 39,
+              "snippet": "N\nمالحظات مهمة في غايات الدوال o\nt\ne\ns\n1 - نحدد مجال الدالة "
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 3.12,
+          "peak": 4.28,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 21,
+              "ratio": 4.28
+            },
+            {
+              "page": 74,
+              "ratio": 1.95
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 83,
+          "hits": 284,
+          "share": 59.29,
+          "samples": [
+            {
+              "page": 5,
+              "hits": 1,
+              "snippet": "] 1 - 1 ["
+            },
+            {
+              "page": 6,
+              "hits": 1,
+              "snippet": "] 1 - 1 ["
+            },
+            {
+              "page": 12,
+              "hits": 2,
+              "snippet": ") n - 1 ("
+            },
+            {
+              "page": 13,
+              "hits": 6,
+              "snippet": ") n - 2 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 1148,
+          "verified": 2,
+          "structural": 3,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 7,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.71,
+          "purpose": 7.14,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 21.22,
+          "thinPages": 0,
+          "pages": 140
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 7.14
+        },
+        "units": {
+          "empty": 7,
+          "distinct": 4,
+          "foreign": 29,
+          "samples": [
+            {
+              "page": 109,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 66.67
+            },
+            {
+              "page": 110,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 33.33
+            },
+            {
+              "page": 111,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 0
+            },
+            {
+              "page": 112,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 33.33
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 47,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 2,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 176.3
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 16,
+        "enrichment": {
+          "file": true,
+          "pages": 140,
+          "structured": {
+            "figures": 16,
+            "glossary": 37,
+            "activities": 15,
+            "exercises": 15
+          }
+        },
+        "checksum": {
+          "recorded": "f0cadbefec67",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "157 محرف تالف U+FFFD في 33 صفحة"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "2.5% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "high",
+          "code": "A6",
+          "message": "83 صفحة (59.3%) فيها كسر أقواس/أسس · 284 موضعاً",
+          "samples": [
+            {
+              "page": 5,
+              "hits": 1,
+              "snippet": "] 1 - 1 ["
+            },
+            {
+              "page": 6,
+              "hits": 1,
+              "snippet": "] 1 - 1 ["
+            },
+            {
+              "page": 12,
+              "hits": 2,
+              "snippet": ") n - 1 ("
+            },
+            {
+              "page": 13,
+              "hits": 6,
+              "snippet": ") n - 2 ("
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 7/140 فارغ · 29 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (الفصل الرابع: التكامل | الفصل الرابع: التكامل)",
+          "samples": [
+            {
+              "page": 109,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 66.67
+            },
+            {
+              "page": 110,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 33.33
+            },
+            {
+              "page": 111,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 0
+            },
+            {
+              "page": 112,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-deni-sixth",
+              "proven": 33.33
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (176.3س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "16 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            1,
+            2,
+            9,
+            11,
+            17,
+            28,
+            38,
+            49,
+            63,
+            74,
+            80,
+            86
+          ]
+        }
+      ]
+    },
+    {
+      "id": "islamic-sixth-preparatory-2025",
+      "title": "القرآن الكريم والتربية الإسلامية للصف السادس الإعدادي",
+      "pages": 164,
+      "score": 71,
+      "counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 4,
+        "low": 1
+      },
+      "notes": {
+        "pages": {
+          "pdf": 164,
+          "index": 164,
+          "declared": 164
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 10,
+          "share": 0.06,
+          "withClaims": 10
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 94,
+          "allah": 0,
+          "other": 24663,
+          "chars": 200204,
+          "pages": 14,
+          "samples": [
+            {
+              "page": 13,
+              "snippet": "المعنى العام ۇئ ۇئ ۆئ ۆئ ۈئ ۈئېئ ېئ ېئ ئى ئى زب ٹ ٹ البقرة: "
+            },
+            {
+              "page": 44,
+              "snippet": "تذكّر أن ّ من اخلير للغاضب ضبط النفس، والسيطرة على األعصاب و"
+            },
+            {
+              "page": 51,
+              "snippet": "ۇئ ۇئ ۆئ ۆئ ۈئ ۈئ ېئ ېئ ېئئى ئى زب ٹ ٹ ئىی یییجئحئمئىئيئجبحب"
+            },
+            {
+              "page": 55,
+              "snippet": "ويدل ّ على . أي صمتا ، وكان من صومهم في شريعتهم ترك الكالم و"
+            },
+            {
+              "page": 61,
+              "snippet": "النور: ٣٦ - ٣٧ ڀٺٺٺٺٿٿٿٿ رب 4- المتحابّان في الله: وقرُب كل "
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 8.62,
+          "peak": 14.7,
+          "pages": 1,
+          "worst": [
+            {
+              "page": 138,
+              "ratio": 14.7
+            },
+            {
+              "page": 107,
+              "ratio": 9.73
+            },
+            {
+              "page": 6,
+              "ratio": 1.44
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 3,
+          "hits": 15,
+          "share": 1.83,
+          "samples": [
+            {
+              "page": 42,
+              "hits": 3,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 44,
+              "hits": 8,
+              "snippet": ") 5 ("
+            },
+            {
+              "page": 164,
+              "hits": 4,
+              "snippet": ") 170 - 153 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 199,
+          "verified": 33,
+          "structural": 8,
+          "layerless": 17,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 52,
+          "samples": []
+        },
+        "religiousUnquotable": 0,
+        "boilerplate": {
+          "summary": 0.61,
+          "purpose": 0.61,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 13.25,
+          "thinPages": 0,
+          "pages": 154
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.61
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 7,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 29,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 2,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 173.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 93,
+        "enrichment": {
+          "file": true,
+          "pages": 164,
+          "structured": {
+            "figures": 6,
+            "glossary": 45,
+            "activities": 2,
+            "exercises": 29
+          }
+        },
+        "checksum": {
+          "recorded": "e6b3f9b6a185",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "10 من 164 صفحة بلا نص (6.0%) · 10 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            24,
+            103,
+            110,
+            116,
+            128,
+            132,
+            133,
+            137,
+            141,
+            150
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "94 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "12.3% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "A5",
+          "message": "1 صفحة فيها نص مكرر داخلها؛ المتوسط 8.6% وأسوأ صفحة 138 بنسبة 14.7%"
+        },
+        {
+          "severity": "low",
+          "code": "A6",
+          "message": "3 صفحة (1.8%) فيها كسر أقواس/أسس · 15 موضعاً",
+          "samples": [
+            {
+              "page": 42,
+              "hits": 3,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 44,
+              "hits": 8,
+              "snippet": ") 5 ("
+            },
+            {
+              "page": 164,
+              "hits": 4,
+              "snippet": ") 170 - 153 ("
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "B8",
+          "message": "0 رقم في 0 صفحة لا يثبته نص الصفحة ⇒ يحتاج مراجعة بصرية لا حذفاً (33 بدليل بصري · 8 ترقيم بنيوي · 17 رقماً في 10 صفحة بلا طبقة نصّ أصلاً (انظر A7))",
+          "samples": []
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (173.97س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "93 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            2,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10,
+            11,
+            14,
+            15,
+            16,
+            17
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arabic-sixth-preparatory-part-1-2025",
+      "title": "اللغة العربية للصف السادس الإعدادي — الجزء الأول",
+      "pages": 164,
+      "score": 84,
+      "counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 4,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 164,
+          "index": 164,
+          "declared": 164
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 6,
+          "other": 50988,
+          "chars": 246774,
+          "pages": 5,
+          "samples": [
+            {
+              "page": 5,
+              "snippet": "الوحدة األولى بَغْداد ُ حَاضِرة ُ الدُّنيا اجلزء األول التَّ"
+            },
+            {
+              "page": 43,
+              "snippet": "الوحدة الثانية ِ التَّضْحِيَة ُ طَرِيق ُ النَّصر اجلزء األول"
+            },
+            {
+              "page": 87,
+              "snippet": "َ فاألمل ُ يظل ُّ حيًّا مع َ االنفتاح ِ على جمال ِ الحياةِ، "
+            },
+            {
+              "page": 106,
+              "snippet": "نعمة المطر / ُ املُطالَعَة : الدَّرْس ُ األوَّلُ ِ ِ المائيَ"
+            },
+            {
+              "page": 162,
+              "snippet": ") 4 ( ْ ل ُ اللَيل ِ عَلَى عَينِيكِ، كَان َّ أو ْ فِي فُؤادِ"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 6.21,
+          "peak": 12.5,
+          "pages": 1,
+          "worst": [
+            {
+              "page": 63,
+              "ratio": 12.5
+            },
+            {
+              "page": 60,
+              "ratio": 3.92
+            },
+            {
+              "page": 53,
+              "ratio": 2.2
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 38,
+          "hits": 67,
+          "share": 23.17,
+          "samples": [
+            {
+              "page": 11,
+              "hits": 1,
+              "snippet": ")، 23 ("
+            },
+            {
+              "page": 16,
+              "hits": 2,
+              "snippet": ") 2،1 ("
+            },
+            {
+              "page": 26,
+              "hits": 1,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 27,
+              "hits": 2,
+              "snippet": ") 2 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 682,
+          "verified": 1,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 16,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.61,
+          "purpose": 0.61,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 12.88,
+          "thinPages": 0,
+          "pages": 164
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.61
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 7,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 24,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 2,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 173.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 164,
+          "structured": {
+            "figures": 5,
+            "glossary": 39,
+            "activities": 82,
+            "exercises": 46
+          }
+        },
+        "checksum": {
+          "recorded": "f3b779e1b8af",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "6 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "20.7% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "A5",
+          "message": "1 صفحة فيها نص مكرر داخلها؛ المتوسط 6.2% وأسوأ صفحة 63 بنسبة 12.5%"
+        },
+        {
+          "severity": "medium",
+          "code": "A6",
+          "message": "38 صفحة (23.2%) فيها كسر أقواس/أسس · 67 موضعاً",
+          "samples": [
+            {
+              "page": 11,
+              "hits": 1,
+              "snippet": ")، 23 ("
+            },
+            {
+              "page": 16,
+              "hits": 2,
+              "snippet": ") 2،1 ("
+            },
+            {
+              "page": 26,
+              "hits": 1,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 27,
+              "hits": 2,
+              "snippet": ") 2 ("
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (173.97س)، enrichment (0.23س)"
+        }
+      ]
+    },
+    {
+      "id": "arabic-sixth-preparatory-part-2-2025",
+      "title": "اللغة العربية للصف السادس الإعدادي — الجزء الثاني",
+      "pages": 112,
+      "score": 84,
+      "counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 4,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 112,
+          "index": 112,
+          "declared": 112
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 5,
+          "other": 36216,
+          "chars": 173999,
+          "pages": 5,
+          "samples": [
+            {
+              "page": 5,
+              "snippet": "ِ فَمِن ْ أجلِها ثار َ ونهض َ وقدَّم َ نفسَه ُ وأهلَه ُ وأصح"
+            },
+            {
+              "page": 6,
+              "snippet": "لمجتمعِنا قبل َ أن ْ يفرضَه ُ علينا الغرب ُ برؤيتِه ِ وفلسفت"
+            },
+            {
+              "page": 29,
+              "snippet": "ِ وقد يتحوّل ُ هذا الطِّفْل ُ إلى رَاشِد ٍ يُفضِّل الشِّدة م"
+            },
+            {
+              "page": 30,
+              "snippet": "فَرَّحَه ُ اللهُ))، وإِدْخال ُ الْفَرْحة ِ على ً ال ْ يَظنُّ"
+            },
+            {
+              "page": 84,
+              "snippet": "ِ أمَّا خصائص ُ المقالة األدبية، فهي الوَحْدة ُ في الموضوعِ،"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 2.66,
+          "peak": 2.66,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 76,
+              "ratio": 2.66
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 18,
+          "hits": 51,
+          "share": 16.07,
+          "samples": [
+            {
+              "page": 14,
+              "hits": 2,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 15,
+              "hits": 2,
+              "snippet": ") 3 ("
+            },
+            {
+              "page": 16,
+              "hits": 2,
+              "snippet": ") 5 ("
+            },
+            {
+              "page": 17,
+              "hits": 1,
+              "snippet": ") 38 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 274,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 1,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 17,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.89,
+          "purpose": 0.89,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 12.39,
+          "thinPages": 0,
+          "pages": 112
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.89
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 8,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 23,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 2,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 24.58
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 175.24
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 27.45
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 112,
+          "structured": {
+            "figures": 5,
+            "glossary": 20,
+            "activities": 54,
+            "exercises": 41
+          }
+        },
+        "checksum": {
+          "recorded": "a7a4b6f4bf2b",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "5 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "20.8% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "A6",
+          "message": "18 صفحة (16.1%) فيها كسر أقواس/أسس · 51 موضعاً",
+          "samples": [
+            {
+              "page": 14,
+              "hits": 2,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 15,
+              "hits": 2,
+              "snippet": ") 3 ("
+            },
+            {
+              "page": 16,
+              "hits": 2,
+              "snippet": ") 5 ("
+            },
+            {
+              "page": 17,
+              "hits": 1,
+              "snippet": ") 38 ("
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "B14",
+          "message": "1 صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (ص86)",
+          "pages": [
+            {
+              "page": 86,
+              "title": "مقالة فرق بين أن تدّعي الجديد وأن تقدر عليه: نقد تبرئة المكا",
+              "own": 16.67,
+              "near": 83.33
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (24.58س)، outlines (175.24س)، enrichment (27.45س)"
+        }
+      ]
+    },
+    {
+      "id": "english-literature-exercises-sixth-pdf",
+      "title": "تمارين الأدب الإنكليزي للسادس الإعدادي",
+      "pages": 24,
+      "score": 95,
+      "counts": {
+        "critical": 0,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 24,
+          "index": 24,
+          "declared": 24
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 179,
+          "chars": 20849,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 197,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 0,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 4.17,
+          "purpose": 4.17,
+          "title": 4
+        },
+        "summaryCoverage": {
+          "median": 24.12,
+          "thinPages": 0,
+          "pages": 24
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 4.17
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 2,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 6,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 28.62
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 0.19
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 31.64
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 24,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 62,
+            "exercises": 62
+          }
+        },
+        "checksum": {
+          "recorded": "18f12a9928f8",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (28.62س)، outlines (0.19س)، enrichment (31.64س)"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary"
+        }
+      ]
+    },
+    {
+      "id": "english-literature-teacher-guide-95722f85-pdf",
+      "title": "دليل مدرس الأدب الإنكليزي — دليل المدرس لمادة الادب انكليزي سادس اعدادي",
+      "pages": 28,
+      "score": 89,
+      "counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 28,
+          "index": 28,
+          "declared": 28
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 338,
+          "chars": 42545,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 4.98,
+          "peak": 5.17,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 17,
+              "ratio": 5.17
+            },
+            {
+              "page": 4,
+              "ratio": 4.79
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 104,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 0,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 3.57,
+          "purpose": 7.14,
+          "title": 4
+        },
+        "summaryCoverage": {
+          "median": 13.79,
+          "thinPages": 0,
+          "pages": 28
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 7.14
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 7,
+          "foreign": 1,
+          "samples": [
+            {
+              "page": 2,
+              "unit": "Literature Focus",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 50
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 8,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 28.96
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 176.3
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 30.25
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 28,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 83,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "79f217b22809",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 0/28 فارغ · 1 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (Literature Focus)",
+          "samples": [
+            {
+              "page": 2,
+              "unit": "Literature Focus",
+              "alsoIn": "student-book-sixth-pdf",
+              "proven": 50
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (28.96س)، outlines (176.3س)، enrichment (30.25س)"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary، exercises"
+        }
+      ]
+    },
+    {
+      "id": "student-book-sixth-pdf",
+      "title": "كتاب الطالب للصف السادس الإعدادي",
+      "pages": 119,
+      "score": 71,
+      "counts": {
+        "critical": 0,
+        "high": 4,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 119,
+          "index": 119,
+          "declared": 119
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 4,
+          "share": 0.03,
+          "withClaims": 4
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 1180,
+          "chars": 186354,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 2.76,
+          "peak": 7.83,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 56,
+              "ratio": 7.83
+            },
+            {
+              "page": 44,
+              "ratio": 4.6
+            },
+            {
+              "page": 62,
+              "ratio": 2.6
+            },
+            {
+              "page": 18,
+              "ratio": 2.04
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 545,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 0,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 2.52,
+          "purpose": 0.84,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 13.28,
+          "thinPages": 0,
+          "pages": 115
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.84
+        },
+        "units": {
+          "empty": 2,
+          "distinct": 24,
+          "foreign": 27,
+          "samples": [
+            {
+              "page": 93,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 75
+            },
+            {
+              "page": 94,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 95,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 96,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 51,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 6,
+          "samples": [
+            53,
+            54,
+            65,
+            66,
+            77,
+            78
+          ]
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 29.58
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 173.48
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 29.87
+          }
+        ],
+        "outlineContradiction": 39,
+        "enrichment": {
+          "file": true,
+          "pages": 19,
+          "structured": {
+            "figures": 38,
+            "glossary": 0,
+            "activities": 0,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "6212d79f5e5f",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "4 من 119 صفحة بلا نص (3.0%) · 4 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            41,
+            53,
+            65,
+            77
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 2/119 فارغ · 27 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (Literature Focus — Pride and Prejudice | Literature Focus — Pride and Prejudice)",
+          "samples": [
+            {
+              "page": 93,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 75
+            },
+            {
+              "page": 94,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 0
+            },
+            {
+              "page": 95,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 96,
+              "unit": "Literature Focus — Pride and Prejudice",
+              "alsoIn": "english-literature-sixth-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "D17",
+          "message": "6 صفحة رقمها المطبوع مخمَّن من قاعدة الثوابت في build-index.mjs:130-141 (وREADME ينصّ على أن الفهرس لا يخمنه)"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (29.58س)، outlines (173.48س)، enrichment (29.87س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "39 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            1,
+            12,
+            24,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: glossary، activities، exercises"
+        }
+      ]
+    },
+    {
+      "id": "student-activity-sixth-pdf",
+      "title": "كتاب النشاط للصف السادس الإعدادي",
+      "pages": 188,
+      "score": 74.5,
+      "counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 3,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 188,
+          "index": 188,
+          "declared": 188
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 64,
+          "persian": 0,
+          "allah": 0,
+          "other": 2591,
+          "chars": 204785,
+          "pages": 23,
+          "samples": [
+            {
+              "page": 1,
+              "snippet": "Unit 1 4 2 Match what each person is saying to the correct p"
+            },
+            {
+              "page": 2,
+              "snippet": "Unit 1 5 Study Tip – words with similar meanings are not alw"
+            },
+            {
+              "page": 3,
+              "snippet": "Unit 1 6 1 Discuss with a partner what is happening in each "
+            },
+            {
+              "page": 6,
+              "snippet": "Unit 1 9 C Close your books. Retell the story, taking turns "
+            },
+            {
+              "page": 7,
+              "snippet": "Unit 1 10 1 Read the texts below and choose the correct figu"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 2.15,
+          "peak": 2.64,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 112,
+              "ratio": 2.64
+            },
+            {
+              "page": 145,
+              "ratio": 1.98
+            },
+            {
+              "page": 136,
+              "ratio": 1.83
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 747,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 15,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.53,
+          "purpose": 0.53,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 17.88,
+          "thinPages": 0,
+          "pages": 188
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.53
+        },
+        "units": {
+          "empty": 0,
+          "distinct": 9,
+          "foreign": 12,
+          "samples": [
+            {
+              "page": 166,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 168,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 170,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 172,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 88,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 29.55
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 0.2
+          }
+        ],
+        "outlineContradiction": 60,
+        "enrichment": {
+          "file": false,
+          "pages": 0,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 0,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "23dde734e922",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "64 رمز PUA خاص في 23 صفحة"
+        },
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 0/188 فارغ · 12 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (Literature Focus | Literature Focus)",
+          "samples": [
+            {
+              "page": 166,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 168,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 170,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            },
+            {
+              "page": 172,
+              "unit": "Literature Focus",
+              "alsoIn": "english-literature-teacher-guide-95722f85-pdf",
+              "proven": 0
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (29.55س)، outlines (0.2س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "60 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            93,
+            99,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "لا ملف enrichment لهذا الكتاب"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary، activities، exercises"
+        }
+      ]
+    },
+    {
+      "id": "quran-readings-deni-sixth",
+      "title": "مباحث القراءات القرآنية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+      "pages": 63,
+      "score": 69.5,
+      "counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 5,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 63,
+          "index": 63,
+          "declared": 63
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 1,
+          "share": 0.02,
+          "withClaims": 1
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 18,
+          "allah": 0,
+          "other": 1612,
+          "chars": 59646,
+          "pages": 11,
+          "samples": [
+            {
+              "page": 2,
+              "snippet": "قسم ا∏ناهج والتطوير\n۱ ًأ.م.د عمار الخالدي رئیسا\n۲ أ.م.د عثما"
+            },
+            {
+              "page": 4,
+              "snippet": "فھرس المحتویات\nالصفحة املوضوع الوحدة\n٢ علم توجيه القراءات ال"
+            },
+            {
+              "page": 8,
+              "snippet": "الذين عاصروا إن ّ علم التوجيه أول ما بدأ اجتهادات فردية من ك"
+            },
+            {
+              "page": 22,
+              "snippet": "هاء الكناية في عُرف القرّاء: هي هاء يُكنّى بها عن المفرد الم"
+            },
+            {
+              "page": 25,
+              "snippet": "الزيادة. قال ابن فارس )ت٣٩٥هـ(: )الميم والدال أصل واحد يدل ا"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 3.84,
+          "peak": 4.03,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 59,
+              "ratio": 4.03
+            },
+            {
+              "page": 10,
+              "ratio": 3.65
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 246,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 3,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 1,
+          "samples": []
+        },
+        "religiousUnquotable": 0,
+        "boilerplate": {
+          "summary": 1.59,
+          "purpose": 1.59,
+          "title": 2
+        },
+        "summaryCoverage": {
+          "median": 15.38,
+          "thinPages": 0,
+          "pages": 62
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 2,
+          "boilerplate": 1.59
+        },
+        "units": {
+          "empty": 6,
+          "distinct": 4,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 1,
+          "value": "القرآن وعلومه — مباحث القراءات"
+        },
+        "printedPage": {
+          "nulls": 5,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 24.58
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.98
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 27.5
+          }
+        ],
+        "outlineContradiction": 1,
+        "enrichment": {
+          "file": true,
+          "pages": 63,
+          "structured": {
+            "figures": 0,
+            "glossary": 33,
+            "activities": 0,
+            "exercises": 7
+          }
+        },
+        "checksum": {
+          "recorded": "3fb3cb479bf4",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "1 من 63 صفحة بلا نص (2.0%) · 1 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            63
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "18 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "2.7% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "B14",
+          "message": "3 صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (ص9، ص11، ص48)",
+          "pages": [
+            {
+              "page": 9,
+              "title": "توجيه ابن عباس لقراءة ننشرها وردّ أم المؤمنين",
+              "own": 20,
+              "near": 80
+            },
+            {
+              "page": 11,
+              "title": "مؤلفات التوجيه: كتب معاني القرآن والتفسير وشروح الشاطبية",
+              "own": 33.33,
+              "near": 83.33
+            },
+            {
+              "page": 48,
+              "title": "قراءة حفص بالياء في يهدي على أصل يهدى",
+              "own": 25,
+              "near": 75
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "C16",
+          "message": "section واحدة فقط على 63 صفحة («القرآن وعلومه — مباحث القراءات»)"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (24.58س)، outlines (104.98س)، enrichment (27.5س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "1 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            3
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، activities"
+        }
+      ]
+    },
+    {
+      "id": "fiqh-shafii-deni-sixth",
+      "title": "الفقه الإسلامي — كتاب الطالب — الصف السادس الإعدادي الإسلامي (الشافعي)",
+      "pages": 106,
+      "score": 69.5,
+      "counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 5,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 106,
+          "index": 106,
+          "declared": 106
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 14,
+          "allah": 3,
+          "other": 4548,
+          "chars": 102255,
+          "pages": 6,
+          "samples": [
+            {
+              "page": 2,
+              "snippet": "قسم الناهج والتطوير\n۱ ًد۰إحسان علي عمران رئیسا\n۲ د۰علي جاسم "
+            },
+            {
+              "page": 4,
+              "snippet": "فھرس المحتویات\nالصفحة الوضوع الوحدة\n٢ فقه اجلنايات الوحدة ال"
+            },
+            {
+              "page": 29,
+              "snippet": "األمر باجتناب اخلمر حتذير من جميع وجوه التعامل\nبه حتضيراً، و"
+            },
+            {
+              "page": 31,
+              "snippet": "أخذ المال خفية. السرقة في اللغة:\nأخذ مال الغير خفية ظلما ً م"
+            },
+            {
+              "page": 46,
+              "snippet": "الثالث: الجهاد بالنفس: وهو على نوعين:\nهو الذي يقوم به المسلم"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 4.84,
+          "peak": 7.29,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 62,
+              "ratio": 7.29
+            },
+            {
+              "page": 102,
+              "ratio": 5.49
+            },
+            {
+              "page": 100,
+              "ratio": 5
+            },
+            {
+              "page": 45,
+              "ratio": 1.59
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 408,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 1,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 2,
+          "samples": []
+        },
+        "religiousUnquotable": 0,
+        "boilerplate": {
+          "summary": 0.94,
+          "purpose": 0.94,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 15.59,
+          "thinPages": 0,
+          "pages": 106
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 5,
+          "boilerplate": 0.94
+        },
+        "units": {
+          "empty": 6,
+          "distinct": 8,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 1,
+          "value": "الفقه الإسلامي الثاني"
+        },
+        "printedPage": {
+          "nulls": 5,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.98
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 2,
+        "enrichment": {
+          "file": true,
+          "pages": 106,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 59,
+            "exercises": 40
+          }
+        },
+        "checksum": {
+          "recorded": "7d876cd6d140",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "3 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "14 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "4.4% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "B14",
+          "message": "1 صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (ص33)",
+          "pages": [
+            {
+              "page": 33,
+              "title": "ضمان المال المسروق",
+              "own": 33.33,
+              "near": 100
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "C16",
+          "message": "section واحدة فقط على 106 صفحة («الفقه الإسلامي الثاني»)"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (104.98س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "2 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            3,
+            106
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary"
+        }
+      ]
+    },
+    {
+      "id": "fiqh-hanafi-deni-sixth",
+      "title": "الحدود والجنايات والأيمان والنذر في الفقه الحنفي — الصف السادس",
+      "pages": 45,
+      "score": 80.5,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 3,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 45,
+          "index": 45,
+          "declared": 45
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 45,
+          "share": 1,
+          "withClaims": 45
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 0,
+          "chars": 0,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 2,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 45,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 1,
+          "samples": []
+        },
+        "religiousUnquotable": 0,
+        "boilerplate": {
+          "summary": 46.67,
+          "purpose": 46.67,
+          "title": 47
+        },
+        "summaryCoverage": {
+          "median": 0,
+          "thinPages": 0,
+          "pages": 0
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 46.67
+        },
+        "units": {
+          "empty": 7,
+          "distinct": 11,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 1,
+          "value": "الفقه الحنفي (إضافي)"
+        },
+        "printedPage": {
+          "nulls": 1,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.98
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 45,
+          "structured": {
+            "figures": 0,
+            "glossary": 0,
+            "activities": 1,
+            "exercises": 35
+          }
+        },
+        "checksum": {
+          "recorded": "617c5d8efb39",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "45 من 45 صفحة بلا نص (100.0%) · 45 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "B8",
+          "message": "0 رقم في 0 صفحة لا يثبته نص الصفحة ⇒ يحتاج مراجعة بصرية لا حذفاً (0 بدليل بصري · 0 ترقيم بنيوي · 45 رقماً في 45 صفحة بلا طبقة نصّ أصلاً (انظر A7))",
+          "samples": []
+        },
+        {
+          "severity": "medium",
+          "code": "C16",
+          "message": "section واحدة فقط على 45 صفحة («الفقه الحنفي (إضافي)»)"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (104.98س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures، glossary"
+        }
+      ]
+    },
+    {
+      "id": "history-deni-sixth",
+      "title": "تاريخ العالم الإسلامي الحديث والمعاصر — الصف السادس الإعدادي الإسلامي",
+      "pages": 140,
+      "score": 83,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 2,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 140,
+          "index": 140,
+          "declared": 140
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 27,
+          "persian": 0,
+          "allah": 0,
+          "other": 1576,
+          "chars": 145591,
+          "pages": 6,
+          "samples": [
+            {
+              "page": 82,
+              "snippet": "كيخػػػتص المجمػػػس بحسػػػب المػػػادة الثالثػػػػة مػػػف الميث"
+            },
+            {
+              "page": 84,
+              "snippet": "كيحدد النظاـ األساسي مياـ األميف العاـ عمى النحك االتي :\n ا"
+            },
+            {
+              "page": 87,
+              "snippet": "الػػدكؿ األعضػػاء طرفػػا فييػػا . كقػػد اتخػػذت المنظمػػة خط"
+            },
+            {
+              "page": 88,
+              "snippet": " تعزيز التعاكف االقتصادم م كالتجار بيف الػدكؿ اإلسػبلمية مػ"
+            },
+            {
+              "page": 89,
+              "snippet": " تتعيػػد الػػدكؿ األعضػػاء اـ جميعػػان بػػاحتر السػػيادة ال"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 2.72,
+          "peak": 2.72,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 75,
+              "ratio": 2.72
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 298,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 5,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.71,
+          "purpose": 16.43,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 38.62,
+          "thinPages": 0,
+          "pages": 140
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 6,
+          "boilerplate": 16.43
+        },
+        "units": {
+          "empty": 3,
+          "distinct": 7,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 21,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 31.13
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.98
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 31.63
+          }
+        ],
+        "outlineContradiction": 1,
+        "enrichment": {
+          "file": true,
+          "pages": 140,
+          "structured": {
+            "figures": 6,
+            "glossary": 0,
+            "activities": 0,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "e582c6f1d4ca",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "27 رمز PUA خاص في 6 صفحة"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (31.13س)، outlines (104.98س)، enrichment (31.63س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "1 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            1
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: glossary، activities، exercises"
+        }
+      ]
+    },
+    {
+      "id": "arabic-grammar-deni-sixth",
+      "title": "النحو الواضح في قواعد اللغة العربية — الصف السادس الإعدادي الإسلامي",
+      "pages": 105,
+      "score": 69.5,
+      "counts": {
+        "critical": 0,
+        "high": 3,
+        "medium": 5,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 105,
+          "index": 105,
+          "declared": 105
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 1,
+          "share": 0.01,
+          "withClaims": 1
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 0,
+          "allah": 0,
+          "other": 6683,
+          "chars": 97502,
+          "pages": 0,
+          "samples": []
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 52,
+          "hits": 144,
+          "share": 49.52,
+          "samples": [
+            {
+              "page": 7,
+              "hits": 3,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 8,
+              "hits": 1,
+              "snippet": ") 4 ("
+            },
+            {
+              "page": 10,
+              "hits": 11,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 12,
+              "hits": 1,
+              "snippet": ") 1 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 572,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 0,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 0.95,
+          "purpose": 0.95,
+          "title": 2
+        },
+        "summaryCoverage": {
+          "median": 16.75,
+          "thinPages": 0,
+          "pages": 104
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 0.95
+        },
+        "units": {
+          "empty": 105,
+          "distinct": 0,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 30,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 4,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 24.58
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 25.42
+          }
+        ],
+        "outlineContradiction": 1,
+        "enrichment": {
+          "file": true,
+          "pages": 91,
+          "structured": {
+            "figures": 4,
+            "glossary": 52,
+            "activities": 0,
+            "exercises": 117
+          }
+        },
+        "checksum": {
+          "recorded": "9cfc49514b49",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "1 من 105 صفحة بلا نص (1.0%) · 1 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            2
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "6.9% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "high",
+          "code": "A6",
+          "message": "52 صفحة (49.5%) فيها كسر أقواس/أسس · 144 موضعاً",
+          "samples": [
+            {
+              "page": 7,
+              "hits": 3,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 8,
+              "hits": 1,
+              "snippet": ") 4 ("
+            },
+            {
+              "page": 10,
+              "hits": 11,
+              "snippet": ") 1 ("
+            },
+            {
+              "page": 12,
+              "hits": 1,
+              "snippet": ") 1 ("
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "C21",
+          "message": "1 من 105 صفحة تحمل عنوان الكتاب («النحو الواضح في قواعد اللغة العربية — ال») فلا تُميَّز في الاسترجاع",
+          "pages": [
+            26
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "C15",
+          "message": "unit: 105/105 فارغ · 0 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر",
+          "samples": []
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (24.58س)، outlines (104.97س)، enrichment (25.42س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "1 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            4
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: activities"
+        }
+      ]
+    },
+    {
+      "id": "balagha-deni-sixth",
+      "title": "البلاغة العربية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+      "pages": 59,
+      "score": 77,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 4,
+        "low": 1
+      },
+      "notes": {
+        "pages": {
+          "pdf": 59,
+          "index": 59,
+          "declared": 59
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 54,
+          "allah": 2,
+          "other": 7643,
+          "chars": 55429,
+          "pages": 12,
+          "samples": [
+            {
+              "page": 2,
+              "snippet": "قسم ا∏ناهج والتطوير\n۱ علي صالح عبد الفتاح الجارم\n۲ مصطفى أمی"
+            },
+            {
+              "page": 8,
+              "snippet": "وإليكُم مَجْمُوعَة مِن َ االرْشَادَات ِ التي نَرى أنَّها تُس"
+            },
+            {
+              "page": 17,
+              "snippet": "مترينـــات\n: في كل ِّ مثال ٍ من َ األمثلة اآلتية جناس ٌ تامٌ"
+            },
+            {
+              "page": 21,
+              "snippet": "مترينـــات\n: بيِّن ْ في كل ِّ اقتباس مما يأتي حُسْن ُ تأتَّي"
+            },
+            {
+              "page": 22,
+              "snippet": ": اقتبس ِ اآليات ِ الكريمة َ اآلتية َ مع إجادة االقتباس وإِح"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 0,
+          "peak": 0,
+          "pages": 0,
+          "worst": []
+        },
+        "brokenMath": {
+          "pages": 2,
+          "hits": 5,
+          "share": 3.39,
+          "samples": [
+            {
+              "page": 24,
+              "hits": 4,
+              "snippet": "] 30 - 28 ["
+            },
+            {
+              "page": 34,
+              "hits": 1,
+              "snippet": "] 7 - 6 ["
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 226,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 4,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 1.69,
+          "purpose": 1.69,
+          "title": 3
+        },
+        "summaryCoverage": {
+          "median": 29.35,
+          "thinPages": 0,
+          "pages": 59
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 1.69
+        },
+        "units": {
+          "empty": 12,
+          "distinct": 2,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 18,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 5,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 4,
+        "enrichment": {
+          "file": true,
+          "pages": 36,
+          "structured": {
+            "figures": 6,
+            "glossary": 22,
+            "activities": 0,
+            "exercises": 39
+          }
+        },
+        "checksum": {
+          "recorded": "1775e172f013",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "2 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "54 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "13.8% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "low",
+          "code": "A6",
+          "message": "2 صفحة (3.4%) فيها كسر أقواس/أسس · 5 موضعاً",
+          "samples": [
+            {
+              "page": 24,
+              "hits": 4,
+              "snippet": "] 30 - 28 ["
+            },
+            {
+              "page": 34,
+              "hits": 1,
+              "snippet": "] 7 - 6 ["
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (104.97س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "4 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            3,
+            13,
+            26,
+            59
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: activities"
+        }
+      ]
+    },
+    {
+      "id": "english-deni-sixth",
+      "title": "English Course for Iraqi Islamic Schools — Student's Book (6)",
+      "pages": 129,
+      "score": 80.5,
+      "counts": {
+        "critical": 0,
+        "high": 2,
+        "medium": 3,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 129,
+          "index": 129,
+          "declared": 129
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 1,
+          "share": 0.01,
+          "withClaims": 1
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 25,
+          "allah": 0,
+          "other": 709,
+          "chars": 97116,
+          "pages": 8,
+          "samples": [
+            {
+              "page": 33,
+              "snippet": "UNIT FOUR 4\nUNIT FOUR\n((for writing))\nللخط فقط\nزب ڤ ڤڤڦڦڦڦڄڄ"
+            },
+            {
+              "page": 52,
+              "snippet": "UNIT SIX 6\nUNIT SIX\n(For writing)\nللخط فقط\nڦڄڄڄڄڃڃڃ ڃچچچ زب\n"
+            },
+            {
+              "page": 61,
+              "snippet": "UNIT SEVEN 7\nUNIT SEVEN\n(For memorizing)\nللحفظ\nرب ڎڎڈڈ ژژ ڑڑ"
+            },
+            {
+              "page": 70,
+              "snippet": "UNIT EIGHT 8\nUNIT EIGHT\n(For writing)\nللخط فقط\nڻڻڻڻۀۀ ہہہ چ\n"
+            },
+            {
+              "page": 80,
+              "snippet": "UNIT NINE 9\nUNIT NINE\n(For memorizing)\nللحفظ\nچ چچچڇڇڇڇڍڍڌڌ چ"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 14.51,
+          "peak": 33.15,
+          "pages": 2,
+          "worst": [
+            {
+              "page": 3,
+              "ratio": 33.15
+            },
+            {
+              "page": 2,
+              "ratio": 32.69
+            },
+            {
+              "page": 16,
+              "ratio": 8.68
+            },
+            {
+              "page": 128,
+              "ratio": 5.17
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 553,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 8,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 1.55,
+          "purpose": 3.1,
+          "title": 5
+        },
+        "summaryCoverage": {
+          "median": 17.19,
+          "thinPages": 0,
+          "pages": 116
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 9,
+          "boilerplate": 3.1
+        },
+        "units": {
+          "empty": 7,
+          "distinct": 12,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 18,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 5,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 30.96
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 30.42
+          }
+        ],
+        "outlineContradiction": 0,
+        "enrichment": {
+          "file": true,
+          "pages": 48,
+          "structured": {
+            "figures": 17,
+            "glossary": 286,
+            "activities": 75,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "f55f8a37d744",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "1 من 129 صفحة بلا نص (1.0%) · 1 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            129
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "25 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "high",
+          "code": "A5",
+          "message": "2 صفحة فيها نص مكرر داخلها؛ المتوسط 14.5% وأسوأ صفحة 3 بنسبة 33.2%"
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (30.96س)، outlines (104.97س)، enrichment (30.42س)"
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: exercises"
+        }
+      ]
+    },
+    {
+      "id": "mathematics-deni-sixth",
+      "title": "الرياضيات للصف السادس الثانوي — ديوان الوقف السني",
+      "pages": 80,
+      "score": 54,
+      "counts": {
+        "critical": 0,
+        "high": 6,
+        "medium": 4,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 80,
+          "index": 80,
+          "declared": 80
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 2,
+          "share": 0.03,
+          "withClaims": 2
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 84,
+          "pua": 271,
+          "persian": 18,
+          "allah": 1,
+          "other": 881,
+          "chars": 54427,
+          "pages": 52,
+          "samples": [
+            {
+              "page": 3,
+              "snippet": "چ جت حتختمت ىتيتجث\nمثىثيثحج مججحمح چ\nالجن: ٨٢\nصدق الله العظي"
+            },
+            {
+              "page": 5,
+              "snippet": "\nالحمد هلل والصالة والسالم على سيدنا محمد رسول الله وعلى آل"
+            },
+            {
+              "page": 10,
+              "snippet": "ٹ ٹ چ ڌڌڎڎ ڈ ڈ ژژڑ ڑ ککک\nکگگ گگ ڳڳ ڳ ڳڱڱڱڱ چ اإلسراء .\nأن مع"
+            },
+            {
+              "page": 11,
+              "snippet": "الفصل األول: مبدأ العدّ والتباديل والتوافيق\nمثااال 3 : كاام "
+            },
+            {
+              "page": 12,
+              "snippet": "الفصل األول: مبدأ العدّ والتباديل والتوافيق\nمثال 5 : وعاء يح"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 3.6,
+          "peak": 3.6,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 51,
+              "ratio": 3.6
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 23,
+          "hits": 45,
+          "share": 28.75,
+          "samples": [
+            {
+              "page": 17,
+              "hits": 1,
+              "snippet": ") 4 - 6 ("
+            },
+            {
+              "page": 20,
+              "hits": 1,
+              "snippet": ") / 2 × 1\n("
+            },
+            {
+              "page": 24,
+              "hits": 1,
+              "snippet": ") 42 ("
+            },
+            {
+              "page": 34,
+              "hits": 1,
+              "snippet": ")\n5 + ) 2 ("
+            }
+          ]
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 664,
+          "verified": 1,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 0,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 2,
+          "samples": []
+        },
+        "boilerplate": {
+          "summary": 1.25,
+          "purpose": 11.25,
+          "title": 1
+        },
+        "summaryCoverage": {
+          "median": 19.47,
+          "thinPages": 0,
+          "pages": 77
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 11.25
+        },
+        "units": {
+          "empty": 10,
+          "distinct": 4,
+          "foreign": 1,
+          "samples": [
+            {
+              "page": 67,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-sixth-literary-pdf",
+              "proven": 33.33
+            }
+          ]
+        },
+        "sections": {
+          "distinct": 27,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 0,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 0.23
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 0.23
+          }
+        ],
+        "outlineContradiction": 1,
+        "enrichment": {
+          "file": true,
+          "pages": 80,
+          "structured": {
+            "figures": 0,
+            "glossary": 13,
+            "activities": 8,
+            "exercises": 8
+          }
+        },
+        "checksum": {
+          "recorded": "ac4646e7e4ba",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "high",
+          "code": "A7",
+          "message": "2 من 80 صفحة بلا نص (3.0%) · 2 منها تحمل title/summary بلا سند نصي",
+          "pages": [
+            4,
+            6
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "84 محرف تالف U+FFFD في 52 صفحة"
+        },
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "271 رمز PUA خاص في 52 صفحة"
+        },
+        {
+          "severity": "high",
+          "code": "A4",
+          "message": "1 موضع «الله» مشوّه (هللا/أهلل)"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "18 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A6",
+          "message": "23 صفحة (28.8%) فيها كسر أقواس/أسس · 45 موضعاً",
+          "samples": [
+            {
+              "page": 17,
+              "hits": 1,
+              "snippet": ") 4 - 6 ("
+            },
+            {
+              "page": 20,
+              "hits": 1,
+              "snippet": ") / 2 × 1\n("
+            },
+            {
+              "page": 24,
+              "hits": 1,
+              "snippet": ") 42 ("
+            },
+            {
+              "page": 34,
+              "hits": 1,
+              "snippet": ")\n5 + ) 2 ("
+            }
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "C15",
+          "message": "unit: 10/80 فارغ · 1 اسم وحدة لا يثبته نص الصفحة ويشترك فيه كتاب آخر (الفصل الرابع: التكامل)",
+          "samples": [
+            {
+              "page": 67,
+              "unit": "الفصل الرابع: التكامل",
+              "alsoIn": "mathematics-sixth-literary-pdf",
+              "proven": 33.33
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (0.23س)، outlines (104.97س)، enrichment (0.23س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "1 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            51
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: figures"
+        }
+      ]
+    },
+    {
+      "id": "hadith-deni-sixth",
+      "title": "الحديث النبوي الشريف وعلومه — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+      "pages": 159,
+      "score": 81.5,
+      "counts": {
+        "critical": 0,
+        "high": 1,
+        "medium": 5,
+        "low": 0
+      },
+      "notes": {
+        "pages": {
+          "pdf": 159,
+          "index": 159,
+          "declared": 159
+        },
+        "textLost": 0,
+        "noText": {
+          "empty": 0,
+          "share": 0,
+          "withClaims": 0
+        },
+        "truncation": {
+          "pages": 0,
+          "lostShare": 0,
+          "samples": []
+        },
+        "corruption": {
+          "replacement": 0,
+          "pua": 0,
+          "persian": 2855,
+          "allah": 0,
+          "other": 9628,
+          "chars": 128208,
+          "pages": 103,
+          "samples": [
+            {
+              "page": 8,
+              "snippet": "قالَ: قال رَسُــول الله صلى الله عليه وسلم عَــن ْ حَكيــم ب"
+            },
+            {
+              "page": 9,
+              "snippet": "أَهَم ُ مَا يُرْشِد ُ إِلَيْه ِ الْحَدِيث\nشیئا ً من أسباب ال"
+            },
+            {
+              "page": 10,
+              "snippet": ")البیعان بالخیار ما لم یتفرقا(؟ صلى الله عليه وسلم ۱- عرف مج"
+            },
+            {
+              "page": 12,
+              "snippet": "صلى الله عليه وسلم ّ انلَّيب قال: صلى الله عليه وسلم بن جَاب"
+            },
+            {
+              "page": 13,
+              "snippet": "أَهَم ُ مَا يُرْشِد ُ إِلَيْه ِ الْحَدِيث\nأَهَم ُ مَا يُرْشِ"
+            }
+          ]
+        },
+        "duplicateLines": {
+          "mean": 3.98,
+          "peak": 5.54,
+          "pages": 0,
+          "worst": [
+            {
+              "page": 153,
+              "ratio": 5.54
+            },
+            {
+              "page": 52,
+              "ratio": 4.37
+            },
+            {
+              "page": 71,
+              "ratio": 4.15
+            },
+            {
+              "page": 13,
+              "ratio": 3.28
+            }
+          ]
+        },
+        "brokenMath": {
+          "pages": 0,
+          "hits": 0,
+          "share": 0,
+          "samples": []
+        },
+        "leaks": {
+          "json": 0,
+          "cjk": 0,
+          "hebrew": 0,
+          "samples": []
+        },
+        "numbers": {
+          "proven": 904,
+          "verified": 0,
+          "structural": 0,
+          "layerless": 0,
+          "unverified": 0,
+          "integrity": {}
+        },
+        "drifted": 2,
+        "pageTypes": {
+          "badTotal": 0,
+          "kinds": 0,
+          "top": []
+        },
+        "misattributed": {
+          "count": 0,
+          "crossReferences": 2,
+          "samples": []
+        },
+        "religiousUnquotable": 0,
+        "boilerplate": {
+          "summary": 1.26,
+          "purpose": 2.52,
+          "title": 3
+        },
+        "summaryCoverage": {
+          "median": 14.63,
+          "thinPages": 0,
+          "pages": 159
+        },
+        "educationalPurpose": {
+          "empty": 0,
+          "short": 0,
+          "boilerplate": 2.52
+        },
+        "units": {
+          "empty": 7,
+          "distinct": 40,
+          "foreign": 0,
+          "samples": []
+        },
+        "sections": {
+          "distinct": 41,
+          "value": null
+        },
+        "printedPage": {
+          "nulls": 6,
+          "guessed": 0,
+          "samples": []
+        },
+        "staleLayers": [
+          {
+            "layer": "pdf-books",
+            "olderByHours": 28.96
+          },
+          {
+            "layer": "outlines",
+            "olderByHours": 104.97
+          },
+          {
+            "layer": "enrichment",
+            "olderByHours": 30.49
+          }
+        ],
+        "outlineContradiction": 2,
+        "enrichment": {
+          "file": true,
+          "pages": 159,
+          "structured": {
+            "figures": 80,
+            "glossary": 120,
+            "activities": 615,
+            "exercises": 0
+          }
+        },
+        "checksum": {
+          "recorded": "db65314579d6",
+          "matched": true
+        }
+      },
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "2855 حرف فارسي/پاكستاني في النص"
+        },
+        {
+          "severity": "medium",
+          "code": "A4",
+          "message": "7.5% من المحارف خارج العربية/اللاتينية/الرقم"
+        },
+        {
+          "severity": "medium",
+          "code": "B14",
+          "message": "2 صفحة وصفها يشبه صفحة مجاورة أكثر من صفحتها (ص94، ص104)",
+          "pages": [
+            {
+              "page": 94,
+              "title": "حديث تحريم الربيبة وأخت الزوجة: أنشطة الدرس وأسئلته",
+              "own": 16.67,
+              "near": 83.33
+            },
+            {
+              "page": 104,
+              "title": "حديث وجوب تغيير المنكر: شرح الحديث وتوضيح ألفاظه",
+              "own": 33.33,
+              "near": 83.33
+            }
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D18",
+          "message": "طبقات أقدم من search-index: pdf-books (28.96س)، outlines (104.97س)، enrichment (30.49س)"
+        },
+        {
+          "severity": "high",
+          "code": "D18",
+          "message": "2 صفحة يقول فيها الـoutline «لا نص/لا يمكن الإجابة» وفي search-index نص كامل",
+          "pages": [
+            3,
+            159
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "D19",
+          "message": "محتوى منظّم صفري: exercises"
+        }
+      ]
+    }
+  ],
+  "criticals": [],
+  "visualReviewQueue": [],
+  "deadLayers": [
+    {
+      "layer": "fast-index.json",
+      "bytes": 3248808,
+      "olderByHours": 195.03
+    },
+    {
+      "layer": "index/search-index.json",
+      "bytes": 4347744,
+      "olderByHours": 212.41
+    },
+    {
+      "layer": "index/materials.json",
+      "bytes": 9907,
+      "olderByHours": 212.41
+    },
+    {
+      "layer": "catalog.json",
+      "bytes": 87,
+      "olderByHours": 212.41
+    }
+  ],
+  "duplicates": [
+    {
+      "left": "english-literature-sixth-pdf",
+      "right": "student-book-sixth-pdf",
+      "shared": 28,
+      "leftPages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rightPages": [
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ],
+      "offset": 90
+    },
+    {
+      "left": "english-literature-exercises-sixth-pdf",
+      "right": "student-activity-sixth-pdf",
+      "shared": 24,
+      "leftPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rightPages": [
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172
+      ],
+      "offset": 164
+    }
+  ]
+}

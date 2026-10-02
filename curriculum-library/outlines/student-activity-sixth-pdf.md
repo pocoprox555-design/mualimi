@@ -1504,7 +1504,7 @@
 - **النوع**: بداية وحدة/درس
 - **العنوان الرسمي**: `Unit 5 104` — `Revision`
 - **التمارين**:
-  - **A** `Complete the dialogues with one word from each box to form compound nouns.` — أكمل الحوار بكلمة واحدة من صندوق الكلمات لتكوين مركّبة اسمية. صندوق الكلمات كما ورد: `car five-star package sea sight travel agency deal front hire hotel seeing`. عدد البنود: 6 فجوات (1–6) في حوار بين `A` و`B` ي谈及 الذهاب إلى `travel agency` والحصول على `package deal` والاستفسار عن `sightseeing` و`car hire` و`sea front` و`five-star hotel`.
+  - **A** `Complete the dialogues with one word from each box to form compound nouns.` — أكمل الحوار بكلمة واحدة من صندوق الكلمات لتكوين مركّبة اسمية. صندوق الكلمات كما ورد: `car five-star package sea sight travel agency deal front hire hotel seeing`. عدد البنود: 6 فجوات (1–6) في حوار بين `A` و`B` يتحدث عن الذهاب إلى `travel agency` والحصول على `package deal` والاستفسار عن `sightseeing` و`car hire` و`sea front` و`five-star hotel`.
   - **B** `Use the correct relative pronoun to make one sentence. The sentence in brackets becomes the relative clause. Add commas where necessary.` — استعمل ضمير الوصف الصحيح لدمج الجملتين وافصل بفاصلة عند اللزوم. النموذجان: `My Uncle Albert still rides a bike. (He is 86.)` → `My Uncle Albert, who is 86, still rides a bike.` و`The hotel has a swimming pool. (It is very big.)` → `The hotel has a swimming pool that is very big.` عدد البنود: 4 (1 `Salwa wants to be an interpreter. (She speaks three languages.)`، 2 `The Tigris Hotel has a fabulous pool. (The pool opened two months ago.)`، 3 `Bashir is going to buy a car very soon. (He passed his driving test last week.)`، 4 `The Star Restaurant has a lovely garden. (You can have a meal there on summer evenings.)`).
 - **المحتوى**: فتح قسم `Revision` للوحدة الخامسة؛ مراجعة مركّبات الاسمية (الدرس 1) والجمل الوصفية (الدرس 7). لا صندوق قواعد في هذه الصفحة. تذييل الصفحة `IRAQ_G12_AB_2024.indb 104`.
 - **ملاحظة للاستخدام**: التميران A وB قابلان للإجابة كاملاً من هذه الصفحة وحدها؛ من أفضل الصفحات للاختبار الذاتي في هذا النطاق.
@@ -2239,7 +2239,7 @@
     4. `Rosalind` — d `Sir Rowland de Boys’ eldest son`
     5. `Celia` — e `Sir Senior’s daughter`
 - **المحتوى**: أول صفحة لقسم تمارين الأدب من مسرحية **As You Like It**؛ تفتح `Literature Focus Section 1` (الجديد) وتخدم المقاطع المطبوعة في **صفحة 115 من كتاب الطالب** (Conflict بين Oliver وOrlando ومبارزة Charles). ترقم مطبوعاً 180 وتذييل `IRAQ_G12_AB_2024.indb 180`.
-- **ملاحظة للاستخدام**: تُعرف من الصفحة وحدها تفاصيل الأحداث الأربع ونص الأسئلة الخمسة وうまطة الشخصيات الخمس؛ لكن الإجابات على A وB وC كلها في المقاطع بصفحة 115 من كتاب الطالب.
+- **ملاحظة للاستخدام**: تُعرف من الصفحة وحدها تفاصيل الأحداث الأربع ونص الأسئلة الخمسة ونمط الشخصيات الخمس؛ لكن الإجابات على A وB وC كلها في المقاطع بصفحة 115 من كتاب الطالب.
 
 ### الصفحة الفيزيائية 178 — المطبوعة 181
 - **النوع**: تمرين أدبي

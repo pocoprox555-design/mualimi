@@ -247,7 +247,8 @@ function firstDescriptiveLine(text) {
   return '';
 }
 
-function pageTitle(page, outlinePage, extra, text) {
+function pageTitle(page, outlinePage, extra, text, runningHeaders = new Set()) {
+  const isFurniture = (value) => runningHeaders.has(cleanText(value).toLowerCase());
   const candidates = [
     { value: extra?.title, weight: 3 },
     { value: page.title, weight: 2 },
@@ -255,12 +256,14 @@ function pageTitle(page, outlinePage, extra, text) {
     { value: firstDescriptiveLine(text), weight: 0 },
   ];
   let best = null;
+  let furnitureFallback = null;
   for (const candidate of candidates) {
     const score = scoreTitle(candidate.value, candidate.weight, text);
     if (score <= 0) continue;
+    if (isFurniture(candidate.value)) { if (!furnitureFallback || score > furnitureFallback.score) furnitureFallback = { value: candidate.value, score }; continue; }
     if (!best || score > best.score) best = { value: candidate.value, score };
   }
-  return clipAtWord(best?.value || 'صفحة تعليمية');
+  return clipAtWord(best?.value || furnitureFallback?.value || 'صفحة تعليمية');
 }
 
 // الملخص يغطّي الصفحة كلها: من أولها ووسطها وآخرها، لا أول جملتين فقط.
@@ -390,6 +393,16 @@ for (const book of raw.books || []) {
     const text = usableText(page.fullText);
     return text.length >= SEARCHABLE_MIN;
   }).length;
+  // ترويسة الصفحة الجاري: سطر يتكرر في أعلى صفحات كثيرة، فهو أثاثُ صفحة لا عنوانها.
+  // توظيفه عنواناً يجعل مئات الصفحات بلا هوية في الاسترجاع (في كتاب النحو 62 صفحة).
+  const headerCounts = new Map();
+  for (const page of pages) {
+    const head = cleanText(usableText(page.fullText)).split('\n')[0]?.trim();
+    const key = cleanText(head).toLowerCase();
+    if (key) headerCounts.set(key, (headerCounts.get(key) || 0) + 1);
+  }
+  const headerFloor = Math.max(3, Math.ceil(pages.length * 0.25));
+  const runningHeaders = new Set([...headerCounts.entries()].filter(([, count]) => count >= headerFloor).map(([key]) => key));
   books.push({
     id: book.id,
     title: cleanText(book.title),
@@ -426,7 +439,7 @@ printed[book.id] = {};
     const outlineSummary = cleanOutlineSummary(compact(outlinePage?.description || '', 2_200))
       || (hasBodyText || !outlinePage ? '' : OUTLINE_FALLBACK);
     const extra = bookEnrichment[physicalPage];
-    const title = pageTitle(page, outlinePage, extra, fullText);
+    const title = pageTitle(page, outlinePage, extra, fullText, runningHeaders);
     const isTemplateSummary = (summaryCounter.get(compact(stripPressSlab(page.summary || ''), 420)) || 0) >= 8;
     const summary = pageSummary(page, title, outlineSummary, fullText, isTemplateSummary);
     const preview = buildPreview(fullText);

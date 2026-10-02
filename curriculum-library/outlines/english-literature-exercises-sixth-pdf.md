@@ -324,7 +324,7 @@
     3. Charles — c Oliver’s younger brother, treated badly by him
     4. Rosalind — d Sir Rowland de Boys’ eldest son
     5. Celia — e Sir Senior’s daughter
-- **المحتوى**: بداية الوحدة الثانية As You Like It وقسمها الأول: مقتطفان من **SB115** حول Oliver وOrlando وCharles، يليها ترتيب 4 أحداث و5 أسئلة فهم ومطابقة 5 شخصيات بصفاتיהן. الترويسة "As You Like It" و"IRAQ_G12_AB_2024.indb 180" وتاريخ "04/08/2025 10:21".
+- **المحتوى**: بداية الوحدة الثانية As You Like It وقسمها الأول: مقتطفان من **SB115** حول Oliver وOrlando وCharles، يليها ترتيب 4 أحداث و5 أسئلة فهم ومطابقة 5 شخصيات بصفاتهن. الترويسة "As You Like It" و"IRAQ_G12_AB_2024.indb 180" وتاريخ "04/08/2025 10:21".
 - **ملاحظة للاستخدام**: تمرين C هنا قابل للحلّ جزئياً من دون النص لأن موجزات الأعمدة معطاة كاملة؛ ويمكن للنموذج تلخيص الشخصيات الخمس وصفاتها (Oliver/Orlando/Charles/Rosalind/Celia) كمصدر معرفي مستقل، بينما A وB يحتاجان SB115.
 
 ### الصفحة الفيزيائية 14 — المطبوعة 181

@@ -98,6 +98,10 @@ export function judgeNumbers(docs, { fields = ['title', 'summary', 'outlineSumma
   return { items, counts, unverified: items.filter((item) => item.verdict === 'unverified') };
 }
 
+// عنوان الصفحة الذي هو عنوان الكتاب: ليس عيباً إن كانت الصفحة غلافاً أو فهرساً،
+// فالعنوان الصحيح هناك هو اسم الكتاب. عيب الاسترجاع في صفحة درس لا غلاف.
+const TITLE_EXEMPT_TYPES = new Set(['divider', 'contents']);
+
 // عنوان الصفحة الذي هو عنوان الكتاب ليس وصفاً: يجعل الصفحة بلا هوية في الاسترجاع.
 // يُفصل عن التكرار الحرفي لأن عطبه في الاسترجاع لا في الوصف.
 export function titleRepetition(docs, bookTitle) {
@@ -111,7 +115,7 @@ export function titleRepetition(docs, bookTitle) {
     const title = foldText(doc.title);
     if (!title) continue;
     counts.set(title, (counts.get(title) || 0) + 1);
-    if (overlapsBook(title)) asBookTitle.push({ page: doc.physicalPage, title: String(doc.title).slice(0, 60) });
+    if (overlapsBook(title) && !TITLE_EXEMPT_TYPES.has(doc.pageType)) asBookTitle.push({ page: doc.physicalPage, title: String(doc.title).slice(0, 60) });
   }
   const values = docs.map((doc) => foldText(doc.title)).filter(Boolean);
   const share = values.length ? Math.max(0, ...[...counts.values()]) / values.length : 0;
@@ -194,6 +198,25 @@ export function crossBookDuplicates(docsByBook, { minShared = 3 } = {}) {
       return { left, right, shared: leftPages.length, leftPages: leftPages.slice(0, 8), rightPages: rightPages.slice(0, 8), offset };
     })
     .sort((a, b) => b.shared - a.shared);
+}
+
+// وصف صفحة يخصّ صفحة أخرى: بداية العنوان موجودة في نص الجار ولا وجود لها في نصها هي.
+// مكتشف لا حَكَم: الغياب لا يُثبت الانتماء لغيره، فيُعرض للمراجعة لا يُحذف.
+export function driftedDescriptions(sortedDocs) {
+  const norm = (value) => foldText(value).replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const hits = [];
+  for (let index = 0; index < sortedDocs.length; index += 1) {
+    const doc = sortedDocs[index];
+    const head = [...new Set(norm(doc.title).split(' ').filter((word) => word.length >= 4))].slice(0, 6);
+    if (head.length < 3) continue;
+    const own = norm(doc.text);
+    const near = [sortedDocs[index - 1], sortedDocs[index + 1]].filter(Boolean).map((item) => norm(item.text)).join(' ');
+    if (!own || !near) continue;
+    const ownHits = head.filter((word) => own.includes(word)).length / head.length;
+    const nearHits = head.filter((word) => near.includes(word)).length / head.length;
+    if (ownHits < 0.34 && nearHits >= 0.67) hits.push({ page: doc.physicalPage, title: String(doc.title).slice(0, 60), own: round(ownHits * 100), near: round(nearHits * 100) });
+  }
+  return hits;
 }
 
 function median(values) {
