@@ -1002,7 +1002,24 @@ for (const spec of BOOKS) {
     source,
     pages,
   };
-  await writeFile(path.join(BOOKS_DIR, `${spec.id}.json`), `${JSON.stringify(book)}\n`);
+  // حارس: الاستخراج الكامل يكتب صفحات من قوالبه، فيمحو كل وصف لاحق راجعه إنسان
+  // أو وكيل بصري (summary/title/educationalPurpose) ويعيد الصفحة إلى ما كانت عليه
+  // قبل ذلك الوصف. لا يُسمح له بذلك على كتاب مُغذّى إلا بأمر صريح.
+  const target = path.join(BOOKS_DIR, `${spec.id}.json`);
+  const existing = await readFile(target, 'utf8').then((raw) => JSON.parse(raw)).catch(() => null);
+  if (existing && !SANDBOX) {
+    const described = (existing.pages || []).filter((page) => String(page.summary || '').trim() || String(page.title || '').trim()).length;
+    const enrichment = await readFile(path.join(TARGET, 'enrichment', `${spec.id}.json`), 'utf8').catch(() => null);
+    const enrichedPages = enrichment ? Object.keys(JSON.parse(enrichment).pages || {}).length : 0;
+    if ((described || enrichedPages) && !FORCE) {
+      console.error(`مُنِع: ${spec.id} يحمل وصفاً على ${described} صفحة و${enrichedPages} صفحة تغذية، وإعادة الاستخراج يمحوه.`);
+      console.error('       استعمل --out-dir <tmp> للتجربة، أو --force إن كنت تريد الاستخراج فوق العمل اليدوي فعلاً.');
+      process.exitCode = 1;
+      continue;
+    }
+  }
+
+  await writeFile(target, `${JSON.stringify(book)}\n`);
   await writeFile(path.join(OUTLINES_DIR, `${spec.id}.md`), outlineFor(book, pages));
   const { schemaVersion: _schemaVersion, ...indexBook } = book;
   const at = index.books.findIndex((candidate) => candidate.id === spec.id);

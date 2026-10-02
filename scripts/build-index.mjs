@@ -447,7 +447,9 @@ printed[book.id] = {};
     ].join(' ')).join('\n')].join('\n');
     const section = cleanText(extra?.section || page.section || '');
     const unit = cleanText(extra?.unit || page.unit || '');
-    const pageType = cleanText(extra?.pageType || page.pageType || '');
+    // المستخرِج يشتق pageType من العدول والبنى الفعلية للصفحة، وهو أخصّ من التغذية
+// التي قد تضع قالباً واحداً لكتب كاملة (وقع في تاريخ أدبي بـ24 قيمة مختلفة).
+const pageType = cleanText(page.pageType || extra?.pageType || '');
     const searchableText = [
       book.title,
       book.subject,

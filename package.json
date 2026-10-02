@@ -11,10 +11,11 @@
     "start": "node server.mjs",
     "import-deni": "node scripts/import-deni-books.mjs",
     "build-index": "node scripts/build-index.mjs",
+    "rebuild-pdf-index": "node scripts/rebuild-pdf-index.mjs",
     "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs test/outline.test.mjs test/server.test.mjs test/validate-rules.test.mjs",
     "validate-index": "node scripts/validate-index.mjs",
     "gate": "node scripts/validate-index.mjs --gate",
-    "verify": "npm run build-index && npm test"
+    "verify": "npm run rebuild-pdf-index && npm run build-index && npm run gate && npm test"
   },
   "dependencies": {
     "pdf-parse": "^2.4.5",
