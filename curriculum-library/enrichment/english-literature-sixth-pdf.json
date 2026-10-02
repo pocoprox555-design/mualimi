@@ -12,7 +12,7 @@
    "pageType": "divider",
    "title": "صفحة فاصلة: Literature Focus يقدّم عملَي Pride and Prejudice وAs You Like It",
    "titleEn": "Unit divider: Literature Focus introducing Pride and Prejudice and As You Like It",
-   "summary": "صفحة فاصلة بلا رقم مطبوع وبلا تمارين: شريط عنوان Literature Focus وتحته نقطتان بحقلكم: Pride and Prejudice ثم As You Like It. لا نص تعليمي ولا مفردات، وتبدأ في الصفحة 98 مقدمة الرواية.",
+   "summary": "صفحة فاصلة بلا رقم مطبوع وبلا تمارين: شريط عنوان Literature Focus وتحته نقطتان بحقلكم: Pride and Prejudice ثم As You Like It. لا نص تعليمي ولا مفردات، وتبدأ في الصفحة التالية بمقدمة الرواية.",
    "summaryEn": "A full-page divider with no printed folio and no exercises: the heading Literature Focus above two bullet titles, Pride and Prejudice and As You Like It. No teaching text, no vocabulary and no figure; the Pride and Prejudice introduction starts on the next page.",
    "figures": [],
    "activities": [],
@@ -35,7 +35,7 @@
    "pageType": "matching",
    "title": "مقدمة الرواية: تمرين مطابقة عناوين مع نصّي سيرة المؤلفة والكتاب",
    "titleEn": "Novel introduction: matching headings with the texts about the author and the book",
-   "summary": "تبدأ المقدمة بالتمرين 1 «Match the headings below with the texts» مع العناوين a–c، وبجوار نقش Jane Austen يقع النص 1 عن سيرتها، ثم النص 2 عن نشر الرواية سنة 1813 باسم مجهول، ويكمل عند الصفحة 99.",
+   "summary": "تبدأ المقدمة بالتمرين 1 «Match the headings below with the texts» مع العناوين a–c، وبجوار نقش Jane Austen يقع النص 1 عن سيرتها، ثم النص 2 عن نشر الرواية سنة 1813 باسم مجهول، ويكمل النص في الصفحة التالية.",
    "summaryEn": "The Pride and Prejudice introduction opens with exercise 1, Match the headings below with the texts, and headings a to c. Beside an engraving of Jane Austen, text 1 gives her biography, and text 2 covers the 1813 anonymous publication, First Impressions and the £110 sale; text 2 runs on to printed page 99.",
    "figures": [
     {
@@ -793,7 +793,7 @@
    "actScene": null,
    "title": "نص Pride and Prejudice: اعتراف Wickham بالميراث الممنوع",
    "titleEn": "Pride and Prejudice Story Text: Mr Wickham Explains the Lost Inheritance",
-   "summary": "نص قصصي من القسم 4: يروي Mr Wickham أن آباء Mr Darcy وعدوه بالميراث ثم سلّمه إلى رجل آخر، فتصدّقه Elizabeth وتلومه. لا صور ولا تمارين، وتنتهي الصفحة بمسرد من 12 مفردة.",
+   "summary": "نص قصصي من القسم 4: يروي Mr Wickham أن آباء Mr Darcy وعدوه بالميراث ثم سلّمه إلى رجل آخر، فتصدّقه Elizabeth وتلومه. لا صور ولا تمارين، وتنتهي الصفحة بمسرد من اثنتي عشرة مفردة.",
    "summaryEn": "Story text of Section 4: Mr Wickham explains that the late Mr Darcy promised him an inheritance that was given to another man; Elizabeth believes him, blames Mr Darcy and asks about his motive. No picture and no numbered exercise; the page ends with a 12-item Glossary.",
    "glossary": [
     {
@@ -1170,7 +1170,7 @@
    "actScene": null,
    "title": "As You Like It: تمرين مطابقة 1 مع نصّ سيرة Shakespeare",
    "titleEn": "As You Like It: Matching Exercise 1 with the Text on Shakespeare’s Life",
-   "summary": "بداية وحدة As You Like It: تمرين مطابقة 1 بعناوين a/b/c ونص 1 عن سيرة William Shakespeare، مع بورتريه له ولوحة ملوّنة لمشهد مسرحي؛ ويكمل النصان 2 و3 في الصفحة 113.",
+   "summary": "بداية وحدة As You Like It: تمرين مطابقة 1 بعناوين a/b/c ونص 1 عن سيرة William Shakespeare، مع بورتريه له ولوحة ملوّنة لمشهد مسرحي؛ ويكمل النصان 2 و3 في الصفحة التالية.",
    "summaryEn": "The As You Like It opener: the title and the three headings a/b/c of matching exercise 1, then text 1 on William Shakespeare’s life – born 1564, once an actor, at least 37 plays and 154 sonnets – beside a portrait of the playwright and a colour illustration of a scene from the play; texts 2 and 3 continue on page 113.",
    "glossary": [],
    "glossaryRefs": [
@@ -1246,9 +1246,9 @@
    "section": null,
    "sectionPath": "As You Like It",
    "actScene": null,
-   "title": "As You Like It: النصّان 2 و3 ومسرد 13 مفردة",
+   "title": "As You Like It: النصّان 2 و3 ومسرد من ثلاث عشرة مفردة",
    "titleEn": "As You Like It: Texts 2 and 3 plus a 13-Item Glossary",
-   "summary": "تكملة المطابقة 1: نص 2 عن تاريخ المسرحية ونص 3 عن حبكتها حتى نفي Rosalind، ثم مسرد 13 مفردة، وصورة غلاف New Penguin Shakespeare.",
+   "summary": "تكملة المطابقة 1: نص 2 عن تاريخ المسرحية ونص 3 عن حبكتها حتى نفي Rosalind، ثم مسرد من ثلاث عشرة مفردة، وصورة غلاف New Penguin Shakespeare.",
    "summaryEn": "The rest of matching exercise 1: text 2 on the play’s writing between 1598 and 1600, its 1599 opening at the Globe Theatre and its adaptations, and text 3 on the plot up to Rosalind’s banishment and Orlando’s flight to the forest of Arden; then a 13-item Glossary from playwright to flees, beside a picture of the New Penguin Shakespeare book cover.",
    "glossary": [
     {
@@ -1546,7 +1546,7 @@
    "actScene": null,
    "title": "قسم 2 من As You Like It: ملخص حتى تنكّر Rosalind وCelia",
    "titleEn": "Section 2 of As You Like It: Recap up to the Disguises of Rosalind and Celia",
-   "summary": "قسم 2: سؤال توقّع، ثم صندوق ملخص حتى تنكّر Rosalind باسم Ganymede وCelia باسم Aliena، وصورة في غابة Arden، وبند قراءة يتحقق يحيل إلى الصفحة 117، وإحالة إلى تمارين كتاب الأنشطة 182–183.",
+   "summary": "قسم 2: سؤال توقّع، ثم صندوق ملخص حتى تنكّر Rosalind باسم Ganymede وCelia باسم Aliena، وصورة في غابة Arden، وبند قراءة يتحقق يحيل إلى صفحة الاستخلاص التالية، وإحالة إلى تمارين كتاب الأنشطة 182–183.",
    "summaryEn": "Section 2: a prediction question, then a recap box running up to Rosalind’s disguise as Ganymede and Celia’s as Aliena, a picture of them in the forest of Arden, a read-and-check item pointing to page 117, and a reference to Activity Book pages 182–183.",
    "glossary": [],
    "glossaryRefs": [],

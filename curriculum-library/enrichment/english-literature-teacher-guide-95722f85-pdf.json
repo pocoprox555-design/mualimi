@@ -1,0 +1,1406 @@
+{
+ "schemaVersion": 1,
+ "bookId": "english-literature-teacher-guide-95722f85-pdf",
+ "pages": {
+  "1": {
+   "unit": "Literature Focus",
+   "work": null,
+   "author": null,
+   "section": "Guidance notes for Literature Focus",
+   "sectionPath": "Literature Focus > Guidance notes",
+   "answerKeyLocation": null,
+   "notes": "صفحة إرشادات للمعلم: أهداف Literature Focus الأربعة، وطريقة استخدام القارئات، وخطة الوحدات السبع المطبوعة (P&P في 1–3 وAYLI في 5–7). لا توجد فيها مؤقتات زمنية إطلاقاً."
+  },
+  "2": {
+   "unit": "Literature Focus",
+   "work": null,
+   "author": null,
+   "section": "Guidance notes for Literature Focus",
+   "sectionPath": "Literature Focus > Guidance notes",
+   "answerKeyLocation": null,
+   "notes": "تكملة الإرشادات: تمثيل الرواية والمسرحية، ونسبة الاختصار إلى الأصل، وسؤال المعلم الختامي عن متعة القصة."
+  },
+  "3": {
+   "unit": null,
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Introduction",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Introduction",
+   "lessonRange": {
+    "studentBook": [
+     "SB98–99",
+     "SB98"
+    ],
+    "activityBook": []
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 1,
+     "title": "Icebreaker",
+     "type": "exercises",
+     "instruction": "Ask students to write the name of a book they have read and enjoyed on a piece of paper. They then walk around the room and show their paper to other students. Ask students to talk about their books with each other, for example: the main plot, what they liked about it, if they have also read their classmate’s book, etc. Elicit some ideas from the whole class ( What book have you read? What did you like about it? Have you read any of your classmate’s books? , etc.).",
+     "source": "SB98",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 2,
+     "title": "Introduce the novel",
+     "type": "exercises",
+     "instruction": "Write Pride and Prejudice on the board and ask if students have ever heard of this novel. If they have, ask what they know about it, and if they haven’t, ask them to guess what it is about based on the title. Tell students they are going to read some extracts (teach this word), or parts, of this famous novel. Refer students to the glossary at the bottom of page 99 of the Student’s Book. Explain that a glossary is similar to a dictionary, in that it explains the meaning of a word. Explain that in the text, there is an asterisk (teach this word) next to a word that is in the glossary. If students do not know the meaning of this word, they can look at the glossary and learn the new word.",
+     "source": "SB98–99",
+     "answerKey": null
+    },
+    {
+     "number": 3,
+     "stage": 3,
+     "title": "Read texts for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the three paragraphs. Walk around the room to monitor and assist as necessary. Ask students to close their books. Get them to say what they can remember from each paragraph without looking back at the Student’s Book and reading it.",
+     "source": "SB98–99",
+     "answerKey": null
+    },
+    {
+     "number": 4,
+     "stage": 4,
+     "title": "Predict the content of a novel",
+     "type": "exercises",
+     "instruction": "Ask students to work in groups of three or four. Ask them to discuss and predict what might happen in the novel. Ask a student from each group to share with the class what their group discussed. Don’t confirm or correct any of the students’ ideas about what might happen in the story just yet.",
+     "source": "SB98–99",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null,
+   "objectives": "Learn about the novel Pride and Prejudice and its author, Jane Austen. Read for detail. Predict the content of the novel.",
+   "vocabulary": [
+    "worsened",
+    "anonymously",
+    "delightful",
+    "chaotic"
+   ],
+   "notes": "ملاحظة مطبوعة في الدليل: لا تمارين Activity Book موافقة لقسم Introduction، فتُنفَّذ تمارين كتاب الطالب شفوياً."
+  },
+  "4": {
+   "unit": "Unit 1",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 1",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 1",
+   "lessonRange": {
+    "studentBook": [
+     "SB100–101",
+     "SB100",
+     "SB101"
+    ],
+    "activityBook": [
+     "AB168–169",
+     "AB168"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to look at the picture and read The story so far . Explain that this section gives them updates on the story and helps them understand the extract they are going to read. Ask: Why would the Bennets be talking about the new arrival? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB100",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read and discuss a literary extract",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask a student from each group to share with the class what their group discussed. Don’t confirm or correct any of the students’ ideas about what might happen in the story just yet.",
+     "source": "SB101",
+     "answerKey": null
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences, and then decide if they are true or false according to the extract on page 101 of the Student’s Book. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class. Ask the students to correct the false statements orally.",
+     "source": "AB168 Ex A",
+     "answerKey": "Answers 1 False – Mr Bingley is not looking to marry one of the Bennet girls to live in the estate. 2 False – Mr Bennet jokes that Mr Bingley will find Mrs Bennet beautiful. 3 False – Mr Bennet does not wish to visit Mr Bingley. 4 True 5 True 6 False – Mr Bennet jokes that he would visit 20 men in the neighbourhood if Mrs Bennet wanted him to."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the questions and then find the answers in the extract on page 101 of the Student’s Book. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "AB168 Ex B",
+     "answerKey": "Answers 1 four or five thousand pounds 2 because he might marry one of them 3 because she is as beautiful as any of their daughters 4 that they often don’t have much beauty to think of 5 because they don’t usually visit newcomers 6 so she can visit him with her daughters 7 because they are all silly and ignorant like other girls, but Lizzy is quicker than her sisters"
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 1 — مفتاح الإجابات مطبوع في Appendix A (صفحة 181 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "nonsense",
+    "flatter",
+    "share",
+    "newcomers",
+    "ignorant",
+    "sympathy"
+   ]
+  },
+  "5": {
+   "unit": "Unit 1",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 1",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 1",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB169"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 6,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. Correct as a whole class.",
+     "source": "AB169 Ex C",
+     "answerKey": "Answers 1 fortune 2 likely 3 grown-up 4 extraordinary 5 consider 6 preference 7 good-humoured 8 mention"
+    },
+    {
+     "number": 2,
+     "stage": 7,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Ask students to use the words from the previous task to complete the sentences. Ask students to compare their answers in pairs before correcting as a whole class.",
+     "source": "AB169 Ex D",
+     "answerKey": "Answers 1 fortune 2 likely 3 preference 4 mention 5 grown-ups 6 extraordinary 7 good-humoured 8 consider"
+    },
+    {
+     "number": 3,
+     "stage": 8,
+     "title": "Predict next parts of the novel",
+     "type": "exercises",
+     "instruction": "Ask students to discuss, in pairs, what would happen during Mr Bennet’s visit to Mr Bingley. Students then write a paragraph narrating what happened.",
+     "source": "AB169 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 1 — مفتاح الإجابات مطبوع في Appendix A (صفحة 182 مطبوعة)"
+  },
+  "6": {
+   "unit": "Unit 1",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 2",
+   "lessonRange": {
+    "studentBook": [
+     "SB102–103",
+     "SB102",
+     "SB103"
+    ],
+    "activityBook": [
+     "AB170–171",
+     "AB170",
+     "AB171"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think Mr Bingley and Mr Darcy are talking about? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB102",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 103 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to read the questions and choose the correct answers. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB103 AB170 Ex A",
+     "answerKey": "Answers 1a, 2c, 3b, 4b, 5c"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to decide if the sentences are true or false . When checking as a class, elicit example sentences with the words. Ask the students to correct the false statements orally.",
+     "source": "SB103 AB170 Ex B",
+     "answerKey": "Answers 1 False – Only one Bingley sister got married and took the name of Mrs Hurst. 2 True 3 True 4 False – Mr Darcy thinks Jane is the only beautiful girl in the room. 5 False – Elizabeth did not like Darcy. 6 False – Mr Bingley danced with Jane twice. 7 False – Mrs Bennet thought Mr Darcy was proud and conceited."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. When checking as a class, drill the correct pronunciation and elicit example sentences with the words.",
+     "source": "SB103 AB171 Ex C",
+     "answerKey": "Answers 1 several 2 introduce 3 coldly 4 lively 5 admired 6 elegant 7 gown"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Complete a summary",
+     "type": "exercises",
+     "instruction": "Write the names of the characters ( Elizabeth, Mr Darcy, Mr Bingley, Mrs Bennet, Mr Bennet ) on the board and ask students to discuss what they know about them so far.",
+     "source": "SB103 AB171 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 2 — مفتاح الإجابات مطبوع في Appendix A (صفحة 183 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "picky",
+    "swear",
+    "dare",
+    "pleasant",
+    "ridiculous",
+    "charming",
+    "lace",
+    "gown",
+    "interrupted",
+    "exaggeration",
+    "conceited"
+   ]
+  },
+  "7": {
+   "unit": "Unit 1",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 2",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB171"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a dialogue",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask students to imagine how Elizabeth felt at the ball and what she would like to say to Mr Darcy. Ask students to write their dialogues individually, and then get them to share it with a partner. Ask for volunteers to share their dialogue with the whole class.",
+     "source": "AB171 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "8": {
+   "unit": "Unit 2",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 3",
+   "lessonRange": {
+    "studentBook": [
+     "SB104–105",
+     "SB104",
+     "SB105"
+    ],
+    "activityBook": [
+     "AB172–173",
+     "AB172",
+     "AB173"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think about the Bingley sisters? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB104",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 105 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to put the events in the order they happened. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB105 AB172 Ex A",
+     "answerKey": "Answers 4, 1, 2, 5, 3"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and complete the task by matching the columns. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB105 AB172 Ex B",
+     "answerKey": "Answers 1d, 2b, 3a, 4c"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to answer the questions. When checking as a class, elicit the extracts from the text that provided the answers.",
+     "source": "SB105 AB172 Ex C",
+     "answerKey": "Answers 1 because he cared about her and Jane 2 to make fun of the fact she walked a long way to the estate 3 because they see it as a sign of status 4 because she wants to marry him 5 She means that the Bennets are too poor to join high society."
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. When checking as a class, drill the correct pronunciation and elicit example sentences with the words.",
+     "source": "SB105 AB173 Ex D",
+     "answerKey": "Answers 1 anxiety 2 lack 3 untidy 4 indifference 5 excessive"
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 3 — مفتاح الإجابات مطبوع في Appendix A (صفحة 185 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "estate",
+    "intruder",
+    "ragout",
+    "petticoat",
+    "inches",
+    "inclined",
+    "half whisper",
+    "brightened",
+    "have regard for"
+   ]
+  },
+  "9": {
+   "unit": "Unit 2",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 3",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB173"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a short letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask students to imagine they are Elizabeth Bennet and have overheard the conversation in the extract. Ask students to write their letters individually, and then get them to share their letters with a partner. Ask for volunteers to share their letters with the whole class.",
+     "source": "AB173 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "10": {
+   "unit": "Unit 2",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 4",
+   "lessonRange": {
+    "studentBook": [
+     "SB106–107",
+     "SB106",
+     "SB107"
+    ],
+    "activityBook": [
+     "AB174–175",
+     "AB174",
+     "AB175"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: Why do you think Elizabeth looks so shocked? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB106",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 107 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to decide whether the sentences are true or false . Check answers as a whole class, eliciting further details from the extract. Ask the students to correct the false statements orally.",
+     "source": "SB107 AB174 Ex A",
+     "answerKey": "Answers 1 False – Mr Darcy’s father left Mr Wickham enough to make his life more comfortable. 2 False – Mr Wickham thinks Mr Darcy will be disgraced publicly at some point, but not by him. 3 True 4 True 5 False – Mr Wickham and Mr Darcy were probably childhood friends. 6 True"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and complete the task by answering the questions. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB107 AB174 Ex B",
+     "answerKey": "Answers 1 because the will was informal 2 because he disliked him/was jealous of him 3 20 years old (he was ‘of age’, e.g., 18, two years ago) 4 He thinks that they are very different sorts of men. 5 He doesn’t disgrace him because of his father. 6 She thinks he is even more handsome than before."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. When checking as a class, drill the correct pronunciation and elicit example sentences with the words.",
+     "source": "SB107 AB175 Ex C",
+     "answerKey": "Answers 1 attached 2 inheritance 3 accuse"
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 4 — مفتاح الإجابات مطبوع في Appendix A (صفحة 187 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "godfather",
+    "not do justice to",
+    "bequest",
+    "extravagance",
+    "imprudence",
+    "temper",
+    "disgraced",
+    "motivation",
+    "tolerate",
+    "boast",
+    "resentments",
+    "vouch for"
+   ]
+  },
+  "11": {
+   "unit": "Unit 2",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 4",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB175"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 6,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Ask students to use the words from the previous task to complete the sentences. Ask students to compare their answers in pairs before correcting as a whole class.",
+     "source": "AB175 Ex D",
+     "answerKey": "Answers 1 accused 2 malicious 3 inheritance 4 attached 5 irritated 6 reflection 7 injustice"
+    },
+    {
+     "number": 2,
+     "stage": 7,
+     "title": "Write a letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask students to imagine they are the late Mr Darcy and are writing a letter to their son. Ask students to write their letters individually, and then get them to share their letters with a partner. Ask for volunteers to share their letters with the whole class.",
+     "source": "AB175 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 4 — مفتاح الإجابات مطبوع في Appendix A (صفحة 188 مطبوعة)"
+  },
+  "12": {
+   "unit": "Unit 3",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 5",
+   "lessonRange": {
+    "studentBook": [
+     "SB108–109",
+     "SB108",
+     "SB109"
+    ],
+    "activityBook": [
+     "AB176–177",
+     "AB176",
+     "AB177"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think is happening? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB108",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 109 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to read the questions and choose the correct answers. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB109 AB176 Ex A",
+     "answerKey": "Answers 1a, 2b, 3c, 4b"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students whether the sentences are true or false . When checking as a class, elicit the extracts from the text that provided the answers. Ask the students to correct the false statements orally.",
+     "source": "SB109 AB176 Ex B",
+     "answerKey": "Answers 1 False – Mr Darcy says ironically that Mr Wickham has had great suffering. 2 True 3 False – Elizabeth says Mr Darcy’s behaviour prevented her from feeling sorry about rejecting him. 4 True 5 True 6 True 7 False – Mr Darcy apologizes for taking too much of Elizabeth’s time."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract again and answer the questions. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB109 AB177 Ex C",
+     "answerKey": "Answers 1 because he is jealous 2 because he was being ironic 3 because he took his father’s inheritance from him 4 He thinks he shouldn’t want to marry someone socially inferior to him. 5 that he was the last man in the world she could be persuaded to marry"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. When checking as a class, drill the correct",
+     "source": "SB109 AB177 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 5 — مفتاح الإجابات مطبوع في Appendix A (صفحة 189 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "overlook",
+    "inclination",
+    "gentlemanlike",
+    "acquaintance",
+    "foundation"
+   ]
+  },
+  "13": {
+   "unit": "Unit 3",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 5",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB177"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a short letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine they are Elizabeth Bennet and have decided to write to Mr Wickham. Ask students to write their letters individually, and then get them to share their letters with a partner. Ask for volunteers to share their letters with the whole class.",
+     "source": "AB177 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "14": {
+   "unit": "Unit 3",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 6",
+   "lessonRange": {
+    "studentBook": [
+     "SB110–111",
+     "SB110",
+     "SB111"
+    ],
+    "activityBook": [
+     "AB178–179",
+     "AB178",
+     "AB179"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think Elizabeth and Darcy are talking about? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB110",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 111 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to put the events in the order they happened. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB111 AB178 Ex A",
+     "answerKey": "Answers 2, 4, 5, 1, 3"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract again and complete the task by answering the questions. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB111 AB178 Ex B",
+     "answerKey": "Answers 1 that Elizabeth is too nice to play with his feelings 2 If Elizabeth says no, he will never bother her again. 3 because he could still feel hope 4 because she feels embarrassed about her past behaviour 5 It made him feel hopeful. 6 No one. She thinks both of them were wrong in the situation."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to find words in the text with the given meanings. When checking as a class, drill the correct pronunciation and elicit example sentences with the words.",
+     "source": "SB111 AB179 Ex C",
+     "answerKey": "Answers 1 generous 2 fluently 3 period 4 valuable 5 unluckily 6 argue"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Understand vocabulary from context",
+     "type": "exercises",
+     "instruction": "Ask students to use the words from the previous task to complete the sentences. Ask students to compare their answers in pairs before correcting as a whole class.",
+     "source": "AB179 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "Pride and Prejudice Section 6 — مفتاح الإجابات مطبوع في Appendix A (صفحة 191 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "embarrassment",
+    "gratitude",
+    "assurance",
+    "latter",
+    "abusing",
+    "accusations",
+    "disapproval"
+   ]
+  },
+  "15": {
+   "unit": "Unit 3",
+   "work": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > Pride and Prejudice > Section 6",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB179"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a short letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask students to imagine they are Mr Darcy and are writing a letter to your aunt to tell her of the news. Ask students to write their letters individually, and then get them to share their letters with a partner. Ask for volunteers to share their letters with the whole class.",
+     "source": "AB179 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "16": {
+   "unit": null,
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Introduction",
+   "sectionPath": "Literature Focus > As You Like It > Introduction",
+   "lessonRange": {
+    "studentBook": [
+     "SB112–113"
+    ],
+    "activityBook": []
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 1,
+     "title": "Icebreaker",
+     "type": "exercises",
+     "instruction": "Ask students to write the titles of three of their favourite books on a piece of paper. Put students into small groups and ask them to talk about their three books and explain what they liked about them. They can also talk about the plot briefly and say what they learnt from the books. Elicit some ideas from the whole class ( Which books are in your top three? What did you like about them? Have you read any of your classmate’s books ?, etc.).",
+     "source": "SB112–113",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 2,
+     "title": "Introduce the play",
+     "type": "exercises",
+     "instruction": "Write As You Like It on the board and ask if students have ever heard of this play. If they have, ask what they know about it, and if they haven’t, ask them to guess what it is about based on the title. Tell students they are going to read some extracts (teach this word), or parts, of this famous play. Refer students to the glossary at the bottom of page 113 of the Student’s Book. Explain that a glossary is similar to a dictionary, in that it explains the meaning of a word. Explain that in the text, there is an asterisk (teach this word) next to a word that is in the glossary. If students do not know the meaning of this word, they can look at the glossary and learn the new word.",
+     "source": "SB112–113",
+     "answerKey": null
+    },
+    {
+     "number": 3,
+     "stage": 3,
+     "title": "Read texts for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the three paragraphs and match them with the headings a–c. Walk around the room to monitor and assist as necessary. When correcting, ask students to close their books. Get them to say what they can remember from each paragraph without looking back at the book and reading it.",
+     "source": "SB112–113",
+     "answerKey": "Answers 1b, 2c, 3a"
+    },
+    {
+     "number": 4,
+     "stage": 4,
+     "title": "Make predictions",
+     "type": "exercises",
+     "instruction": "Ask students to work in groups of three or four. Ask them to discuss and predict what might happen in the story. Ask a student from each group to share with the class what their group discussed. Don’t confirm or correct any of the students’ ideas about what might happen in the story just yet.",
+     "source": "SB112–113",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Introduction — مفتاح الإجابات مطبوع في Appendix A (صفحة 193 مطبوعة)",
+   "objectives": "Learn about the play As You Like It and its author, William Shakespeare. Read for detail. Predict the content of the play.",
+   "vocabulary": [
+    "playwright",
+    "sonnet",
+    "Globe Theatre",
+    "inspired",
+    "romance",
+    "medieval",
+    "tale",
+    "adapted",
+    "rebel",
+    "forbidden",
+    "threat",
+    "exile",
+    "flees"
+   ],
+   "notes": "ملاحظة مطبوعة في الدليل: لا تمارين Activity Book موافقة لقسم Introduction، فتُنفَّذ تمارين كتاب الطالب شفوياً."
+  },
+  "17": {
+   "unit": "Unit 5",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 1",
+   "sectionPath": "Literature Focus > As You Like It > Section 1",
+   "lessonRange": {
+    "studentBook": [
+     "SB114–115",
+     "SB114",
+     "SB115"
+    ],
+    "activityBook": [
+     "AB180–181",
+     "AB180",
+     "AB181"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Explain that this section gives them updates on the story and helps them understand the extract they are going to read. Ask: What do you think is going to happen next? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB114",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract",
+     "type": "exercises",
+     "instruction": "Explain that As You Like It was written in old English, so a modern version of each part is provided. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story.",
+     "source": "SB115",
+     "answerKey": null
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and then put the events in order according to the extract on page 115 of the Student’s Book. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB115 AB180 Ex A",
+     "answerKey": "Answers 3, 2, 1, 4"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the questions and try to remember the answers based on what they have understood so far. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB115 AB180 Ex B",
+     "answerKey": "Answers 1 that he is three times a villain by doing so 2 Orlando makes him promise to give him enough money to pursue an education. 3 because she is friends with his daughter, Celia 4 He does not know why. 5 Oliver’s plan is to have Charles wrestle Orlando."
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Understand characters in a play",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to match the characters with their features. When checking as a whole class, elicit what else they know about each character so far.",
+     "source": "AB180 Ex C",
+     "answerKey": "Answers 1d, 2c, 3a, 4e, 5b"
+    },
+    {
+     "number": 6,
+     "stage": 7,
+     "title": "Identify words in old English",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to compare the old and modern versions of the extracts and find words in the original version that correspond to the words in modern English.",
+     "source": "SB115 AB181 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 1 — مفتاح الإجابات مطبوع في Appendix A (صفحة 194 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "estate",
+    "passing",
+    "pursue",
+    "obey",
+    "swear",
+    "grab",
+    "villain",
+    "soul",
+    "noble"
+   ]
+  },
+  "18": {
+   "unit": "Unit 5",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 1",
+   "sectionPath": "Literature Focus > As You Like It > Section 1",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB181"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 8,
+     "title": "Write a paragraph",
+     "type": "exercises",
+     "instruction": "Ask students to discuss in small groups what they think will happen to the characters next. Students then write, individually, an account of their predictions.",
+     "source": "AB181 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "19": {
+   "unit": "Unit 5",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > As You Like It > Section 2",
+   "lessonRange": {
+    "studentBook": [
+     "SB116–117",
+     "SB116",
+     "SB117"
+    ],
+    "activityBook": [
+     "AB182–183",
+     "AB182",
+     "AB183"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think the two men are doing in the forest? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB116",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Tell students to read the scenes to find out what the two men are doing in the forest. Ask them to picture the scene and think about how the dialogue will go.",
+     "source": "SB117",
+     "answerKey": null
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read a literary extract for detail",
+     "type": "exercises",
+     "instruction": "Ask students to read the extract on page 117 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to read the questions and choose the correct answers. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB117 AB182 Ex A",
+     "answerKey": "Answers 1b, 2c, 3b, 4a, 5c"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Ask the students to read the sentences and try to remember if they are true or false . Students check in the text and then compare answers in pairs. Ask the students to correct the false statements orally.",
+     "source": "SB117 AB182–183 Ex B",
+     "answerKey": "Answers 1 True 2 True 3 False – Hisperia heard Celia and Rosalind talking about Orlando. 4 False – Rosalind disguises herself as a man named Ganymede, and Celia disguises herself as a woman named Aliena. 5 False – Corin says he has loved before. 6 True 7 True 8 True"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Identify words in old English",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to compare the old and modern versions of the extracts and find words in the original version that correspond to the words in modern English. When they have finished, ask students to compare their answers. Then check the answers as a whole class.",
+     "source": "SB117 AB183 Ex C",
+     "answerKey": "Answers 1 gentlewoman 2 o’erheard 3 oft 4 rememb’rest 5 didst 6 hast 7 thy"
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 2 — مفتاح الإجابات مطبوع في Appendix A (صفحة 196 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "overheard",
+    "good looks",
+    "wherever",
+    "shepherd",
+    "beloved"
+   ]
+  },
+  "20": {
+   "unit": "Unit 5",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 2",
+   "sectionPath": "Literature Focus > As You Like It > Section 2",
+   "lessonRange": {
+    "studentBook": [
+     "SB117"
+    ],
+    "activityBook": [
+     "AB183"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Complete a summary",
+     "type": "exercises",
+     "instruction": "Ask students to read the summary of the extracts. Explain that they should use the words from the modern English versions to complete the text. Ask students to complete the task individually. When they have finished, ask students to compare their answer. Then check the answers as a whole class.",
+     "source": "SB117 AB183 Ex D",
+     "answerKey": "Answers 1 secretly 2 overheard 3 missing 4 beloved 5 loved 6 much 7 love"
+    },
+    {
+     "number": 2,
+     "stage": 8,
+     "title": "Write a scene in a play",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine Rosalind’s reaction to Silvius’ speech and to write a scene about it. Ask students to write their scenes individually and then share them with their group. You can also display the scenes around the classroom for all students to read and choose the best one.",
+     "source": "AB183 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 2 — مفتاح الإجابات مطبوع في Appendix A (صفحة 197 مطبوعة)"
+  },
+  "21": {
+   "unit": "Unit 6",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > As You Like It > Section 3",
+   "lessonRange": {
+    "studentBook": [
+     "SB118–119",
+     "SB118",
+     "SB119"
+    ],
+    "activityBook": [
+     "AB184–185",
+     "AB184",
+     "AB185"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think Rosalind and Orlando are talking about? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class. Ask students to read the extracts on page 119 to see if they were right.",
+     "source": "SB118",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extracts on page 119 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to decide if the sentences are true or false . Check answers as a whole class, eliciting further details from the extract. Ask the students to correct the false statements orally.",
+     "source": "SB119 AB184 Ex A",
+     "answerKey": "Answers 1 False – Orlando is in love with Rosalind. 2 True 3 False – Ganymede talks to Orlando about the poet who hung the poems in the forest. 4 True 5 True"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read and understand the actions of the characters",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and complete the task by putting the sentences in the order they happened. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB119 AB184 Ex B",
+     "answerKey": "Answers 3, 4, 2, 1"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to answer the questions based on the information in the extracts. When checking as a class, elicit any further details.",
+     "source": "SB119 AB184 Ex C",
+     "answerKey": "Answers 1 because he wants everyone in the forest to see Rosalind’s beauty described everywhere 2 He meets Rosalind, disguised as Ganymede. 3 Ganymede wants Orlando to come to the cottage every day and pretend to court him. 4 They go to her cottage. 5 They stop where Orlando lives in the forest."
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Put a speech in order",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to try to put Orlando’s speech in order without looking at the Student’s Book.",
+     "source": "SB119 AB185 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 3 — مفتاح الإجابات مطبوع في Appendix A (صفحة 198 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "verse",
+    "indescribable",
+    "cure"
+   ]
+  },
+  "22": {
+   "unit": "Unit 6",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 3",
+   "sectionPath": "Literature Focus > As You Like It > Section 3",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB185"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a scene in a play",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine Rosalind revealing herself to Orlando at the end of the scene. Ask students to write a scene individually and then share them with their group. You can also display the scene around the classroom for all students to read and choose the best one.",
+     "source": "AB185 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "23": {
+   "unit": "Unit 6",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > As You Like It > Section 4",
+   "lessonRange": {
+    "studentBook": [
+     "SB120–121",
+     "SB120",
+     "SB121"
+    ],
+    "activityBook": [
+     "AB186–187",
+     "AB186",
+     "AB187"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think is happening? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB120",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extracts on page 121 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to decide what the order of the events is. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB121 AB186 Ex A",
+     "answerKey": "Answers 4, 2, 3, 1"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read and understand the actions of the characters",
+     "type": "exercises",
+     "instruction": "Ask students to read the extracts again and complete the task by answering the questions. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB121 AB186 Ex B",
+     "answerKey": "Answers 1 so that she won’t hurt him 2 She wants them to kill Silvius. 3 because she is not beautiful, and she is still loved by Silvius 4 because no man has treated her as badly as he has 5 He tells her that he is more fake than a promise from a drunk. 6 He tells Silvius to keep trying with Phoebe. 7 because he’s a kind man"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to match the columns based on the information in the extracts. When checking as a class, elicit any further details.",
+     "source": "AB187 Ex C",
+     "answerKey": "Answers 1a, 2c, 3d, 4b"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Identify words in old English",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to compare the old and modern versions of the extracts and find words in the original version that correspond to the words in modern English. When they have finished, ask students to compare their answers. Then check the answers as a whole class.",
+     "source": "SB121 AB187 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 4 — مفتاح الإجابات مطبوع في Appendix A (صفحة 200 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "confess",
+    "executioner",
+    "cowardly",
+    "tyrants",
+    "butchers or murderers",
+    "frowning",
+    "reject",
+    "fake",
+    "bush",
+    "nearby"
+   ]
+  },
+  "24": {
+   "unit": "Unit 6",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 4",
+   "sectionPath": "Literature Focus > As You Like It > Section 4",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB187"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a short letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine they are Phoebe and have decided to write a letter to Ganymede to confess their love. Ask students to write a scene individually and then share them with their group. You can also display the scenes around the classroom for all students to read and choose the best one.",
+     "source": "AB187 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "25": {
+   "unit": "Unit 7",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > As You Like It > Section 5",
+   "lessonRange": {
+    "studentBook": [
+     "SB122–123",
+     "SB122",
+     "SB123"
+    ],
+    "activityBook": [
+     "AB188–189",
+     "AB188",
+     "AB189"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: Who do you think the men are and what is happening? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB122",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extracts on page 123 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to read the questions and to choose the correct answers. Check answers as a whole class, eliciting further details from the extract.",
+     "source": "SB123 AB188 Ex A",
+     "answerKey": "Answers 1b, 2c, 3b, 4a, 5a, 6c"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read and understand the actions of the characters",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and complete the task by deciding whether the sentences are true or false . When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class. Ask the students to correct the false statements orally.",
+     "source": "SB123 AB188–189 Ex B",
+     "answerKey": "Answers 1 False – Orlando was attacked by a lioness. 2 True 3 True 4 False – Duke Senior gave Oliver fresh clothes, food and drink. 5 True 6 False – Orlando told Oliver that he calls Ganymede Rosalind during their lessons. 7 False – Orlando told Oliver to give Ganymede his bloody handkerchief."
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to put the sentences in the order that they happened. When checking as a class, elicit any further details.",
+     "source": "SB123 AB189 Ex C",
+     "answerKey": "Answers 2, 5, 1, 3, 6, 4"
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Complete the summary of the extracts with words from the mo",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to complete the summary with the words from the modern English version of the text.",
+     "source": "SB123 AB189 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 5 — مفتاح الإجابات مطبوع في Appendix A (صفحة 202 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary.",
+   "vocabulary": [
+    "warning",
+    "handkerchief",
+    "scaring",
+    "revenge",
+    "deserted",
+    "care",
+    "cave",
+    "wound",
+    "bleeding"
+   ]
+  },
+  "26": {
+   "unit": "Unit 7",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 5",
+   "sectionPath": "Literature Focus > As You Like It > Section 5",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB189"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine Oliver telling Frederick about what happened between him and his brother, Orlando. Ask students to write their letter individually and then share them with their group. You can also display the letters around the classroom for all students to read and choose the best one.",
+     "source": "AB189 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  },
+  "27": {
+   "unit": "Unit 7",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > As You Like It > Section 6",
+   "lessonRange": {
+    "studentBook": [
+     "SB124–125",
+     "SB124",
+     "SB125"
+    ],
+    "activityBook": [
+     "AB190–191",
+     "AB190",
+     "AB191"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 2,
+     "title": "Read a summary of The story so far",
+     "type": "exercises",
+     "instruction": "Tell students to read The story so far . Ask: What do you think is happening? What are the celebrations for? Give students one or two minutes to discuss the question with a partner. Elicit some ideas as a whole class.",
+     "source": "SB124",
+     "answerKey": null
+    },
+    {
+     "number": 2,
+     "stage": 3,
+     "title": "Read a literary extract for gist",
+     "type": "exercises",
+     "instruction": "Ask students to read the extracts on page 125 of the Student’s Book. Monitor and help when necessary, but tell them they do not need to know the meaning of every word to understand the story. Ask students to decide if the sentences are true or false . Check answers as a whole class, eliciting further details from the extract. Ask the students to correct the false statements orally.",
+     "source": "SB125 AB190 Ex A",
+     "answerKey": "Answers 1 True 2 False – Even if they do fight, Rosalind and Orlando will not break up. 3 False – Celia and Oliver are in love. 4 True 5 False – Duke Frederick became a holy man and decided not to kill his brother. 6 True"
+    },
+    {
+     "number": 3,
+     "stage": 4,
+     "title": "Read and understand the characters of a play",
+     "type": "exercises",
+     "instruction": "Ask students to read the sentences and complete the task by matching the characters to their characteristics and actions. When they have finished, ask students to compare answers with a partner. Then check the correct answers as a whole class.",
+     "source": "SB125 AB190 Ex B",
+     "answerKey": "Answers 1f, 2c, 3b, 4e, 5d, 6a"
+    },
+    {
+     "number": 4,
+     "stage": 5,
+     "title": "Read for detail",
+     "type": "exercises",
+     "instruction": "Explain the task and ask students to answer the questions based on the information in the extracts. When checking as a class, elicit any further details.",
+     "source": "SB125 AB190–191 Ex C",
+     "answerKey": "Answers 1 Hymen says that if what he tells them is what they feel, they must be married. 2 He says that Phoebe must agree to love Silvius. 3 Hymen compares them to winter and bad weather. 4 He planned to kill his brother. 5 He gives them his crown and his lands."
+    },
+    {
+     "number": 5,
+     "stage": 6,
+     "title": "Put a speech in order",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to try to put Jacques’ speech in the correct order without looking at the Student’s Book. They then compare their answers to the version in the Student’s Book. When correcting, elicit which words helped them decide on the order of the sentences.",
+     "source": "SB125 AB191 Ex D",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": "As You Like It Section 6 — مفتاح الإجابات مطبوع في Appendix A (صفحة 204 مطبوعة)",
+   "objectives": "Read for pleasure. Develop vocabulary."
+  },
+  "28": {
+   "unit": "Unit 7",
+   "work": "As You Like It",
+   "author": "William Shakespeare",
+   "section": "Section 6",
+   "sectionPath": "Literature Focus > As You Like It > Section 6",
+   "lessonRange": {
+    "studentBook": [],
+    "activityBook": [
+     "AB191"
+    ]
+   },
+   "activities": [
+    {
+     "number": 1,
+     "stage": 7,
+     "title": "Write a letter",
+     "type": "exercises",
+     "instruction": "Put students into groups of three or four. Ask them to imagine Duke Frederick writing a letter to his brother about his decision to become a holy man. Ask students to write their letter individually and then share them with their group. You can also display the letters around the classroom for all students to read and choose the best one.",
+     "source": "AB191 Ex E",
+     "answerKey": null
+    }
+   ],
+   "answerKeyLocation": null
+  }
+ }
+}

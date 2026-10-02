@@ -1,0 +1,71 @@
+{
+ "at": "2026-10-01T22:43:00.679Z",
+ "library": "D:\\NT\\APP CHAT\\curriculum-library",
+ "dryRun": false,
+ "patchFiles": 170,
+ "applied": 77,
+ "changedEntries": 77,
+ "alreadyApplied": 3979,
+ "pendingBefore": 90,
+ "pendingAfter": 6,
+ "pendingAfterItems": [],
+ "rejectedEntries": 6,
+ "pressCharsRemoved": 0,
+ "otherCharsNormalized": 279,
+ "serializedRepairedPages": 0,
+ "serializedRepairedFields": 0,
+ "serializedRepaired": [],
+ "softWarnings": {
+  "TITLE_TOO_LONG:97": 7,
+  "FOREIGN_SUBJECT:القران الكريم": 4,
+  "TITLE_TOO_LONG:93": 4,
+  "FOREIGN_SUBJECT:الحديث النبوي": 4,
+  "TITLE_TOO_LONG:95": 4,
+  "TITLE_TOO_LONG:92": 4,
+  "TITLE_TOO_LONG:98": 3,
+  "TITLE_TOO_LONG:94": 3,
+  "TITLE_TOO_LONG:100": 3,
+  "PURPOSE_SHORT:55": 3,
+  "PURPOSE_SHORT:48": 3,
+  "TITLE_TOO_LONG:102": 2,
+  "TITLE_TOO_LONG:124": 2,
+  "TITLE_TOO_LONG:103": 2,
+  "TITLE_TOO_LONG:101": 2,
+  "TITLE_TOO_LONG:91": 2,
+  "PURPOSE_SHORT:51": 2,
+  "PURPOSE_SHORT:54": 2,
+  "PURPOSE_SHORT:57": 2,
+  "TITLE_TOO_LONG:99": 1,
+  "TITLE_TOO_LONG:108": 1,
+  "TITLE_TOO_LONG:106": 1,
+  "TITLE_TOO_LONG:112": 1,
+  "TITLE_TOO_LONG:105": 1,
+  "TITLE_TOO_LONG:113": 1,
+  "TITLE_TOO_LONG:119": 1,
+  "TITLE_TOO_LONG:110": 1,
+  "PURPOSE_SHORT:52": 1,
+  "PURPOSE_SHORT:46": 1,
+  "PURPOSE_SHORT:44": 1
+ },
+ "rejectCodes": {
+  "CJK": 3,
+  "EMPTY_FULL_TEXT_WOULD_WIPE": 3
+ },
+ "missing": [],
+ "errors": [],
+ "duplication": {
+  "educationalPurpose": {
+   "filled": 1999,
+   "unique": 1505,
+   "duplicated": 579,
+   "ratio": 29
+  },
+  "summary": {
+   "filled": 2217,
+   "unique": 2195,
+   "duplicated": 25,
+   "ratio": 1.1
+  }
+ },
+ "pdfIndex": "updated"
+}

@@ -1,0 +1,54 @@
+{
+ "at": "2026-10-01T22:43:00.940Z",
+ "count": 6,
+ "rejects": [
+  {
+   "source": "enrich-arabic-sixth-preparatory-part-1-2025-0000.json",
+   "bookId": "arabic-sixth-preparatory-part-1-2025",
+   "physicalPage": 7,
+   "field": "summary",
+   "code": "CJK",
+   "value": "متابعة نص المطالعة تصف بغداد كم城市发展 Monument والمدن المتعددة الطوائف، وتتحدث عن تحمّلها الغزوات والحروب دون فقدان هويتها، وتسجل مصطلحات الكرخ والرصافة كناحتيها "
+  },
+  {
+   "source": "enrich-mathematics-sixth-literary-pdf-0127.json",
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 89,
+   "field": "summary",
+   "code": "CJK",
+   "value": "حل مثال محلول ي求 قيمة المعامل a في دالة تكعيبية يُعطى فيها أن لها نقطة نهاية محلية عند قيمة محددة، مع تحليل اشارة الدالة وتحديد أنواع النهايات."
+  },
+  {
+   "source": "enrich-mathematics-sixth-literary-pdf-0127.json",
+   "bookId": "mathematics-sixth-literary-pdf",
+   "physicalPage": 90,
+   "field": "summary",
+   "code": "CJK",
+   "value": "مثال محلول ي求 قيم المعاملين a و b في دالة تكعيبية معطى أنها تمتلك نقطة نهاية محلية عند نقطة محددة، مع استعمال معادلتي التحقق لتحديد المعاملين ونوع النهاية."
+  },
+  {
+   "source": "agent-ocr-student.json",
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 53,
+   "field": "fullText",
+   "code": "EMPTY_FULL_TEXT_WOULD_WIPE",
+   "value": ""
+  },
+  {
+   "source": "agent-ocr-student.json",
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 65,
+   "field": "fullText",
+   "code": "EMPTY_FULL_TEXT_WOULD_WIPE",
+   "value": ""
+  },
+  {
+   "source": "agent-ocr-student.json",
+   "bookId": "student-book-sixth-pdf",
+   "physicalPage": 77,
+   "field": "fullText",
+   "code": "EMPTY_FULL_TEXT_WOULD_WIPE",
+   "value": ""
+  }
+ ]
+}
