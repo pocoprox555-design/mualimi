@@ -25,7 +25,7 @@ Render يعيد البناء تلقائيًا (~2-3 دقائق). لا حاجة �
 |---------|--------|
 | `AI_API_KEY` | مفتاح المزود؛ يمكن إدخاله مباشرة في Environment في Render، والبادئة `b64:` مدعومة |
 | `AI_ENDPOINT` | `https://opencode.ai/zen/go/v1` |
-| `AI_MODEL` | `mimo-v2.6-flash` (والاسم القديم يُحوّل تلقائيا) |
+| `AI_MODEL` | `deepseek-v4-flash-vision-exp` (أرخص نموذج في Zen يقرأ صور الصفحات صراحةً؛ الاسم القديم يُحوّل تلقائيا) |
 | `AI_CONTEXT_WINDOW` | `1000000` |
 | `AI_MAX_OUTPUT_TOKENS` | اختياري؛ الافتراضي 3000 ويُحدّ الخادم إلى 16,000 كحد أقصى |
 
