@@ -147,6 +147,7 @@ function loadState() {
   state.settings.curriculumTrack = 'ديني';
   state.conversations = state.conversations.filter((conversation) => Array.isArray(conversation.messages)).slice(0, MAX_CONVERSATIONS);
   state.exams = state.exams.filter((exam) => exam?.title && exam?.date).slice(0, 80);
+  if(state.view === 'plan') state.view = 'learn';
 }
 
 function buildStateSnapshot(maxChars) {
@@ -295,6 +296,7 @@ function openConversation(id) {
   state.activeId = id;
   loadConversationImageContext(conversation);
   state.view = 'learn';
+  closeSidebar();
   renderAll();
 }
 
@@ -305,6 +307,7 @@ function newChat() {
   state.composing = Boolean(state.pendingImages.length);
   state.imageContext = null;
   state.view = 'learn';
+  closeSidebar();
   renderAll();
   $('#messageInput')?.focus();
 }
@@ -809,7 +812,7 @@ function renderRecent() {
     button.className = `recent-item${conversation.id === state.activeId ? ' current' : ''}`;
     button.textContent = conversation.title;
     button.title = conversation.title;
-    button.addEventListener('click', () => { openConversation(conversation.id); $('#sidebar').classList.remove('open'); });
+    button.addEventListener('click', () => { openConversation(conversation.id); closeSidebar(); });
     list.appendChild(button);
   });
 }
@@ -832,6 +835,7 @@ function daysLabel(days) {
 
 function renderPlan() {
   const list = $('#examList');
+  if(!list) return;
   list.innerHTML = '';
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const upcoming = state.exams.filter((exam) => new Date(`${exam.date}T00:00:00`) >= today).sort((a, b) => a.date.localeCompare(b.date));
@@ -875,18 +879,34 @@ function renderHistory() {
 }
 
 function setView(view) {
-  if (!['learn', 'plan', 'history'].includes(view)) view = 'learn';
+  if (!['learn', 'history'].includes(view)) view = 'learn';
   state.view = view;
-  ['learn', 'plan', 'history'].forEach((name) => {
+  ['learn', 'history'].forEach((name) => {
     const section = $(`#view-${name}`);
     if (section) section.hidden = name !== view;
   });
-  $$('.nav-item, .mobile-nav-item').forEach((button) => button.classList.toggle('active', button.dataset.view === view));
+  const planSection = $('#view-plan');
+  if (planSection) planSection.hidden = true;
+  $('.nav-item, .mobile-nav-item').forEach((button) => {
+    const v = button.dataset.view;
+    if (v) button.classList.toggle('active', v === view);
+  });
   if (view === 'learn') showLearnPanel();
-  if (view === 'plan') renderPlan();
   if (view === 'history') renderHistory();
   if (view !== 'learn') updateHeaderSession(false, null);
-  $('#sidebar').classList.remove('open');
+  closeSidebar();
+}
+function closeSidebar(){
+  $('#sidebar')?.classList.remove('open');
+  const ov = $('#sidebarOverlay');
+  if(ov){ ov.hidden = true; }
+  document.body.style.overflow = '';
+}
+function openSidebar(){
+  $('#sidebar')?.classList.add('open');
+  const ov = $('#sidebarOverlay');
+  if(ov){ ov.hidden = false; }
+  document.body.style.overflow = 'hidden';
 }
 
 function renderAll() {
@@ -1310,9 +1330,10 @@ function partialReplyMarker(error) {
 }
 
 let lastStreamPaint = 0;
+const STREAM_THROTTLE_MS = 50;
 function renderStream(shell, content) {
   const now = Date.now();
-  if (now - lastStreamPaint < 130) return;
+  if (now - lastStreamPaint < 50) return;
   lastStreamPaint = now;
   fillAssistantBubble(shell.querySelector('.message-bubble'), content, true, shell.id, shell._citations || []);
   const list = $('#messageList');
@@ -1665,7 +1686,18 @@ function bindEvents() {
   bindPromptButtons();
   $('#newChatButton').addEventListener('click', newChat); $('#chatNewButton').addEventListener('click', newChat); $('#mobileNewChat').addEventListener('click', newChat); $('#heroStartButton').addEventListener('click', () => openComposer());
   $('#chatBackButton').addEventListener('click', newChat);
-  $('#mobileMenuButton').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
+  $('#mobileMenuButton').addEventListener('click', () => {
+    const sb = $('#sidebar');
+    if(sb?.classList.contains('open')) closeSidebar(); else openSidebar();
+  });
+  $('#sidebarOverlay')?.addEventListener('click', closeSidebar);
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      if($('#sidebar')?.classList.contains('open')) closeSidebar();
+      if(!$('#settingsModal')?.hidden) closeModal('settingsModal');
+      if(!$('#pageModal')?.hidden) closeModal('pageModal');
+    }
+  });
   $('#clearHistoryButton').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!state.conversations.length || !confirm('مسح كل الجلسات المحفوظة؟')) return; state.conversations = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); renderAll(); toast('مُسحت الجلسات'); });
   $('#composer').addEventListener('submit', (event) => { event.preventDefault(); const text = $('#messageInput').value.trim(); sendMessage(text, state.pendingImages.slice(0, 2)); });
   $('#messageInput').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 140)}px`; });

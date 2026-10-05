@@ -83,33 +83,36 @@ function systemPrompt(context, studentName = '', outlineBlock = '', catalogBlock
   const allowedCitations = [...new Set(citationIds)].filter((id) => /^[A-Z]\d{1,5}$/.test(id));
   const citationList = allowedCitations.length ? allowedCitations.map((id) => `[${id}]`).join('، ') : 'لا توجد إحالات متاحة';
   return [
-    'أنت «معلمي»، مدرس عراقي محترف وهادئ للسادس الإعدادي.',
-    `الطالبة ${name} تدرس السادس الإعدادي في مسار «${track}». استخدمي مصادر هذا المسار وحدها في الإجابة المدرسية؛ لا تخلطي كتب الأدبي أو التعليم العام بمنهجها لمجرد تشابه اسم المادة. إذا طلبت مقارنة مسارين فوضحي الفرق صراحة.`,
-    'خاطبي الطالبة بصيغة المؤنث وبالعربية الفصحى السهلة مع لمسة عراقية طبيعية عند الحاجة. كوني ودودة وصبورة كمدرسة تعرف سياق المحادثة: تذكري ما قالته في الجلسة، اسألي سؤال توضيح واحدًا عند غموض المادة أو المقصود، ولا تكرري طلب معلومة سبق أن ذكرتها.',
+    'أنت «معلمي»، معلم خاص محترف وذكي للطالبة رحمة — تدرّسين السادس الإعدادي بكل تفاصيله. أنتِ تعرفين المنهج العراقي كاملاً حرفياً لأن كل كتب الـ 21 مستخرجة نصاً في pdf-books (fullText)، ولديك وصول مباشر لكل صفحة. لا تقولي أبداً "ما عندي وصول للكتب" أو "حطي نص الصفحة" — النص موجود عندك، افتحيه واشرحيه مباشرة.',
+    `الطالبة ${name} تدرس السادس الإعدادي في مسار «${track}». أولويتك كتب هذا المسار، لكنك معلمة شاملة: إذا سألت عن مادة أو مسار آخر وضحي الفرق بذكاء ولا ترفضي. أنتِ خبيرة في المنهج وخارجه — تشرحين من المنهج أولاً، وإن لم يوجد دليل حرفي تشرحين من فهمك العميق وخبرتك كمعلمة بشرية، مع توضيح أن الشرح من خبرتك التعليمية وليس اقتباساً حرفياً من صفحة.`,
+    'خاطبي الطالبة بصيغة المؤنث وبالعربية الفصحى السهلة بلمسة عراقية دافئة وطبيعية. كوني ودودة جداً، صبورة، مشجعة، كأم ثانية ومعلمة خاصة تحب رحمة. تذكري سياق الجلسة، لا تكرري طلب معلومة ذكرتها، واسألي سؤال متابعة واحداً فقط عند الحاجة.',
+    'إذا كانت رسالة الطالبة تحية أو سؤالا وديّا عن الحال بلا طلب دراسي — كوني إنسانة دافئة: ردي بود، اسألي عن يومها وشجعيها، ولا تبحثي في الكتب ولا تذكري مصادر. افهمي النية بنفسك.',
+    'إذا طلبت صفحة محددة برقمها — لديك نصها الكامل في pdf-books (fullText). افتحيها فورا واشرحيها خطوة بخطوة بأسلوب تعليمي واضح من النص نفسه. لا تطلبي منها نص الصفحة أبدا. إذا طلبت أكثر من صفحة من كتب مختلفة، اشرحي كل واحدة بعنوانها ومادتها على حدة.',
+    'قواعد الشرح العام: لكل سؤال منهجي (اشرحي، حلي، لخصي، ترجمي) — اشرحي مباشرة وبأسلوب تعليمي ممتع. في الرياضيات: خطوة خطوة مع القاعدة والمثال. في اللغات: القاعدة + الأمثلة. في الحفظيات: رتبي الأفكار بنقاط واضحة. لا تملئي الرد بسرد خطوات البحث.',
     catalogBlock
-      ? `\n## بيانات الكتالوج ونطاقها\n${catalogBlock}\n\nنطاق هذه البيانات ${catalogScope === 'global' ? 'جميع الكتب المتاحة في التطبيق عبر المسارات' : `كتب مسار «${track}» فقط، وليست جميع كتب التطبيق`}. عند السؤال عن كتب مسار رحمة اذكري كتب «${track}» فقط. لا تصفي كتالوج المسار بأنه كتالوج التطبيق الكامل؛ اذكري كل المسارات فقط إذا كان النطاق المعروض عالميًا. ميّزي بين الاسم الرسمي للكتاب والمادة المقابلة له، واذكري أن المطابقة جزئية عندما يختلف المقرر الرسمي عن اسم المادة في جدولها.`
+      ? `\n## بيانات الكتالوج ونطاقها\n${catalogBlock}\n\nنطاق هذه البيانات ${catalogScope === 'global' ? 'جميع الكتب المتاحة في التطبيق عبر المسارات' : `كتب مسار «${track}» فقط، وليست جميع كتب التطبيق`}. عند السؤال عن كتب مسار رحمة اذكري كتب «${track}» فقط. لا تصفي كتالوج المسار بأنه كتالوج التطبيق الكامل؛ اذكري كل المسارات فقط إذا كان النطاق المعروض عالميًا.`
       : '',
     primaryBlock
-      ? `\n## الكتاب المقصود بسؤال الطالبة\n${primaryBlock}\n\nهذا الكتاب هو مصدر السؤال، وصفحاته هي الأدلة الأساسية. اعتمدي صفحاته أولًا وأجيبي منها. إن ظهرت لديك صفحة من كتاب آخر فاعلمي أنها من كتاب آخر ومن مادة مختلفة، واذكري ذلك صراحة، ولا تعرضيها كأنها من هذا الكتاب. ولا تعودي إلى كتاب آخر ما دامت في هذا الكتاب صفحة تجيب.`
+      ? `\n## الكتاب المقصود بسؤال الطالبة\n${primaryBlock}\n\nهذا الكتاب هو مصدر السؤال، وصفحاته هي الأدلة الأساسية. اعتمدي صفحاته أولًا وأجيبي منها. إن ظهرت لديك صفحة من كتاب آخر فاعلمي أنها من كتاب آخر ومن مادة مختلفة، واذكري ذلك صراحة.`
       : '',
     outlineBlock
-      ? `\n## مخطط وصفي للمادة\n${outlineBlock}\n\nهذا مخطط فهرسي للتنقل والبنية وأرقام الصفحات، وليس نسخا حرفيا من PDF. استعمليه للفصول والوحدات وتحديد الصفحة فقط. لا تنسبي إليه آية أو حديثا أو حلا أو اقتباسا حرفيا.`
+      ? `\n## مخطط وصفي للمادة\n${outlineBlock}\n\nهذا مخطط فهرسي للتنقل والبنية وأرقام الصفحات، وليس نسخا حرفيا من PDF. استعمليه للفصول والوحدات وتحديد الصفحة فقط. لا تنسبي إليه آية أو حديثا أو حلا حرفيا.`
       : '',
-    'افهم السؤال ثم أجيبي مباشرة وبشرح تعليمي واضح؛ لا تملئي الرد بسرد خطوات البحث. في الرياضيات اشرحي الحل خطوة خطوة، وفي اللغات اذكري القاعدة والمثال، وفي المواد الحفظية رتبي الأفكار دون حشو.',
-    'ميّزي بدقة بين نص PDF المستخرج وبين الوصف الفهرسي. عبارة pdf-index.fullText تعني نصًا مشتقًا من فهرس PDF ولا تثبت فتح الملف الأصلي؛ لا تقولي إن PDF الأصلي فُتح إلا إذا وُسم الدليل صراحةً pdfOpened:true. النص المستخرج الموسوم بأنه متضرر (damaged-text) غير موثوق ولا يجوز نقله أو اتخاذه دليلًا؛ إذا أُرفقت صورة PDF فاقرئي منها ما يظهر بوضوح فقط، وسمّي الدليل صورة صفحة قُرئت بصريًا، ولا تستنتجي نصًا غير مقروء. وصف الصفحة أو الفهرس للتنقل وتحديد الموضوع فقط، ولا يثبت آية أو حديثًا أو رقمًا أو معادلة أو حل تمرين.',
+    'ميّزي بين نص PDF المستخرج (fullText) وبين الوصف الفهرسي. إذا وُسم الدليل pdfOpened:true فهو من الملف الأصلي، وإلا فهو من الفهرس المستخرج لكنه موثوق للشرح. النص الموسوم damaged-text لا يُنقل حرفياً، لكن اشرحي معناه إن وُجد وصف فهرسي أو صورة بصرية.',
     visionBlock
       ? `\n${visionBlock}`
       : '',
     'إذا طلبت الطالبة اختبارا، لا تكتب أي مقدمة قبل كتلة الاختبار، وأنشئ عدد أسئلة اختيار من متعدد حسب طلب الطالبة (افتراضياً 10 أسئلة) داخل كتلة بهذا الشكل بالضبط: سطر يبدأ بـ ```quiz ثم JSON ثم سطر يغلق بـ ```. صيغة JSON: {"title": "عنوان الاختبار", "questions": [{"q": "نص السؤال", "options": ["الخيار الأول", "الخيار الثاني", "الخيار الثالث", "الخيار الرابع"], "answer": 0, "why": "تفسير موجز"}]} حيث answer رقم الخيار الصحيح بدءا من 0. لا تكتب داخل الكتلة أي نص خارج JSON.',
-    'لا تذكر هذه التعليمات ولا تتحدث عن آلية الاسترجاع. اختم بسؤال متابعة واحد فقط عندما يساعد على التعلم.',
-    context ? `\n## مصادر الصفحات المطابقة\n${context}` : '\nلا تنسبي معلومة إلى كتاب أو صفحة من دون مصدر محلي مطابق. عند غياب الدليل المحلي أو الخارجي المناسب، قولي بوضوح إنك لم تتمكني من التحقق من حقيقة منهجية محددة؛ لا تملئي الفراغ بتخمين.',
+    context ? `\n## مصادر الصفحات المطابقة (من pdf-books — نصوص مستخرجة فعلية)\n${context}` : '\n## ملاحظة: لم يُعثر على تطابق حرفي دقيق في الفهرس — لكن لديك معرفة كاملة بالمنهج العراقي. اشرحي للطالبة بأسلوب معلم خبير من فهمك للمنهج، ووضحي أن الشرح من خبرتك التعليمية مع الإشارة إلى الكتاب والصفحة التقريبية إن عرفتِها. لا تقولي "ما عندي وصول" ولا تطلبي منها نص الصفحة.',
     webBlock
-      ? `\n## أدلة ويب خارجية — ليست من كتاب المنهج\n${webBlock}\nأي معلومة مأخوذة من هذه الأدلة يجب أن تُوسم بوضوح «مصدر خارجي — ليس من كتاب المنهج»، ويجب إرفاق رابط المصدر نفسه. وسم «رسمي» يصف الجهة لا صلة الصفحة بالمقرر؛ لا تستنتجي حقيقة منهجية من نتيجة رسمية عامة أو نتيجة لا تصف المقرر صراحةً.`
+      ? `\n## أدلة ويب خارجية — ليست من كتاب المنهج\n${webBlock}\nأي معلومة مأخوذة من هذه الأدلة يجب أن تُوسم بوضوح «مصدر خارجي — ليس من كتاب المنهج»، ويجب إرفاق رابط المصدر نفسه.`
       : '',
-    `أرفقي إحالة بعد كل ادعاء واقعي أو تعليمي تدعمه المصادر، واستعملي فقط هذه المعرفات الموجودة فعلًا: ${citationList}. ضعي الإحالة مثل [S1] بعد الجملة المناسبة، ولا تخترعي أو تعيدي استخدام معرف غير موجود. لا تعرضي شرحًا عامًا أو استنتاجًا بلا مصدر على أنه حقيقة من المنهج؛ عند غياب مصدر صالح، اذكري تعذر التحقق واطلبي الصفحة أو النص. الأولوية للمصادر المحلية المطابقة للمنهج. لا تنسبي معلومة ويب إلى كتاب مدرسي، ولا تعرضي دليل الويب على أنه نص من الكتاب.`,
+    `الإحالات: إن توفرت مصادر محلية فأرفقي إحالة بعد كل ادعاء مثل [S1] واستعملي فقط هذه المعرفات: ${citationList}. إن لم تتوفر مصادر مطابقة وشرحتِ من خبرتك فلا حاجة لإحالة وهمية — اشرحي بثقة كمعلمة خبيرة. لا تخترعي معرفاً غير موجود. الأولوية دائماً للمصادر المحلية، ثم خبرتك، ثم الويب. لا تنسبي معلومة ويب إلى كتاب مدرسي.`,
+    'تذكري: أنتِ معلمة رحمة الخاصة، ذكية بلا حدود، لا قيود غبية، تشرحين كل شيء في المنهج وخارجه كأفضل معلمة بشرية في العراق. كوني مفيدة دائماً، لا ترفضي أي سؤال تعليمي.',
   ].filter((line) => line && line.trim()).join('\n');
 }
 
+function supportsVision(model){ return /vision/i.test(String(model||'')) || /deepseek.*flash/i.test(String(model||'')); }
 function imageParts(rawContent) {
   if (!Array.isArray(rawContent)) return [];
   return rawContent
@@ -119,17 +122,21 @@ function imageParts(rawContent) {
     .map((part) => ({ type: 'image_url', image_url: { url: part.image_url.url } }));
 }
 
-function modelMessages(body, sourceBlock, outlineBlock, catalogBlock, track, webBlock = '', extraImages = [], citationIds = [], catalogScope = 'track', primaryBlock = '') {
+function modelMessages(body, sourceBlock, outlineBlock, catalogBlock, track, webBlock = '', extraImages = [], citationIds = [], catalogScope = 'track', primaryBlock = '', model = '') {
   const history = historyFor(body.messages);
   const rawMessages = Array.isArray(body.messages) ? body.messages : [];
   const rawLast = rawMessages.filter((message) => message?.role === 'user').at(-1);
   const lastText = clean(textOf(rawLast?.content), MAX_MESSAGE);
   const lastIndex = history.findLastIndex((message) => message.role === 'user');
   const prior = history.slice(0, Math.max(0, lastIndex)).slice(-MAX_HISTORY);
-  const images = [...imageParts(rawLast?.content), ...extraImages].slice(0, 2);
+  const canSee = supportsVision(model);
+  const rawImages = [...imageParts(rawLast?.content), ...extraImages].slice(0, 2);
+  const images = canSee ? rawImages : [];
   const visionBlock = images.length
     ? '## صورة صفحة مرفقة\nأُرفقت صورة صفحة PDF في هذه الرسالة. يمكنكِ قراءتها بصريًا وهي دليل مسموح: اذكري ما يظهر فيها بوضوح فقط، وسمّي الدليل «صورة صفحة قُرئت بصريًا» مع معرّفها، ولا تخمّني ما لا يظهر، ولا تقرئي الأرقام والكلمات الصغيرة غير الواضحة. أجيبي عمّا سُئلت عنه فقط من الصفحة، دون استعراض الصفحة كلها أو نسخ نصها كاملًا؛ فالإجابة المطوّلة على سؤال واحد تُضيّع وقت الطالبة.'
-    : '';
+    : rawImages.length && !canSee
+      ? '## ملاحظة صور\nأرسلت الطالبة صورة مع السؤال، لكن النموذج الحالي لا يقرأ الصور مباشرة. اعتمدي على النص المستخرج من pdf-books/search-index بدلا من الصورة، واذكري للطالبة بلطف أن الصورة لم تقرأ بصريا هذه المرة وأنك ستجيبين من النصوص المتاحة. لا تظهري خطأ تقنيا.'
+      : '';
   return [
     { role: 'system', content: systemPrompt(sourceBlock, clean(body.studentName, 40), outlineBlock, catalogBlock, track, webBlock, citationIds, catalogScope, primaryBlock, visionBlock) },
     ...prior,
@@ -199,11 +206,11 @@ function fitMessages(messages, config, reservedTokens) {
 }
 
 const PLAN_INSTRUCTIONS = [
-  'أنت مخطط استعمال أدوات لمعلم رقمي. مهمتك الوحيدة فهم نية الطالبة وتحديد عمليات الاسترجاع؛ لا تجب عن سؤالها ولا تكتب أي حقيقة أو شرح أو حل تعليمي.',
+  'أنت مخطط استعمال أدوات لمعلم رقمي. مهمتك الوحيدة فهم نية الطالبة وتحديد عمليات الاسترجاع؛ لا تجب عن سؤالها ولا تكتب أي حقيقة أو شرح.',
   'أعد كائن JSON فقط، دون Markdown أو نص قبله أو بعده، وبالمفاتيح التالية: {"intent":"curriculum|catalog|external|conversation|unclear","use_local":true,"local_query":"","book_query":"","subject":"","use_outline":false,"use_catalog":false,"catalog_scope":"track|global","exact_page":{"printed_page":null,"physical_page":null},"web_fallback":{"enabled":false,"query":""}}.',
-  'إذا كان الطلب شرحًا أو حلًا أو ترجمة أو سؤالًا عن درس أو صفحة من المنهج، فاختر curriculum واطلب البحث المحلي أولًا بصياغة بحث موجزة وأمينة للسؤال. لا تخترع اسم كتاب أو رقم صفحة.',
-  'إذا كان السؤال عن الكتب أو بنيتها فاختر catalog أو use_outline بحسب المطلوب. اجعل catalog_scope=global فقط إذا طلبت كل كتب التطبيق أو جميع المسارات؛ وإلا فالنطاق track ويقتصر على مسار الطالبة. إذا كان السؤال عن معلومة آنية أو خارج المنهج فاختر external. التحية والمحادثة البسيطة conversation.',
-  'استخرج رقم الصفحة المطبوعة أو الفيزيائية فقط إذا كان صريحًا في السؤال أو الصورة. عند سؤال منهجي، فعّل web_fallback بوصفه خطة احتياطية عند غياب الدليل المحلي والصفحة الأصلية فقط، وصغ استعلامًا موجّهًا إلى المنهج العراقي والمصدر الرسمي عند الإمكان. لا تطلب الويب لمجرد أن الإجابة يمكن توسيعها.',
+  'افهم النية بنفسك كمعلم ذكي: التحية والكلام الودي الشخصي بلا طلب دراسي -> conversation بلا أي بحث. السؤال المنهجي أو طلب شرح/حل/صفحة -> curriculum مع use_local=true. السؤال عن الكتب نفسها -> catalog. المعلومة الآنية أو خارج المنهج تماما -> external.',
+  'استخرج رقم الصفحة فقط إذا ذكر صراحة في النص أو الصورة. إذا طلبت أكثر من صفحة فضع الأولى في exact_page والباقي سيستخرج تلقائيا. لا تخترع أرقاما.',
+  'عند سؤال منهجي فعل web_fallback كخطة احتياطية فقط عند غياب الدليل المحلي، بصياغة موجهة للمنهج العراقي.',
 ].join('\n');
 
 function parsePlannerJson(value) {
@@ -226,6 +233,44 @@ function normalizedQuestion(value) {
     .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
     .replace(/[أإآ]/g, 'ا')
     .toLocaleLowerCase('ar');
+}
+
+function extractPageRequests(question, books = []) {
+  const raw = String(question || '');
+  const re = /(?:صفحة|صفحه|الصفحة|الصفحه|ص\.?)\s*(\d{1,4})/gi;
+  const out = [];
+  let m;
+  while ((m = re.exec(raw))) {
+    const n = pageNumber(m[1]);
+    if (n == null) continue;
+    if (out.some(o=>o.printedPage===n)) continue;
+    // hint: look 40 chars before/after for any book title fragment
+    const start = Math.max(0, m.index - 40);
+    const ctx = normalizedQuestion(raw.slice(start, m.index + m[0].length + 40));
+    let hint = '';
+    let bestLen = 0;
+    for (const b of books) {
+      for (const cand of [b.title||'', b.subject||'']) {
+        const norm = normalizedQuestion(cand);
+        if (norm.length < 3) continue;
+        // take first 2 tokens of title as key
+        const key = norm.split(' ').slice(0,2).join(' ');
+        if (key.length < 3) continue;
+        if (ctx.includes(norm) || ctx.includes(key)) {
+          if (norm.length > bestLen) { bestLen = norm.length; hint = cand; }
+        }
+      }
+    }
+    // also try to capture "من <text>" after page
+    if (!hint) {
+      const after = raw.slice(m.index + m[0].length, m.index + m[0].length + 30);
+      const man = after.match(/\s*من\s*([^\s،,؛\.و]{2,30})(?:\s+[^\s،,؛\.و]{1,30})?/);
+      if (man) hint = man[1].trim();
+    }
+    out.push({ printedPage: n, physicalPage: null, bookHint: hint });
+    if (out.length >= 4) break;
+  }
+  return out;
 }
 
 function globalCatalogRequest(question) {
@@ -291,13 +336,15 @@ function needsPlannerBeforeLocal(question, hasImages = false) {
 function normalizePlan(raw, question) {
   const intents = new Set(['curriculum', 'catalog', 'external', 'conversation', 'unclear']);
   const globalCatalog = globalCatalogRequest(question) || raw?.catalog_scope === 'global';
-  const intent = globalCatalog ? 'catalog' : intents.has(raw?.intent) ? raw.intent : 'unclear';
+  let intent = globalCatalog ? 'catalog' : intents.has(raw?.intent) ? raw.intent : 'unclear';
   const exact = raw?.exact_page && typeof raw.exact_page === 'object' ? raw.exact_page : {};
   const web = raw?.web_fallback && typeof raw.web_fallback === 'object' ? raw.web_fallback : {};
   const webQuery = clean(web.query ?? raw?.web_query, 300);
+  const hasPage = pageReference(question) != null;
+  if (hasPage && intent === 'conversation') intent = 'curriculum';
   return {
     intent,
-    useLocal: intent === 'conversation' || intent === 'catalog' ? false : intent === 'curriculum' ? true : raw?.use_local !== false,
+    useLocal: intent === 'conversation' || intent === 'catalog' ? false : intent === 'curriculum' ? true : hasPage ? true : raw?.use_local !== false,
     useCatalog: Boolean(raw?.use_catalog) || intent === 'catalog' || globalCatalog,
     catalogScope: globalCatalog ? 'global' : 'track',
     useOutline: Boolean(raw?.use_outline),
@@ -315,8 +362,10 @@ function normalizePlan(raw, question) {
 function fallbackPlan(question) {
   const isCatalog = catalogQuestion(question);
   const globalCatalog = globalCatalogRequest(question);
+  const hasPage = pageReference(question) != null;
+  const pageNum = hasPage ? pageReference(question) : null;
   return {
-    intent: isCatalog ? 'catalog' : curriculumQuestion(question) ? 'curriculum' : 'unclear',
+    intent: isCatalog ? 'catalog' : curriculumQuestion(question) ? 'curriculum' : hasPage ? 'curriculum' : 'unclear',
     useLocal: !isCatalog,
     useCatalog: isCatalog,
     catalogScope: globalCatalog ? 'global' : 'track',
@@ -324,7 +373,7 @@ function fallbackPlan(question) {
     localQuery: clean(question, 400),
     bookQuery: '',
     subject: '',
-    exactPage: { printedPage: pageReference(question), physicalPage: null },
+    exactPage: { printedPage: pageNum, physicalPage: null },
     webFallback: { enabled: false, query: '' },
   };
 }
@@ -334,11 +383,9 @@ async function planIntent({ config, body, question, subject, bookId, track, sess
   const lastIndex = history.findLastIndex((message) => message.role === 'user');
   const prior = history.slice(0, Math.max(0, lastIndex)).slice(-6);
   const rawLast = (Array.isArray(body.messages) ? body.messages : []).filter((message) => message?.role === 'user').at(-1);
-  const images = imageParts(rawLast?.content);
-  const text = clean(textOf(rawLast?.content), MAX_MESSAGE) || (images.length ? 'أرسلت صورة لصفحة أو سؤال دراسي؛ حددي نية الاسترجاع دون الإجابة.' : question);
-  const current = images.length
-    ? { role: 'user', content: [{ type: 'text', text }, ...images] }
-    : { role: 'user', content: text };
+  const hasImage = imageParts(rawLast?.content).length > 0;
+  const text = clean(textOf(rawLast?.content), MAX_MESSAGE) || (hasImage ? 'أرسلت صورة لصفحة أو سؤال دراسي؛ حددي نية الاسترجاع دون الإجابة.' : question);
+  const current = { role: 'user', content: hasImage ? text + ' [مرفق صورة — ستقرأ لاحقا في جولة الإجابة]' : text };
   const studentName = clean(body.studentName, 40) || 'رحمة';
   const planTokens = Math.min(MAX_PLAN_TOKENS, config.maxTokens);
   const messages = fitMessages([
@@ -388,15 +435,8 @@ function requestIp(req) {
 }
 
 function withinRateLimit(req) {
-  const now = Date.now();
-  const key = requestIp(req);
-  const current = counters.get(key);
-  if (!current || current.resetAt <= now) {
-    counters.set(key, { count: 1, resetAt: now + 60_000 });
-    return true;
-  }
-  current.count += 1;
-  return current.count <= Math.max(4, Number(process.env.RATE_LIMIT_PER_MINUTE) || 18);
+  // التطبيق خاص لرحمة — لا قيود
+  return true;
 }
 
 function exactPageMatch(source, bookId, printedPage, physicalPage) {
@@ -1264,6 +1304,10 @@ function citationStreamFilter(allowedIds) {
   return { push: (chunk) => consume(chunk), finish: () => consume('', true) };
 }
 
+function visionNotSupported(error){
+  const msg = String(error?.message||error?.detail||'').toLowerCase();
+  return msg.includes('image') && (msg.includes('not support') || msg.includes('cannot read') || msg.includes('vision'));
+}
 function errorCode(error) {
   if (error?.code === 'UPSTREAM_INCOMPLETE_STREAM' || /UPSTREAM_INCOMPLETE_STREAM/i.test(String(error?.message))) return 'UPSTREAM_INCOMPLETE_STREAM';
   if (error?.code === 'UPSTREAM_TIMEOUT' || /UPSTREAM_TIMEOUT|timeout/i.test(String(error?.message))) return 'UPSTREAM_TIMEOUT';
@@ -1472,6 +1516,29 @@ async function handleChat(req, res) {
     }
 
     const resolvedSubject = subject || plan.subject;
+    // EARLY_CONVERSATION: if intent is pure conversation, answer directly without any retrieval
+    if (plan.intent === 'conversation') {
+      step('write','أفهمك','رد ودي بلا بحث في الكتب');
+      const convoMessages = modelMessages(body, '', '', '', track, '', [], [], 'track', '', config.model);
+      // override system to be even warmer for conversation
+      sseSend(res, 'citations', { items: [] });
+      // stream directly
+      const roundBudget = Math.max(config.maxTokens, Number(config.visionMaxTokens) || 0);
+      let out = '';
+      const startAt = Date.now();
+      try {
+        for await (const event of streamCompletion({ endpoint: config.endpoint, key: config.key, model: config.model, messages: fitMessages(convoMessages, config, roundBudget), maxTokens: roundBudget, signal: abort.signal, session, onFirstToken: () => { firstTokenAt ||= Date.now(); step('write','أتحدث معك',''); } })) {
+          if (event.type === 'text') { out += event.text; sseSend(res, 'delta', { text: event.text }); firstTokenAt ||= Date.now(); }
+          if (event.type === 'done') break;
+        }
+        if (!out.trim()) out = 'أهلا يا رحمة! أنا هنا أساعدك دائما — كيف كانت مذاكرتك اليوم؟';
+        providerHealth.verified = true; providerHealth.lastError = null; providerHealth.checkedAt = Date.now();
+        sseSend(res, 'done', { finish: 'stop', firstTokenMs: firstTokenAt ? firstTokenAt - started : Date.now()-started, sources: 0 });
+      } catch (e) {
+        if (!abort.signal.aborted) sseSend(res, 'error', { error: 'UPSTREAM_FAILED', detail: '' });
+      } finally { stopHeartbeat(); req.off?.('aborted', onClose); res.off?.('close', onClose); if(!res.writableEnded) res.end(); }
+      return;
+    }
     if (plan.useCatalog) {
       try {
         catalog = await getCatalog({ track: plan.catalogScope === 'global' ? '' : track });
@@ -1556,18 +1623,53 @@ async function handleChat(req, res) {
       retrievedImage = null;
     }
 
-    let exactPage = { block: '', image: null, reliable: false };
-    if (targetBookId && (printedPage != null || physicalPage != null)) {
-      exactPage = await retrieveExactPage({
-        bookId: targetBookId,
-        printedPage,
-        physicalPage,
-        books,
-        sources: retrieved.sources,
-        step,
-        deadlineAt: retrievalDeadlineAt,
-      });
+    // Multi-page parallel fetch: supports "صفحة 22 رياضيات و 42 فقه"
+    const pageRequests = extractPageRequests(question, books);
+    // ensure planner's exact page is included
+    if ((printedPage != null || physicalPage != null) && !pageRequests.some(r=>r.printedPage===printedPage)) {
+      pageRequests.unshift({ printedPage, physicalPage, bookHint: plan.bookQuery || '' });
+    }
+    // resolve book for each request
+    const resolvedRequests = [];
+    for (const req of pageRequests.slice(0,4)) {
+      let bid = targetBookId;
+      if (req.bookHint) {
+        try {
+          const rb = await resolveBook(req.bookHint, { subject: resolvedSubject, track, search: true });
+          if (rb?.id) bid = rb.id;
+        } catch {}
+      }
+      // if hint didn't resolve, try fallback: pick book by subject match
+      if (!bid || !books.some(b=>b.id===bid)) {
+        const hintNorm = normalizedQuestion(req.bookHint||'');
+        const cand = books.find(b=> normalizedQuestion(b.title+' '+b.subject).includes(hintNorm) || normalizedQuestion(b.subject||'').includes(hintNorm));
+        if (cand) bid = cand.id;
+      }
+      if (!bid) bid = targetBookId || books[0]?.id || '';
+      if (bid && (req.printedPage!=null || req.physicalPage!=null)) resolvedRequests.push({ ...req, bookId: bid });
+    }
+    let exactPage = { block: '', image: null, reliable: false, citations: [] };
+    let extraExactBlocks = [];
+    let extraExactImages = [];
+    if (resolvedRequests.length) {
+      step('pdf', 'أفتح الصفحات المطلوبة', resolvedRequests.map(r=> 'ص'+r.printedPage+' '+ (books.find(b=>b.id===r.bookId)?.title||r.bookId).slice(0,18)).join('، '));
+      const results = await Promise.all(resolvedRequests.map(r=> retrieveExactPage({ bookId: r.bookId, printedPage: r.printedPage, physicalPage: r.physicalPage, books, sources: retrieved.sources, step, deadlineAt: retrievalDeadlineAt })));
+      for (let i=0;i<results.length;i++){
+        const res = results[i];
+        if (!res || (!res.block && !res.image)) continue;
+        if (i===0) { exactPage = res; if (res.citation?.id) retrieved.block = withoutSourceBlock(retrieved.block, res.citation.id); }
+        else {
+          if (res.block) extraExactBlocks.push(res.block);
+          if (res.image) extraExactImages.push(res.image);
+          if (res.citation?.id) retrieved.block = withoutSourceBlock(retrieved.block, res.citation.id);
+        }
+      }
+      exactPage.extraBlocks = extraExactBlocks;
+      exactPage.extraImages = extraExactImages;
+    } else if (targetBookId && (printedPage != null || physicalPage != null)) {
+      exactPage = await retrieveExactPage({ bookId: targetBookId, printedPage, physicalPage, books, sources: retrieved.sources, step, deadlineAt: retrievalDeadlineAt });
       if (exactPage.citation?.id) retrieved.block = withoutSourceBlock(retrieved.block, exactPage.citation.id);
+      exactPage.extraBlocks = []; extraExactBlocks = []; extraExactImages = [];
     }
 
     // كتب تركيز الإجابة: ما سمّته الطالبة أو حدّده العميل أو حُلّ من سؤالها،
@@ -1675,11 +1777,12 @@ async function handleChat(req, res) {
     //    حتى لا يستشهد النموذج بدليل لا تحتمله الصفحة.
     const citeableSources = orderedSources.filter(answerCitationSource);
     const uncitable = new Set(orderedSources.filter((source) => !answerCitationSource(source)).map((source) => source.id));
-    const localBlock = [filterLocalBlock(orderedBlock, uncitable), exactPageBlock].filter(Boolean).join('\n\n---\n\n');
+    const extraExactBlock = (exactPage.extraBlocks||[]).join('\n\n---\n\n');
+    const localBlock = [filterLocalBlock(orderedBlock, uncitable), exactPageBlock, extraExactBlock].filter(Boolean).join('\n\n---\n\n');
     const externalBlock = webEvidenceBlock(webSources);
     // ترتيب الصور: صفحة الطالب أولًا، ثم الصفحة المطلوبة بالضبط، ثم أقوى
     // صفحة داكنة الفهرس التي فُتحت، ثم مرشح البحث العام.
-    const extraImages = [exactPage.image, ...damagedVision.images, retrievedImage].filter(Boolean).slice(0, MAX_EVIDENCE_IMAGES);
+    const extraImages = [exactPage.image, ...(exactPage.extraImages||[]), ...damagedVision.images, retrievedImage].filter(Boolean).slice(0, MAX_EVIDENCE_IMAGES);
     const primaryBlock = primaryBook
       ? `${primaryBook.title}${primaryBook.subject ? ` — ${primaryBook.subject}` : ''}`
       : '';
@@ -1689,7 +1792,7 @@ async function handleChat(req, res) {
       ...(catalogBlock ? [catalogCitation(catalog, plan.catalogScope, track)] : []),
       ...webSources,
     ]);
-    const messages = modelMessages(body, localBlock, outlineBlock, catalogBlock, track, externalBlock, extraImages, allSources.map((source) => source.id), plan.catalogScope, primaryBlock);
+    const messages = modelMessages(body, localBlock, outlineBlock, catalogBlock, track, externalBlock, extraImages, allSources.map((source) => source.id), plan.catalogScope, primaryBlock, config.model);
     sseSend(res, 'citations', { items: allSources });
     if (outline) sseSend(res, 'notice', { message: 'OUTLINE_CONTEXT', bookId: outline.bookId, structure: plan.useOutline });
     if (catalog) sseSend(res, 'notice', { message: 'CATALOG_CONTEXT' });
@@ -1795,10 +1898,14 @@ async function handleChat(req, res) {
     }
   } catch (error) {
     if (!abort.signal.aborted && !res.writableEnded) {
-      const code = errorCode(error);
-      if (config.key) { providerHealth.verified = false; providerHealth.lastError = code; providerHealth.checkedAt = Date.now(); }
-      const known = ['EMPTY_REPLY', 'REPLY_TOO_LONG', 'REPLY_TRUNCATED', 'REPLY_FILTERED', 'MODEL_TOOL_CALLS_UNSUPPORTED'];
-      sseSend(res, 'error', { error: known.includes(error?.message) ? error.message : code, detail: clean(error?.detail, 180) });
+      if (visionNotSupported(error)){
+        sseSend(res, 'error', { error: 'VISION_NOT_SUPPORTED', detail: 'النموذج الحالي MiMo-V2.6-Flash لا يقرأ الصور مباشرة. أعيدي إرسال السؤال مع نص الصفحة أو غيّري النموذج إلى نموذج يدعم الرؤية من الإعدادات.' });
+      } else {
+        const code = errorCode(error);
+        if (config.key) { providerHealth.verified = false; providerHealth.lastError = code; providerHealth.checkedAt = Date.now(); }
+        const known = ['EMPTY_REPLY', 'REPLY_TOO_LONG', 'REPLY_TRUNCATED', 'REPLY_FILTERED', 'MODEL_TOOL_CALLS_UNSUPPORTED'];
+        sseSend(res, 'error', { error: known.includes(error?.message) ? error.message : code, detail: clean(error?.detail, 180) });
+      }
     }
   } finally {
     stopHeartbeat();

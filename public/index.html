@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-  <meta name="theme-color" content="#102d38">
-  <meta name="description" content="معلمي: مساعدك الدراسي من كتب السادس الإعدادي">
-  <title>معلمي | من كتبك إلى فهمك</title>
+  <meta name="theme-color" content="#0f2d38">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="معلمي — معلمك الخاص للسادس الإعدادي. يشرح أي صفحة من كتبك مباشرة بأسلوب هادئ واحترافي.">
+  <title>معلمي — معلمك الخاص</title>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=4.7">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.0">
 </head>
 <body>
-  <div id="offlineBar" class="offline-bar" role="status" aria-live="polite" hidden>لا يوجد اتصال. قد تتوفر المحادثات المحفوظة؛ البحث في الكتب والرد يحتاج إلى اتصال.</div>
+  <div id="offlineBar" class="offline-bar" role="status" aria-live="polite" hidden>لا يوجد اتصال — المحادثات المحفوظة متاحة، والرد يحتاج اتصالاً.</div>
 
   <div id="app" class="app-shell" hidden>
     <header class="app-header">
       <button id="mobileMenuButton" class="icon-button mobile-only" aria-label="فتح القائمة">☰</button>
       <div id="headerBrand" class="brand-lockup">
         <span class="brand-mark">م</span>
-        <span><strong>معلمي</strong><small>تعلم من المصدر</small></span>
+        <span><strong>معلمي</strong><small>معلمك الخاص للسادس</small></span>
       </div>
       <div id="headerSession" class="header-session" hidden>
-        <button id="chatBackButton" class="header-back" aria-label="رجوع للرئيسية">→</button>
+        <button id="chatBackButton" class="header-back" aria-label="رجوع">→</button>
         <div class="header-session-text">
           <span class="kicker">جلسة تعلم</span>
           <strong id="headerSessionTitle">جلسة جديدة</strong>
         </div>
       </div>
-      <div id="headerCenter" class="header-center"><span class="connection-dot"></span><span id="connectionText">جار التحقق...</span></div>
+      <div id="headerCenter" class="header-center"><span class="connection-dot"></span><span id="connectionText">جار التحقق…</span></div>
       <div class="header-actions">
         <button id="chatNewButton" class="icon-button header-new-chat" aria-label="جلسة جديدة" hidden>＋</button>
         <button id="settingsButton" class="icon-button" aria-label="الإعدادات">⚙</button>
@@ -38,39 +40,44 @@
     </header>
 
     <div id="appGrid" class="app-grid">
-      <aside id="sidebar" class="sidebar">
+      <aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية">
         <button id="newChatButton" class="button button-primary new-chat-button"><span>＋</span> جلسة جديدة</button>
-        <nav class="side-nav" aria-label="التنقل الرئيسي">
+        <nav class="side-nav" aria-label="التنقل">
           <button class="nav-item active" data-view="learn"><span class="nav-icon">◈</span> جلسة التعلم</button>
-          <button class="nav-item" data-view="plan"><span class="nav-icon">◇</span> خطتي</button>
-          <button class="nav-item" data-view="history"><span class="nav-icon">◷</span> محادثاتي</button>
+          <button class="nav-item" data-view="history"><span class="nav-icon">◷</span> جلساتي</button>
         </nav>
         <div class="sidebar-divider"></div>
         <div class="sidebar-label"><span>آخر الجلسات</span><button id="clearHistoryButton">مسح</button></div>
         <div id="recentList" class="recent-list"></div>
-         <div class="sidebar-foot"><span class="foot-mark">م</span><span>مصادر مسارك الدراسي<br><small>السادس الإعدادي · التعليم الديني</small></span></div>
+        <div class="sidebar-foot"><span class="foot-mark">م</span><span>مسار التعليم الديني<br><small>السادس الإعدادي</small></span></div>
       </aside>
+      <div id="sidebarOverlay" class="sidebar-overlay" hidden></div>
 
       <main class="main-content">
-        <section id="view-learn" class="view active-view">
+        <section id="view-learn" class="view">
           <div id="homePanel" class="home-panel">
             <div class="hero-card">
               <div class="hero-copy">
                 <span class="kicker light">جلسة اليوم</span>
-                <h1>أهلا بكِ، <span id="studentName">طالبة</span></h1>
-                <p>اسألي عن أي فكرة. سأبحث في كتبك أولا ثم أشرحها بطريقة تفيدك.</p>
-                <button id="heroStartButton" class="text-button light-button">ابدئي بسؤال <span>←</span></button>
+                <h1>أهلاً يا <span id="studentName">رحمة</span> ✨</h1>
+                <p>أنا معلمك الخاص — أعرف كتبك صفحة صفحة. قولي مثلاً <em>«اشرحي صفحة 22 من الرياضيات»</em> وأشرحها لك فوراً خطوة بخطوة.</p>
+                <button id="heroStartButton" class="text-button light-button">ابدئي الآن <span>←</span></button>
               </div>
-              <div class="hero-seal"><span>م</span><small>افهميها</small></div>
-              <div class="hero-line"></div>
+              <div class="hero-seal" aria-hidden="true"><span>م</span><small>افهميها</small></div>
+              <div class="hero-line" aria-hidden="true"></div>
             </div>
-            <div class="section-heading"><div><span class="kicker">اختاري طريقا</span><h2>كيف أساعدك اليوم؟</h2></div><span class="section-count">٤ طرق</span></div>
+
+            <div class="section-heading">
+              <div><span class="kicker">اختاري طريقك</span><h2>كيف أساعدك اليوم؟</h2></div>
+              <span class="section-count">٤ طرق</span>
+            </div>
             <div class="quick-actions">
-              <button class="quick-action action-ask" data-prompt="اشرح لي أهم فكرة في درس من دروسي اليوم بطريقة مبسطة."><span class="action-icon">↗</span><b>اشرح لي درسا</b><small>فهم خطوة بخطوة</small></button>
-              <button class="quick-action action-quiz" data-prompt="اختبرني في أهم أفكار مادة من مواد السادس، وابدأ بسؤال واحد."><span class="action-icon">✦</span><b>اختبرني</b><small>تدريب ذكي قصير</small></button>
-              <button class="quick-action action-summary" data-prompt="لخص لي موضوعا من كتابي في نقاط واضحة مع أهم ما يجب حفظه."><span class="action-icon">≋</span><b>لخص لي</b><small>خلاصة لا تضيع الوقت</small></button>
-              <button class="quick-action action-plan" data-prompt="ساعدني في وضع خطة مذاكرة عملية لهذا الأسبوع حسب مواد السادس."><span class="action-icon">◷</span><b>خطط لوقتي</b><small>خطة قابلة للتنفيذ</small></button>
+              <button class="quick-action action-ask" data-prompt="اشرحي لي درس التوافيق من الرياضيات بطريقة مبسطة خطوة بخطوة."><span class="action-icon">↗</span><b>اشرحي لي درساً</b><small>فهم خطوة بخطوة</small></button>
+              <button class="quick-action action-quiz" data-prompt="اختبريّني في مادة من مواد السادس — ابدئي بسؤال واحد."><span class="action-icon">✦</span><b>اختبريّني</b><small>تدريب ذكي قصير</small></button>
+              <button class="quick-action action-summary" data-prompt="لخصي لي موضوع شروط إقامة حد الردة من الفقه في نقاط واضحة."><span class="action-icon">≋</span><b>لخصي لي</b><small>خلاصة بلا حشو</small></button>
+              <button class="quick-action action-plan" data-prompt="ساعديني أرتب خطة مذاكرة هذا الأسبوع حسب مواد السادس الديني."><span class="action-icon">◷</span><b>خططي لوقتي</b><small>خطة قابلة للتنفيذ</small></button>
             </div>
+            <p class="home-hint">تلميح: جربي <em>«صفحة 42 من الفقه»</em> أو <em>«صفحة 22 رياضيات و 42 فقه»</em> — أجيبهما معاً.</p>
           </div>
 
           <div id="chatPanel" class="chat-panel" hidden>
@@ -79,26 +86,21 @@
             <div id="imageContextStatus" class="image-context-status" role="status" aria-live="polite" hidden></div>
             <div id="imagePreview" class="image-preview" hidden aria-label="الصور المرفقة"></div>
             <form id="composer" class="composer">
-              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" aria-label="اختيار صورة للسؤال" hidden>
+              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" aria-label="اختيار صورة" hidden>
               <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة">⊕</button>
-              <textarea id="messageInput" rows="1" maxlength="4000" placeholder="اكتبي سؤالك هنا..." aria-label="سؤالك"></textarea>
+              <textarea id="messageInput" rows="1" maxlength="4000" placeholder="اكتبي سؤالك هنا… مثلاً: اشرحي صفحة 22 من الرياضيات" aria-label="سؤالك"></textarea>
               <button id="sendButton" class="send-button" type="submit" aria-label="إرسال">↑</button>
               <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف" hidden>■</button>
             </form>
           </div>
         </section>
 
-        <section id="view-plan" class="view" hidden>
-          <div class="view-heading"><div><span class="kicker">خطوة كل يوم</span><h1>خطة مذاكرتك</h1><p>ضعي مواعيدك هنا ليبقى الطريق واضحا أمامك.</p></div><span class="plan-sun">☼</span></div>
-          <div class="plan-highlight"><div><span class="kicker light">الموعد الأقرب</span><strong id="nextExamLabel">لا توجد مواعيد بعد</strong><small id="nextExamMeta">أضيفي امتحانا أو هدفا دراسيا.</small></div><span id="nextExamDays" class="days-badge">—</span></div>
-          <form id="examForm" class="exam-form"><div class="field-wrap"><label for="examTitle">ما الذي تستعدين له؟</label><input id="examTitle" class="field" maxlength="100" placeholder="مثال: امتحان التاريخ" required></div><div class="field-wrap date-wrap"><label for="examDate">التاريخ</label><input id="examDate" class="field" type="date" required></div><button class="button button-primary" type="submit">إضافة</button></form>
-          <div class="section-heading compact-heading"><div><span class="kicker">قائمة الطريق</span><h2>مواعيدي القادمة</h2></div></div>
-          <div id="examList" class="exam-list"></div>
-        </section>
-
         <section id="view-history" class="view" hidden>
-          <div class="view-heading"><div><span class="kicker">كل ما تعلمناه</span><h1>محادثاتي</h1><p>عودي إلى أي فكرة وكملي من حيث توقفتِ.</p></div><span id="historyCount" class="stat-pill"></span></div>
-          <div class="library-search history-search"><span>⌕</span><input id="historySearch" type="search" placeholder="ابحثي في جلساتك..." autocomplete="off"></div>
+          <div class="view-heading">
+            <div><span class="kicker">كل ما تعلمناه</span><h1>جلساتي</h1><p>ارجعي لأي فكرة وكمّلي من حيث توقفتِ.</p></div>
+            <span id="historyCount" class="stat-pill"></span>
+          </div>
+          <div class="library-search history-search"><span aria-hidden="true">⌕</span><input id="historySearch" type="search" placeholder="ابحثي في جلساتك…" autocomplete="off"></div>
           <div id="historyList" class="history-list"></div>
         </section>
       </main>
@@ -107,7 +109,6 @@
     <nav class="mobile-nav" aria-label="تنقل الجوال">
       <button class="mobile-nav-item active" data-view="learn"><span>◈</span><small>التعلم</small></button>
       <button id="mobileNewChat" class="mobile-new-chat" aria-label="جلسة جديدة">＋</button>
-      <button class="mobile-nav-item" data-view="plan"><span>◇</span><small>خطتي</small></button>
       <button class="mobile-nav-item" data-view="history"><span>◷</span><small>جلساتي</small></button>
     </nav>
   </div>
@@ -115,30 +116,32 @@
   <div id="pageModal" class="modal" hidden aria-hidden="true">
     <div class="modal-card page-card" role="dialog" aria-modal="true" aria-labelledby="pageModalTitle">
       <div class="modal-header"><div><span class="kicker" id="pageModalBook"></span><h2 id="pageModalTitle">صفحة من الكتاب</h2></div><button class="close-button" data-close-modal="pageModal" aria-label="إغلاق">×</button></div>
-      <div id="pageModalMeta" class="page-meta" role="group" aria-label="بيانات الصفحة والدليل"></div><div id="pageModalBody" class="page-body" aria-busy="false"><span class="loader-line"></span></div>
+      <div id="pageModalMeta" class="page-meta" role="group" aria-label="بيانات الصفحة"></div>
+      <div id="pageModalBody" class="page-body" aria-busy="false"><span class="loader-line"></span></div>
     </div>
   </div>
 
   <div id="settingsModal" class="modal" hidden aria-hidden="true">
     <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="modal-header"><div><span class="kicker">مساحتك</span><h2 id="settingsTitle">الإعدادات</h2></div><button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button></div>
-      <label for="settingsName">اسمك</label><input id="settingsName" class="field" maxlength="40" placeholder="شلون منناديچ؟ (اختياري)" autocomplete="nickname">
-        <div class="settings-note"><span>i</span><p>جلسة رحمة مهيأة لمسار التعليم الديني. إذا غاب نص موثوق، يوضح المعلم حدود الدليل وقد يقدّم شرحاً عاماً لا ينسبه إلى الكتاب. أرفقي صورة الصفحة عند الحاجة.</p></div>
-      <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق من الخادم...</span></div>
+      <label for="settingsName">اسمك</label>
+      <input id="settingsName" class="field" maxlength="40" placeholder="شلون أناديچ؟ (اختياري)" autocomplete="nickname">
+      <div class="settings-note"><span>i</span><p>مسارك هو التعليم الديني. المعلم يعرف كتبك صفحة صفحة ويشرح أي صفحة تطلبينها فوراً. لإرسال صورة، استخدمي ⊕ بجانب مربع الكتابة.</p></div>
+      <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق…</span></div>
       <div class="provider-panel">
         <div class="provider-panel-head"><div><span class="kicker">الذكاء الاصطناعي</span><h3>مفتاح المعلم</h3></div><span id="providerState" class="provider-state">غير معروف</span></div>
-        <p class="provider-copy">هذا التطبيق خاص. المفتاح يحفظ على جهازك فقط، ويمكنك تغييره أو حذفه من هذا المكان.</p>
+        <p class="provider-copy">التطبيق خاص. المفتاح يُحفظ على جهازك فقط.</p>
         <div class="provider-facts"><span>النموذج <b id="providerModel">—</b></span><span>المسار <b id="providerEndpoint">—</b></span></div>
-         <label for="providerKey">مفتاح API <input id="providerKey" class="field" type="password" maxlength="2048" autocomplete="new-password" placeholder="الصقي المفتاح هنا"></label>
+        <label for="providerKey">مفتاح API <input id="providerKey" class="field" type="password" maxlength="2048" autocomplete="new-password" placeholder="الصقي المفتاح هنا"></label>
         <button id="saveProvider" class="button button-soft button-wide">حفظ المفتاح</button>
         <small id="providerResult" class="provider-result"></small>
       </div>
       <button id="saveSettings" class="button button-primary button-wide">حفظ التغييرات</button>
-      <button id="resetData" class="danger-button">مسح المحادثات والخطة من هذا الجهاز</button>
+      <button id="resetData" class="danger-button">مسح المحادثات من هذا الجهاز</button>
     </div>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=4.7" defer></script>
+  <script src="/app.js?v=5.0" defer></script>
 </body>
 </html>
