@@ -1,0 +1,524 @@
+[
+  {
+    "caseId": "quran-readings-deni-sixth#47",
+    "bookId": "quran-readings-deni-sixth",
+    "bookTitle": "مباحث القراءات القرآنية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "القرآن وعلومه — مباحث القراءات",
+    "physicalPage": 47,
+    "printedPage": 43,
+    "pageTotal": 57,
+    "position": "late",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "المدغمه",
+      "فاختلس",
+      "للهاء"
+    ],
+    "quote": "المدغمة، فاختلس للهاء الساكنة فتحة التاء المدغمة للتخلص من التقاء الساكنين.",
+    "question": "في كتاب القرآن وعلومه — مباحث القراءات، ما الذي يقوله النص عن: المدغمه، فاختلس، للهاء؟"
+  },
+  {
+    "caseId": "quran-readings-deni-sixth#34",
+    "bookId": "quran-readings-deni-sixth",
+    "bookTitle": "مباحث القراءات القرآنية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "القرآن وعلومه — مباحث القراءات",
+    "physicalPage": 34,
+    "printedPage": 30,
+    "pageTotal": 57,
+    "position": "middle",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "وعالمه",
+      "الياء",
+      "احالل"
+    ],
+    "quote": "وعالمة هذه الياء هي صحة إحالل الكاف والهاء محلها فتقول: )فطرني-فطرك-",
+    "question": "في كتاب القرآن وعلومه — مباحث القراءات، ما الذي يقوله النص عن: وعالمه، الياء، احالل؟"
+  },
+  {
+    "caseId": "quran-readings-deni-sixth#62",
+    "bookId": "quran-readings-deni-sixth",
+    "bookTitle": "مباحث القراءات القرآنية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "القرآن وعلومه — مباحث القراءات",
+    "physicalPage": 62,
+    "printedPage": 58,
+    "pageTotal": 57,
+    "position": "last",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "القراء",
+      "الوقف",
+      "العله"
+    ],
+    "quote": "س٥: بيّن أثر خالف القرّاء في كلمة )وضعت( على الوقف مع ذكر العلّة.",
+    "question": "في كتاب القرآن وعلومه — مباحث القراءات، ما الذي يقوله النص عن: القراء، الوقف، العله؟"
+  },
+  {
+    "caseId": "quran-readings-deni-sixth#56",
+    "bookId": "quran-readings-deni-sixth",
+    "bookTitle": "مباحث القراءات القرآنية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "القرآن وعلومه — مباحث القراءات",
+    "physicalPage": 56,
+    "printedPage": 52,
+    "pageTotal": 57,
+    "position": "deep",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "والمضمومه",
+      "ولقالون",
+      "الخلف"
+    ],
+    "quote": "والمضمومة، ولقالون الخُلف قبل الهمزة المكسورة، وهي ثابتة في رسم المصحف،",
+    "question": "في كتاب القرآن وعلومه — مباحث القراءات، ما الذي يقوله النص عن: والمضمومه، ولقالون، الخلف؟"
+  },
+  {
+    "caseId": "fiqh-shafii-deni-sixth#75",
+    "bookId": "fiqh-shafii-deni-sixth",
+    "bookTitle": "الفقه الإسلامي — كتاب الطالب — الصف السادس الإعدادي الإسلامي (الشافعي)",
+    "subject": "الفقه الشافعي",
+    "physicalPage": 75,
+    "printedPage": 71,
+    "pageTotal": 97,
+    "position": "late",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "اليمين",
+      "وسيله",
+      "للتاثير"
+    ],
+    "quote": "إذا كانت اليمين وسيلة للتأثير على السامعين، وسببا ً في تصديقهم الندب: ٤",
+    "question": "في كتاب الفقه الشافعي، ما الذي يقوله النص عن: اليمين، وسيله، للتاثير؟"
+  },
+  {
+    "caseId": "fiqh-shafii-deni-sixth#52",
+    "bookId": "fiqh-shafii-deni-sixth",
+    "bookTitle": "الفقه الإسلامي — كتاب الطالب — الصف السادس الإعدادي الإسلامي (الشافعي)",
+    "subject": "الفقه الشافعي",
+    "physicalPage": 52,
+    "printedPage": 48,
+    "pageTotal": 97,
+    "position": "middle",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "حمايتهم",
+      "ورعايتهم",
+      "والتزام"
+    ],
+    "quote": "حمايتهم ورعايتهم، وإلتزام الدولة النظر في شؤونهم وذلك ضمن ضوابط وشروط",
+    "question": "في كتاب الفقه الشافعي، ما الذي يقوله النص عن: حمايتهم، ورعايتهم، والتزام؟"
+  },
+  {
+    "caseId": "fiqh-shafii-deni-sixth#105",
+    "bookId": "fiqh-shafii-deni-sixth",
+    "bookTitle": "الفقه الإسلامي — كتاب الطالب — الصف السادس الإعدادي الإسلامي (الشافعي)",
+    "subject": "الفقه الشافعي",
+    "physicalPage": 105,
+    "printedPage": 101,
+    "pageTotal": 97,
+    "position": "last",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "ويسجله",
+      "حاضرا",
+      "غيابه"
+    ],
+    "quote": "ويسجله حاضرا ً رغم غيابه، وينقل ألبويه صور غير حقيقية عن سلوكياته،",
+    "question": "في كتاب الفقه الشافعي، ما الذي يقوله النص عن: ويسجله، حاضرا، غيابه؟"
+  },
+  {
+    "caseId": "fiqh-shafii-deni-sixth#93",
+    "bookId": "fiqh-shafii-deni-sixth",
+    "bookTitle": "الفقه الإسلامي — كتاب الطالب — الصف السادس الإعدادي الإسلامي (الشافعي)",
+    "subject": "الفقه الشافعي",
+    "physicalPage": 93,
+    "printedPage": 89,
+    "pageTotal": 97,
+    "position": "deep",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "للامام",
+      "القاضي",
+      "يقتضي"
+    ],
+    "quote": "للإمام عزل القاضي إذا ظهر منه خلل لا يقتضي انعزاله وهي : ١.......",
+    "question": "في كتاب الفقه الشافعي، ما الذي يقوله النص عن: للامام، القاضي، يقتضي؟"
+  },
+  {
+    "caseId": "history-deni-sixth#101",
+    "bookId": "history-deni-sixth",
+    "bookTitle": "تاريخ العالم الإسلامي الحديث والمعاصر — الصف السادس الإعدادي الإسلامي",
+    "subject": "التاريخ والسيرة (التعليم الديني)",
+    "physicalPage": 101,
+    "printedPage": 101,
+    "pageTotal": 131,
+    "position": "late",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "جيديا",
+      "لتسيي",
+      "كتحقي"
+    ],
+    "quote": "جيدىا لتسييؿ كتحقيػؽ ىػذه الغايػة عمػى أف يفيػـ جميػان انػو لػف يػؤتى بعمػؿ",
+    "question": "في كتاب التاريخ والسيرة (التعليم الديني)، ما الذي يقوله النص عن: جيديا، لتسيي، كتحقي؟"
+  },
+  {
+    "caseId": "history-deni-sixth#70",
+    "bookId": "history-deni-sixth",
+    "bookTitle": "تاريخ العالم الإسلامي الحديث والمعاصر — الصف السادس الإعدادي الإسلامي",
+    "subject": "التاريخ والسيرة (التعليم الديني)",
+    "physicalPage": 70,
+    "printedPage": 70,
+    "pageTotal": 131,
+    "position": "middle",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "بريطاني",
+      "كفرنس",
+      "فانقس"
+    ],
+    "quote": "كرفػػػض انػػػذار بريطانيػػػا كفرنسػػػا فانقسػػػـ العػػػالـ إلػػػى معسػػػكريف الحمفػػػاء كالمحػػػكر",
+    "question": "في كتاب التاريخ والسيرة (التعليم الديني)، ما الذي يقوله النص عن: بريطاني، كفرنس، فانقس؟"
+  },
+  {
+    "caseId": "history-deni-sixth#124",
+    "bookId": "history-deni-sixth",
+    "bookTitle": "تاريخ العالم الإسلامي الحديث والمعاصر — الصف السادس الإعدادي الإسلامي",
+    "subject": "التاريخ والسيرة (التعليم الديني)",
+    "physicalPage": 124,
+    "printedPage": 124,
+    "pageTotal": 131,
+    "position": "deep",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "كليسكا",
+      "منتجيف",
+      "مشاركيف"
+    ],
+    "quote": "ة كليسكا منتجيف ليا أك مشاركيف فييا ة المعاصر ات الحضار لمنجز .",
+    "question": "في كتاب التاريخ والسيرة (التعليم الديني)، ما الذي يقوله النص عن: كليسكا، منتجيف، مشاركيف؟"
+  },
+  {
+    "caseId": "arabic-grammar-deni-sixth#78",
+    "bookId": "arabic-grammar-deni-sixth",
+    "bookTitle": "النحو الواضح في قواعد اللغة العربية — الصف السادس الإعدادي الإسلامي",
+    "subject": "النحو والتطبيق (التعليم الديني)",
+    "physicalPage": 78,
+    "printedPage": 78,
+    "pageTotal": 96,
+    "position": "late",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "المعطوف",
+      "الزمن",
+      "تاملت"
+    ],
+    "quote": "المعطوف عليه من غير تراخ في الزمن، ولو تأملت أمثلة العطف بالفاء جميعها",
+    "question": "في كتاب النحو والتطبيق (التعليم الديني)، ما الذي يقوله النص عن: المعطوف، الزمن، تاملت؟"
+  },
+  {
+    "caseId": "arabic-grammar-deni-sixth#56",
+    "bookId": "arabic-grammar-deni-sixth",
+    "bookTitle": "النحو الواضح في قواعد اللغة العربية — الصف السادس الإعدادي الإسلامي",
+    "subject": "النحو والتطبيق (التعليم الديني)",
+    "physicalPage": 56,
+    "printedPage": 56,
+    "pageTotal": 96,
+    "position": "middle",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "المثله",
+      "السابقه",
+      "الكلمات"
+    ],
+    "quote": "تأمل في ألمثلة السابقة، الكلمات: مدارس، وعصافير، وصحراء، ونُعمَى.",
+    "question": "في كتاب النحو والتطبيق (التعليم الديني)، ما الذي يقوله النص عن: المثله، السابقه، الكلمات؟"
+  },
+  {
+    "caseId": "arabic-grammar-deni-sixth#104",
+    "bookId": "arabic-grammar-deni-sixth",
+    "bookTitle": "النحو الواضح في قواعد اللغة العربية — الصف السادس الإعدادي الإسلامي",
+    "subject": "النحو والتطبيق (التعليم الديني)",
+    "physicalPage": 104,
+    "printedPage": 104,
+    "pageTotal": 96,
+    "position": "last",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "مطابقه",
+      "النعت",
+      "للمنعوت"
+    ],
+    "quote": "مطابقة ُ النعت ِ للمنعوت ...................................",
+    "question": "في كتاب النحو والتطبيق (التعليم الديني)، ما الذي يقوله النص عن: مطابقه، النعت، للمنعوت؟"
+  },
+  {
+    "caseId": "arabic-grammar-deni-sixth#93",
+    "bookId": "arabic-grammar-deni-sixth",
+    "bookTitle": "النحو الواضح في قواعد اللغة العربية — الصف السادس الإعدادي الإسلامي",
+    "subject": "النحو والتطبيق (التعليم الديني)",
+    "physicalPage": 93,
+    "printedPage": 93,
+    "pageTotal": 96,
+    "position": "deep",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "النعوت",
+      "السببيه",
+      "الجمل"
+    ],
+    "quote": "حول النعوت السببية في الجمل آلتية إلى جمل وصفية، ثم بيّن نوع استتار",
+    "question": "في كتاب النحو والتطبيق (التعليم الديني)، ما الذي يقوله النص عن: النعوت، السببيه، الجمل؟"
+  },
+  {
+    "caseId": "balagha-deni-sixth#44",
+    "bookId": "balagha-deni-sixth",
+    "bookTitle": "البلاغة العربية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "البلاغة (التعليم الديني)",
+    "physicalPage": 44,
+    "printedPage": 40,
+    "pageTotal": 53,
+    "position": "late",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "كساها",
+      "دفنهم",
+      "الترب"
+    ],
+    "quote": "كَسَاهَا دَفنُهُم فِي التُرْب ِ طِيْبَا وَمَا رِيْـــح ُ الـــرِّيَاض ِ لَــــهَا وَلَـــكِن",
+    "question": "في كتاب البلاغة (التعليم الديني)، ما الذي يقوله النص عن: كساها، دفنهم، الترب؟"
+  },
+  {
+    "caseId": "balagha-deni-sixth#32",
+    "bookId": "balagha-deni-sixth",
+    "bookTitle": "البلاغة العربية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "البلاغة (التعليم الديني)",
+    "physicalPage": 32,
+    "printedPage": 28,
+    "pageTotal": 53,
+    "position": "middle",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "ينكرون",
+      "القول",
+      "وننكر"
+    ],
+    "quote": "وال يُنكِرون َ القول َ حين َ نَقول ونُنكِر ُ إن شِئنا على النّاس ِ قولَهم",
+    "question": "في كتاب البلاغة (التعليم الديني)، ما الذي يقوله النص عن: ينكرون، القول، وننكر؟"
+  },
+  {
+    "caseId": "balagha-deni-sixth#58",
+    "bookId": "balagha-deni-sixth",
+    "bookTitle": "البلاغة العربية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "البلاغة (التعليم الديني)",
+    "physicalPage": 58,
+    "printedPage": 54,
+    "pageTotal": 53,
+    "position": "last",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "بغيرها",
+      "الوان",
+      "المعاني"
+    ],
+    "quote": "يعـرف بغيرهـا مـن ألـوان المعاني والبيان ومسـائلهما، وجه إعجاز القرآن الكريم،",
+    "question": "في كتاب البلاغة (التعليم الديني)، ما الذي يقوله النص عن: بغيرها، الوان، المعاني؟"
+  },
+  {
+    "caseId": "balagha-deni-sixth#52",
+    "bookId": "balagha-deni-sixth",
+    "bookTitle": "البلاغة العربية — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "البلاغة (التعليم الديني)",
+    "physicalPage": 52,
+    "printedPage": 48,
+    "pageTotal": 53,
+    "position": "deep",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "جاءني",
+      "ريحانه",
+      "ومصدر"
+    ],
+    "quote": "جاءَني ابْني يوْمــــا ً وكنــــت ُ أَراه ُ … … لِـــي ريْحانَـــــــة ومصْـــــدر َ أُنْس",
+    "question": "في كتاب البلاغة (التعليم الديني)، ما الذي يقوله النص عن: جاءني، ريحانه، ومصدر؟"
+  },
+  {
+    "caseId": "english-deni-sixth#95",
+    "bookId": "english-deni-sixth",
+    "bookTitle": "English Course for Iraqi Islamic Schools — Student's Book (6)",
+    "subject": "اللغة الإنكليزية (التعليم الديني)",
+    "physicalPage": 95,
+    "printedPage": 95,
+    "pageTotal": 109,
+    "position": "late",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "caliphs",
+      "truly",
+      "followed"
+    ],
+    "quote": "The Caliphs who truly followed the Prophet's example are called 'The Rightly-Guided",
+    "question": "في كتاب اللغة الإنكليزية (التعليم الديني)، ما الذي يقوله النص عن: caliphs، truly، followed؟"
+  },
+  {
+    "caseId": "english-deni-sixth#66",
+    "bookId": "english-deni-sixth",
+    "bookTitle": "English Course for Iraqi Islamic Schools — Student's Book (6)",
+    "subject": "اللغة الإنكليزية (التعليم الديني)",
+    "physicalPage": 66,
+    "printedPage": 66,
+    "pageTotal": 109,
+    "position": "middle",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "muttalib",
+      "makka",
+      "fifty"
+    ],
+    "quote": "Muttalib, was born in Makka fifty-three years before the Hijrah.",
+    "question": "في كتاب اللغة الإنكليزية (التعليم الديني)، ما الذي يقوله النص عن: muttalib، makka، fifty؟"
+  },
+  {
+    "caseId": "english-deni-sixth#114",
+    "bookId": "english-deni-sixth",
+    "bookTitle": "English Course for Iraqi Islamic Schools — Student's Book (6)",
+    "subject": "اللغة الإنكليزية (التعليم الديني)",
+    "physicalPage": 114,
+    "printedPage": 114,
+    "pageTotal": 109,
+    "position": "deep",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "later",
+      "third",
+      "caliph"
+    ],
+    "quote": "Later, the third Caliph, 'Uthman ibn 'Affan, again asked Zayd to oversee",
+    "question": "في كتاب اللغة الإنكليزية (التعليم الديني)، ما الذي يقوله النص عن: later، third، caliph؟"
+  },
+  {
+    "caseId": "mathematics-deni-sixth#60",
+    "bookId": "mathematics-deni-sixth",
+    "bookTitle": "الرياضيات للصف السادس الثانوي — ديوان الوقف السني",
+    "subject": "الرياضيات (التعليم الديني)",
+    "physicalPage": 60,
+    "printedPage": 60,
+    "pageTotal": 70,
+    "position": "late",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "مالحظه",
+      "العمودي",
+      "المماس"
+    ],
+    "quote": "مالحظة : ميل العمودي على المماس هو المقلوب السالب لميل المماس.",
+    "question": "في كتاب الرياضيات (التعليم الديني)، ما الذي يقوله النص عن: مالحظه، العمودي، المماس؟"
+  },
+  {
+    "caseId": "mathematics-deni-sixth#43",
+    "bookId": "mathematics-deni-sixth",
+    "bookTitle": "الرياضيات للصف السادس الثانوي — ديوان الوقف السني",
+    "subject": "الرياضيات (التعليم الديني)",
+    "physicalPage": 43,
+    "printedPage": 43,
+    "pageTotal": 70,
+    "position": "middle",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "للداله",
+      "العدد",
+      "الفترتين"
+    ],
+    "quote": "الحل: لكي تكون للدالة غاية عند س ← 1 (العدد الذي يفصل بين الفترتين) يجب أن تكون الغاية",
+    "question": "في كتاب الرياضيات (التعليم الديني)، ما الذي يقوله النص عن: للداله، العدد، الفترتين؟"
+  },
+  {
+    "caseId": "mathematics-deni-sixth#79",
+    "bookId": "mathematics-deni-sixth",
+    "bookTitle": "الرياضيات للصف السادس الثانوي — ديوان الوقف السني",
+    "subject": "الرياضيات (التعليم الديني)",
+    "physicalPage": 79,
+    "printedPage": 79,
+    "pageTotal": 70,
+    "position": "last",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "ايجاد",
+      "تنتمي",
+      "الداله"
+    ],
+    "quote": "إيجاد نقطة تنتمي إلى الدالة عندها المماس يوازي مستقيم معلوم 62",
+    "question": "في كتاب الرياضيات (التعليم الديني)، ما الذي يقوله النص عن: ايجاد، تنتمي، الداله؟"
+  },
+  {
+    "caseId": "mathematics-deni-sixth#71",
+    "bookId": "mathematics-deni-sixth",
+    "bookTitle": "الرياضيات للصف السادس الثانوي — ديوان الوقف السني",
+    "subject": "الرياضيات (التعليم الديني)",
+    "physicalPage": 71,
+    "printedPage": 71,
+    "pageTotal": 70,
+    "position": "deep",
+    "evidenceStatus": "damaged-text",
+    "keyTerms": [
+      "القاعده",
+      "الثالثه",
+      "تكامل"
+    ],
+    "quote": "القاعدة الثالثة : تكامل مجمو ع عدد محدود من الدوال يساوي مجمو ع تكامالتهـا .",
+    "question": "في كتاب الرياضيات (التعليم الديني)، ما الذي يقوله النص عن: القاعده، الثالثه، تكامل؟"
+  },
+  {
+    "caseId": "hadith-deni-sixth#117",
+    "bookId": "hadith-deni-sixth",
+    "bookTitle": "الحديث النبوي الشريف وعلومه — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "الحديث (التعليم الديني)",
+    "physicalPage": 117,
+    "printedPage": 112,
+    "pageTotal": 140,
+    "position": "late",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "والنفاق",
+      "والمنافقون",
+      "خطوره"
+    ],
+    "quote": "والنفاق والمنافقون أشد خطورة على الإسلام والمسلمین من الكفار الحقیقیین المظھرین",
+    "question": "في كتاب الحديث (التعليم الديني)، ما الذي يقوله النص عن: والنفاق، والمنافقون، خطوره؟"
+  },
+  {
+    "caseId": "hadith-deni-sixth#158",
+    "bookId": "hadith-deni-sixth",
+    "bookTitle": "الحديث النبوي الشريف وعلومه — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "الحديث (التعليم الديني)",
+    "physicalPage": 158,
+    "printedPage": 153,
+    "pageTotal": 140,
+    "position": "last",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "النفقه",
+      "الاولاد",
+      "والزوجه"
+    ],
+    "quote": "۸- أن َّ النفقة على الأولاد والزوجة عبادة جلیلة مع النیة الحسنة.",
+    "question": "في كتاب الحديث (التعليم الديني)، ما الذي يقوله النص عن: النفقه، الاولاد، والزوجه؟"
+  },
+  {
+    "caseId": "hadith-deni-sixth#141",
+    "bookId": "hadith-deni-sixth",
+    "bookTitle": "الحديث النبوي الشريف وعلومه — كتاب الطالب للصف السادس الإعدادي الإسلامي",
+    "subject": "الحديث (التعليم الديني)",
+    "physicalPage": 141,
+    "printedPage": 136,
+    "pageTotal": 140,
+    "position": "deep",
+    "evidenceStatus": "clean-extracted-text",
+    "keyTerms": [
+      "ابراز",
+      "مكانه",
+      "الخير"
+    ],
+    "quote": "۳- جواز إبراز مكانة من یفعل الخیر عرفانا ً بفضلھم، وتشجیعا ً لغیرهم حسبما",
+    "question": "في كتاب الحديث (التعليم الديني)، ما الذي يقوله النص عن: ابراز، مكانه، الخير؟"
+  }
+]

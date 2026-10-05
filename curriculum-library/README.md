@@ -1,35 +1,25 @@
 # مكتبة منهج «معلمي»
 
-هذه المكتبة هي المرجع المحلي القابل للبحث للنموذج. ملفات PDF وملفات النص المرقمة هي مصدر الحقيقة، أما `pdf-index.json` و`pdf-books` و`index` فهي مخرجات مشتقة قابلة لإعادة البناء.
+هذه المكتبة هي المرجع المحلي القابل للبحث للنموذج. ملفات PDF في `pdf-sources` هي مصادر PDF الأصلية؛ أما `pdf-index.json` و`pdf-books` و`outlines` و`search-index.json` فهي بيانات مشتقة.
 
-## استيراد ملف نصي مرقّم
+## الأوامر الفعلية في `package.json`
 
-```bash
-npm run curriculum:import -- "D:/path/book.txt" \
-  --id islamic-sixth-preparatory-2025 \
-  --title "القرآن الكريم والتربية الإسلامية للصف السادس الإعدادي" \
-  --subject "التربية الإسلامية" \
-  --branch "عام" \
-  --edition "الطبعة التاسعة" \
-  --year 2025
-```
-
-المستورد يدعم الفواصل `----- [ صفحة 1 ] -----` والأسطر `[ص1-س1]`. الصفحات التي لا تحتوي نصًا لا تُحذف، بل تُعلّم `needsOcr`.
-
-## الأوامر
-
-- `npm run curriculum:pdf-index` — استخراج فهرس PDF schema v2 من `pdf-sources` مع المطابقة المطبوعة/الفيزيائية.
-- `npm run curriculum:reindex` — إعادة بناء الفهارس المشتقة للكتب المرقمة وPDF.
-- `npm run curriculum:rebuild` — إعادة بناء كاملة متسلسلة: PDF ثم الخرائط والملخصات والبحث.
-- `npm run curriculum:validate` — فحص manifests والصفحات والبصمات ومخرجات schema v2.
+- `npm ci` — تثبيت الاعتماديات وفق `package-lock.json`.
+- `npm run import-deni` — استيراد كتب التعليم الديني من ملفات `pdf-sources`.
+- `npm run rebuild-pdf-index` — إعادة بناء `pdf-index.json` من ملفات `pdf-books` الموجودة؛ لا يستخرج PDF من جديد.
+- `npm run build-index` — بناء `search-index.json` من `pdf-index.json` وملفات `outlines` و`enrichment`.
+- `npm run validate-index` — طباعة تقرير التحقق الكامل.
+- `npm run gate` — تشغيل بوابة الفهرس وإرجاع فشل عند وجود فجوات حرجة.
+- `npm test` — تشغيل مجموعة الاختبارات المحددة في `package.json`.
+- `npm run verify` — تشغيل `rebuild-pdf-index` ثم `build-index` ثم `gate` ثم `npm test`.
 
 ## شكل الفهرس المشتق
 
-`pdf-index.json` وملف كل كتاب في `pdf-books` يستخدمان `schemaVersion: 2`. لكل كتاب توجد هوية المادة ومصدر PDF وبصمته وحالته المرجعية، ولكل صفحة `physicalPage` و`printedPage` و`fullText` و`searchable` و`ocr` و`title` و`summary` و`section` و`unit` و`pageType` و`educationalPurpose` و`neighbors` و`sourceProvenance`. رقم الصفحة المطبوع قد يكون `null` عندما لا يثبت من النص أو من الاستمرارية؛ لا يُخمنه الفهرس.
+يستخدم `pdf-index.json` الحالي `schemaVersion: 2`. ملفات `pdf-books` تحمل مخططات المصدر الخاصة بها؛ في البيانات الحالية توجد سجلات بإصداري 1 و2. تتضمن سجلات الكتب هوية المادة ومصدر PDF وبصمته، وتتضمن الصفحات حقولًا مثل `physicalPage` و`printedPage` و`fullText` و`searchable` و`ocr` و`title` و`summary` و`section` و`unit` و`pageType` و`educationalPurpose` و`neighbors` و`sourceProvenance`. رقم الصفحة المطبوع قد يكون `null` عندما لا يثبت من النص أو من الاستمرارية؛ لا يُخمنه الفهرس.
 
-### `search-index.json` هو مصدر الحقيقة وقت التشغيل (`schemaVersion: 4`)
+### `search-index.json` (`schemaVersion: 4`)
 
-الفهرس **مكتفي بذاته**: كل صفحة لها `text` كامل بلا اقتطاع، ولا يُقرأ أي ملف صفحة ولا PDF ولا `pdf-books` أثناء التشغيل. `lib/index.mjs` يقرأ `search-index.json` وحده.
+يحتوي الفهرس نص الصفحات المفهرس كاملًا بلا اقتطاع، ويستخدمه `lib/index.mjs` للبحث واسترجاع النص. بيانات التشغيل الأخرى لها قراءاتها الخاصة: `lib/outline.mjs` يقرأ `outlines` و`pdf-books` لإسناد أوصاف المخططات، وملفات `pdf-sources` الأصلية متاحة لمسار قراءة PDF الاحتياطي عند غياب نص مفهرس كافٍ.
 
 لكل وثيقة: `text` و`textLength` و`normalized` (غير مقصوص) و`preview` (أول 700 وآخر 400 حرف مع علامة صريحة بالمحذوف) و`pageOffset` (= `printedPage − physicalPage`) و`terms` و`keywords` (بلا أرقام) و`enriched`.
 
@@ -47,12 +37,13 @@ npm run curriculum:import -- "D:/path/book.txt" \
 
 مخطط الحقول وقواعدها الإلزامية (لا تختلق، احفظ الشرطات، الأرقام فاطحة) في `.pdfverify/enrichment-schema.md`.
 
+### التحقق والبناء في Docker
+
+مرحلة التحقق في `Dockerfile` تحتاج `pdf-sources` للتحقق من البصمات و`pdf-books` لإعادة بناء الفهارس وتشغيل البوابة والاختبارات. الصورة النهائية تنسخ ملفات التشغيل فقط: `search-index.json` و`pdf-index.json` و`pdf-books` و`outlines` و`pdf-sources`، ولا تتضمن سكربتات البناء أو الاختبارات.
+
 ### تنقية
 
-`usableText()` في `scripts/build-index.mjs` يحذف حروف المصنع (`IRAQ_G12_SB_2024.indb`) والتواريخ، ويحذف رقم الصفحة المطبوع الملتصق بأول النص وآخره قبل الفهرسة. آخر فهرس نُظّف بذلك: 19,536 حرف حروف مصنع أُزيلت، و0 كلمة مفتاحية رقمية.
-
-- `npm test` — اختبارات parser والتطبيع والبحث والأمان.
-
+`usableText()` في `scripts/build-index.mjs` يحذف حروف المصنع (`IRAQ_G12_SB_2024.indb`) والتواريخ، ويحذف رقم الصفحة المطبوع الملتصق بأول النص وآخره قبل الفهرسة.
 
 ## حقوق المحتوى
 

@@ -18,7 +18,7 @@
     "verify": "npm run rebuild-pdf-index && npm run build-index && npm run gate && npm test"
   },
   "dependencies": {
-    "pdf-parse": "^2.4.5",
+    "@napi-rs/canvas": "^0.1.80",
     "pdfjs-dist": "^4.0.379"
   }
 }

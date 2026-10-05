@@ -8,10 +8,13 @@
   <title>معلمي | من كتبك إلى فهمك</title>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style.css?v=4.3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=4.7">
 </head>
 <body>
-  <div id="offlineBar" class="offline-bar" hidden>لا يوجد اتصال حاليا. ستبقى كتبك ومحادثاتك المتاحة على الجهاز.</div>
+  <div id="offlineBar" class="offline-bar" role="status" aria-live="polite" hidden>لا يوجد اتصال. قد تتوفر المحادثات المحفوظة؛ البحث في الكتب والرد يحتاج إلى اتصال.</div>
 
   <div id="app" class="app-shell" hidden>
     <header class="app-header">
@@ -45,7 +48,7 @@
         <div class="sidebar-divider"></div>
         <div class="sidebar-label"><span>آخر الجلسات</span><button id="clearHistoryButton">مسح</button></div>
         <div id="recentList" class="recent-list"></div>
-         <div class="sidebar-foot"><span class="foot-mark">م</span><span>المحتوى من كتبك المدرسية<br><small>السادس الإعدادي · التعليم الديني</small></span></div>
+         <div class="sidebar-foot"><span class="foot-mark">م</span><span>مصادر مسارك الدراسي<br><small>السادس الإعدادي · التعليم الديني</small></span></div>
       </aside>
 
       <main class="main-content">
@@ -73,11 +76,12 @@
           <div id="chatPanel" class="chat-panel" hidden>
             <div id="messageList" class="message-list" aria-live="polite"></div>
             <div id="sourceTray" class="source-tray" hidden></div>
-            <div id="imagePreview" class="image-preview" hidden></div>
+            <div id="imageContextStatus" class="image-context-status" role="status" aria-live="polite" hidden></div>
+            <div id="imagePreview" class="image-preview" hidden aria-label="الصور المرفقة"></div>
             <form id="composer" class="composer">
-              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" aria-label="اختيار صورة للسؤال" hidden>
               <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة">⊕</button>
-              <textarea id="messageInput" rows="1" maxlength="5000" placeholder="اكتبي سؤالك هنا..." aria-label="سؤالك"></textarea>
+              <textarea id="messageInput" rows="1" maxlength="4000" placeholder="اكتبي سؤالك هنا..." aria-label="سؤالك"></textarea>
               <button id="sendButton" class="send-button" type="submit" aria-label="إرسال">↑</button>
               <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف" hidden>■</button>
             </form>
@@ -111,7 +115,7 @@
   <div id="pageModal" class="modal" hidden aria-hidden="true">
     <div class="modal-card page-card" role="dialog" aria-modal="true" aria-labelledby="pageModalTitle">
       <div class="modal-header"><div><span class="kicker" id="pageModalBook"></span><h2 id="pageModalTitle">صفحة من الكتاب</h2></div><button class="close-button" data-close-modal="pageModal" aria-label="إغلاق">×</button></div>
-      <div id="pageModalMeta" class="page-meta"></div><div id="pageModalBody" class="page-body"><span class="loader-line"></span></div>
+      <div id="pageModalMeta" class="page-meta" role="group" aria-label="بيانات الصفحة والدليل"></div><div id="pageModalBody" class="page-body" aria-busy="false"><span class="loader-line"></span></div>
     </div>
   </div>
 
@@ -119,13 +123,13 @@
     <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div class="modal-header"><div><span class="kicker">مساحتك</span><h2 id="settingsTitle">الإعدادات</h2></div><button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button></div>
       <label for="settingsName">اسمك</label><input id="settingsName" class="field" maxlength="40" placeholder="شلون منناديچ؟ (اختياري)" autocomplete="nickname">
-        <div class="settings-note"><span>i</span><p>جلسة رحمة مهيأة لمسار التعليم الديني، وتبحث في كتبه دون خلطها بكتب الفرع الأدبي. إذا لم يتوفر نص مقرر، ستطلب صورة الصفحة بدل التخمين.</p></div>
+        <div class="settings-note"><span>i</span><p>جلسة رحمة مهيأة لمسار التعليم الديني. إذا غاب نص موثوق، يوضح المعلم حدود الدليل وقد يقدّم شرحاً عاماً لا ينسبه إلى الكتاب. أرفقي صورة الصفحة عند الحاجة.</p></div>
       <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق من الخادم...</span></div>
       <div class="provider-panel">
         <div class="provider-panel-head"><div><span class="kicker">الذكاء الاصطناعي</span><h3>مفتاح المعلم</h3></div><span id="providerState" class="provider-state">غير معروف</span></div>
         <p class="provider-copy">هذا التطبيق خاص. المفتاح يحفظ على جهازك فقط، ويمكنك تغييره أو حذفه من هذا المكان.</p>
         <div class="provider-facts"><span>النموذج <b id="providerModel">—</b></span><span>المسار <b id="providerEndpoint">—</b></span></div>
-        <label for="providerKey">مفتاح API <input id="providerKey" class="field" type="password" autocomplete="new-password" placeholder="الصقي المفتاح هنا"></label>
+         <label for="providerKey">مفتاح API <input id="providerKey" class="field" type="password" maxlength="2048" autocomplete="new-password" placeholder="الصقي المفتاح هنا"></label>
         <button id="saveProvider" class="button button-soft button-wide">حفظ المفتاح</button>
         <small id="providerResult" class="provider-result"></small>
       </div>
@@ -135,6 +139,6 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=4.3" defer></script>
+  <script src="/app.js?v=4.7" defer></script>
 </body>
 </html>

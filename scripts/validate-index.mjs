@@ -13,6 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanText } from '../lib/text.mjs';
 import { normalizeDigits } from '../lib/text.mjs';
+import { classifyPageEvidence } from '../lib/pdf-fallback.mjs';
 import { crossBookDuplicates, deadLayers, driftedDescriptions, foreignUnits, judgeNumbers, noTextPages, titleRepetition } from './validate-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -30,6 +31,7 @@ const LEGACY_INDEX_DIR = path.join(LIB, 'index');
 const TEXT_MIN = 20;
 const PAGE_TYPES = new Set(['divider', 'lesson_content', 'parallel_text', 'boxed_recap', 'matching', 'exercises', 'glossary', 'contents']);
 const SEVERITIES = ['critical', 'high', 'medium', 'low'];
+const EVIDENCE_STATUSES = new Set(['clean-extracted-text', 'ocr-text', 'damaged-text', 'no-text']);
 const WEIGHT = { critical: 12, high: 6, medium: 2.5, low: 1 };
 const PRESS_FILE_SRC = 'IRAQ_G\\d+_[A-Z]{2,4}_\\d{4}\\.indb';
 const PRESS_FILE = new RegExp(PRESS_FILE_SRC, 'gi');
@@ -246,6 +248,7 @@ const CHECKS = [
   { id: 'A5', title: 'النص غير المرئي المكرر: نسبة تكرار الأسطر داخل الصفحة' },
   { id: 'A6', title: 'خلط الأعمدة وكسر الأقواس والأسس' },
   { id: 'A7', title: 'صفحة بلا نص في الـPDF، وهي تحمل وصفاً في الفهرس' },
+  { id: 'A8', title: 'حالة دليل الصفحة: نص مستخرج / OCR / تالف / بلا نص' },
   { id: 'B7', title: 'محتوى مخترق/مسرَّب: JSON / CJK / عبري داخل الحقول' },
   { id: 'B8', title: 'أرقام لا يثبتها نص الصفحة (غير مُثبتة ⇒ تحتاج عيناً لا حذفاً)' },
   { id: 'B14', title: 'وصف صفحة يخصّ صفحة أخرى (كشف لا حكم)' },
@@ -348,6 +351,39 @@ for (const [bookId, book] of searchBooks) {
     const claimNote = blind.claims.length ? ` · ${blind.claims.length} منها تحمل title/summary بلا سند نصي` : '';
     report.add(severity, 'A7', `${blind.empty.length} من ${docs.length} صفحة بلا نص (${pct(blind.share)})${claimNote}`, { pages: blind.empty.slice(0, 12) });
     record('A7', bookId, severity, `${blind.empty.length} بلا نص${blind.claims.length ? ` · ${blind.claims.length} بوصف` : ''}`);
+  }
+
+  // A8 ── حالة الدليل قابلة للاستهلاك، وتطابق نص الصفحة وبيانات OCR في المصدر.
+  const statusCounts = Object.fromEntries([...EVIDENCE_STATUSES].map((status) => [
+    status,
+    docs.filter((doc) => doc.evidenceStatus === status).length,
+  ]));
+  const missingStatusPages = [];
+  const mismatchedStatusPages = [];
+  for (const doc of docs) {
+    const status = doc.evidenceStatus;
+    if (!EVIDENCE_STATUSES.has(status)) {
+      missingStatusPages.push(doc.physicalPage);
+      continue;
+    }
+    const sourcePage = pdfPages.get(doc.physicalPage);
+    const expected = classifyPageEvidence(String(doc.text || ''), sourcePage || {});
+    if (status !== expected) mismatchedStatusPages.push({ page: doc.physicalPage, indexed: status, expected });
+  }
+  report.notes.evidenceStatus = {
+    counts: statusCounts,
+    missing: missingStatusPages.length,
+    mismatched: mismatchedStatusPages.length,
+    samples: mismatchedStatusPages.slice(0, 8),
+  };
+  if (missingStatusPages.length || mismatchedStatusPages.length) {
+    const severity = missingStatusPages.length === docs.length && !mismatchedStatusPages.length ? 'medium' : 'high';
+    const message = `${missingStatusPages.length} صفحة بلا evidenceStatus · ${mismatchedStatusPages.length} حالة لا تطابق pdf-books`;
+    report.add(severity, 'A8', message, {
+      missingPages: missingStatusPages.slice(0, 12),
+      mismatched: mismatchedStatusPages.slice(0, 8),
+    });
+    record('A8', bookId, severity, message);
   }
 
   // A3 ── الاقتطاع: نقيس النص المتوقَّع بعد التنقية نفسها التي يطبّقها البناء (scripts/build-index.mjs)
@@ -669,9 +705,11 @@ for (const [bookId, book] of searchBooks) {
     if (hours != null && hours > 0) stale.push({ layer, olderByHours: hours });
   }
   const raw = outlineRaw.get(bookId);
-  const contradicting = raw ? contradictingOutlinePages(raw, docByPage) : [];
+  const outlineAudit = raw ? auditOutlineNegatives(raw, docByPage) : { reconciled: [], unreconciled: [] };
+  const contradicting = outlineAudit.unreconciled;
   report.notes.staleLayers = stale;
   report.notes.outlineContradiction = contradicting.length;
+  report.notes.reconciledOutlineNegatives = outlineAudit.reconciled.length;
   if (stale.length) {
     report.add('medium', 'D18', `طبقات أقدم من search-index: ${stale.map((item) => `${item.layer} (${item.olderByHours}س)`).join('، ')}`);
     record('D18', bookId, 'medium', stale.map((item) => item.layer).join('+'));
@@ -812,7 +850,7 @@ for (const report of bookReports) {
   for (const severity of SEVERITIES) libraryCounts[severity] += counts[severity];
 }
 for (const finding of library.findings) libraryCounts[finding.severity] += 1;
-// درجة المكتبة = نظافة الفحوص العشرين: كل فحص نظيف يمنح 5، ووجود فجوة عالية يخصم نصفه.
+// درجة المكتبة = نظافة الفحوص المسجلة: كل فحص نظيف يمنح 5، ووجود فجوة عالية يخصم نصفه.
 const libraryScore = round(CHECKS.reduce((sum, entry) => {
   const critical = entry.findings.filter((item) => item.severity === 'critical').length;
   const high = entry.findings.filter((item) => item.severity === 'high').length;
@@ -919,8 +957,9 @@ if (gate && !noExit && gateBlocked) {
   console.log(`\n  البوابة مغلقة: حرج ${criticals.length} · بانتظار مراجعة بصرية ${queue.length}. لا يُنشر الفهرس قبل تصفيرهما.`);
 }
 
-function contradictingOutlinePages(rawText, docByPage) {
-  const pages = [];
+function auditOutlineNegatives(rawText, docByPage) {
+  const reconciled = [];
+  const unreconciled = [];
   const scanner = new RegExp(OUTLINE_ENTRY.source, 'gm');
   let match;
   while ((match = scanner.exec(rawText))) {
@@ -928,8 +967,12 @@ function contradictingOutlinePages(rawText, docByPage) {
     const next = rawText.indexOf('\n### الصفحة الفيزيائية ', start);
     const block = rawText.slice(start, next < 0 ? rawText.length : next);
     if (!NO_TEXT_CLAIM.test(block)) continue;
-    const doc = docByPage.get(Number(match[1]));
-    if (doc && squeeze(doc.text).length >= TEXT_MIN) pages.push(Number(match[1]));
+    const page = Number(match[1]);
+    const doc = docByPage.get(page);
+    if (!doc || squeeze(doc.text).length < TEXT_MIN) continue;
+    const stillNegative = [doc.title, doc.summary, doc.preview, doc.outlineSummary]
+      .some((value) => NO_TEXT_CLAIM.test(String(value || '')));
+    (stillNegative ? unreconciled : reconciled).push(page);
   }
-  return pages;
+  return { reconciled, unreconciled };
 }

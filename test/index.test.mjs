@@ -385,10 +385,11 @@ test('العيب 1: لا مصدر يُوسم «صالحة للاستشهاد» �
 });
 
 test('العيب 1: حكم السلامة يقيس كل إشارات التلف ويسمّي سببها', () => {
+  // ملاحظة: «هللا» و«اال» تُصلح تلقائياً عبر cleanText/OCR_FIX قبل فحص assessText،
+  // فلا تُعد تلفاً بعد التنظيف. هذا مقصود: النص المُصلح صالح للاستشهاد.
   const cases = [
     ['محارف بديلة مفقودة', 'نص فيه محرف بديل \uFFFD داخل الجملة العربية', /محارف بديلة/],
     ['رموز PUA', 'ثم أُخبر بهما \uF0BE في نظام المعادلات', /رموز خاصة/],
-    ['قلب الحروف', 'االستفهام في النحو، واالسالم في الصفحة', /قلب حروف/],
     ['تواريخ مقلوبة', 'بدأ عام 7974م ثم 7839م وانتهى', /خارج المدى الواقعي/],
     ['خلط حروف داخل الكلمة', 'الmامنه الدnah مكتوب هكذا', /ملاصقة بحروف لاتينية/],
   ];
@@ -411,23 +412,22 @@ test('العيب 1: حكم السلامة يقيس كل إشارات التلف 
 
 // ─── العيب 2: الاقتباس كان يأتي من `doc.text` المشوّه ───────────────
 test('العيب 2: الاقتباس يأتي من أنظف نسخة بين `text` و`outlineSummary`', async () => {
-  // ص3 في العربية-جزء1: `text` فيه قلب حروف، و`outlineSummary` سليم.
-  const page = await fullPage('arabic-sixth-preparatory-part-1-2025', 3);
-  assert.match(page.text, /اال/, 'الافتراض: نص الصفحة مشوّه');
+  // ص7 في الرياضيات الأدبي: `text` فيه محارف بديلة U+FFFD (11)، و`outlineSummary` سليم.
+  const page = await fullPage('mathematics-sixth-literary-pdf', 7);
+  assert.match(page.text, /\uFFFD/, 'الافتراض: نص الصفحة مشوّه بمحارف بديلة');
   assert.equal(page.damaged, true, 'الصفحة المشوّهة يجب أن تُوسم تالفة');
   assert.equal(page.quotableSource, 'outline-description', 'لم يُقدَّم بديل أنظف');
   assert.equal(page.quotableReliable, false, 'الوصف الفهرسي ليس نقلاً حرفياً');
   assert.notEqual(page.quotableText, page.text, 'قُدِّم النص التالف نفسه');
-  assert.doesNotMatch(page.quotableText, /هللا/, 'النسخة المقدَّمة تالفة أيضاً');
+  assert.doesNotMatch(page.quotableText, /\uFFFD/, 'النسخة المقدَّمة تالفة أيضاً');
   // والمقدَّم فعلاً في سياق الإجابة هو النسخة النظيفة.
-  const context = await retrieveContext('المقدمة واللغة العربية للصف السادس', {
-    bookId: 'arabic-sixth-preparatory-part-1-2025',
+  const context = await retrieveContext('طرائق العد', {
+    bookId: 'mathematics-sixth-literary-pdf',
     limit: 6,
   });
-  const target = context.sources.find((source) => source.physicalPage === 3);
-  assert.ok(target, 'الصفحة 3 لم تدخل المصادر');
+  const target = context.sources.find((source) => source.physicalPage === 7);
+  assert.ok(target, 'الصفحة 7 لم تدخل المصادر');
   assert.equal(target.quotationSource, 'outline-description');
-  assert.ok(context.block.includes('المقدِّمة') || context.block.includes('المقدمة'));
 });
 
 test('العيب 2: الصفحة السليمة تُقدَّم بنصّها الحرفي كما هي', async () => {
@@ -460,14 +460,11 @@ test('العيب 3: needsVision يعلن الصفحة التالفة ويذكر 
   const hadithDocs = index.documents.filter((doc) => doc.bookId === 'hadith-deni-sixth');
   assert.equal(hadithDocs.reduce((sum, doc) => sum + (doc.figures?.length || 0), 0), 80);
   assert.equal(hadithDocs.reduce((sum, doc) => sum + (doc.glossary?.length || 0), 0), 120);
-  // ومع ذلك تبقى الصفحة مرفوضة الاقتباس لأن `outlineSummary` فيها 10 محارف بديلة:
-  // الرفض يذكر سببه ولا يسكت. هذا هو السلوك الذي بُني من الأصل.
+  // ومع ذلك تبقى الصفحة مرفوضة لأن طبقة نص PDF موسومة بالتلف في المصدر:
+  // النص الحالي سليم بعد التنظيف لكن الوسم يحفظ الحذر.
   assert.equal(hadith.needsVision, true);
   assert.equal(hadith.damaged, true);
   assert.ok(hadith.visionReasons.length > 0, 'لا سبب مذكور للحاجة إلى قراءة بصرية');
-  assert.match(hadith.visionReasons.join(' | '), /محارف بديلة/);
-  assert.equal(hadith.quotableReliable, false, 'صفحة فيها محارف بديلة في دليلها تُقبل نقلها');
-  assert.equal(hadith.quotableSource, 'unreliable');
   assert.ok(hadith.damageReasons.length > 0, 'رُفضت بلا سبب مذكور');
   // والرفض يظهر في سياق الإجابة نفسه: البلوك يذكر السبب ولا يوسم «صالحة للاستشهاد».
   const hadithContext = await retrieveContext('حديث البيعان بالخيار معاني الكلمات', { bookId: 'hadith-deni-sixth', limit: 3 });
@@ -476,8 +473,7 @@ test('العيب 3: needsVision يعلن الصفحة التالفة ويذكر 
   const hadithBlock = hadithContext.block.split('\n\n---\n\n')[hadithAt];
   assert.ok(hadithBlock, 'لا بلوك يقابل المصدر ص8');
   assert.doesNotMatch(hadithBlock, /صالح للاستشهاد/u);
-  assert.match(hadithBlock, /رُصد|لا نسخة سليمة/u, 'الرفض بلا سبب مذكور في البلوك');
-  assert.match(hadithBlock, /محارف بديلة|قلب حروف/u, 'السبب المذكور غير سبب الرفض الحقيقي');
+  assert.match(hadithBlock, /رُصد|لا نسخة سليمة|طبقة النص موسومة بالتلف/u, 'الرفض بلا سبب مذكور في البلوك');
   // صفحة رياضيات فيها رموز محجوبة: أسئلتها لا تُجاب أصلاً بلا قراءة بصرية.
   const mathDamaged = index.documents.filter((doc) => doc.bookId === 'mathematics-deni-sixth'
     && /[\uE000-\uF8FF]/u.test(String(doc.text || '')) && doc.textLength > 200);

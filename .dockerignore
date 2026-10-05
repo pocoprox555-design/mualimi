@@ -4,11 +4,10 @@
 node_modules
 dist
 curriculum-data
-# ملفات PDF الخام (171MB) لا يحتاجها السيرفر — الفهارس المبنية تكفي
-curriculum-library/pdf-sources
+# مرحلة التحقق تحتاج PDF للتحقق من البصمات؛ ويستخدمها runtime كمسار PDF احتياطي.
+# تُنسخ إلى الصورة النهائية مع ملفات المكتبة التي يقرأها الخادم فقط.
+# ملف نصوص المصدر القديم غير مستخدم في البناء أو التشغيل.
 curriculum-library/legacy-text-sources
-# النص الكامل صار داخل search-index.json؛ هذه نسخة بناء فقط
-curriculum-library/pdf-books
 .mimosa
 *.log
 .git

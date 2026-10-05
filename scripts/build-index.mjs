@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanText, compact, normalizeAr, normalizeDigits, topKeywords, searchTokens, uniqueTokens } from '../lib/text.mjs';
 import { getOutline } from '../lib/outline.mjs';
+import { classifyPageEvidence } from '../lib/pdf-fallback.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LIBRARY = path.join(ROOT, 'curriculum-library');
@@ -22,9 +23,9 @@ const PRESS_STAMP = /\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{2}/g;
 // البديل الأقصر (رقمان مفصولان بمسافة) يسبق الرقم الصلب حتى لا يُؤكل نصف رقم حقيقي («11 3 - العوامل» = 113).
 const LEADING_FOLIO = /^((?:[0-9٠-٩۰-۹]{1,2}\s+[0-9٠-٩۰-۹]{1,2})|[0-9٠-٩۰-۹]{1,4})(?:\s+|$)/;
 const TRAILING_FOLIO = /(?:\s)((?:[0-9٠-٩۰-۹]{1,2}\s+[0-9٠-٩۰-۹]{1,2})|[0-9٠-٩۰-۹]{1,4})\s*$/;
-// تلف النص: بديل استخراجي محلي عن hasTextDamage في lib/text.mjs (وحدة ليُوحَّد لاحقاً).
-const DAMAGED = /[\uFFFD\uE000-\uF8FF]/;
+// رقم الصفحة داخل folio.
 const FOLIO_DIGITS = '[0-9٠-٩۰-۹]';
+const EVIDENCE_STATUSES = ['clean-extracted-text', 'ocr-text', 'damaged-text', 'no-text'];
 
 // النص يحتفظ بأي محتوى حقيقي مهما قصر؛ أما «قابل للبحث» فيبقى له حدّه الأدنى 20 محرفاً:
 // صفحة من ست كلمات لا تُعامَل كصفحة نصية كاملة، لكنها تُحفظ حتى لا يخفيها الفهرس عن النموذج.
@@ -185,13 +186,16 @@ function usefulOutlineValue(value) {
 
 // التنظيف لا يترك للصفحة بلا نص واصفاً فارغاً: يُبقي الجمل التي فيها معلومة فعلية
 // («التمرين 1: عرّف ما يأتي») ويُسقط جملة «لا نص مستخرج (تحتاج قراءة بصرية)».
-function cleanOutlineSummary(value) {
+function cleanOutlineSummary(value, hasCurrentText = false) {
   const raw = cleanText(value || '');
   if (!raw) return '';
   if (!OUTLINE_NEGATIVE.test(raw)) return raw;
-  const parts = raw.split(/\n+|(?<=[.!؟?])\s+/).map((part) => part.trim()).filter(Boolean);
+  const parts = raw.split(/\n+|(?<=[.!؟?؛;])\s+/).map((part) => part.trim()).filter(Boolean);
   const kept = parts.filter((part) => !OUTLINE_NEGATIVE.test(part));
   const rest = kept.join(' ').replace(/\s+/g, ' ').trim();
+  // إذا أثبتت طبقة الصفحة الحالية وجود النص، فالأجزاء الموجبة من الوصف تبقى
+  // نافعة حتى لو كانت قصيرة؛ السطر السلبي القديم وحده يُسقط.
+  if (hasCurrentText) return rest;
   return rest.length >= 60 ? rest : '';
 }
 
@@ -436,8 +440,9 @@ printed[book.id] = {};
     if (printedPage != null) printed[book.id][printedPage] = physicalPage;
     const fullText = stripTrailingFolio(stripLeadingFolio(pageText, printedPage), printedPage);
     // صفحة بلا نص تستند إلى وصف المخطط؛ لولا nettoyage stink الحكم «outline-description» ينهار.
-    const outlineSummary = cleanOutlineSummary(compact(outlinePage?.description || '', 2_200))
+    const outlineSummary = cleanOutlineSummary(compact(outlinePage?.description || '', 2_200), hasBodyText)
       || (hasBodyText || !outlinePage ? '' : OUTLINE_FALLBACK);
+    const evidenceStatus = classifyPageEvidence(fullText, page);
     const extra = bookEnrichment[physicalPage];
     const title = pageTitle(page, outlinePage, extra, fullText, runningHeaders);
     const isTemplateSummary = (summaryCounter.get(compact(stripPressSlab(page.summary || ''), 420)) || 0) >= 8;
@@ -505,7 +510,8 @@ const pageType = cleanText(page.pageType || extra?.pageType || '');
       preview,
       text: fullText,
       textLength: fullText.length,
-      textDamaged: DAMAGED.test(fullText),
+      textDamaged: evidenceStatus === 'damaged-text',
+      evidenceStatus,
       normalized,
       terms,
       keywords: topKeywords(searchableText, 12).filter((word) => !/^\d+$/.test(word)),
@@ -547,6 +553,10 @@ const output = {
     enrichedBooks: books.filter((book) => book.enriched).length,
     fullTextPages: documents.filter((doc) => doc.textLength > 0).length,
     fullTextChars: documents.reduce((sum, doc) => sum + doc.textLength, 0),
+    evidenceStatuses: Object.fromEntries(EVIDENCE_STATUSES.map((status) => [
+      status,
+      documents.filter((doc) => doc.evidenceStatus === status).length,
+    ])),
     structuredPages: documents.filter((doc) => doc.figures?.length || doc.glossary?.length || doc.exercises?.length).length,
     figures: documents.reduce((sum, doc) => sum + (doc.figures?.length || 0), 0),
     glossaryEntries: documents.reduce((sum, doc) => sum + (doc.glossary?.length || 0), 0),
@@ -582,6 +592,7 @@ for (const pages of enrichment.values()) {
 const notCarried = [...presentInFiles].filter((key) => !TRANSFERRED.includes(key) && !['physicalPage', 'pageNumber'].includes(key));
 const printedSources = {};
 for (const doc of documents) printedSources[doc.printedPageSource] = (printedSources[doc.printedPageSource] || 0) + 1;
+console.log(`  evidence status: ${Object.entries(output.stats.evidenceStatuses).map(([status, count]) => `${status}=${count}`).join(' ')}`);
 console.log(`  transferred enrichment fields: ${TRANSFERRED.map((key) => `${key}=${transferredCounts[key]}`).join(' ')}`);
 console.log(`  enrichment keys present in files but not carried: ${notCarried.length ? notCarried.join(', ') : 'none'}`);
 console.log(`  printedPage sources: ${Object.entries(printedSources).map(([key, value]) => `${key}=${value}`).join(' ')} · offsetHint=${documents.filter((doc) => doc.pageOffsetHint != null).length} · damagedText=${documents.filter((doc) => doc.textDamaged).length}`);
