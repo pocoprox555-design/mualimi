@@ -110,7 +110,8 @@ h1,h2,h3,strong,b{font-weight:800}
 .hero-copy p{color:rgba(255,255,255,.72);font-size:.85rem;line-height:1.9;max-width:440px}
 .hero-copy em{color:var(--gold-soft);font-style:normal;font-weight:800}
 .text-button{border:0;background:none;color:var(--teal);padding:0;font-size:.75rem;font-weight:800}
-.light-button{color:var(--gold-soft);margin-top:18px}
+/* زر «ابدئي الآن» كان 71×18px على الجوال: هدف لمس غير قابل. */
+.light-button{display:inline-flex;align-items:center;min-height:44px;margin-top:10px;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:0 18px;color:var(--gold-soft)}
 .hero-seal{width:112px;height:112px;position:relative;z-index:1;display:grid;place-items:center;align-content:center;flex:0 0 auto;border:1px solid rgba(232,200,142,.42);border-radius:50%;color:var(--gold-soft);transform:rotate(9deg)}
 .hero-seal::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(232,200,142,.38);border-radius:50%}
 .hero-seal span{font-size:2.5rem;line-height:1;font-weight:900}
@@ -163,6 +164,7 @@ h1,h2,h3,strong,b{font-weight:800}
 .message-bubble th{color:var(--deep);background:var(--surface-2);white-space:nowrap}
 .message-bubble td{line-height:1.8}
 .reference-mark{display:inline-block;color:var(--teal);background:var(--teal-light);border-radius:5px;padding:0 4px;font-size:.68em;font-weight:900;vertical-align:.35em;margin:0 2px;text-decoration:none}
+.message-bubble del{opacity:.62;text-decoration:line-through}
 .reference-mark:hover{color:#fff;background:var(--teal)}
 .external-link{color:var(--teal);font-weight:700;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
 .message-attachment{display:block;width:fit-content;margin-top:7px;border:1px solid rgba(255,255,255,.24);border-radius:7px;padding:3px 7px;color:var(--gold-soft);font-size:.69rem;line-height:1.5}
@@ -229,8 +231,14 @@ h1,h2,h3,strong,b{font-weight:800}
 .composer{display:flex;align-items:flex-end;gap:7px;padding:7px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 5px 20px rgba(22,47,52,.05);transition:border-color .18s,box-shadow .18s}
 .composer.drag-over{border-color:var(--teal);box-shadow:0 0 0 3px rgba(40,126,120,.14),0 5px 20px rgba(22,47,52,.08)}
 .composer:focus-within{border-color:#9bc8bd;box-shadow:0 5px 23px rgba(40,126,120,.10)}
-.composer textarea{min-height:40px;max-height:140px;flex:1;resize:none;border:0;outline:0;color:var(--ink);background:transparent;line-height:1.6;padding:8px 4px;font-size:.86rem}
-.composer textarea::placeholder{color:#a9b3b1}
+/* سطر واحد فارغ = 44px بالضبط. الإرتفاع القديم مع نص إرشادي طويل كان
+   يلتف إلى سطرين فيصير الصندوق 67px ويبدو ضخماً على الجوال. */
+.composer textarea{min-height:44px;max-height:140px;flex:1;resize:none;border:0;outline:0;color:var(--ink);background:transparent;line-height:1.6;padding:11px 4px;font-size:.86rem;overflow-y:auto}
+.composer textarea::placeholder{color:#a9b3b1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.composer-tool[hidden]{display:none}
+.math-line{display:inline-block;direction:ltr;unicode-bidi:isolate;font-family:'Tajawal',system-ui,sans-serif;font-weight:700;background:var(--surface-2);border-radius:8px;padding:2px 8px;margin:2px 0}
+.source-toggle{flex:0 0 auto;border:1px solid var(--line);border-radius:99px;color:var(--teal);background:var(--surface);padding:7px 12px;font-size:.66rem;font-weight:800;min-height:32px}
+.source-card[hidden]{display:none}
 .composer-tool,.send-button{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto;border:0;border-radius:12px}
 .composer-tool{background:var(--surface-2);color:var(--muted);font-size:1.2rem}
 .composer-tool:hover{color:var(--teal);background:var(--teal-light)}

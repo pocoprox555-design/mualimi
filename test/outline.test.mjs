@@ -74,6 +74,14 @@ test('تحديد كتاب المادة من السؤال أو من المادة 
   assert.equal((await resolveBook('فهرس الأدب الإنكليزي'))?.id, 'english-literature-sixth-pdf');
   assert.equal((await resolveBook('خطة دليل مدرس الأدب الإنكليزي'))?.id, 'english-literature-teacher-guide-95722f85-pdf');
   assert.equal((await resolveBook('محتويات تمارين الأدب الإنكليزي'))?.id, 'english-literature-exercises-sixth-pdf');
+  // اسم المادة يغلب كلمةً عرضية في عنوان كتاب آخر: «الحديث» في عنوان كتاب
+  // التاريخ («العالم الإسلامي الحديث») لا يحوّله إلى كتاب حديث.
+  assert.equal((await resolveBook('الحديث', { track: 'ديني' }))?.id, 'hadith-deni-sixth');
+  assert.equal((await resolveBook('القرآن', { track: 'ديني' }))?.id, 'quran-readings-deni-sixth');
+  assert.equal((await resolveBook('التربية الإسلامية', { track: 'ديني' }))?.id, 'islamic-sixth-preparatory-2025');
+  // ومادةٌ لها كتابان لا يُخمَّن: «اللغة العربية» جزء أول وجزء ثانٍ، والنحو جزء
+  // منها لا كتابها، فيُسأل بدل فتح كتابٍ بالصدفة.
+  assert.equal((await resolveBook('اللغة العربية', { track: 'ديني' })) ?? null, null);
 });
 
 // ── قاعدة الصدق: لا رقم بلا سند من نص الصفحة ────────────────────────────────

@@ -15,6 +15,7 @@ const MAX_LOCAL_STATE_CHARS = 1_000_000;
 const MAX_FALLBACK_STATE_CHARS = 250_000;
 const MAX_QUIZ_QUESTIONS = 10;
 const MAX_CITATIONS = 16;
+const MAX_VISIBLE_SOURCE_CARDS = 3;
 const IMAGE_DB_NAME = 'mualimi-image-context-v1';
 const IMAGE_STORE_NAME = 'contexts';
 const MAX_IMAGE_DATA_URL_CHARS = 800_000;
@@ -98,6 +99,9 @@ function normalizeMessage(message) {
     cites,
     ...(notices.length ? { notices } : {}),
     ...(message.hasImage ? { hasImage: true, imageOrigin: message.imageOrigin === 'context' ? 'context' : 'attached' } : {}),
+    // دور أوقفته الطالبة: يبقى مرئياً في السجل ولا يدخل سياق النموذج أبداً،
+    // وإلا أُجيب عنه بعدين داخل جواب سؤال آخر.
+    ...(message.abandoned ? { abandoned: true } : {}),
   };
 }
 
@@ -168,6 +172,7 @@ function buildStateSnapshot(maxChars) {
           ? { notices: message.notices.map((notice) => String(notice || '').slice(0, 300)).filter(Boolean).slice(0, 4) }
           : {}),
         ...(message.hasImage ? { hasImage: true, imageOrigin: message.imageOrigin === 'context' ? 'context' : 'attached' } : {}),
+        ...(message.abandoned ? { abandoned: true } : {}),
       })),
     }))
     .sort((a, b) => b.updatedAt - a.updatedAt)
@@ -271,6 +276,30 @@ function statusText(data) {
   return 'المعلم جاهز';
 }
 
+// قدرة النموذج على قراءة الصور معلنة من الخادم في /api/config. نموذج غير
+// بصري يجعل ⊕ اعتباطاً: تُحفظ الصورة ولا تُقرأ، وتُوسَم كل رسالة تالية بـ
+// «استُخدمت الصورة السابقة». falsehood تلك وُهم، فتُخفى الأدوات كلها.
+function modelSupportsVision() {
+  return state.ai?.supportsVision !== false;
+}
+
+function applyImageCapability() {
+  const enabled = modelSupportsVision();
+  const attach = $('#attachButton');
+  if (attach) {
+    attach.disabled = !enabled;
+    attach.hidden = !enabled;
+    attach.title = enabled ? 'إرفاق صورة' : 'النموذج الحالي لا يقرأ الصور';
+  }
+  if (!enabled) {
+    state.pendingImages = [];
+    if (state.imageContext) state.imageContext = null;
+    const status = $('#imageContextStatus');
+    if (status) { status.hidden = true; status.innerHTML = ''; }
+  }
+  renderPendingImages();
+}
+
 function currentConversation() {
   return state.conversations.find((conversation) => conversation.id === state.activeId) || null;
 }
@@ -300,17 +329,32 @@ function openConversation(id) {
   renderAll();
 }
 
+// «جلسة جديدة» تُنشئ الجلسة وتفتح مربع الكتابة فوراً. النسخة السابقة كانت
+// تترك الطالبة في الشاشة الرئيسية بلا مربع كتابة ولا تأكيد، فيبدو الزر
+// معطلاً (شكوى متكرّرة). زر الرجوع وحده يعود إلى الرئيسية.
 function newChat() {
   if (state.preparingMessage) return toast('انتظري لحظة حتى يكتمل تجهيز الرسالة.');
   if (state.request) return toast('أوقفي الرد الحالي أولا');
-  state.activeId = null;
-  state.composing = Boolean(state.pendingImages.length);
-  state.imageContext = null;
+  // جلسة فارغة من ضغطة سابقة لا تستحق مكاناً في التخزين: تُزال قبل الإنشاء
+  // حتى لا تدفع جلسات حقيقية خارج حد الثلاثين بمجرد النقر المتكرر على ＋.
+  state.conversations = state.conversations.filter((conversation) => conversation.messages?.length);
+  createConversation();
+  state.composing = true;
   state.view = 'learn';
   closeSidebar();
   renderAll();
+  toast('جلسة جديدة — اكتبي سؤالك');
   $('#messageInput')?.focus();
 }
+
+function goHome() {
+  if (state.preparingMessage) return toast('انتظري لحظة حتى يكتمل تجهيز الرسالة.');
+  state.composing = false;
+  state.view = 'learn';
+  closeSidebar();
+  renderAll();
+}
+
 
 function displayDate(timestamp) {
   try { return new Intl.DateTimeFormat('ar-IQ', { day: 'numeric', month: 'short' }).format(new Date(timestamp)); } catch { return ''; }
@@ -345,6 +389,7 @@ async function loadBootstrap() {
     state.curriculum = data.curriculum || null;
     state.ai = data;
     renderProviderStatus();
+    applyImageCapability();
     setConnection('online', statusText(data));
   } catch (error) {
     setConnection('offline', 'تعذر الوصول للخادم');
@@ -358,6 +403,7 @@ async function warmup() {
     state.ai = { ...state.ai, ...(data.ai || {}) };
     setConnection('online', statusText(state.ai));
     renderProviderStatus();
+    applyImageCapability();
   } catch { setConnection('offline', 'تحققي من الاتصال'); }
 }
 
@@ -405,12 +451,64 @@ function linkifyUrls(root) {
   });
 }
 
+// الصيغ تصل النص كما كتبها النموذج: \frac{a}{b} و^{2} و$$…$$ تظهران خاماً على
+// الجوال وتُقرأ كعشوائية. التحويل إلى صيغة مقروءة أرخص وأسرع من تحميل مكتبة
+// رياضيات، ويصلح لصفحات الكتب المدرسية (كسر، جذر، ضرب، قوى).
+// لا تلمس الأسطر ولا الأقواس المعقوفة إلا ما جاء من
+// أوامر LaTeX فعلاً، وإلا لتحوّل كل فقرة في الرد إلى سطر واحد.
+function readableMath(value) {
+  let out = String(value || '').trim();
+  out = out.replace(/\\frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, '($1 ÷ $2)');
+  out = out.replace(/\\[dt]?frac\s*(\d)\s*(\d)/g, '$1 ÷ $2');
+  out = out.replace(/\\sqrt\s*\[(\d+)\]\s*\{([^{}]*)\}/g, '$2^(1/$1)');
+  out = out.replace(/\\sqrt\s*\{([^{}]*)\}/g, '√($1)');
+  out = out.replace(/\\cdot|\\times/g, '×');
+  out = out.replace(/\\div/g, '÷').replace(/\\pm/g, '±').replace(/\\neq/g, '≠').replace(/\\approx/g, '≈');
+  out = out.replace(/\\leq|\\le/g, '≤').replace(/\\geq|\\ge/g, '≥');
+  out = out.replace(/\\(?:mathrm|text|mathbf|operatorname|mathbb|mathcal)\s*\{([^{}]*)\}/g, '$1');
+  out = out.replace(/\\(?:left|right|displaystyle|,|;|!|quad|qquad)/g, '');
+  const symbols = { alpha: 'أ', beta: 'ب', gamma: 'ج', delta: 'د', theta: 'ث', lambda: 'ل', mu: 'م', pi: 'ط', sigma: 'س', phi: 'ف', omega: 'و' };
+  out = out.replace(/\\([a-zA-Z]+)/g, (whole, name) => (symbols[name] ?? (name === 'ldots' || name === 'dots' ? '…' : '')));
+  const sup = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+  const sub = '₀₁₂₃₄₅₆₇₈₉';
+  out = out.replace(/\^\{([^{}]*)\}|\^(\w)/g, (_all, braced, bare) => {
+    const value = String(braced ?? bare ?? '');
+    return /^\d+$/.test(value) ? [...value].map((digit) => sup[Number(digit)]).join('') : `^(${value})`;
+  });
+  out = out.replace(/_\{([^{}]*)\}|_(\w)/g, (_all, braced, bare) => {
+    const value = String(braced ?? bare ?? '');
+    return /^\d+$/.test(value) ? [...value].map((digit) => sub[Number(digit)]).join('') : `_(${value})`;
+  });
+  out = out.replace(/[{}]/g, '').replace(/[ \t]{2,}/g, ' ').trim();
+  return out;
+}
+
+function formatMath(text) {
+  const blocks = [];
+  let out = String(text || '').replace(/\$\$([\s\S]+?)\$\$|\$([^$\n]{1,160})\$/g, (_all, block, inline) => {
+    const value = readableMath(block ?? inline ?? '');
+    blocks.push(value ? `<span class="math-line" dir="ltr">${escapeHtml(value)}</span>` : '');
+    return `\u0000M${blocks.length - 1}\u0000`;
+  });
+  // أوامر LaTeX خارج علامات $ (النموذج أحياناً يكتب \frac بلا delimiters).
+  if (/\\[a-zA-Z]/.test(out)) out = out.replace(/\\[a-zA-Z]+[^\s]*/g, (whole) => readableMath(whole) || '');
+  return out.replace(/\u0000M(\d+)\u0000/g, (_all, index) => blocks[Number(index)] || '');
+}
+
 function markdownHtml(source, referencePrefix = '', citationIds = []) {
   let text = escapeHtml(source);
+  // LaTeX يسبق الترميز حتى لا تُلتقط أكواده كـ HTML أو كترميز عريض.
+  text = formatMath(text);
+
   text = text.replace(/```[\w-]*\n?([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
   text = text.replace(/`([^`\n]+)`/g, '<code>$1</code>');
-  text = text.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>').replace(/^###\s+(.+)$/gm, '<h3>$1</h3>').replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+  text = text.replace(/^#{4,6}\s+(.+)$/gm, '<h3>$1</h3>')
+    .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+    .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+    .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
   text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // الشطب: ~~مشطوب~~ كان يظهر حرفياً على الجوال.
+  text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
   // المائل قد يمتد على أكثر من سطر داخل اقتباس الكتاب، فلا يُترك نجمةً ظاهرة للطالبة.
   text = text.replace(/\*([^*]+)\*/g, (_match, inner) => `<em>${String(inner).replace(/\s*\n\s*/g, ' ')}</em>`);
   const ids = new Set(citationIds.map((item) => String(typeof item === 'string' ? item : item?.id || '')));
@@ -665,9 +763,14 @@ function citationDomId(prefix, id) {
 function sourceCards(sources, target, compact = false, referencePrefix = '') {
   target.innerHTML = '';
   const items = Array.isArray(sources) ? sources.filter((source) => source && typeof source === 'object').slice(0, MAX_CITATIONS) : [];
-  if (!items.length) { target.hidden = true; return; }
+  // مصدر بلا رقم صفحة ولا رابط لا يستطيع الطالبة فتحه ولا التحقق منه: لا
+  // يُعرض. كان يملأ الشريط بعنوان «رقم الصفحة غير متاح» ويوهمها بدليل.
+  const visible = items.filter((source) => source.sourceType === 'web' || source.sourceType === 'catalog'
+    || source.physicalPage != null || source.printedPage != null);
+  if (!visible.length) { target.hidden = true; return; }
   target.hidden = false;
-  items.forEach((source) => {
+  const cards = [];
+  visible.forEach((source) => {
     const id = String(source.id || 'S');
     const url = safeWebUrl(source.url);
     const canOpenPage = source.sourceType !== 'web' && Boolean(String(source.bookId || '').trim()) && source.physicalPage != null && Number.isInteger(Number(source.physicalPage)) && Number(source.physicalPage) > 0;
@@ -713,7 +816,25 @@ function sourceCards(sources, target, compact = false, referencePrefix = '') {
       card.append(reason);
     }
     target.appendChild(card);
+    cards.push(card);
   });
+  // سبع بطاقات تحت جواب واحد كانت أكبر إزعاج على الجوال. ثلاثة تظهر، والباقي
+  // خلف زر «المصادر (N)» يفتحها بإرادة الطالبة لا تلقائياً.
+  if (cards.length > MAX_VISIBLE_SOURCE_CARDS) {
+    cards.forEach((card, index) => { card.hidden = index >= MAX_VISIBLE_SOURCE_CARDS; });
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'source-toggle';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = `المصادر (${cards.length})`;
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      cards.forEach((card, index) => { card.hidden = expanded ? index >= MAX_VISIBLE_SOURCE_CARDS : false; });
+      toggle.textContent = expanded ? `المصادر (${cards.length})` : 'إخفاء المصادر';
+      toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    target.appendChild(toggle);
+  }
   if (compact) target.classList.add('compact'); else target.classList.remove('compact');
 }
 
@@ -868,7 +989,12 @@ function renderHistory() {
     if (!query) return true;
     return conversation.title.toLowerCase().includes(query) || conversation.messages.some((message) => String(message.content).toLowerCase().includes(query));
   });
-  $('#historyCount').textContent = countLabel(state.conversations.filter((conversation) => conversation.messages?.length).length, { one: 'جلسة واحدة', two: 'جلستان', few: 'جلسات', many: 'جلسة' });
+  // الشارة كانت تعرض عدد كل الجلسات مهما كان البحث، فبدا كأن الفلترة لم
+  // تعمل. مع بحث تعرض النتائج فقط.
+  const counted = query ? conversations.length : state.conversations.filter((conversation) => conversation.messages?.length).length;
+  $('#historyCount').textContent = query
+    ? `${countLabel(counted, { one: 'نتيجة واحدة', two: 'نتيجتان', few: 'نتائج', many: 'نتيجة' })}`
+    : countLabel(counted, { one: 'جلسة واحدة', two: 'جلستان', few: 'جلسات', many: 'جلسة' });
   list.innerHTML = '';
   if (!conversations.length) { list.innerHTML = '<div class="empty-state">لا توجد جلسات مطابقة بعد. كل سؤال جيد هو بداية جديدة.</div>'; return; }
   conversations.forEach((conversation) => {
@@ -1346,12 +1472,18 @@ async function requestReply(conversation, question, images, shell) {
   state.request = { abort, conversation, question, images };
   $('#sendButton').hidden = true; $('#stopButton').hidden = false;
   setConnection('online', 'المعلم يكتب...');
-  const messages = conversation.messages.slice(-MAX_REQUEST_MESSAGES).map((message) => ({
+  // الدور المُوقوف يبقى في السجل البصري ويُستثنى من سياق النموذج.
+  const live = conversation.messages.filter((message) => !message.abandoned);
+  const messages = live.slice(-MAX_REQUEST_MESSAGES).map((message) => ({
     role: message.role,
     content: String(message.content || '').slice(0, MAX_REQUEST_MESSAGE_CHARS),
   }));
   const last = messages.at(-1);
-  if (images.length && last?.role === 'user') last.content = [{ type: 'text', text: question || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images.slice(0, 1).map((url) => ({ type: 'image_url', image_url: { url } }))];
+  // إعادة المحاولة بعد رد جزئي: آخر مدخل قد يكون رداً لا سؤالاً، فيُضاف السؤال
+  // صراحةً وإلا أُجيب عن شي غير وارد في الطلب.
+  if (messages.at(-1)?.role !== 'user') messages.push({ role: 'user', content: question || 'اشرحي ما يظهر في الصورة المرفقة.' });
+  const lastUserIndex = messages.findLastIndex((message) => message.role === 'user');
+  if (images.length && lastUserIndex >= 0) messages[lastUserIndex] = { ...messages[lastUserIndex], content: [{ type: 'text', text: question || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images.slice(0, 1).map((url) => ({ type: 'image_url', image_url: { url } }))] };
   let full = ''; let citations = []; let finished = false; let paint = 0;
   let streamIncomplete = false;
   const streamNotices = new Set();
@@ -1395,6 +1527,11 @@ async function requestReply(conversation, question, images, shell) {
   } catch (error) {
     if (paint) cancelAnimationFrame(paint);
     if (abort.signal.aborted) {
+      // أوقفتِ الطالبة الرد: دورها يُوسم «موقوف» فلا يُعاد الجواب عنه لاحقاً
+      // داخل جواب آخر، ويبقى ما كُتب منها مرئياً في السجل.
+      for (let index = conversation.messages.length - 1; index >= 0; index -= 1) {
+        if (conversation.messages[index]?.role === 'user') { conversation.messages[index].abandoned = true; break; }
+      }
       if (full.trim()) {
         const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
         conversation.messages.push({ role: 'assistant', content: partial, cites: citations, notices: [...streamNotices] });
@@ -1432,7 +1569,12 @@ async function requestReply(conversation, question, images, shell) {
 async function sendMessage(text, images = []) {
   if (state.request || state.preparingMessage) return;
   const question = String(text || '').trim().slice(0, MAX_REQUEST_MESSAGE_CHARS);
-  const selectedImages = Array.isArray(images) ? images.slice(0, 2) : [];
+  let selectedImages = Array.isArray(images) ? images.slice(0, 2) : [];
+  if (selectedImages.length && !modelSupportsVision()) {
+    // لا حفظ ولا إرسال لصورة لن يقرأها أحد: توهم الطالبة بقدرة غير موجودة.
+    selectedImages = [];
+    toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.');
+  }
   if (!question && !selectedImages.length) return;
   const conversation = currentConversation() || createConversation();
   state.preparingMessage = true;
@@ -1440,7 +1582,9 @@ async function sendMessage(text, images = []) {
   let requestImages = selectedImages;
   let imageOrigin = selectedImages.length ? 'attached' : '';
   try {
-    if (!requestImages.length && conversation.imageContext) {
+    // سياق الصورة السابقة يُرفق مرة واحدة مع الرسالة التالية فقط. بقاؤه
+    // لكل رسائل الجلسة كان يوسم خمس رسائل بلا علاقة بالصورة.
+    if (!requestImages.length && conversation.imageContext && modelSupportsVision()) {
       const context = await ensureImageContext(conversation);
       if (!context?.dataUrl) {
         context && (context.status = 'unavailable');
@@ -1450,6 +1594,12 @@ async function sendMessage(text, images = []) {
       }
       requestImages = [context.dataUrl];
       imageOrigin = 'context';
+      // الصورة استُعملت مرة واحدة: لا تُعاد تلقائياً مع كل رسالة بعد هذه،
+      // وتبقى في المحادثة لتفتحيها بملمسك متى شئتِ.
+      delete conversation.imageContext;
+      state.imageContextCache.delete(conversation.id);
+      state.imageContext = { conversationId: conversation.id, dataUrl: '', status: 'none' };
+      renderImageContextStatus();
     }
     if (selectedImages.length) {
       const dataUrl = selectedImages[0];
@@ -1686,7 +1836,7 @@ function bindEvents() {
   $$('.quick-action').forEach((button) => button.addEventListener('click', () => openComposer(button.dataset.prompt || '')));
   bindPromptButtons();
   $('#newChatButton').addEventListener('click', newChat); $('#chatNewButton').addEventListener('click', newChat); $('#mobileNewChat').addEventListener('click', newChat); $('#heroStartButton').addEventListener('click', () => openComposer());
-  $('#chatBackButton').addEventListener('click', newChat);
+  $('#chatBackButton').addEventListener('click', goHome);
   $('#mobileMenuButton').addEventListener('click', () => {
     const sb = $('#sidebar');
     if(sb?.classList.contains('open')) closeSidebar(); else openSidebar();
@@ -1704,9 +1854,10 @@ function bindEvents() {
   $('#messageInput').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 140)}px`; });
   $('#messageInput').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('#composer').requestSubmit(); } });
   $('#stopButton').addEventListener('click', () => state.request?.abort.abort(new DOMException('stopped', 'AbortError')));
-  $('#attachButton').addEventListener('click', () => $('#imageInput').click());
+  $('#attachButton').addEventListener('click', () => { if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.'); $('#imageInput').click(); });
   $('#imageInput').addEventListener('change', async (event) => {
     const files = [...(event.target.files || [])].slice(0, 2); event.target.value = ''; if (!files.length) return;
+    if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.');
     const pending = [];
     for (const file of files) {
       if (state.pendingImages.length + pending.length >= 2) { toast('يمكنك إرفاق صورتين كحد أقصى في الرسالة الواحدة.'); break; }
@@ -1721,11 +1872,18 @@ function bindEvents() {
   // سحب وإفلات + لصق الصور
   const composer = $('#composer');
   const handleDroppedFiles = async (files) => {
-    const list = [...files].filter((f) => /^image\/(jpeg|png|webp)$/.test(f.type)).slice(0, 2);
+    const all = [...files];
+    const list = all.filter((f) => /^image\/(jpeg|png|webp)$/.test(f.type)).slice(0, 2);
+    // ملف غير صورة يُهمل مع رسالة: الصمت كان يوهم بأن شيئاً سيُستعمل.
+    if (all.length && !list.length) { toast('الصيغة مدعومة: صورة JPEG أو PNG أو WebP.'); return; }
     if (!list.length) return;
+    if (!modelSupportsVision()) { toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.'); return; }
+    if (list.length > 2) toast('سأرفق صورتين كحد أقصى.');
+    // اللصق على الشاشة الرئيسية بلا مربع كتابة: نفتحه حتى ترى المرفق.
+    if (!currentConversation() || !state.composing) openComposer();
     const pending = [];
     for (const file of list) {
-      if (state.pendingImages.length + pending.length >= 2) { toast('يمكنك إرفاق صورتين كحد أقصى.'); break; }
+      if (state.pendingImages.length + pending.length >= 2) break;
       try { pending.push(await compressImage(file)); } catch { toast('تعذرت قراءة إحدى الصور.'); }
     }
     if (pending.length) { state.pendingImages.push(...pending); renderPendingImages(); }

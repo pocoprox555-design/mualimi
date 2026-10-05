@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=5.0">
+  <link rel="stylesheet" href="/style.css?v=6.0">
 </head>
 <body>
   <div id="offlineBar" class="offline-bar" role="status" aria-live="polite" hidden>لا يوجد اتصال — المحادثات المحفوظة متاحة، والرد يحتاج اتصالاً.</div>
@@ -86,9 +86,9 @@
             <div id="imageContextStatus" class="image-context-status" role="status" aria-live="polite" hidden></div>
             <div id="imagePreview" class="image-preview" hidden aria-label="الصور المرفقة"></div>
             <form id="composer" class="composer">
-              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" aria-label="اختيار صورة" hidden>
-              <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة">⊕</button>
-              <textarea id="messageInput" rows="1" maxlength="4000" placeholder="اكتبي سؤالك هنا… مثلاً: اشرحي صفحة 22 من الرياضيات" aria-label="سؤالك"></textarea>
+              <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="اختيار صورة" hidden>
+              <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة" title="إرفاق صورة">⊕</button>
+              <textarea id="messageInput" rows="1" maxlength="4000" placeholder="اكتبي سؤالك… مثلاً: صفحة ٢٢ من الفقه" aria-label="سؤالك"></textarea>
               <button id="sendButton" class="send-button" type="submit" aria-label="إرسال">↑</button>
               <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف" hidden>■</button>
             </form>
@@ -126,7 +126,8 @@
       <div class="modal-header"><div><span class="kicker">مساحتك</span><h2 id="settingsTitle">الإعدادات</h2></div><button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button></div>
       <label for="settingsName">اسمك</label>
       <input id="settingsName" class="field" maxlength="40" placeholder="شلون أناديچ؟ (اختياري)" autocomplete="nickname">
-      <div class="settings-note"><span>i</span><p>مسارك هو التعليم الديني. المعلم يعرف كتبك صفحة صفحة ويشرح أي صفحة تطلبينها فوراً. لإرسال صورة، استخدمي ⊕ بجانب مربع الكتابة.</p></div>
+        <div class="settings-note"><span>i</span><p>مسارك هو التعليم الديني. المعلم يعرف كتبك صفحة صفحة ويشرح أي صفحة تطلبينها فوراً.</p></div>
+
       <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق…</span></div>
       <div class="provider-panel">
         <div class="provider-panel-head"><div><span class="kicker">الذكاء الاصطناعي</span><h3>مفتاح المعلم</h3></div><span id="providerState" class="provider-state">غير معروف</span></div>
@@ -142,6 +143,6 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=5.1" defer></script>
+  <script src="/app.js?v=6.0" defer></script>
 </body>
 </html>

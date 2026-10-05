@@ -217,14 +217,26 @@ test('يرفض الاسترجاع الضعيف الذي يخلط بين موضو
   assert.deepEqual(await search('حل السؤال الثالث صفحة 42', { limit: 5 }), []);
 });
 
-test('منهج رحمة الديني معزول عن كتب الأدبي ويغطي الكتب الرسمية المضافة', async () => {
+test('منهج رحمة الديني معزول عن كتب الأدبي ويغطي كتبها الأساسية', async () => {
   const books = await listBooks({ track: 'ديني' });
-  assert.equal(books.length, 8);
-  assert.equal(books.reduce((sum, book) => sum + book.pageCount, 0), 841);
+  // ١١ كتاباً و١٢٨١ صفحة. كانت ٨ كتب و٨٤١ صفحة: الكتب الثلاثة الأولى
+  // (القرآن الكريم والتربية الإسلامية، واللغة العربية جزءاً أول وثاني) كانت
+  // مسجّلة بمسار «عام» فلم تكن مرئية لرحمة أصلاً، فصار «صفحة ٢٤ من التربية
+  // الإسلامية» بلا كتاب يُفتح. حُذف الخلل بالتصحيح في pdf-books لا بتوسيع
+  // الفلتر، وأُثبت هنا بالاسم حتى لا يعود المسارُ قبيحاً صامتاً.
+  assert.equal(books.length, 11);
+  assert.equal(books.reduce((sum, book) => sum + book.pageCount, 0), 1281);
+  for (const id of ['islamic-sixth-preparatory-2025', 'arabic-sixth-preparatory-part-1-2025', 'arabic-sixth-preparatory-part-2-2025', 'quran-readings-deni-sixth', 'fiqh-shafii-deni-sixth', 'hadith-deni-sixth']) {
+    assert.ok(books.some((book) => book.id === id), `${id} خارج منهج رحمة`);
+  }
+  // العزل عن الأدبي باقٍ، وكذلك استبعاد الكتب العامة والإضافية.
+  assert.ok(books.every((book) => book.track !== 'أدبي'), 'كتاب أدبي تسرّب إلى المسار الديني');
+  assert.ok(books.every((book) => book.track !== 'عام'), 'كتاب عامّ تسرّب إلى المسار الديني');
+  assert.ok(books.every((book) => !book.supplementary), 'الفقه الحنفي الإضافي داخل المسار الأساسي');
   // 824 كانت قبل حذف النص المصحف المختلق من `quran-readings-deni-sixth` ص63 (الصفحة
   // بيضاء فعلاً: حرفان في طبقة النص وهما رقم الطبع ٥٩). انخفض العدّ واحداً لأن ص63 صارت
   // `searchable: false`، وهذا هو الإصلاح لا الانحدار، فالثقابة تُثبَّت أدناه باسمها.
-  assert.equal(books.reduce((sum, book) => sum + book.searchablePageCount, 0), 823);
+  assert.equal(books.reduce((sum, book) => sum + book.searchablePageCount, 0), 1253);
   const quranBlank = await fullPage('quran-readings-deni-sixth', 63);
   assert.equal(quranBlank.searchable, false, 'ص63 استُعيد فيها نصٌ لم يكن في الكتاب');
   assert.equal(quranBlank.needsVision, true);
