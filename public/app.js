@@ -836,6 +836,7 @@ function daysLabel(days) {
 function renderPlan() {
   const list = $('#examList');
   if(!list) return;
+  // plan view removed in v5 — keep no-op to avoid null crashes
   list.innerHTML = '';
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const upcoming = state.exams.filter((exam) => new Date(`${exam.date}T00:00:00`) >= today).sort((a, b) => a.date.localeCompare(b.date));
@@ -1739,8 +1740,8 @@ function bindEvents() {
     if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
     await handleDroppedFiles(files);
   });
-  $('#historySearch').addEventListener('input', renderHistory);
-  $('#examForm').addEventListener('submit', (event) => { event.preventDefault(); const title = $('#examTitle').value.trim(); const date = $('#examDate').value; if (!title || !date) return; state.exams.push({ id: uid('e'), title, date }); saveState(); event.target.reset(); renderPlan(); toast('أُضيف الموعد إلى خطتك'); });
+  $('#historySearch')?.addEventListener('input', renderHistory);
+  $('#examForm')?.addEventListener('submit', (event) => { event.preventDefault(); const title = $('#examTitle')?.value.trim(); const date = $('#examDate')?.value; if (!title || !date) return; state.exams.push({ id: uid('e'), title, date }); saveState(); event.target.reset(); renderPlan(); toast('أُضيف الموعد إلى خطتك'); });
   $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
   $('#saveProvider').addEventListener('click', async () => {
     const apiKey = $('#providerKey').value.trim().slice(0, 2_048);
@@ -1766,7 +1767,7 @@ function enterApp() {
 
 function boot() {
   loadState();
-  bindEvents();
+  try{ bindEvents(); }catch(e){ console.error('bindEvents',e); }
   enterApp();
   if (!navigator.onLine) $('#offlineBar').hidden = false;
   loadBootstrap();
