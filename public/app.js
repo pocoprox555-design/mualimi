@@ -888,7 +888,7 @@ function setView(view) {
   });
   const planSection = $('#view-plan');
   if (planSection) planSection.hidden = true;
-  $('.nav-item, .mobile-nav-item').forEach((button) => {
+  $$('.nav-item, .mobile-nav-item').forEach((button) => {
     const v = button.dataset.view;
     if (v) button.classList.toggle('active', v === view);
   });
