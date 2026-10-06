@@ -1,5 +1,6 @@
 // معلمي 3: خادم واحد ينسّق استرجاع المصادر ويترك تفسير الطلب وصياغة الإجابة للنموذج.
 import http from 'node:http';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
@@ -7,7 +8,7 @@ try { process.loadEnvFile(path.join(path.dirname(fileURLToPath(import.meta.url))
   if (error?.code !== 'ENOENT') throw error;
 }
 
-import { publicConfig, resolveProvider, resolveWebSearch } from './lib/config.mjs';
+import { publicConfig, resolveProvider, resolveWebSearch, supportsVision } from './lib/config.mjs';
 import { getCatalog, getHealth, getSubjects, listBooks, locate, fullPage, search, retrieveContext, resolveBook, catalogContext } from './lib/index.mjs';
 import * as corpusIndex from './lib/index.mjs';
 import { getOutline, listOutlineIds, outlineContext } from './lib/outline.mjs';
@@ -56,7 +57,25 @@ const MAX_CROSS_BOOK_SOURCES = 2;
 const MAX_ANSWER_ROUNDS = 3;
 const MAX_ANSWER_CHARS = 64_000;
 const counters = new Map();
-const providerHealth = { verified: null, lastError: null, checkedAt: 0 };
+const providerHealth = { verified: null, lastError: null, checkedAt: 0, fingerprint: '' };
+
+function providerFingerprint(config) {
+  return createHash('sha256')
+    .update(`${config?.endpoint || ''}\0${config?.model || ''}\0${config?.key || ''}`)
+    .digest('hex');
+}
+
+function providerHealthFor(config) {
+  if (providerHealth.fingerprint !== providerFingerprint(config)) return { verified: null, lastError: null };
+  return { verified: providerHealth.verified, lastError: providerHealth.lastError };
+}
+
+function markProviderHealth(config, verified, lastError = null) {
+  providerHealth.fingerprint = providerFingerprint(config);
+  providerHealth.verified = verified;
+  providerHealth.lastError = lastError;
+  providerHealth.checkedAt = Date.now();
+}
 
 const clean = (value, max = 4000) => String(value ?? '')
   .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
@@ -87,11 +106,11 @@ function safeSession(value) {
 function systemPrompt(context, studentName = '', outlineBlock = '', catalogBlock = '', track = 'ديني', webBlock = '', citationIds = [], catalogScope = 'track', primaryBlock = '', visionBlock = '', gateBlock = '', quizBlock = '') {
   const name = String(studentName || 'رحمة').trim().slice(0, 40);
   return [
-    'أنت «معلمي»، معلم خاص محترف وذكي للطالبة رحمة — تدرّسين السادس الإعدادي بكل تفاصيله. أنتِ تعرفين المنهج العراقي كاملاً حرفياً لأن كل كتب الـ 21 مستخرجة نصاً في pdf-books (fullText)، ولديك وصول مباشر لكل صفحة. لا تقولي أبداً "ما عندي وصول للكتب" أو "حطي نص الصفحة" — النص موجود عندك، افتحيه واشرحيه مباشرة.',
+    'أنتِ «معلمي»، معلمة خاصة محترفة وذكية للطالبة رحمة. الخادم يبحث في كتب السادس الإعدادي ويرفق لكِ النص أو الوصف المتاح للصفحات المطابقة؛ ليست كل صفحة قابلة للاستخراج أو القراءة. لا تدّعي أنك رأيتِ صفحة أو صورة لم يُرفق دليلها، ولا تطلبي من الطالبة نسخ الصفحة.',
     `الطالبة ${name} تدرس السادس الإعدادي في مسار «${track}». أولويتك كتب هذا المسار، لكنك معلمة شاملة: إذا سألت عن مادة أو مسار آخر وضحي الفرق بذكاء ولا ترفضي.`,
-    'خاطبي الطالبة بصيغة المؤنث وبالعربية الفصحى السهلة بلمسة عراقية دافئة وطبيعية. كوني ودودة جداً، صبورة، مشجعة، كأم ثانية ومعلمة خاصة تحب رحمة. تذكري سياق الجلسة، لا تكرري طلب معلومة ذكرتها، واسألي سؤال متابعة واحداً فقط عند الحاجة.',
+    'خاطبي الطالبة بصيغة المؤنث وبالعربية الفصحى السهلة بلمسة عراقية هادئة وطبيعية. كوني مهنية وجادة وصبورة، بلا مبالغة في المديح أو الحميمية. اشرحي بما يناسب مستوى السادس، وتذكري سياق الجلسة، ولا تكرري طلب معلومة ذكرتها، واسألي سؤال متابعة واحداً فقط عند الحاجة.',
     'إذا كانت رسالة الطالبة تحية أو سؤالا وديّا عن الحال بلا طلب دراسي — كوني إنسانة دافئة: ردي بود، اسألي عن يومها وشجعيها، ولا تبحثي في الكتب ولا تذكري مصادر. افهمي النية بنفسك.',
-    'إذا طلبت صفحة محددة برقمها — لديك نصها الكامل في pdf-books (fullText). افتحيها فورا واشرحيها خطوة بخطوة بأسلوب تعليمي واضح من النص نفسه. لا تطلبي منها نص الصفحة أبدا. إذا طلبت أكثر من صفحة من كتب مختلفة، اشرحي كل واحدة بعنوانها ومادتها على حدة.',
+    'إذا طلبت صفحة محددة، فاعتمدي على دليل الصفحة المرفق أمامك فقط. إذا لم يصل نص موثوق أو وصف فهرسي، لا تصفي محتوى الصفحة من الذاكرة؛ قولي بوضوح إن النسخة الرقمية لم تُظهرها. إذا طلبت صفحات متعددة، عالجي كل صفحة على حدة، ولا تكمّلي صفحة تعذّر فتحها من معلومات صفحة أخرى.',
     'قواعد الشرح العام: لكل سؤال منهجي (اشرحي، حلي، لخصي، ترجمي) — اشرحي مباشرة وبأسلوب تعليمي ممتع. في الرياضيات: خطوة خطوة مع القاعدة والمثال. في اللغات: القاعدة + الأمثلة. في الحفظيات: رتبي الأفكار بنقاط واضحة. لا تملئي الرد بسرد خطوات البحث ولا تذكري مصادرك ولا خطواتك الداخلية.',
 
     // ── القاعدة العليا: لا نص ديني ولا صفحة مخترعة ─────────────────────────
@@ -132,7 +151,6 @@ function systemPrompt(context, studentName = '', outlineBlock = '', catalogBlock
 }
 
 
-function supportsVision(model){ return /vision/i.test(String(model||'')) || /deepseek.*flash/i.test(String(model||'')); }
 function imageParts(rawContent) {
   if (!Array.isArray(rawContent)) return [];
   return rawContent
@@ -153,7 +171,7 @@ function modelMessages(body, sourceBlock, outlineBlock, catalogBlock, track, web
   const rawImages = [...imageParts(rawLast?.content), ...extraImages].slice(0, 2);
   const images = canSee ? rawImages : [];
   const visionBlock = images.length
-    ? '## صورة صفحة مرفقة\nأُرفقت صورة صفحة PDF في هذه الرسالة. يمكنكِ قراءتها بصريًا وهي دليل مسموح: اذكري ما يظهر فيها بوضوح فقط، وسمّي الدليل «صورة صفحة قُرئت بصريًا» مع معرّفها، ولا تخمّني ما لا يظهر، ولا تقرئي الأرقام والكلمات الصغيرة غير الواضحة. أجيبي عمّا سُئلت عنه فقط من الصفحة، دون استعراض الصفحة كلها أو نسخ نصها كاملًا؛ فالإجابة المطوّلة على سؤال واحد تُضيّع وقت الطالبة.'
+        ? '## صورة صفحة مرفقة\nأُرفقت صورة صفحة في هذه الرسالة. اقرئي ما يظهر بوضوح فقط، ولا تخمّني ما لا يظهر أو الأرقام والكلمات الصغيرة غير الواضحة. أجيبي عن المطلوب من الصورة، ولا تنسبي إليها شيئاً غير مقروء؛ ولا تستعرضي الصفحة كلها أو تنسخيها كاملة.'
     : rawImages.length && !canSee
       ? '## ملاحظة صور\nأرسلت الطالبة صورة مع السؤال، والنموذج الحالي لا يقرأ الصور بصرياً، فلا تسردي أي محتوى لتلك الصورة ولا تختلقي وصفاً لها. اعتمدي على النصوص المستخرجة من pdf-books وحدها. إن كان السؤال كله عن الصورة فجاوبي بلطف بجملة واحدة صادقة: لم أتمكن من قراءة الصورة هذه المرة، وأستطيع أن أشرح لها الموضوع نفسه من نصوص الكتاب. لا تطلبي منها أن تكتب نص الصورة ولا تعتذري بأنك بلا وصول، ولا تظهري خطأ تقنياً.'
       : '';
@@ -229,10 +247,10 @@ function fitMessages(messages, config, reservedTokens) {
 const PLAN_INSTRUCTIONS = [
   'أنت مخطط استعمال أدوات لمعلم رقمي. مهمتك الوحيدة فهم نية الطالبة وتحديد عمليات الاسترجاع؛ لا تجب عن سؤالها ولا تكتب أي حقيقة أو شرح.',
   'أعد كائن JSON فقط، دون Markdown أو نص قبله أو بعده، وبالمفاتيح التالية: {"intent":"curriculum|catalog|external|conversation|unclear","use_local":true,"local_query":"","book_query":"","subject":"","use_outline":false,"use_catalog":false,"catalog_scope":"track|global","exact_page":{"printed_page":null,"physical_page":null},"quiz":{"requested":false,"questions":0},"web_fallback":{"enabled":false,"query":""}}.',
-  'افهم النية بنفسك كمعلم ذكي: التحية والكلام الودي الشخصي بلا طلب دراسي -> conversation بلا أي بحث. السؤال المنهجي أو طلب شرح/حل/صفحة -> curriculum مع use_local=true. السؤال عن الكتب نفسها -> catalog. المعلومة الآنية أو خارج المنهج تماما -> external.',
+  'افهمي النية بنفسك: التحية والكلام الودي الشخصي بلا طلب دراسي -> conversation. السؤال المنهجي أو طلب شرح/حل/صفحة أو اختبار دراسي -> curriculum مع use_local=true. السؤال عن الكتب نفسها -> catalog. المعلومة الآنية أو خارج المنهج تماماً -> external.',
   'استخرج رقم الصفحة فقط إذا ذكر صراحة في النص أو الصورة. إذا طلبت أكثر من صفحة فضع الأولى في exact_page والباقي سيستخرج تلقائيا. لا تخترع أرقاما.',
   'إذا طلبت الطالبة اختباراً أو تدريباً أو «اختبريني» فاجعل quiz.requested=true، وضع في quiz.questions عدد الأسئلة الذي طلبته إن ذكرته (وإلا 0 ليُفترض 5)، واذكر book_query إن كان الاختبار في كتاب محدد.',
-  'عند سؤال منهجي فعل web_fallback كخطة احتياطية فقط عند غياب الدليل المحلي، بصياغة موجهة للمنهج العراقي.',
+  'عند سؤال منهجي فعل web_fallback كخطة احتياطية فقط عند غياب الدليل المحلي، بصياغة موجهة للمنهج العراقي. وعند سؤال خارجي أو معلومة آنية اختر web_fallback.enabled=true متى كان التحقق من الويب مهماً.',
 ].join('\n');
 
 function parsePlannerJson(value) {
@@ -257,51 +275,102 @@ function normalizedQuestion(value) {
     .toLocaleLowerCase('ar');
 }
 
-// كل «صفحة N» في سؤال الطالبة، مع الكتاب الذي تنتمي إليه إن سمّته. النافذة
-// ٦٠ محرفاً حول الرقم تكفي لاسم المادة أو الكتاب، والأرقام العربية تُطبّع
-// أولاً وإلا فات «صفحة ٢٢» كل استخراج والنتيجة كتاب عشوائي.
+// استخراج كل الصفحات المطلوبة، بما فيها «صفحة 22 رياضيات و42 فقه». تُقسّم
+// أسماء الكتب عند الوصل بين طلبين كي لا يُنسب اسم الكتاب الأقرب للصفحة الأخرى.
 function extractPageRequests(question, books = []) {
   const raw = normalizeDigits(String(question || ''));
-  const re = /(?:صفحة|صفحه|الصفحة|الصفحه|ص\.?)\s*(\d{1,4})/gi;
-  const out = [];
+  const re = /(?:الصفحات|الصفحة|الصفحه|صفحات|صفحه|صفحة|ص\.?|\bpages?\b|\bpp?\.?)\s*(?:(?:رقم|المطبوع(?:ة|ه)?|printed)\s*)?(\d{1,4})/giu;
+  const refs = [];
+  const byPosition = new Map();
+  const addRef = (number, numberStart, explicit) => {
+    const printedPage = pageNumber(number);
+    if (printedPage == null) return;
+    const existing = byPosition.get(numberStart);
+    if (existing) { existing.explicit ||= explicit; return; }
+    const ref = { printedPage, physicalPage: null, numberStart, numberEnd: numberStart + String(number).length, explicit, bookHint: '' };
+    byPosition.set(numberStart, ref);
+    refs.push(ref);
+  };
   let m;
   while ((m = re.exec(raw))) {
-    const n = pageNumber(m[1]);
-    if (n == null) continue;
-    if (out.some(o=>o.printedPage===n)) continue;
-    // hint: نافذة واسعة حول الرقم تلتقط «من الفقه» و«في كتاب التربية الإسلامية»
-    const start = Math.max(0, m.index - 60);
-    const ctx = normalizedQuestion(raw.slice(start, m.index + m[0].length + 60));
-    let hint = '';
-    const pickHint = (candidates) => {
-      let bestLen = 0;
-      let best = '';
-      for (const cand of [...new Set(candidates.filter(Boolean))]) {
-        const norm = normalizedQuestion(cand);
-        if (norm.length < 3) continue;
-        // take first 2 tokens of title as key
-        const key = norm.split(' ').slice(0, 2).join(' ');
-        if (key.length < 3) continue;
-        if (ctx.includes(norm) || ctx.includes(key)) {
-          if (norm.length > bestLen) { bestLen = norm.length; best = cand; }
-        }
-      }
-      return best;
-    };
-    // أسماء المواد أولاً وبأولوية تامة: «اللغة العربية» موضوع لكتبها جزآن، أما
-    // العنوان الكامل «… — الجزء الثاني» فيسمّي كتاباً واحداً في يقينٍ زائف
-    // فيُفتح جزءٌ بالتخمين. لا يُلجأ إلى العناوين إلا إن لم يطابق اسم مادة.
-    hint = pickHint(books.map((book) => book.subject || ''));
-    if (!hint) hint = pickHint(books.map((book) => book.title || ''));
+    addRef(m[1], m.index + m[0].lastIndexOf(m[1]), true);
+  }
 
-    // also try to capture "من <text>" after page
-    if (!hint) {
-      const after = raw.slice(m.index + m[0].length, m.index + m[0].length + 30);
-      const man = after.match(/\s*من\s*([^\s،,؛\.و]{2,30})(?:\s+[^\s،,؛\.و]{1,30})?/);
-      if (man) hint = man[1].trim();
+  // الرقم الثاني قد لا تسبقه كلمة «صفحة»: «صفحة 22 رياضيات و42 فقه».
+  // نلتقطه فقط في سلسلة موصولة، ثم نحتفظ به إذا أمكن ربطه باسم كتاب/مادة.
+  for (const ref of [...refs]) {
+    const endMatch = raw.slice(ref.numberEnd).match(/[.!؟?\n؛;]/);
+    const end = endMatch ? ref.numberEnd + endMatch.index : raw.length;
+    const tail = raw.slice(ref.numberEnd, end);
+    const chained = /(?:^|\s)(?:و|ثم|and|then|,|،)\s*(?:(?:الصفحات|الصفحة|الصفحه|صفحات|صفحه|صفحة|ص\.?|pages?|pp?\.?)\s*)?(?:(?:رقم|المطبوع(?:ة|ه)?|printed)\s*)?(\d{1,4})/giu;
+    let match;
+    while ((match = chained.exec(tail))) {
+      const numberStart = ref.numberEnd + match.index + match[0].lastIndexOf(match[1]);
+      addRef(match[1], numberStart, false);
     }
-    out.push({ printedPage: n, physicalPage: null, bookHint: hint });
-    if (out.length >= 4) break;
+  }
+
+  refs.sort((a, b) => a.numberStart - b.numberStart);
+  const separators = [];
+  for (let index = 0; index < refs.length - 1; index += 1) {
+    const gapStart = refs[index].numberEnd;
+    const gap = raw.slice(gapStart, refs[index + 1].numberStart);
+    const matches = [...gap.matchAll(/\s+(?:و|ثم|and|then)\s*|[,،؛]\s*/giu)];
+    if (matches.length) {
+      const match = matches.at(-1);
+      separators.push({ leftEnd: gapStart + match.index, rightStart: gapStart + match.index + match[0].length });
+      continue;
+    }
+    const lastSpace = gap.lastIndexOf(' ');
+    const split = lastSpace >= 0 ? gapStart + lastSpace : gapStart + Math.floor(gap.length / 2);
+    separators.push({ leftEnd: split, rightStart: Math.min(refs[index + 1].numberStart, split + 1) });
+  }
+
+  const pickHint = (candidates, context) => {
+    const normalized = normalizedQuestion(context);
+    let best = '';
+    let bestLength = 0;
+    for (const candidate of [...new Set(candidates.filter(Boolean))]) {
+      const name = normalizedQuestion(candidate);
+      if (name.length < 3) continue;
+      const words = name.split(' ');
+      const withoutArticle = words.map((word) => word.startsWith('ال') && word.length > 3 ? word.slice(2) : word).join(' ');
+      const keys = [words.slice(0, 2).join(' '), withoutArticle.split(' ').slice(0, 2).join(' ')];
+      const matched = normalized.includes(name)
+        || normalized.includes(withoutArticle)
+        || keys.some((key) => key.length >= 3 && normalized.includes(key));
+      if (matched && name.length > bestLength) {
+        best = candidate;
+        bestLength = name.length;
+      }
+    }
+    return best;
+  };
+
+  const out = [];
+  for (let index = 0; index < refs.length && out.length < 4; index += 1) {
+    const segmentStart = index === 0 ? 0 : separators[index - 1].rightStart;
+    const segmentEnd = index < separators.length ? separators[index].leftEnd : raw.length;
+    const contextStart = Math.max(segmentStart, refs[index].numberStart - 60);
+    const contextEnd = Math.min(segmentEnd, refs[index].numberEnd + 60);
+    const context = raw.slice(contextStart, Math.max(contextStart, contextEnd));
+    let hint = pickHint(books.map((book) => book.subject || ''), context);
+    // اسم الجزء/العنوان الكامل أقوى من اسم مادة مشترك فقط إذا ورد صراحةً.
+    const titleHint = pickHint(books.map((book) => book.title || ''), context);
+    if (titleHint && normalizedQuestion(titleHint) !== normalizedQuestion(hint)) {
+      const titleNorm = normalizedQuestion(titleHint);
+      if (titleNorm.length > normalizedQuestion(hint).length && normalizedQuestion(context).includes(titleNorm)) hint = titleHint;
+    }
+    if (!hint) {
+      const from = context.match(/(?:من|في|from|in)\s*(?:كتاب\s*)?([^،,؛.\s]{2,30}(?:\s+[^،,؛.\s]{2,30})?)/i);
+      if (from) hint = from[1].trim();
+    }
+    const ref = refs[index];
+    if (!ref.explicit && !hint) continue;
+    const duplicate = out.some((item) => item.printedPage === ref.printedPage
+      && normalizedQuestion(item.bookHint) === normalizedQuestion(hint));
+    if (duplicate) continue;
+    out.push({ printedPage: ref.printedPage, physicalPage: null, bookHint: hint });
   }
   return out;
 }
@@ -340,8 +409,23 @@ function quizCount(question) {
     .replace(/ى/g, 'ي')
     .toLowerCase();
   const match = text.match(/(\d{1,2})\s*(?:سو?ال|ا?س[ي]?له|question)/);
-  const count = match ? Number(match[1]) : 0;
-  return count >= 2 && count <= 30 ? count : 0;
+  if (match) {
+    const count = Number(match[1]);
+    if (count >= 1 && count <= 30) return count;
+  }
+  if (/(?:سوال(?:ا|ه)?\s*(?:واحد|واحده|واحدا|اولا)|(?:ب|بس)\s*سوال(?:ا|ه)?\s*واحدا?)/.test(text)) return 1;
+  if (/(?:سوالين|سوالان|سوال\s*(?:اثنين|اثنان|ثنين))/.test(text)) return 2;
+  const wordCounts = [
+    [/ثلاث(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|ثلاثه\s*اسيله/, 3],
+    [/اربع(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|اربعه\s*اسيله/, 4],
+    [/خمس(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|خمسه\s*اسيله/, 5],
+    [/ست(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|سته\s*اسيله/, 6],
+    [/سبع(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|سبعه\s*اسيله/, 7],
+    [/ثمان(?:يه)?\s*(?:اسيله|اسئله|اساله|سوالات)|ثمانيه\s*اسيله/, 8],
+    [/تسع(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|تسعه\s*اسيله/, 9],
+    [/عشر(?:ه)?\s*(?:اسيله|اسئله|اساله|سوالات)|عشره\s*اسيله/, 10],
+  ];
+  return wordCounts.find(([pattern]) => pattern.test(text))?.[1] || 0;
 }
 
 // الأرقام تُكتب بالعربية في التعليمات كما تكتبها الطالبة، فلا يلتبس العدد
@@ -353,9 +437,9 @@ function arNumber(value) {
 
 // الاختبار يصل إلى الطالبة بطاقة تفاعلية فقط إن أخرجتِ بكتلة quiz. الشرط
 // ليس «مرجواً» بل إخراج مفروض: مقدمة قصيرة سطر واحد ثم الكتلة بلا أي نص
-// بعدها، وعدد الأسئلة هو ما طلبته الطالبة (عشرة افتراضياً لا أكثر).
+// بعدها، وعدد الأسئلة هو ما طلبته الطالبة (خمسة افتراضياً، وحتى 30 سؤالاً).
 function quizInstruction(requestedCount) {
-  const count = requestedCount >= 2 && requestedCount <= 30 ? requestedCount : 10;
+  const count = requestedCount >= 1 && requestedCount <= 30 ? requestedCount : 5;
   return [
     '## اختبار تفاعلي — إلزامي الآن',
     'الطالبة طلبت اختباراً، وقد أعدّت الواجهة لها بطاقة تفاعلية تُبنى من كائن JSON واحد. إذا لم تكتب هذه الكتلة ظهر الرد نصاً غير قابل للنقر، وهو فشل لا يُغتفر.',
@@ -367,8 +451,28 @@ function quizInstruction(requestedCount) {
   ].join('\n');
 }
 
-function quizBlockPresent(text) {
-  return /```(?:quiz|json)\s*\{/.test(String(text || ''));
+function quizBlockPresent(text, expectedCount = 0) {
+  const blocks = [...String(text || '').matchAll(/```(?:quiz|json)\s*([\s\S]*?)```/gi)];
+  const expected = Number(expectedCount) || 5;
+  for (const block of blocks) {
+    try {
+      const quiz = JSON.parse(block[1].trim());
+      const questions = Array.isArray(quiz?.questions) ? quiz.questions : Array.isArray(quiz?.quiz) ? quiz.quiz : [];
+      const valid = questions.length === expected && questions.every((item) => {
+        const options = Array.isArray(item?.options) ? item.options.map((option) => String(option).trim()) : [];
+        return typeof (item?.q || item?.question) === 'string'
+          && String(item.q || item.question).trim().length > 0
+          && options.length === 4
+          && options.every(Boolean)
+          && new Set(options).size === 4
+          && Number.isInteger(item.answer)
+          && item.answer >= 0 && item.answer < options.length
+          && String(item.why || item.explanation || '').trim().length > 0;
+      });
+      if (valid) return true;
+    } catch { /* جرب كتلة الاختبار التالية إن وُجدت */ }
+  }
+  return false;
 }
 
 
@@ -434,9 +538,10 @@ function normalizePlan(raw, question) {
   // سؤال الكتب صريح في نصه، فلا يُترك للنموذج أن يقرره: وإلا سرد كتباً من
   // ذاكرته حين يعجز أو يتأخر. الكتالوج بيانات محلية رخيصة تُحمَّل دائماً.
   const asksCatalog = catalogQuestion(question);
+  const asksQuiz = Boolean(quiz.requested ?? raw?.use_quiz) || quizRequest(question);
   return {
     intent: asksCatalog ? 'catalog' : intent,
-    useLocal: asksCatalog || intent === 'conversation' || intent === 'catalog' ? false : intent === 'curriculum' ? true : hasPage ? true : raw?.use_local !== false,
+    useLocal: asksCatalog || (intent === 'conversation' && !asksQuiz) || intent === 'catalog' ? false : intent === 'curriculum' || hasPage || asksQuiz ? true : raw?.use_local !== false,
     useCatalog: Boolean(raw?.use_catalog) || asksCatalog || intent === 'catalog' || globalCatalog,
     catalogScope: globalCatalog ? 'global' : 'track',
     useOutline: Boolean(raw?.use_outline),
@@ -448,9 +553,9 @@ function normalizePlan(raw, question) {
       physicalPage: pageNumber(exact.physical_page ?? exact.physicalPage),
     },
     quiz: {
-      requested: Boolean(quiz.requested ?? raw?.use_quiz) || quizRequest(question),
+      requested: asksQuiz,
       // عدد أسئلة طلبته الطالبة نصاً حجّة قاطعة على ما خطّطه النموذج.
-      questions: Math.max(0, Math.min(30, Number(quiz.questions ?? raw?.quiz_questions) || 0)) || quizCount(question),
+      questions: Math.max(0, Math.min(30, Math.floor(Number(quiz.questions ?? raw?.quiz_questions) || 0))) || quizCount(question),
     },
     webFallback: { enabled: Boolean(web.enabled ?? raw?.use_web) && webQuery.length >= 2, query: webQuery },
   };
@@ -462,7 +567,9 @@ function fallbackPlan(question) {
   const hasPage = pageReference(question) != null;
   const pageNum = hasPage ? pageReference(question) : null;
   return {
-    intent: isCatalog ? 'catalog' : curriculumQuestion(question) ? 'curriculum' : hasPage ? 'curriculum' : 'unclear',
+    // عند تعذّر المخطط لا نخمن النية من كلمات السؤال؛ الصفحة والكتالوج فقط
+    // حقائق قابلة للكشف محلياً، وما عداها يبقى unclear.
+    intent: isCatalog ? 'catalog' : hasPage ? 'curriculum' : 'unclear',
     useLocal: !isCatalog,
     useCatalog: isCatalog,
     catalogScope: globalCatalog ? 'global' : 'track',
@@ -1146,28 +1253,6 @@ async function retrieveLocalEvidence(query, { bookId = '', subject = '', track, 
   return { retrieved, image, error };
 }
 
-// جولة تخطيط إضافية لا تُبرَّر عندما يكون البحث المحلي نفسه كافيًا: النموذج يقرأ
-// الطلب الأصلي ويفهم نيته، والجولة تضيف زمنًا بلا معلومات جديدة.
-function strongLocalEvidence(sources) {
-  if (sources?.some(isReliableLocalSource)) return true;
-  return Boolean(dominantLocalBook(sources));
-}
-
-function fastCurriculumPlan(question, subject) {
-  return {
-    intent: 'curriculum',
-    useLocal: true,
-    useCatalog: false,
-    catalogScope: 'track',
-    useOutline: false,
-    localQuery: clean(question, 400),
-    bookQuery: '',
-    subject,
-    exactPage: { printedPage: null, physicalPage: null },
-    quiz: { requested: quizRequest(question), questions: quizCount(question) },
-    webFallback: { enabled: false, query: '' },
-  };
-}
 function scopedCatalogBlock(catalog, scope, track) {
   const raw = catalogContext(catalog);
   if (!raw) return '';
@@ -1246,26 +1331,6 @@ function sourceRankFor(source, focusBookIds) {
   if (!focusBookIds?.size) return 0;
   if (!source?.bookId) return 0;
   return focusBookIds.has(source.bookId) ? 0 : 1;
-}
-
-// كتاب يهيمن على نتائج البحث: أكثر من نصف أعلى الصفحات من كتاب واحد. التمييز
-// القاطع لا يحتمل التخمين، فيُبنى على عدد لا على رتبة واحدة. يُستعمل لتخطّي
-// جولة التخطيط فقط، لا لحذف مصادر.
-function dominantLocalBook(sources) {
-  const counts = new Map();
-  for (const source of (Array.isArray(sources) ? sources : []).slice(0, 8)) {
-    if (!source?.bookId) continue;
-    const current = counts.get(source.bookId) || { bookId: source.bookId, count: 0, score: 0 };
-    current.count += 1;
-    current.score += Number(source.score) || 0;
-    counts.set(source.bookId, current);
-  }
-  let best = null;
-  for (const entry of counts.values()) if (!best || entry.count > best.count || (entry.count === best.count && entry.score > best.score)) best = entry;
-  if (!best || best.count < 3) return '';
-  let total = 0;
-  for (const entry of counts.values()) total += entry.count;
-  return best.count / total >= 0.5 ? best.bookId : '';
 }
 
 // كتب يسمّيها الطالبة في سؤاله نصًّا. الإشارة أدقّ من عدّ النتائج، وهي أساس
@@ -1545,10 +1610,13 @@ async function handleChat(req, res) {
   sseHeaders(res);
   const stopHeartbeat = heartbeat(res);
   const started = Date.now();
-  // الخطوة المعروضة للطالبة قصيرة ودافئة بلا مصطلحات داخلية، والتفاصيل
-  // التشخيصية تبقى في سجل الخادم. ما يراه الطالبة: «أفتح صفحة من كتابك».
+  // الواجهة أثناء العمل بلا نصوص محلية غبية: كل step يُسجّل في الخادم،
+  // ولا يُبث للطالبة إلا مرحلتا «أفهم طلبك» و«أكتب». الباقي تفاصيل تشخيصية
+  // في console فقط، فلا ترى الطالبة «بحثت في الكتب» ولا «فتحت صفحة».
+  const ALLOWED_STEP_PHASES = new Set(['intent', 'write']);
   const step = (phase, label, detail = '') => {
     if (detail) console.log(`[${new Date().toISOString()}] ${phase}: ${label} — ${clean(detail, 200)}`);
+    if (!ALLOWED_STEP_PHASES.has(phase)) return;
     sseSend(res, 'step', { phase, label: clean(label, 90), at: Date.now() - started });
   };
   const session = safeSession(req.headers['x-session']);
@@ -1582,6 +1650,7 @@ async function handleChat(req, res) {
     let retrieved = { block: '', sources: [] };
     let retrievedImage = null;
     let prefetch = { attempted: false, query: '', bookId: '', subject: '' };
+    let prefetchPromise = null;
     let plan = null;
     let plannerError = null;
     // ميزانية زمنية واحدة لكل عمل الاسترجاع في هذا الطلب؛ تقيّد فتح صفحات PDF
@@ -1610,7 +1679,8 @@ async function handleChat(req, res) {
       plan = planDirect(question, subject);
     } else if (!needsPlannerBeforeLocal(question, hasImages)) {
       const query = clean(question, 400);
-      const local = await retrieveLocalEvidence(query, {
+      prefetch = { attempted: true, query, bookId: selectedBookId, subject };
+      prefetchPromise = retrieveLocalEvidence(query, {
         bookId: selectedBookId,
         subject,
         track,
@@ -1620,16 +1690,10 @@ async function handleChat(req, res) {
         step: (info) => probeTrace.push(info),
         allowPdfFallback: false,
         deadlineAt: retrievalDeadlineAt,
+      }).catch((error) => {
+        console.warn('curriculum prefetch failed:', error?.message || error);
+        return { retrieved: { block: '', sources: [] }, image: null, error };
       });
-      retrieved = local.retrieved;
-      retrievedImage = local.image;
-      prefetch = { attempted: true, query, bookId: selectedBookId, subject };
-      if (strongLocalEvidence(retrieved.sources)) {
-        // النموذج يقرأ الطلب الأصلي ويقرّر كيف يجيب؛ فمع وجود دليل محلي قوي
-        // (أو كتاب واحد يهيمن على النتائج) جولة تخطيط إضافية لا تضيف معلومة
-        // وتضيف زمن انتظار، فتُؤجَّل.
-        plan = fastCurriculumPlan(question, subject);
-      }
     }
 
     if (!plan) {
@@ -1653,28 +1717,85 @@ async function handleChat(req, res) {
     }
 
     const resolvedSubject = subject || plan.subject;
+    // يتحدد المقصد بالنموذج دائماً؛ الاستطلاع المحلي يعمل بالتوازي ولا يستطيع
+    // تحويل تحية أو سؤال شخصي إلى سؤال منهجي بسبب مصادفة كلمة في كتاب.
+    if (plan.intent !== 'conversation' && prefetchPromise) {
+      const local = await prefetchPromise;
+      retrieved = local.retrieved;
+      retrievedImage = local.image;
+    }
     // نتائج الاستطلاع تُعرض الآن فقط، حين ثبت أن الطلب طلب دراسي.
     if (plan.intent === 'curriculum' && probeTrace.length) {
       const replay = localTrace(step);
       probeTrace.forEach(replay);
     }
     // EARLY_CONVERSATION: if intent is pure conversation, answer directly without any retrieval
-    if (plan.intent === 'conversation') {
+    if (plan.intent === 'conversation' && !plan.quiz?.requested) {
       step('write','أفهمك','رد ودي بلا بحث في الكتب');
       const convoMessages = modelMessages(body, '', '', '', track, '', [], [], 'track', '', config.model);
       sseSend(res, 'citations', { items: [] });
       const roundBudget = Math.max(config.maxTokens, Number(config.visionMaxTokens) || 0);
       let out = '';
+      let finalFinish = 'stop';
       try {
-        for await (const event of streamCompletion({ endpoint: config.endpoint, key: config.key, model: config.model, messages: fitMessages(convoMessages, config, roundBudget), maxTokens: roundBudget, signal: abort.signal, session, onFirstToken: () => { firstTokenAt ||= Date.now(); step('write','أتحدث معك',''); } })) {
-          if (event.type === 'text') { out += event.text; sseSend(res, 'delta', { text: event.text }); firstTokenAt ||= Date.now(); }
-          if (event.type === 'done') break;
+        for (let round = 0; round < MAX_ANSWER_ROUNDS; round += 1) {
+          const roundMessages = round === 0
+            ? convoMessages
+            : [
+              ...convoMessages,
+              { role: 'assistant', content: out },
+              { role: 'user', content: 'أكملي ردك الودي من آخر نقطة، من دون إعادة ما سبق.' },
+            ];
+          const filter = citationStreamFilter([]);
+          let finish = '';
+          for await (const event of streamCompletion({
+            endpoint: config.endpoint,
+            key: config.key,
+            model: config.model,
+            messages: fitMessages(roundMessages, config, roundBudget),
+            maxTokens: roundBudget,
+            signal: abort.signal,
+            session,
+            onFirstToken: () => { firstTokenAt ||= Date.now(); step('write','أتحدث معك',''); },
+          })) {
+            if (event.type === 'text') {
+              const text = filter.push(event.text);
+              if (text) {
+                if (out.length + text.length > Math.min(MAX_ANSWER_CHARS, config.maxTokens * 4)) throw new Error('REPLY_TOO_LONG');
+                out += text;
+                sseSend(res, 'delta', { text });
+              }
+              firstTokenAt ||= Date.now();
+            } else if (event.type === 'done') finish = event.finish || 'stop';
+          }
+          const tail = filter.finish();
+          if (tail) {
+            if (out.length + tail.length > Math.min(MAX_ANSWER_CHARS, config.maxTokens * 4)) throw new Error('REPLY_TOO_LONG');
+            out += tail;
+            sseSend(res, 'delta', { text: tail });
+          }
+          if (finish === 'tool_calls' || finish === 'function_call') throw new Error('MODEL_TOOL_CALLS_UNSUPPORTED');
+          if (finish === 'content_filter') throw new Error('REPLY_FILTERED');
+          if (finish === 'length') {
+            if (round + 1 < MAX_ANSWER_ROUNDS) {
+              step('write', 'أكمل حديثي معك', 'أتابع الرد الذي وصل إلى حد الكتابة');
+              continue;
+            }
+            throw new Error('REPLY_TRUNCATED');
+          }
+          if (!out.trim()) throw new Error('EMPTY_REPLY');
+          finalFinish = finish;
+          break;
         }
-        if (!out.trim()) out = 'أهلا يا رحمة! أنا هنا أساعدك دائما — كيف كانت مذاكرتك اليوم؟';
-        providerHealth.verified = true; providerHealth.lastError = null; providerHealth.checkedAt = Date.now();
-        sseSend(res, 'done', { finish: 'stop', firstTokenMs: firstTokenAt ? firstTokenAt - started : Date.now()-started, sources: 0 });
-      } catch (e) {
-        if (!abort.signal.aborted) sseSend(res, 'error', { error: 'UPSTREAM_FAILED', detail: '' });
+        markProviderHealth(config, true);
+        sseSend(res, 'done', { finish: finalFinish, firstTokenMs: firstTokenAt ? firstTokenAt - started : Date.now()-started, sources: 0 });
+      } catch (error) {
+        if (!abort.signal.aborted) {
+          const known = ['EMPTY_REPLY', 'REPLY_TOO_LONG', 'REPLY_TRUNCATED', 'REPLY_FILTERED', 'MODEL_TOOL_CALLS_UNSUPPORTED'];
+          const code = known.includes(error?.message) ? error.message : errorCode(error);
+          markProviderHealth(config, false, code);
+          sseSend(res, 'error', { error: code, detail: clean(error?.detail, 180) });
+        }
       } finally { stopHeartbeat(); req.off?.('aborted', onClose); res.off?.('close', onClose); if(!res.writableEnded) res.end(); }
       return;
     }
@@ -1709,8 +1830,10 @@ async function handleChat(req, res) {
     if ((printedPage != null || physicalPage != null) && !pageRequests.some((r) => r.printedPage === printedPage)) {
       pageRequests.unshift({ printedPage, physicalPage, bookHint: plan.bookQuery || '' });
     }
+    pageRequests.forEach((request, index) => { request.requestId = index; });
+    const overflowPageRequests = pageRequests.splice(4);
     const resolvedRequests = [];
-    let ambiguousHint = '';
+    const unresolvedPageRequests = [...overflowPageRequests];
     for (const req of pageRequests.slice(0, 4)) {
       if (req.printedPage == null && req.physicalPage == null) continue;
       let bid = '';
@@ -1725,7 +1848,7 @@ async function handleChat(req, res) {
         bid = exactSubject[0].id;
       } else if (exactSubject.length > 1) {
         console.warn(`page hint "${req.bookHint}" matches ${exactSubject.length} books; asking instead of guessing`);
-        ambiguousHint = req.bookHint;
+        unresolvedPageRequests.push(req);
         continue;
       }
       if (!bid && req.bookHint) {
@@ -1734,6 +1857,7 @@ async function handleChat(req, res) {
           if (rb?.id) bid = rb.id;
         } catch { /* لا كتاب مؤكد */ }
       }
+      if (bid && !books.some((book) => book.id === bid)) bid = '';
       if (!bid || !books.some((b) => b.id === bid)) {
         if (hintNorm.length >= 3) {
           const cand = books.find((b) => normalizedQuestion(`${b.title || ''} ${b.subject || ''}`).includes(hintNorm)
@@ -1744,10 +1868,10 @@ async function handleChat(req, res) {
       // كتاب العميل (اختيار صريح في الواجهة) حجّة قاطعة، أما غيابها فلا.
       if (!bid && !req.bookHint && selectedBookId) bid = selectedBookId;
       if (bid) resolvedRequests.push({ ...req, bookId: bid });
+      else unresolvedPageRequests.push(req);
     }
-    // صفحة بلا كتاب مؤكد: لا تخمين. نسأل الطالبة، ولا نفتح ولا نعرض.
-    const ambiguousPage = pageRequests.length > 0 && resolvedRequests.length === 0;
-    if (ambiguousPage && !ambiguousHint) ambiguousHint = pageRequests.find((req) => req.bookHint)?.bookHint || '';
+    // كل صفحة تُحل مستقلة؛ لا تختفي الصفحة الملتبسة لمجرد نجاح صفحة أخرى.
+    const ambiguousPage = unresolvedPageRequests.length > 0;
 
     const shouldResolveBook = !pageAsked && Boolean(plan.bookQuery || plan.useOutline || printedPage != null || physicalPage != null);
     let bookResolutionFailed = false;
@@ -1770,7 +1894,7 @@ async function handleChat(req, res) {
     const targetBookId = resolvedRequests[0]?.bookId || (ambiguousPage ? '' : selectedBookId || resolvedBook?.id || '');
     if (!resolvedBook && targetBookId) resolvedBook = books.find((book) => book.id === targetBookId) || null;
     if (ambiguousPage) {
-      step('book', 'أحتاج توضيحاً واحداً', 'لم تسمّي الكتاب الذي تقصدين صفحته، وكل الكتب لها صفحة رقمها نفسه');
+      step('book', 'أحتاج توضيحاً واحداً', `تعذّر حسم كتاب ${unresolvedPageRequests.length} صفحة؛ لن أخمّنها أو أشرحها من صفحة أخرى`);
     }
     if ((plan.useOutline || printedPage != null || physicalPage != null) && targetBookId) {
       try {
@@ -1827,8 +1951,8 @@ async function handleChat(req, res) {
       const results = await Promise.all(resolvedRequests.map(r=> retrieveExactPage({ bookId: r.bookId, printedPage: r.printedPage, physicalPage: r.physicalPage, books, sources: retrieved.sources, step, deadlineAt: retrievalDeadlineAt, canSee })));
       for (let i=0;i<results.length;i++){
         const res = results[i];
-        if (!res || (!res.block && !res.image)) continue;
-        exactResults.push(res);
+        exactResults.push({ requestId: resolvedRequests[i].requestId, result: res || null });
+        if (!res) continue;
         if (i===0) { exactPage = res; if (res.citation?.id) retrieved.block = withoutSourceBlock(retrieved.block, res.citation.id); }
         else {
           if (res.block) extraExactBlocks.push(res.block);
@@ -1841,7 +1965,7 @@ async function handleChat(req, res) {
     } else if (targetBookId && (printedPage != null || physicalPage != null)) {
       exactPage = await retrieveExactPage({ bookId: targetBookId, printedPage, physicalPage, books, sources: retrieved.sources, step, deadlineAt: retrievalDeadlineAt, canSee });
       if (exactPage.citation?.id) retrieved.block = withoutSourceBlock(retrieved.block, exactPage.citation.id);
-      if (exactPage.block || exactPage.image) exactResults.push(exactPage);
+      exactResults.push({ requestId: pageRequests[0]?.requestId ?? -1, result: exactPage });
       exactPage.extraBlocks = []; extraExactBlocks = []; extraExactImages = [];
     }
 
@@ -1881,7 +2005,8 @@ async function handleChat(req, res) {
 
     const outlineBlock = outline ? `[O1] ${outlineContext(outline, { structure: plan.useOutline })}` : '';
     const catalogBlock = catalog?.books?.length ? scopedCatalogBlock(catalog, plan.catalogScope, track) : '';
-    const reliableLocalEvidence = retrieved.sources.some(isReliableLocalSource) || exactPage.reliable;
+    const reliableLocalEvidence = retrieved.sources.some(isReliableLocalSource)
+      || exactResults.some((entry) => entry.result?.reliable === true);
     const catalogAnswersRequest = catalogAdequatelyAnswers(plan, question, catalog);
     const webConfig = resolveWebSearch();
     let webSources = [];
@@ -1889,10 +2014,10 @@ async function handleChat(req, res) {
       || (!['external', 'conversation'].includes(plan.intent) && curriculumQuestion(question, resolvedSubject, requestedBookId));
     const automaticCurriculumFallback = plan.intent === 'curriculum'
       || (plan.intent === 'unclear' && curriculumQuestion(question, resolvedSubject, requestedBookId));
-    const shouldUseWeb = !reliableLocalEvidence
-      && !catalogAnswersRequest
+    const shouldUseWeb = !catalogAnswersRequest
       && plan.intent !== 'conversation'
-      && (plan.webFallback.enabled || automaticCurriculumFallback);
+      && (plan.intent === 'external'
+        || (!reliableLocalEvidence && (plan.webFallback.enabled || automaticCurriculumFallback)));
     if (shouldUseWeb) {
       const webQuery = plan.webFallback.query || plan.localQuery || question;
       if (webConfig.enabled) {
@@ -1959,12 +2084,21 @@ async function handleChat(req, res) {
     // وجود صفحات من كتب أخرى في السياق كان هو سبب «شرح صفحة ٢٢ رياضيات» من
     // كتاب النحو: النموذج لم يجد طلبها فأجاب ممّا وجد. هنا يُحذف تشويش البحث
     // العام، وتُوضع قاعدة صريحة: لا وصف لهذه الصفحة، لا تختلقي واحدة.
-    const exactReliable = exactResults.some((result) => result?.reliable);
-    const exactHasBlock = exactResults.some((result) => result?.block);
-    // البطاقات لصفحات لم تُفتح تُسقط كلها: الطالبة كانت ترى مصدراً بلا رقم
-    // صفحة وتظن أن الجواب منها.
-    const pageGate = (pageAsked || ambiguousPage) && !exactReliable;
-    const gateSources = pageGate ? [] : orderedSources;
+    const exactByRequest = new Map(exactResults.map((entry) => [entry.requestId, entry.result]));
+    const everyRequestedPageReliable = pageRequests.length > 0
+      && unresolvedPageRequests.length === 0
+      && resolvedRequests.length === pageRequests.length
+      && resolvedRequests.every((request) => exactByRequest.get(request.requestId)?.reliable === true);
+    // لا تُفتح البوابة إلا إذا ثبتت كل صفحة، لا صفحة واحدة من الطلب المتعدد.
+    const hasRequestedPage = pageAsked || pageRequests.length > 0 || printedPage != null || physicalPage != null;
+    const pageGate = hasRequestedPage && !everyRequestedPageReliable;
+    // عند نقص صفحة، تبقى بطاقات الصفحات التي فُتحت نصياً فقط؛ لا تُعرض بطاقة
+    // لصفحة ملتبسة أو غير موثوقة وكأنها دليل على مضمونها.
+    const gateSources = pageGate
+      ? orderedSources.filter((source) => resolvedRequests.some((request) =>
+          exactByRequest.get(request.requestId)?.reliable === true
+          && exactPageMatch(source, request.bookId, request.printedPage, request.physicalPage)))
+      : orderedSources;
     // 3) موثوقية الدليل: ما لا يصلح للإسناد يخرج من السياق ومن الإحالات معًا،
     //    حتى لا يستشهد النموذج بدليل لا تحتمله الصفحة.
     const shownSources = gateSources.filter(answerCitationSource)
@@ -1977,19 +2111,25 @@ async function handleChat(req, res) {
       exactPageBlock,
       extraExactBlock,
     ].filter(Boolean).join('\n\n---\n\n');
-    // البوابة تُشتق من ما في البرومبت فعلاً لا ممّا نُيّته: كتلة الصفحة قد
-    // تُسقط لمصادر غير صالحة، فلو صفّرنا «غير حرفي» من نية كتلة محذوفة
-    // لِما تغيّر السلوك إلا الكلام: النموذج يُقال عنه إن وصله وصفٌ وهو غائب.
-    const exactTextInPrompt = Boolean(exactPageBlock || extraExactBlock);
-    const gateBlock = ambiguousPage
-      ? `## توضيح مطلوب قبل أي شرح\n${ambiguousHint
-        ? `ذكرت الطالبة «${ambiguousHint}» وهو اسم مادة لكتبها أكثر من جزء واحد، فالصفحة ${printedPage ?? ''} تختلف من كتاب لآخر. اسأليها سؤالاً واحداً قصيراً تسمّين فيه الجزء المطلوب${ambiguousHint === '' ? '' : ''}. ولا تختاري كتاباً ولا صفحة ولا تشرحي صفحة من كتاب آخر.`
-        : 'طلبت الطالبة رقم صفحة ولم تسمِّ الكتاب الذي تقصده، وكل كتاب في مسارها يحمل صفحات بنفس الأرقام. اسأليها سؤالاً واحداً قصيراً: من أي كتاب الصفحة؟ ولا تختاري كتاباً ولا صفحة ولا تشرحي صفحة من كتاب آخر.'} ولا تسردي كتباً بصيغة «من المعتاد».`
-      : pageGate && !exactTextInPrompt
-        ? `## الصفحة المطلوبة لم تُفتح\nلم أصل إلى نص سليم من الصفحة ${printedPage ?? ''} المطلوبة ولا إلى صورة قابلة لقراءتها، ولا حتى إلى وصف فهرسي لها، فلا دليل لك عن محتواها. ممنوع عليكِ وصف هذه الصفحة أو تمثيل مضمونها أو ذكر عنوانها الفرعي أو تمارينها أو أمثلتها من ذاكرتك. قولي للطالبة بصراحة وبسطرين إن النص الرقمي لهذه الصفحة لم يظهر لها، واعرضي إن أرادت ما تعرفينه عن الموضوع العام بصيغة «من معرفتي بالمنهج»، مع دعوة صريحة لمراجعة الصفحة في كتابها. ولا تعتذري بأنك بلا وصول، ولا تطلبي منها كتابة النص.`
-        : pageGate
-          ? '## دليل الصفحة غير حرفي\nما وصل عن هذه الصفحة هو وصف فهرسي أو نص مستخرج موسوم بالتلف، وليس نص الصفحة السليم. اشرحي المعنى والفكرة العامة استناداً إليه، واذكري بوضوح أن ما قلته «من وصف الفهرس لا من نص الصفحة». ممنوع نسخ عبارة أو آية أو حديث أو رقم أو مثال بوصفه من الكتاب. ولا تسألي الطالبة عن نص الصفحة ولا تعتذري بأنك بلا وصول.'
-          : '';
+    const requestLabel = (request) => {
+      const book = request.bookId ? books.find((entry) => entry.id === request.bookId) : null;
+      const page = request.printedPage != null ? `الصفحة المطبوعة ${request.printedPage}` : `صفحة PDF ${request.physicalPage}`;
+      const bookLabel = book?.title ? `${book.title} — ` : '';
+      const hintLabel = !book && request.bookHint ? ` (المادة المذكورة: ${request.bookHint})` : '';
+      return `${bookLabel}${page}${hintLabel}`;
+    };
+    const unresolvedLabels = unresolvedPageRequests.map(requestLabel);
+    const unopenedLabels = resolvedRequests
+      .filter((request) => exactByRequest.get(request.requestId)?.reliable !== true)
+      .map(requestLabel);
+    if (pageGate && !ambiguousPage && !unopenedLabels.length) {
+      unopenedLabels.push(`الصفحة ${printedPage ?? pageReference(question) ?? physicalPage ?? ''}`);
+    }
+    const gateBlock = !pageGate
+      ? ''
+      : ambiguousPage
+        ? `## توضيح مطلوب للصفحات غير المحددة\nالصفحات التي لم أستطع ربطها بكتاب مؤكد: ${unresolvedLabels.join('، ')}. اسألي سؤالاً واحداً قصيراً لتحديد الكتاب أو الجزء لكل صفحة ملتبسة. لا تخمّني محتواها ولا تشرحيها من الذاكرة. يمكنك شرح صفحة أخرى فقط إذا وصل نصها الموثوق في السياق.`
+        : `## بعض الصفحات المطلوبة لم تصل بدليل موثوق\nالصفحات غير المتحققة: ${unopenedLabels.join('، ')}. لا تصفيها من الذاكرة ولا تكمّليها من صفحة أخرى. إذا أُرفق لها وصف فهرسي صريح، اشرحي فكرته العامة فقط واذكري أنه وصف غير حرفي؛ وإلا قولي إن النسخة الرقمية لم تُظهر محتواها. أجيبي فقط عن الصفحات الأخرى التي وصل نصها الموثوق، ولا تنقلي نصاً دينياً أو مدرسياً من غير مقتطف سليم.`;
     const externalBlock = webEvidenceBlock(webSources);
     // ترتيب الصور: صفحة الطالب أولًا، ثم الصفحة المطلوبة بالضبط، ثم أقوى
     // صفحة داكنة الفهرس التي فُتحت، ثم مرشح البحث العام.
@@ -2006,15 +2146,18 @@ async function handleChat(req, res) {
       ...webSources,
     ]);
     const quizBlock = plan.quiz?.requested ? quizInstruction(plan.quiz.questions) : '';
-    const messages = modelMessages(body, localBlock, outlineBlock, catalogBlock, track, externalBlock, extraImages, allSources.map((source) => source.id), plan.catalogScope, primaryBlock, config.model, gateBlock, quizBlock);
+    const expectedQuizCount = plan.quiz?.requested ? (plan.quiz.questions >= 1 ? plan.quiz.questions : 5) : 0;
+    const buildMessages = (images) => modelMessages(body, localBlock, outlineBlock, catalogBlock, track, externalBlock, images, allSources.map((source) => source.id), plan.catalogScope, primaryBlock, config.model, gateBlock, quizBlock);
+    let messages = buildMessages(extraImages);
+    // مزوّد قد يعلن الرؤية في مواصفته ثم يرفض `image_url` عند الطلب. عندها يضيع
+    // الرد كله بخطأ تقني، بينما يمكن إكماله من النصوص المستخرجة وحدها.
+    let visionFallbackUsed = false;
     sseSend(res, 'citations', { items: allSources });
     if (outline) sseSend(res, 'notice', { message: 'OUTLINE_CONTEXT', bookId: outline.bookId, structure: plan.useOutline });
     if (catalog) sseSend(res, 'notice', { message: 'CATALOG_CONTEXT' });
     if (plannerError && isProviderFailure(plannerError)) {
       const code = errorCode(plannerError);
-      providerHealth.verified = false;
-      providerHealth.lastError = code;
-      providerHealth.checkedAt = Date.now();
+      markProviderHealth(config, false, code);
       sseSend(res, 'error', { error: code, detail: clean(plannerError?.detail, 180) });
       return;
     }
@@ -2031,19 +2174,19 @@ async function handleChat(req, res) {
     for (let round = 0; round < MAX_ANSWER_ROUNDS; round += 1) {
       // جولة إصلاح الاختبار: نطلب الكتلة وحدها، فتبقى مقدمة الرد السابقة سليمة
       // وتُضاف البطاقة تحتها بدل إعادة توليد الرد كاملاً.
-      const quizMissing = Boolean(plan.quiz?.requested) && !quizBlockPresent(output);
+      const quizMissing = Boolean(plan.quiz?.requested) && !quizBlockPresent(output, expectedQuizCount);
       const roundMessages = round === 0
         ? messages
         : quizMissing
           ? [
             ...messages,
             { role: 'assistant', content: output },
-            { role: 'user', content: `الاختبار لم يأتِ في الصورة المطلوبة فلم تظهر أزراره للطالبة. أجيبي الآن بكتلة الاختبار فقط، بلا أي شرح أو مقدمة: سطر \`\`\`quiz ثم كائن JSON فيه ${arNumber(plan.quiz.questions >= 2 ? plan.quiz.questions : 10)} أسئلة (كل سؤال q وخيارات options ورقم الصحيح في answer يبدأ من 0 وwhy للسبب) ثم سطر \`\`\` يغلقها. لا تكتب شيئاً خارج الكتلة.` },
+            { role: 'user', content: `الاختبار لم يأتِ ببطاقة صالحة للطالبة. أجيبي الآن بكتلة quiz فقط بلا شرح: ${arNumber(expectedQuizCount)} أسئلة بالضبط، ولكل سؤال أربعة خيارات مختلفة وanswer من 0 إلى 3 وwhy يشرح الجواب. استخدمي JSON صالحاً داخل الكتلة.` },
           ]
           : [
             ...messages,
             { role: 'assistant', content: output },
-            { role: 'user', content: `أكملي إجابتك على سؤال الطالبة: ${clean(question, 1_000)}. تابعي من آخر نقطة دون إعادة ما سبق، ولا تبدئي مقدمة أو خاتمة جديدة، وكوني مباشرة في الاستنتاج.${extraImages.length ? ' الصورة المرفقة قد لم تُذكر بعد؛ اذكري ما يظهر فيها بوضوح إن كان ذا صلة بالسؤال.' : ''}` },
+            { role: 'user', content: `أكملي إجابتك على سؤال الطالبة: ${clean(question, 1_000)}. تابعي من آخر نقطة دون إعادة ما سبق، ولا تبدئي مقدمة أو خاتمة جديدة، وكوني مباشرة في الاستنتاج.${extraImages.length && !visionFallbackUsed ? ' الصورة المرفقة قد لم تُذكر بعد؛ اذكري ما يظهر فيها بوضوح إن كان ذا صلة بالسؤال.' : ''}` },
           ];
       const requestMessages = fitMessages(roundMessages, config, roundBudget);
       let finish = '';
@@ -2065,7 +2208,7 @@ async function handleChat(req, res) {
           maxTokens: roundBudget,
           signal: abort.signal,
           session,
-          onFirstToken: () => { firstTokenAt ||= Date.now(); step('write', 'بدأت الكتابة', extraImages.length ? 'أقرأ الصفحة المصوّرة وأشرح اعتمادًا على الأدلة المتاحة' : 'أشرح الآن اعتمادًا على الأدلة المتاحة'); },
+          onFirstToken: () => { firstTokenAt ||= Date.now(); step('write', 'بدأت الكتابة', extraImages.length && !visionFallbackUsed ? 'أقرأ الصفحة المصوّرة وأشرح اعتمادًا على الأدلة المتاحة' : 'أشرح الآن اعتمادًا على الأدلة المتاحة'); },
         })) {
           if (event.type === 'text') {
             const text = citationFilter.push(event.text);
@@ -2080,6 +2223,19 @@ async function handleChat(req, res) {
             reasoningTokens = Math.max(reasoningTokens, Number(event.reasoningTokens) || 0);
           }
         }
+      } catch (error) {
+        // رفض المزوّد للصورة: نعيد الجولة نفسها بلا صور بدل إنهاء الإجابة.
+        if (visionNotSupported(error) && !visionFallbackUsed
+          && round + 1 < MAX_ANSWER_ROUNDS && (extraImages.length || hasImages)) {
+          visionFallbackUsed = true;
+          step('pdf', 'أكمل من النصوص', 'رفض النموذج قراءة الصورة، فسأشرح لكِ من نصوص الكتاب المستخرجة');
+          sseSend(res, 'notice', { message: 'VISION_FALLBACK_TEXT' });
+          messages = buildMessages([]);
+          output = '';
+          firstTokenAt = 0;
+          continue;
+        }
+        throw error;
       } finally {
         clearInterval(waiting);
       }
@@ -2111,16 +2267,15 @@ async function handleChat(req, res) {
 
       // اختبار بلا كتلة quiz = اختبار نصي غير قابل للنقر. جولة إصلاح واحدة
       // فقط، والمحتوى السابق يبقى كما هو ثم تُضاف البطاقة، فلا يُعاد كل الرد.
-      if (plan.quiz?.requested && !quizBlockPresent(output)) {
+      if (plan.quiz?.requested && !quizBlockPresent(output, expectedQuizCount)) {
         if (round + 1 < MAX_ANSWER_ROUNDS) {
           step('write', 'أجهّز بطاقة الاختبار', 'لم تأتِ الاختبارات بالشكل التفاعلي المطلوب؛ أطلبها الآن بصيغتها الصحيحة');
           continue;
         }
+        throw new Error('QUIZ_INVALID');
       }
 
-      providerHealth.verified = true;
-      providerHealth.lastError = null;
-      providerHealth.checkedAt = Date.now();
+      markProviderHealth(config, true);
       sseSend(res, 'done', {
         finish,
         firstTokenMs: firstTokenAt ? firstTokenAt - started : 0,
@@ -2132,11 +2287,11 @@ async function handleChat(req, res) {
     if (!abort.signal.aborted && !res.writableEnded) {
       if (visionNotSupported(error)){
         // القاعدة: لا نطلب من الطالبة كتابة نص الصفحة. الرسالة تصف العطل كما هو.
-        sseSend(res, 'error', { error: 'VISION_NOT_SUPPORTED', detail: `النموذج المشغّل حالياً (${clean(config.model, 60)}) لا يقرأ الصور. سأشرح لك الموضوع من نصوص كتبك؛ ولقراءة صورة worksheet اختاري نموذجاً يدعم الرؤية من الإعدادات.` });
+        sseSend(res, 'error', { error: 'VISION_NOT_SUPPORTED', detail: `النموذج المشغّل حالياً (${clean(config.model, 60)}) لا يقرأ الصور. أستطيع شرح الموضوع من نصوص الكتب؛ وقراءة الصور تحتاج إلى تفعيل نموذج يدعم الرؤية في إعدادات الخدمة.` });
       } else {
         const code = errorCode(error);
-        if (config.key) { providerHealth.verified = false; providerHealth.lastError = code; providerHealth.checkedAt = Date.now(); }
-        const known = ['EMPTY_REPLY', 'REPLY_TOO_LONG', 'REPLY_TRUNCATED', 'REPLY_FILTERED', 'MODEL_TOOL_CALLS_UNSUPPORTED'];
+        if (config.key) markProviderHealth(config, false, code);
+        const known = ['EMPTY_REPLY', 'REPLY_TOO_LONG', 'REPLY_TRUNCATED', 'REPLY_FILTERED', 'MODEL_TOOL_CALLS_UNSUPPORTED', 'QUIZ_INVALID'];
         sseSend(res, 'error', { error: known.includes(error?.message) ? error.message : code, detail: clean(error?.detail, 180) });
       }
     }
@@ -2154,7 +2309,7 @@ async function api(req, res, url) {
     try {
       const curriculum = await getHealth();
       const ai = resolveProvider({ headers: req.headers });
-      return sendJson(res, 200, { ok: true, uptime: Math.round((Date.now() - startedAt) / 1000), curriculum, ai: { ...publicConfig(ai), verified: providerHealth.verified, lastError: providerHealth.lastError } });
+      return sendJson(res, 200, { ok: true, uptime: Math.round((Date.now() - startedAt) / 1000), curriculum, ai: { ...publicConfig(ai), ...providerHealthFor(ai) } });
     } catch (error) { return sendJson(res, 503, { ok: false, error: error.message }); }
   }
   if ((pathname === '/api/bootstrap' || pathname === '/api/config') && req.method === 'GET') {
@@ -2165,8 +2320,7 @@ async function api(req, res, url) {
       return sendJson(res, 200, {
         app: { name: 'معلمي', version: '3.0.0' },
         ...publicConfig(config),
-        verified: providerHealth.verified,
-        lastError: providerHealth.lastError,
+        ...providerHealthFor(config),
         books: books.map((book) => publicBook(book, ready)),
         subjects,
         curriculum,
@@ -2251,9 +2405,11 @@ const server = http.createServer(async (req, res) => {
 });
 
 const port = Number(process.env.PORT) || 3000;
+// SSE بث طويل: headers يجب أن يكون أكبر من keepAlive وإلا تُقطع الاتصالات البطيئة.
+// requestTimeout يُلغى للبث (0) وإلا قتل Node الرد بعد دقيقتين رغم أن المزود لا يزال يكتب.
 server.keepAliveTimeout = 65_000;
-server.headersTimeout = 20_000;
-server.requestTimeout = 120_000;
+server.headersTimeout = 70_000;
+server.requestTimeout = 0;
 server.listen(port, '0.0.0.0', () => {
   console.log(`Mualimi 3 ready on :${port}`);
   // تسخين محرك PDF وفهرس الكتب بعد الإقلاع: تحميل pdfjs يكلّف ثوانٍ

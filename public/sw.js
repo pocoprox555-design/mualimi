@@ -1,6 +1,6 @@
 /* غلاف التطبيق والملفات الأساسية فقط؛ بيانات الكتب وواجهات API تتطلب اتصالاً. */
-const CACHE = 'mualimi-v4-6';
-const CORE = ['/', '/index.html', '/style.css?v=4.6', '/app.js?v=4.6', '/manifest.webmanifest', '/icons/icon.svg'];
+const CACHE = 'mualimi-v6-1';
+const CORE = ['/', '/index.html', '/style.css?v=6.1', '/app.js?v=6.1', '/manifest.webmanifest', '/icons/icon.svg'];
 const CORE_SET = new Set(CORE);
 
 self.addEventListener('install', (event) => {

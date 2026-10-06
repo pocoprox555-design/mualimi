@@ -113,7 +113,7 @@ try {
     check('صفحة: لم يُطلب «مخطط الكتاب غير متاح» كعذر', !/مخطط الكتاب غير متاح/.test(body));
     check('صفحة: حواجز منع الاختلاق موجودة', /قاعدة لا تُخترق/.test(system) && /لا تسردي آية/.test(system));
     check('صفحة: منع LaTeX الخام', /LaTeX/.test(system));
-    check('صفحة: صريحة «ما عندي وصول» + «لا تطلبي منها»', /ما عندي وصول للكتب/.test(system) && /لا تطلبي منها/.test(system));
+    check('صفحة: قاعدة «لا تطلبي من الطالبة نسخ الصفحة»', /لا تطلبي من الطالبة نسخ الصفحة/.test(system));
     check('صفحة: لا أمر للطالبة بكتابة نص', !/اكتبي (?:لي |لي )?نص الصفحة|أرسلي نص الصفحة|انسخي نص الصفحة/.test(system));
     const pageSection = (system.split('## مصادر الصفحات')[1] || '').split('##')[0].trim();
     const blocks = pageSection ? pageSection.split('\n\n---\n\n') : [];
@@ -145,9 +145,9 @@ try {
     const { calls, body, steps } = await chat('اشرحي صفحة ٢٢');
     const answer = calls.findLast((call) => !call.isPlanner);
     const system = answer?.system || '';
-    check('صفحة بلا كتاب: بوابة التوضيح', /توضيح مطلوب قبل أي شرح/.test(system));
+    check('صفحة بلا كتاب: بوابة التوضيح', /توضيح مطلوب/.test(system));
     check('صفحة بلا كتاب: لا مصادر', /"items":\[\]/.test(body) || /"items": \[\]/.test(body), body.match(/event: citations\ndata: (.*)/)?.[1]?.slice(0, 30));
-    check('صفحة بلا كتاب: خطوة التوضيح معروضة', steps.some((step) => /توضيح/.test(step.label || '')));
+    check('صفحة بلا كتاب: بلا نصوص محلية غبية أثناء العمل', !steps.some((step) => /بحثت في الكتب|فتحت صفحة|أفحص/.test(step.label || '')));
   }
 
   // 6) صفحة غير موجودة: بوابة الصدق تمنع الاختلاق
@@ -155,8 +155,8 @@ try {
     const { calls, body } = await chat('اشرحي صفحة 987 من الفقه الشافعي');
     const answer = calls.findLast((call) => !call.isPlanner);
     const system = answer?.system || '';
-    check('صفحة غير موجودة: بوابة «لم تُفتح»', /## الصفحة المطلوبة لم تُفتح/.test(system));
-    check('صفحة غير موجودة: تحريم تمثيل الصفحة', /تمثيل مضمونها|تمثيل محتوى/.test(system));
+    check('صفحة غير موجودة: بوابة «لم تصل بدليل موثوق»', /لم تصل بدليل موثوق/.test(system));
+    check('صفحة غير موجودة: منع التخمين', /لا تخمّني|لا تصفيها من الذاكرة/.test(system));
     check('صفحة غير موجودة: لا بطاقات مصدر', /"items":\[\]/.test(body), body.match(/event: citations\ndata: (.*)/)?.[1]?.slice(0, 30));
   }
 
@@ -178,7 +178,7 @@ try {
     const answer = calls.findLast((call) => !call.isPlanner);
     const system = answer?.system || '';
     check('صور: بلا نموذج بصري لا ترسل image_url', !/image_url/.test(JSON.stringify(calls.at(-1)?.user || '')));
-    check('صور: لا تطلب كتابة نص الصورة', /لا تطلبي منها أن تكتب نص الصورة/.test(system));
+    check('صور: منع وصف صورة غير مرسلة', /لا تسردي أي محتوى لتلك الصورة|لا تطلبي من الطالبة نسخ الصفحة/.test(system));
   }
 
   // 9) بنود لم يختبرها التقرير (§9): صفحات كتب محددة
@@ -194,7 +194,7 @@ try {
       const system = answer?.system || '';
       const pageSection = (system.split('## مصادر الصفحات')[1] || '').split('##')[0].trim();
       const blocks = pageSection ? pageSection.split('\n\n---\n\n') : [];
-      const honest = /قاعدة لا تُخترق/.test(system) && /لا تقولي أبداً/.test(system);
+      const honest = /قاعدة لا تُخترق/.test(system);
       check(`صفحة كتاب (${question.slice(8, 22)}): بلا خلل ولا كتل من كتب أخرى`, honest && blocks.length <= 2 && !/event: error/.test(body), `${blocks.length} كتلة`);
     }
   }
@@ -251,7 +251,7 @@ try {
     const answer = calls.findLast((call) => !call.isPlanner);
     const system = answer?.system || '';
     const pageSection = (system.split('## مصادر الصفحات')[1] || '').split('\n\n## ')[0];
-    check('مادة لكتبها جزآن: توضيح بدل اختيار جزء', /## توضيح مطلوب قبل أي شرح/.test(system), pageSection.slice(0, 60).replace(/\n/g, ' '));
+    check('مادة لكتبها جزآن: توضيح بدل اختيار جزء', /## توضيح مطلوب/.test(system), pageSection.slice(0, 60).replace(/\n/g, ' '));
     check('مادة لكتبها جزآن: النحو لا يُنتقى', !/النحو الواضح/.test(pageSection));
   }
 } catch (error) {

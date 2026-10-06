@@ -72,7 +72,7 @@ try {
     const answer = turn.findLast((call) => !/مخطط استعمال أدوات/.test(call.system));
     const hasImage = Array.isArray(answer?.last) && answer.last.some((part) => part?.type === 'image_url');
     check('صورة مرفوعة: تُرسل image_url مع النموذج البصري', hasImage, JSON.stringify(answer?.last)?.slice(0, 80));
-    check('صورة مرفوعة: تعليمات القراءة البصرية موجودة', /صورة صفحة قُرئت بصريًا/.test(answer?.system || ''));
+    check('صورة مرفوعة: تعليمات القراءة البصرية موجودة', /صورة صفحة مرفقة|صورة صفحة للقراءة البصرية/.test(answer?.system || ''));
     check('صورة مرفوعة: لا تطلب كتابة النص', !/لا تُظهره كاملاً[\s\S]{0,80}الصورة/.test(answer?.system || '') && !/اكتبي نص الصورة/.test(answer?.system || ''));
   }
 
@@ -84,8 +84,8 @@ try {
     // صفحة 24 من التربية الإسلامية نصها مستخرج مختل/مفقود. إمّا فُتحت صورتها
     // وأُرسلت بصرياً، وإمّا دخلت بوابة الامتناع. الحالة الثالثة (شرح من كتاب
     // آخر) ممنوعة منعاً باتاً.
-    const visualRead = /صورة صفحة PDF|صورة صفحة قُرئت بصريًا/.test(system);
-    const gate = /## الصفحة المطلوبة لم تُفتح|## دليل الصفحة غير حرفي|## توضيح مطلوب/.test(system);
+    const visualRead = /صورة صفحة PDF|صورة صفحة مرفقة|صورة صفحة للقراءة البصرية/.test(system);
+    const gate = /لم تصل بدليل موثوق|توضيح مطلوب|دليل الصفحة غير حرفي|النسخة الرقمية لم تُظهر/.test(system);
     const otherBook = /(?:تاريخ|قواعد|النحو|حديث|قراءات)[^|\n]{0,40}\|\s*الصفحة المطبوعة/.test(pageSection);
     check('صفحة بلا نص (التربية 24): دليل بصري أو بوابة امتناع، لا كتاب آخر', visualRead || gate, `بصري=${visualRead} · بوابة=${gate} · كتل=${pageSection.length}`);
     check('صفحة بلا نص: لا صفحة من كتاب آخر في السياق', !otherBook);
