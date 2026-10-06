@@ -38,6 +38,7 @@ const state = {
   request: null,
   preparingMessage: false,
   composing: false,
+  homeVisible: false,
   booted: false,
   storageWarningShown: false,
   historyTrimWarningShown: false,
@@ -323,6 +324,7 @@ function openConversation(id) {
   const conversation = state.conversations.find((item) => item.id === id);
   if (!conversation) return;
   state.activeId = id;
+  state.homeVisible = false;
   loadConversationImageContext(conversation);
   state.view = 'learn';
   closeSidebar();
@@ -339,6 +341,7 @@ function newChat() {
   // حتى لا تدفع جلسات حقيقية خارج حد الثلاثين بمجرد النقر المتكرر على ＋.
   state.conversations = state.conversations.filter((conversation) => conversation.messages?.length);
   createConversation();
+  state.homeVisible = false;
   state.composing = true;
   state.view = 'learn';
   closeSidebar();
@@ -349,6 +352,7 @@ function newChat() {
 
 function goHome() {
   if (state.preparingMessage) return toast('انتظري لحظة حتى يكتمل تجهيز الرسالة.');
+  state.homeVisible = true;
   state.composing = false;
   state.view = 'learn';
   closeSidebar();
@@ -915,7 +919,9 @@ function updateHeaderSession(chatting, conversation) {
 function showLearnPanel() {
   clearSourceTray();
   const conversation = currentConversation();
-  const chatting = Boolean(conversation?.messages?.length || state.composing);
+  // زر الرجوع يعيد للرئيسية فعلاً: الرئيسية تُعرض عندما يطلبها المستخدم
+  // (homeVisible) حتى لو كانت الجلسة الحالية تحمل رسائل.
+  const chatting = !state.homeVisible && Boolean(conversation?.messages?.length || state.composing);
   $('#homePanel').hidden = chatting;
   $('#chatPanel').hidden = !chatting;
   updateHeaderSession(chatting, conversation);
@@ -1052,6 +1058,7 @@ function bindPromptButtons(root = document) {
 
 function openComposer(prompt = '') {
   if (!currentConversation()) createConversation();
+  state.homeVisible = false;
   state.composing = true;
   state.view = 'learn';
   renderAll();
@@ -1386,7 +1393,7 @@ function apiErrorMessage(error) {
   if (isIncompleteProviderStreamCode(code)) return INCOMPLETE_STREAM_MESSAGE;
   const evidenceMessage = noTrustedEvidenceNotice('error', { error: code });
   if (evidenceMessage) return evidenceMessage;
-  if (code.includes('AI_NOT_CONFIGURED')) return 'الكتب جاهزة، لكن خدمة الذكاء الاصطناعي غير مضبوطة على الخادم حاليا.';
+  if (code.includes('AI_NOT_CONFIGURED')) return 'لم تُدخلي مفتاح API بعد. افتحي الإعدادات ⚙ وأدخلي مفتاحك ثم أعيدي المحاولة.';
   if (code.includes('RATE_LIMITED')) return 'أرسلتِ طلبات كثيرة بسرعة. انتظري لحظات ثم حاولي من جديد.';
   if (code.includes('UPSTREAM_AUTH')) return 'المفتاح المخصص للخادم مرفوض. يحتاج المسؤول إلى تحديثه.';
   if (code.includes('UPSTREAM_MODEL')) return 'النموذج غير متاح حاليا. يحتاج المسؤول إلى مراجعة إعداداته.';
@@ -1832,7 +1839,7 @@ function closeModal(id) {
 }
 
 function bindEvents() {
-  $$('.nav-item, .mobile-nav-item').forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+  $$('.nav-item, .mobile-nav-item').forEach((button) => button.addEventListener('click', () => { if (button.dataset.view === 'learn') state.homeVisible = false; setView(button.dataset.view); }));
   $$('.quick-action').forEach((button) => button.addEventListener('click', () => openComposer(button.dataset.prompt || '')));
   bindPromptButtons();
   $('#newChatButton').addEventListener('click', newChat); $('#chatNewButton').addEventListener('click', newChat); $('#mobileNewChat').addEventListener('click', newChat); $('#heroStartButton').addEventListener('click', () => openComposer());
