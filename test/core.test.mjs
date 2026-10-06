@@ -190,7 +190,7 @@ test('hasTextDamage يكشف تلف النص ويترك الصفحات السل�
   assert.equal(hasTextDamage('قصير'), false);
 });
 
-test('مفتاح الجهاز يتجاوز مفتاح الخادم دون تغيير الوجهة أو النموذج', () => {
+test('المفتاح يُقرأ من هيدر الجهاز وحده ولا من متغيرات الخادم', () => {
   const config = resolveProvider({
     env: { AI_API_KEY: 'server-key', AI_ENDPOINT: 'https://server.example/v1', AI_MODEL: 'M1' },
     headers: { 'x-ai-api-key': 'user-key', 'x-ai-endpoint': 'https://attacker.example/v1', 'x-ai-model': 'U1' },
@@ -200,10 +200,12 @@ test('مفتاح الجهاز يتجاوز مفتاح الخادم دون تغي
   assert.equal(config.model, 'M1');
   assert.equal(publicConfig(config).configured, true);
   assert.equal(publicConfig(config).key, undefined);
+  // التطبيق خاص: مفتاح الخادم لم يعد مستعملاً إطلاقاً.
+  assert.equal(resolveProvider({ env: { AI_API_KEY: 'server-key', AI_ENDPOINT: 'https://server.example/v1' } }).key, '');
 });
 
-test('مفتاح b64 يُفك ورابط غير صالح يُرفض', () => {
+test('مفتاح b64 من الهيدر يُفك ورابط غير صالح يُرفض', () => {
   const raw = Buffer.from('secret123').toString('base64');
-  assert.equal(resolveProvider({ env: { AI_API_KEY: `b64:${raw}`, AI_ENDPOINT: 'https://example.com/v1' } }).key, 'secret123');
+  assert.equal(resolveProvider({ headers: { 'x-ai-api-key': `b64:${raw}` }, env: { AI_ENDPOINT: 'https://example.com/v1' } }).key, 'secret123');
   assert.equal(resolveProvider({ env: { AI_ENDPOINT: 'ftp://x' } }).error, 'INVALID_ENDPOINT');
 });

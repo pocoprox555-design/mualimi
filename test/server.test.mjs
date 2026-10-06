@@ -53,7 +53,7 @@ test('تعطل النموذج لا يتحول إلى جواب أو fallback مح
     assert.ok(ready, 'server starts');
     const response = await fetch(`http://127.0.0.1:${port}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Session': 'test-no-local-answer' },
+      headers: { 'Content-Type': 'application/json', 'X-Session': 'test-no-local-answer', 'X-AI-API-Key': 'mualimi-test-key' },
       body: JSON.stringify({ messages: [{ role: 'user', content: 'في كتاب الفقه الشافعي، ماذا أتوقع بعد دراسة الوحدة؟' }], studentName: 'رحمة', curriculumTrack: 'ديني' }),
     });
     const body = await response.text();

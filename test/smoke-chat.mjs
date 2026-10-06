@@ -73,7 +73,7 @@ async function chat(question, extra = {}) {
   const before = upstreamCalls.length;
   const response = await fetch(`http://127.0.0.1:${port}/api/chat`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Session': 'smoke' },
+    headers: { 'Content-Type': 'application/json', 'X-Session': 'smoke', 'X-AI-API-Key': 'smoke-key' },
     body: JSON.stringify({ messages: [{ role: 'user', content: question }], studentName: 'رحمة', curriculumTrack: 'ديني', ...extra }),
   });
   const body = await response.text();
