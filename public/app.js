@@ -1347,6 +1347,14 @@ const INCOMPLETE_STREAM_CODES = new Set(['UPSTREAM_INCOMPLETE_STREAM', 'INCOMPLE
 const INCOMPLETE_STREAM_MESSAGE = 'انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل وليس إجابة نهائية. راجعي الأدلة وأعيدي المحاولة.';
 const INCOMPLETE_STREAM_MARKER = '**انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل.**';
 
+// إشعارات الخادم الحتمية التي يجب أن تراها الطالبة، لا أن تُبتلع بصمت.
+const NOTICE_TEXT = {
+  ANSWER_LIMIT_REACHED: 'اكتمل قدر الإجابة هنا عند حدّ الطول؛ ما ظهر هو الجواب الكامل المتاح.',
+  VISION_FALLBACK_TEXT: 'تعذّرت قراءة الصورة هذه المرة، فأكملت الشرح من نصوص الكتاب.',
+  VISION_NOT_SUPPORTED: 'النموذج الحالي لا يقرأ الصور؛ أشرح الموضوع من نصوص الكتاب.',
+  QUIZ_PROSE_FALLBACK: 'لم يتيسّر عرض الاختبار بصيغة قابلة للنقر هذه المرة، فإليكِ الشرح نصياً.',
+};
+
 function evidenceSignalToken(value) {
   if (typeof value !== 'string') return '';
   return value.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
@@ -1508,6 +1516,10 @@ async function requestReply(conversation, question, images, shell) {
       const evidenceNotice = noTrustedEvidenceNotice(packet.event, packet.data);
       if (evidenceNotice) streamNotices.add(evidenceNotice);
       if (packet.event === 'step') updateAssistantProgress(shell, packet.data);
+      if (packet.event === 'notice') {
+        const mapped = NOTICE_TEXT[String(packet.data?.message || '')];
+        if (mapped) streamNotices.add(mapped);
+      }
       if (packet.event === 'citations') {
         citations = Array.isArray(packet.data.items) ? packet.data.items.map(normalizeCitation).filter(Boolean).slice(0, MAX_CITATIONS) : [];
         shell._citations = citations;
@@ -1516,6 +1528,15 @@ async function requestReply(conversation, question, images, shell) {
       if (packet.event === 'delta') {
         full += packet.data.text || '';
         if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
+      }
+      // حارس الإسناد على الخادم أزال نصاً دينياً لا سند له من الدليل: النص
+      // المصحح يحلّ محل ما بُثّ، ويُعاد الرسم فوراً، وتُحفظ النسخة المصححة.
+      if (packet.event === 'correction') {
+        if (paint) { cancelAnimationFrame(paint); paint = 0; }
+        if (typeof packet.data.text === 'string') full = packet.data.text;
+        (Array.isArray(packet.data.notices) ? packet.data.notices : []).forEach((notice) => streamNotices.add(String(notice)));
+        fillAssistantBubble(shell.querySelector('.message-bubble'), full, true, shell.id, citations);
+        appendEvidenceNotices(shell, [...streamNotices]);
       }
       if (packet.event === 'done') finished = true;
       if (packet.event === 'error') { const error = new Error(packet.data.error || 'UPSTREAM_FAILED'); error.detail = packet.data.detail || ''; throw error; }

@@ -13,6 +13,7 @@ import { getCatalog, getHealth, getSubjects, listBooks, locate, fullPage, search
 import * as corpusIndex from './lib/index.mjs';
 import { getOutline, listOutlineIds, outlineContext } from './lib/outline.mjs';
 import { streamCompletion } from './lib/provider.mjs';
+import { groundReligiousText, stripForeignScripts } from './lib/grounding.mjs';
 import { normalizeDigits, pageReference } from './lib/text.mjs';
 import { heartbeat, readJsonBody, sendJson, serveStatic, sseHeaders, sseSend } from './lib/http.mjs';
 import { searchWeb } from './lib/web-search.mjs';
@@ -2272,10 +2273,34 @@ async function handleChat(req, res) {
           step('write', 'أجهّز بطاقة الاختبار', 'لم تأتِ الاختبارات بالشكل التفاعلي المطلوب؛ أطلبها الآن بصيغتها الصحيحة');
           continue;
         }
-        throw new Error('QUIZ_INVALID');
+        // جولة الإصلاح الأخيرة فشلت: نُسلّم الشرح النصي كما وصل مع إشعار صادق،
+        // بدل رمي الإجابة كلها. اختبار نصي مفهوم يبقى للطالبة أجدى من خطأ يمحو
+        // كل ما كُتب — نفس فلسفة ANSWER_LIMIT_REACHED.
+        if (output.trim()) {
+          sseSend(res, 'notice', { message: 'QUIZ_PROSE_FALLBACK' });
+        } else {
+          throw new Error('QUIZ_INVALID');
+        }
       }
 
       markProviderHealth(config, true);
+      // حارس الإسناد: النموذج الصغير يكمل آية من ذاكرته أو ينسبها لغير موضعها
+      // رغم صرامة الـprompt. ما ليس في الدليل المرفق يُزال حتمياً هنا، فلا يصل
+      // الطالبة نص ديني مختلق. الإشعار يشرح لها لماذا عُدّل النص.
+      // قبل ذلك: يُنظَّف الرد من رموز غير عربية (عبري/CJK/سريلي) تظهر من خلل رموز
+      // النموذج نفسه — رصدناها حياً في صفحة الفقه والتجويد — فلا ترى الطالبة حروفاً
+      // مكسورة في شرح سليم.
+      const stripped = stripForeignScripts(output);
+      if (stripped.changed) output = stripped.text;
+      const grounded = groundReligiousText(output, `${localBlock}\n${externalBlock}`);
+      if (grounded.changed) output = grounded.text;
+      if (stripped.changed || grounded.changed) {
+        sseSend(res, 'correction', {
+          text: output,
+          removed: [...stripped.removed, ...grounded.removed],
+          notices: [...stripped.notices, ...grounded.notices],
+        });
+      }
       sseSend(res, 'done', {
         finish,
         firstTokenMs: firstTokenAt ? firstTokenAt - started : 0,
