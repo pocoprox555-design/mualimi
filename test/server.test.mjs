@@ -15,16 +15,26 @@ async function freePort() {
   return port;
 }
 
-test('تعطل النموذج لا يتحول إلى جواب أو fallback محلي', { timeout: 30_000 }, async () => {
+// العمارة الجديدة: النموذج هو المخطّط والخادم مُنفّذ أدوات. لذلك لا يُجهّز
+// الخادم مصادر مسبقة ولا يبحث قبل نداء النموذج. ما يبقى مضموناً:
+//   • تعطّل المزوّد يُعلَن خطأً صريحاً ولا يُتحوّل إلى جواب محلّي ملفّق.
+//   • لا نصّ يصل الطالبة (لا event: delta).
+//   • النموذج يملك الأدوات وقواعد الصدق في تعليمات النظام.
+test('تعطل النموذج لا يتحول إلى جواب أو fallback محلي', { timeout: 40_000 }, async () => {
   let upstreamCalls = 0;
-  let upstreamMessages = [];
+  let upstreamBody = {};
+  let upstreamPrompt = '';
   const upstream = http.createServer((req, res) => {
     upstreamCalls += 1;
     let raw = '';
     req.on('data', (chunk) => { raw += chunk; });
     req.on('end', () => {
-      try { upstreamMessages = JSON.parse(raw).messages || []; } catch { /* test assertion reports missing prompt */ }
-      res.writeHead(500, { 'Content-Type': 'text/plain' }); res.end('mock failure');
+      try {
+        upstreamBody = JSON.parse(raw);
+        upstreamPrompt = String(upstreamBody.messages?.[0]?.content || '');
+      } catch { /* assertion reports the missing prompt */ }
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('mock failure');
     });
   });
   await new Promise((resolve) => upstream.listen(0, '127.0.0.1', resolve));
@@ -34,7 +44,6 @@ test('تعطل النموذج لا يتحول إلى جواب أو fallback مح
     env: {
       ...process.env,
       PORT: String(port),
-      AI_API_KEY: 'mualimi-test-key',
       AI_ENDPOINT: `http://127.0.0.1:${upstream.address().port}/v1`,
       AI_MODEL: 'mock-model',
     },
@@ -58,12 +67,24 @@ test('تعطل النموذج لا يتحول إلى جواب أو fallback مح
     });
     const body = await response.text();
     assert.equal(response.status, 200);
+    // الخطأ يُعلَن صراحةً ولا يُغطّى بجواب.
     assert.match(body, /event: error/);
     assert.match(body, /UPSTREAM_HTTP_500/);
+    // ولا نصّ illustrative يصل الطالبة.
     assert.doesNotMatch(body, /event: delta/);
-    assert.match(body, /fiqh-shafii-deni-sixth/);
-    assert.match(upstreamMessages[0]?.content || '', /رحمة تدرس السادس الإعدادي في مسار «ديني»/);
-    assert.equal(upstreamCalls, 3);
+    // النموذج يملك الأدوات: هذا ما يجعل الخادم «بيئة» لا «مُقرِّر».
+    const toolNames = (upstreamBody.tools || []).map((tool) => tool.function?.name);
+    assert.ok(toolNames.length >= 8, `expected the tool registry, got ${JSON.stringify(toolNames)}`);
+    assert.ok(toolNames.includes('search_books') && toolNames.includes('read_page')
+      && toolNames.includes('read_pdf_page') && toolNames.includes('read_pages_range'),
+      'required curriculum tools are not offered');
+    // وقواعد الصدق موجودة في تعليمات النظام.
+    assert.match(upstreamPrompt, /لا تسردي آية أو حديثاً/);
+    assert.match(upstreamPrompt, /قواعد الصدق/);
+    // لا اقتباس من صفحة لم تُفتح: النص غير المقتطع ممنوع إعادة صياغته.
+    assert.match(upstreamPrompt, /UNTRUSTED/);
+    // ثلاث محاولات ثم إعلان الفشل (لا صمت ولا حلقة لا نهائية).
+    assert.equal(upstreamCalls, 3, `expected 3 upstream attempts, got ${upstreamCalls}`);
   } finally {
     app.kill();
     await new Promise((resolve) => upstream.close(resolve));

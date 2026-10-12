@@ -25,6 +25,7 @@ COPY --chown=app:app server.mjs ./server.mjs
 COPY --chown=app:app lib ./lib
 COPY --chown=app:app public ./public
 COPY --from=verify --chown=app:app /app/curriculum-library/search-index.json ./curriculum-library/search-index.json
+COPY --from=verify --chown=app:app /app/curriculum-library/shards ./curriculum-library/shards
 COPY --from=verify --chown=app:app /app/curriculum-library/pdf-index.json ./curriculum-library/pdf-index.json
 COPY --from=verify --chown=app:app /app/curriculum-library/pdf-books ./curriculum-library/pdf-books
 COPY --from=verify --chown=app:app /app/curriculum-library/outlines ./curriculum-library/outlines

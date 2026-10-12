@@ -30,3 +30,10 @@ Thumbs.db
 .ocr-tmp/
 .pdfverify/
 curriculum-library/_tmp_*
+
+# الطبقة المشرّحة وقت التشغيل: تُبنى بأمر واحد من search-index.json، فلا تُرفع
+curriculum-library/shards/
+curriculum-library/search-index.json.manifest.json
+
+# ذاكرة وسياق WorkBuddy المحلي — لا تُنشر
+.workbuddy-ai/

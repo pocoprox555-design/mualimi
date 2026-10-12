@@ -21,7 +21,8 @@ const { readPdfPage } = await import('../lib/pdf-fallback.mjs');
 const target = process.argv[2] || 'hadith-deni-sixth';
 const pageNumber = Number(process.argv[3] || 60);
 
-const page = await readPdfPage({ bookId: target, physicalPage: pageNumber, forceSource: true });
+// يطلب الصورة صراحةً: القراءة الافتراضية لا ترسم إلا حين يُحتاج النصّ إليها.
+const page = await readPdfPage({ bookId: target, physicalPage: pageNumber, forceSource: true, wantImage: true });
 console.log(`book=${target} physical=${pageNumber} status=${page.status} textLen=${(page.text || '').length} hasImage=${Boolean(page.imageDataUrl)} pdfOpened=${page.pdfOpened}`);
 
 if (!page.imageDataUrl) {

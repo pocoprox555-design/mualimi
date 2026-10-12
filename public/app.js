@@ -7,18 +7,11 @@ const LEGACY_SETTINGS = 'm2_settings';
 const LEGACY_CONVERSATIONS = 'm2_convs';
 const LEGACY_EXAMS = 'm2_exams';
 const MAX_CONVERSATIONS = 30;
-const MAX_MESSAGES_PER_CONVERSATION = 80;
-const MAX_REQUEST_MESSAGES = 14;
-const MAX_REQUEST_MESSAGE_CHARS = 4_000;
-const MAX_SAVED_MESSAGE_CHARS = 5_000;
 const MAX_LOCAL_STATE_CHARS = 1_000_000;
 const MAX_FALLBACK_STATE_CHARS = 250_000;
-const MAX_QUIZ_QUESTIONS = 10;
-const MAX_CITATIONS = 16;
-const MAX_VISIBLE_SOURCE_CARDS = 3;
 const IMAGE_DB_NAME = 'mualimi-image-context-v1';
 const IMAGE_STORE_NAME = 'contexts';
-const MAX_IMAGE_DATA_URL_CHARS = 800_000;
+const MAX_IMAGE_DATA_URL_CHARS = 1_450_000;
 const MAX_IMAGE_CONTEXTS = 6;
 const MAX_IMAGE_CONTEXT_TOTAL_CHARS = 3_600_000;
 const uid = (prefix) => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
@@ -51,7 +44,7 @@ function readJson(key, fallback) {
 function normalizeCitation(source) {
   if (!source || typeof source !== 'object') return null;
   const short = (value, max = 180) => String(value ?? '').slice(0, max);
-  const reasons = Array.isArray(source.damageReasons) ? source.damageReasons.map((reason) => short(reason, 140)).filter(Boolean).slice(0, 5) : [];
+  const reasons = Array.isArray(source.damageReasons) ? source.damageReasons.map(String).filter(Boolean) : [];
   const url = safeWebUrl(source.url);
   const evidenceStatus = short(source.evidenceStatus, 60);
   const status = short(source.status, 60);
@@ -61,7 +54,7 @@ function normalizeCitation(source) {
   const normalizedType = normalizedEvidenceToken(evidenceType);
   const inferredSearchable = source.searchable == null && (['pdf-text', 'ocr-text'].includes(normalizedType) || ['clean-extracted-text', 'clean-text', 'ocr-text'].includes(normalizedStatus));
   return {
-    id: short(source.id || 'S', 24),
+    id: String(source.id || 'S'),
     bookId: short(source.bookId, 120),
     title: short(source.title, 180),
     subject: short(source.subject, 100),
@@ -91,12 +84,12 @@ function normalizeCitation(source) {
 function normalizeMessage(message) {
   if (!message || !['user', 'assistant'].includes(message.role)) return null;
   const original = String(message.content ?? '');
-  const cites = Array.isArray(message.cites) ? message.cites.map(normalizeCitation).filter(Boolean).slice(0, MAX_CITATIONS) : [];
+  const cites = Array.isArray(message.cites) ? message.cites.map(normalizeCitation).filter(Boolean) : [];
   const notices = Array.isArray(message.notices) ? message.notices.map((notice) => String(notice || '').slice(0, 300)).filter(Boolean).slice(0, 4) : [];
   return {
     role: message.role,
-    content: original.slice(0, MAX_SAVED_MESSAGE_CHARS),
-    truncated: Boolean(message.truncated || original.length > MAX_SAVED_MESSAGE_CHARS),
+    content: original,
+    truncated: Boolean(message.truncated),
     cites,
     ...(notices.length ? { notices } : {}),
     ...(message.hasImage ? { hasImage: true, imageOrigin: message.imageOrigin === 'context' ? 'context' : 'attached' } : {}),
@@ -110,7 +103,7 @@ function normalizeConversation(conversation) {
   if (!conversation || typeof conversation !== 'object') return null;
   const originalMessages = Array.isArray(conversation.messages) ? conversation.messages : [];
   const normalizedMessages = originalMessages.map(normalizeMessage).filter(Boolean);
-  const messages = normalizedMessages.slice(-MAX_MESSAGES_PER_CONVERSATION);
+  const messages = normalizedMessages;
   const rawContext = conversation.imageContext;
   const imageContext = rawContext && typeof rawContext === 'object'
     ? { updatedAt: Number(rawContext.updatedAt) || Date.now(), stored: rawContext.stored === true }
@@ -120,7 +113,7 @@ function normalizeConversation(conversation) {
     title: String(conversation.title || 'جلسة سابقة').slice(0, 100),
     createdAt: Number(conversation.createdAt) || Date.now(),
     updatedAt: Number(conversation.updatedAt || conversation.createdAt) || Date.now(),
-    historyTrimmed: conversation.historyTrimmed === true || normalizedMessages.length > MAX_MESSAGES_PER_CONVERSATION,
+    historyTrimmed: conversation.historyTrimmed === true,
     imageContext,
     messages,
   };
@@ -164,11 +157,11 @@ function buildStateSnapshot(maxChars) {
       updatedAt: Number(conversation.updatedAt) || Date.now(),
       historyTrimmed: conversation.historyTrimmed === true,
       imageContext: conversation.imageContext ? { updatedAt: Number(conversation.imageContext.updatedAt) || Date.now(), stored: conversation.imageContext.stored === true } : null,
-      messages: (conversation.messages || []).slice(-MAX_MESSAGES_PER_CONVERSATION).map((message) => ({
+      messages: (conversation.messages || []).map((message) => ({
         role: message.role,
-        content: String(message.content || '').slice(0, MAX_SAVED_MESSAGE_CHARS),
-        truncated: Boolean(message.truncated || String(message.content || '').length > MAX_SAVED_MESSAGE_CHARS),
-        cites: Array.isArray(message.cites) ? message.cites.map(normalizeCitation).filter(Boolean).slice(0, MAX_CITATIONS) : [],
+        content: String(message.content || ''),
+        truncated: Boolean(message.truncated),
+        cites: Array.isArray(message.cites) ? message.cites.map(normalizeCitation).filter(Boolean) : [],
         ...(Array.isArray(message.notices) && message.notices.length
           ? { notices: message.notices.map((notice) => String(notice || '').slice(0, 300)).filter(Boolean).slice(0, 4) }
           : {}),
@@ -577,7 +570,7 @@ function quizFromJson(raw) {
     return { q: question.q || question.question || '', options, answer: Number(answer), why: question.why || question.explanation || '' };
   }).filter((question) => question.q && question.options.length >= 2);
   if (!questions.length) return null;
-  return { title: quiz.title, subject: quiz.subject, questions: questions.slice(0, MAX_QUIZ_QUESTIONS) };
+  return { title: quiz.title, subject: quiz.subject, questions };
 }
 
 function extractQuiz(part) {
@@ -611,13 +604,13 @@ function quizElement(raw) {
   let answered = 0;
   const result = document.createElement('p');
   result.className = 'quiz-result';
-  quiz.questions.slice(0, MAX_QUIZ_QUESTIONS).forEach((question, index) => {
+  quiz.questions.forEach((question, index) => {
     const item = document.createElement('div');
     item.className = 'quiz-question';
     const title = document.createElement('b');
     title.textContent = `${index + 1}. ${question.q || ''}`;
     item.appendChild(title);
-    (question.options || []).slice(0, 5).forEach((option, optionIndex) => {
+    (question.options || []).forEach((option, optionIndex) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = option;
@@ -628,7 +621,7 @@ function quizElement(raw) {
         if (correct) { score += 1; button.classList.add('correct'); } else { button.classList.add('wrong'); item.querySelectorAll('button')[Number(question.answer)]?.classList.add('correct'); }
         item.querySelectorAll('button').forEach((choice) => { choice.disabled = true; });
         const why = document.createElement('small'); why.textContent = question.why || ''; item.appendChild(why);
-        if (answered === Math.min(quiz.questions.length, MAX_QUIZ_QUESTIONS)) result.textContent = `نتيجتك ${score} من ${answered}`;
+        if (answered === quiz.questions.length) result.textContent = `نتيجتك ${score} من ${answered}`;
       });
       item.appendChild(button);
     });
@@ -766,14 +759,13 @@ function citationDomId(prefix, id) {
 
 function sourceCards(sources, target, compact = false, referencePrefix = '') {
   target.innerHTML = '';
-  const items = Array.isArray(sources) ? sources.filter((source) => source && typeof source === 'object').slice(0, MAX_CITATIONS) : [];
+  const items = Array.isArray(sources) ? sources.filter((source) => source && typeof source === 'object') : [];
   // مصدر بلا رقم صفحة ولا رابط لا يستطيع الطالبة فتحه ولا التحقق منه: لا
   // يُعرض. كان يملأ الشريط بعنوان «رقم الصفحة غير متاح» ويوهمها بدليل.
   const visible = items.filter((source) => source.sourceType === 'web' || source.sourceType === 'catalog'
     || source.physicalPage != null || source.printedPage != null);
   if (!visible.length) { target.hidden = true; return; }
   target.hidden = false;
-  const cards = [];
   visible.forEach((source) => {
     const id = String(source.id || 'S');
     const url = safeWebUrl(source.url);
@@ -816,29 +808,11 @@ function sourceCards(sources, target, compact = false, referencePrefix = '') {
     if (evidence.warning && evidence.damageReasons.length) {
       const reason = document.createElement('small');
       reason.className = 'source-reason';
-      reason.textContent = evidence.damageReasons.slice(0, 2).join('؛ ');
+      reason.textContent = evidence.damageReasons.join('؛ ');
       card.append(reason);
     }
     target.appendChild(card);
-    cards.push(card);
   });
-  // سبع بطاقات تحت جواب واحد كانت أكبر إزعاج على الجوال. ثلاثة تظهر، والباقي
-  // خلف زر «المصادر (N)» يفتحها بإرادة الطالبة لا تلقائياً.
-  if (cards.length > MAX_VISIBLE_SOURCE_CARDS) {
-    cards.forEach((card, index) => { card.hidden = index >= MAX_VISIBLE_SOURCE_CARDS; });
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'source-toggle';
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.textContent = `المصادر (${cards.length})`;
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      cards.forEach((card, index) => { card.hidden = expanded ? index >= MAX_VISIBLE_SOURCE_CARDS : false; });
-      toggle.textContent = expanded ? `المصادر (${cards.length})` : 'إخفاء المصادر';
-      toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    target.appendChild(toggle);
-  }
   if (compact) target.classList.add('compact'); else target.classList.remove('compact');
 }
 
@@ -952,41 +926,6 @@ function countLabel(count, forms) {
   return `${count} ${forms.many}`;
 }
 
-function daysLabel(days) {
-  if (days <= 0) return 'اليوم';
-  if (days === 1) return 'غدا';
-  if (days === 2) return 'بعد يومين';
-  if (days <= 10) return `بعد ${days} أيام`;
-  return `بعد ${days} يوما`;
-}
-
-function renderPlan() {
-  const list = $('#examList');
-  if(!list) return;
-  // plan view removed in v5 — keep no-op to avoid null crashes
-  list.innerHTML = '';
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  const upcoming = state.exams.filter((exam) => new Date(`${exam.date}T00:00:00`) >= today).sort((a, b) => a.date.localeCompare(b.date));
-  const next = upcoming[0];
-  if (next) {
-    const days = Math.ceil((new Date(`${next.date}T00:00:00`) - today) / 86_400_000);
-    $('#nextExamLabel').textContent = next.title;
-    $('#nextExamMeta').textContent = new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(`${next.date}T00:00:00`));
-    $('#nextExamDays').textContent = daysLabel(days);
-  } else {
-    $('#nextExamLabel').textContent = 'لا توجد مواعيد بعد'; $('#nextExamMeta').textContent = 'أضيفي امتحانا أو هدفا دراسيا.'; $('#nextExamDays').textContent = '—';
-  }
-  if (!upcoming.length) { list.innerHTML = '<div class="empty-state">الخطة الفارغة ليست مشكلة. أضيفي أول موعد، وسنرى الطريق أمامك.</div>'; return; }
-  upcoming.forEach((exam) => {
-    const date = new Date(`${exam.date}T00:00:00`);
-    const days = Math.ceil((date - today) / 86_400_000);
-    const item = document.createElement('article'); item.className = 'exam-item';
-    item.innerHTML = `<span class="exam-date">${date.getDate()}<small>${new Intl.DateTimeFormat('ar-IQ', { month: 'short' }).format(date)}</small></span><div class="exam-info"><b>${escapeHtml(exam.title)}</b><small>${new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', year: 'numeric' }).format(date)}</small></div><span class="exam-days">${daysLabel(days)}</span><button class="delete-button" type="button" aria-label="حذف الموعد">×</button>`;
-    item.querySelector('.delete-button').addEventListener('click', () => { state.exams = state.exams.filter((value) => value.id !== exam.id); saveState(); renderPlan(); toast('حُذف الموعد'); });
-    list.appendChild(item);
-  });
-}
-
 function renderHistory() {
   const list = $('#historyList');
   const query = ($('#historySearch')?.value || '').trim().toLowerCase();
@@ -1018,8 +957,6 @@ function setView(view) {
     const section = $(`#view-${name}`);
     if (section) section.hidden = name !== view;
   });
-  const planSection = $('#view-plan');
-  if (planSection) planSection.hidden = true;
   $$('.nav-item, .mobile-nav-item').forEach((button) => {
     const v = button.dataset.view;
     if (v) button.classList.toggle('active', v === view);
@@ -1260,13 +1197,6 @@ async function clearConversationImageContext(conversationId) {
   toast('أُزيل سياق الصورة');
 }
 
-function boundConversation(conversation) {
-  if (conversation.messages.length > MAX_MESSAGES_PER_CONVERSATION) {
-    conversation.messages.splice(0, conversation.messages.length - MAX_MESSAGES_PER_CONVERSATION);
-    conversation.historyTrimmed = true;
-  }
-}
-
 function compressImage(file) {
   return new Promise((resolve, reject) => {
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
@@ -1278,14 +1208,16 @@ function compressImage(file) {
       const image = new Image(); image.onerror = () => reject(new Error('IMAGE_READ'));
       image.onload = () => {
         if (!image.width || !image.height || image.width * image.height > 40_000_000) { reject(new Error('IMAGE_DIMENSIONS')); return; }
-        for (const edge of [1200, 1000, 800, 640]) {
+        const original = String(reader.result || '');
+        if (original.length <= MAX_IMAGE_DATA_URL_CHARS) { resolve(original); return; }
+        for (const edge of [2400, 2000, 1600, 1200, 1000]) {
           const scale = Math.min(1, edge / Math.max(image.width, image.height));
           const canvas = document.createElement('canvas');
           canvas.width = Math.max(1, Math.round(image.width * scale)); canvas.height = Math.max(1, Math.round(image.height * scale));
           const context = canvas.getContext('2d');
           if (!context) { reject(new Error('IMAGE_CANVAS')); return; }
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
-          for (const quality of [.72, .62, .52]) {
+          for (const quality of [.9, .84, .78, .72]) {
             const dataUrl = canvas.toDataURL('image/jpeg', quality);
             if (dataUrl.length <= MAX_IMAGE_DATA_URL_CHARS) { resolve(dataUrl); return; }
           }
@@ -1306,7 +1238,10 @@ async function* sseEvents(response, signal) {
     for (;;) {
       if (signal?.aborted) throw signal.reason || new Error('ABORTED');
       const { done, value } = await reader.read();
-      if (done) break;
+      if (done) {
+        buffer += decoder.decode();
+        break;
+      }
       buffer += decoder.decode(value, { stream: true });
       for (;;) {
         const match = buffer.match(/\r?\n\r?\n/);
@@ -1331,29 +1266,9 @@ function parseSseBlock(block) {
   try { return { event: eventName, data: JSON.parse(payload) }; } catch { return null; }
 }
 
-const NO_TRUSTED_EVIDENCE_CODES = new Set([
-  'NO_TRUSTED_EVIDENCE', 'NO_TRUSTED_RESULT', 'NO_TRUSTED_RESULTS', 'NO_TRUSTED_SOURCE', 'NO_TRUSTED_SOURCES',
-  'NO_TRUSTED_CURRICULUM_WEB', 'NO_TRUSTED_CURRICULUM_WEB_RESULT', 'NO_TRUSTED_CURRICULUM_WEB_EVIDENCE',
-  'NO_TRUSTED_CURRICULUM_OR_WEB_RESULT', 'NO_TRUSTED_CURRICULUM_OR_WEB_EVIDENCE', 'NO_TRUSTED_CURRICULUM_OR_WEB',
-  'NO_TRUSTED_LOCAL_OR_WEB_RESULT', 'NO_TRUSTED_LOCAL_OR_WEB_EVIDENCE', 'NO_TRUSTED_CURRICULUM_OR_EXTERNAL_RESULT', 'NO_LOCAL_OR_WEB_EVIDENCE',
-  'NO_CURRICULUM_WEB_RESULT', 'NO_CURRICULUM_OR_WEB_RESULT', 'NO_CURRICULUM_OR_WEB_EVIDENCE',
-]);
-const NO_TRUSTED_CURRICULUM_CODES = new Set(['NO_TRUSTED_CURRICULUM', 'NO_TRUSTED_CURRICULUM_RESULT', 'NO_TRUSTED_LOCAL_RESULT', 'NO_CURRICULUM_EVIDENCE', 'NO_LOCAL_EVIDENCE']);
-const NO_TRUSTED_WEB_CODES = new Set(['NO_TRUSTED_WEB', 'NO_TRUSTED_WEB_RESULT', 'NO_TRUSTED_WEB_RESULTS', 'NO_TRUSTED_WEB_EVIDENCE', 'NO_WEB_EVIDENCE', 'NO_WEB_RESULT', 'NO_WEB_RESULTS']);
-const NO_TRUSTED_EVIDENCE_MESSAGE = 'لم يُعثر على دليل موثوق في كتب المنهج ولا على نتيجة ويب موثوقة؛ أي شرح عام لا يُعد نقلاً موثقاً من الكتاب.';
-const NO_TRUSTED_CURRICULUM_MESSAGE = 'لم يُعثر على دليل موثوق من كتب المنهج لهذا الرد؛ أي شرح عام لا يُعد نقلاً موثقاً من الكتاب.';
-const NO_TRUSTED_WEB_MESSAGE = 'لم تُعثر على نتيجة ويب موثوقة؛ لا يُنسب أي شرح عام إلى كتاب المنهج.';
 const INCOMPLETE_STREAM_CODES = new Set(['UPSTREAM_INCOMPLETE_STREAM', 'INCOMPLETE_PROVIDER_STREAM', 'PROVIDER_STREAM_INCOMPLETE', 'UPSTREAM_STREAM_INCOMPLETE', 'STREAM_INCOMPLETE']);
 const INCOMPLETE_STREAM_MESSAGE = 'انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل وليس إجابة نهائية. راجعي الأدلة وأعيدي المحاولة.';
 const INCOMPLETE_STREAM_MARKER = '**انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل.**';
-
-// إشعارات الخادم الحتمية التي يجب أن تراها الطالبة، لا أن تُبتلع بصمت.
-const NOTICE_TEXT = {
-  ANSWER_LIMIT_REACHED: 'اكتمل قدر الإجابة هنا عند حدّ الطول؛ ما ظهر هو الجواب الكامل المتاح.',
-  VISION_FALLBACK_TEXT: 'تعذّرت قراءة الصورة هذه المرة، فأكملت الشرح من نصوص الكتاب.',
-  VISION_NOT_SUPPORTED: 'النموذج الحالي لا يقرأ الصور؛ أشرح الموضوع من نصوص الكتاب.',
-  QUIZ_PROSE_FALLBACK: 'لم يتيسّر عرض الاختبار بصيغة قابلة للنقر هذه المرة، فإليكِ الشرح نصياً.',
-};
 
 function evidenceSignalToken(value) {
   if (typeof value !== 'string') return '';
@@ -1375,42 +1290,23 @@ function incompleteProviderStreamSignal(eventName, data) {
   return records.some((record) => record.incomplete === true || record.streamComplete === false || record.providerStreamComplete === false || (eventToken === 'DONE' && record.complete === false));
 }
 
-function noTrustedEvidenceNotice(eventName, data) {
-  const eventToken = evidenceSignalToken(String(eventName || ''));
-  if (NO_TRUSTED_EVIDENCE_CODES.has(eventToken)) return NO_TRUSTED_EVIDENCE_MESSAGE;
-  if (NO_TRUSTED_CURRICULUM_CODES.has(eventToken)) return NO_TRUSTED_CURRICULUM_MESSAGE;
-  if (NO_TRUSTED_WEB_CODES.has(eventToken)) return NO_TRUSTED_WEB_MESSAGE;
-  if (!['notice', 'status', 'evidence', 'evidence-status', 'evidence_status', 'warning', 'step', 'done', 'error', 'citations', 'result'].includes(String(eventName || '').toLowerCase())) return '';
-  const records = [data, data?.evidence, data?.result].filter((value) => value && typeof value === 'object');
-  const signalFields = ['code', 'error', 'status', 'evidenceStatus', 'message', 'reason', 'kind', 'type'];
-  const tokens = [typeof data === 'string' ? evidenceSignalToken(data) : '', ...records.flatMap((record) => signalFields.map((field) => evidenceSignalToken(record[field])))];
-  if (tokens.some((token) => NO_TRUSTED_EVIDENCE_CODES.has(token))) return NO_TRUSTED_EVIDENCE_MESSAGE;
-  if (tokens.some((token) => NO_TRUSTED_CURRICULUM_CODES.has(token))) return NO_TRUSTED_CURRICULUM_MESSAGE;
-  if (tokens.some((token) => NO_TRUSTED_WEB_CODES.has(token))) return NO_TRUSTED_WEB_MESSAGE;
-  const curriculumFlags = records.flatMap((record) => [record.trustedCurriculum, record.curriculumTrusted, record.hasTrustedCurriculum]);
-  const webFlags = records.flatMap((record) => [record.trustedWeb, record.webTrusted, record.hasTrustedWeb]);
-  if (records.some((record) => [record.trustedEvidence, record.hasTrustedEvidence, record.trustedResult].includes(false))) return NO_TRUSTED_EVIDENCE_MESSAGE;
-  if (curriculumFlags.includes(false) && webFlags.includes(false)) return NO_TRUSTED_EVIDENCE_MESSAGE;
-  if (curriculumFlags.includes(false)) return NO_TRUSTED_CURRICULUM_MESSAGE;
-  if (webFlags.includes(false)) return NO_TRUSTED_WEB_MESSAGE;
-  return '';
-}
-
 function apiErrorMessage(error) {
   const code = String(error?.message || error);
   if (isIncompleteProviderStreamCode(code)) return INCOMPLETE_STREAM_MESSAGE;
-  const evidenceMessage = noTrustedEvidenceNotice('error', { error: code });
-  if (evidenceMessage) return evidenceMessage;
-  if (code.includes('AI_NOT_CONFIGURED')) return 'لم تُدخلي مفتاح API بعد. افتحي الإعدادات ⚙ وأدخلي مفتاحك ثم أعيدي المحاولة.';
-  if (code.includes('RATE_LIMITED')) return 'أرسلتِ طلبات كثيرة بسرعة. انتظري لحظات ثم حاولي من جديد.';
-  if (code.includes('UPSTREAM_AUTH')) return 'المفتاح المخصص للخادم مرفوض. يحتاج المسؤول إلى تحديثه.';
-  if (code.includes('UPSTREAM_MODEL')) return 'النموذج غير متاح حاليا. يحتاج المسؤول إلى مراجعة إعداداته.';
-  if (code.includes('UPSTREAM_BAD_REQUEST')) return 'رفض مزود الذكاء الطلب. تحققي من إعدادات النموذج وحاولي مجددا.';
-  if (code.includes('UPSTREAM_TIMEOUT')) return 'تأخر الرد أكثر من اللازم. اختصري السؤال أو حاولي مرة أخرى.';
-  if (code.includes('UPSTREAM_BUSY')) return 'المعلم مشغول الآن. حاولي بعد لحظة.';
-  if (code.includes('EMPTY_REPLY')) return 'وصل رد فارغ. حاولي صياغة السؤال بطريقة مختلفة.';
-  if (!navigator.onLine || code.includes('Failed to fetch')) return 'انقطع الاتصال. تحققي من الإنترنت وحاولي من جديد.';
-  return 'حدث عطل مؤقت أثناء الإجابة. حاولي مرة أخرى.';
+  if (code.includes('AI_NOT_CONFIGURED')) return 'لم يُرسل مفتاح للمزوّد. افتحي الإعدادات وأدخلي مفتاح API ثم أعيدي المحاولة.';
+  if (code.includes('HTTP_413')) return 'حجم سجل الجلسة أو الصور تجاوز ما يقبله الطلب. ابدئي جلسة جديدة أو أرسلي الصور على دفعات.';
+  if (code.includes('UPSTREAM_AUTH')) return 'المزوّد لم يقبل المفتاح. تحققي من المفتاح في الإعدادات.';
+  if (code.includes('UPSTREAM_MODEL')) return 'النموذج غير متاح عند المزوّد حالياً. تحققي من إعداداته ثم أعيدي المحاولة.';
+  if (code.includes('UPSTREAM_BAD_REQUEST')) return 'المزوّد رفض الطلب. أعيدي المحاولة؛ إذا تكرر الخطأ أرسلي رمز الخطأ للمسؤول.';
+  if (code.includes('UPSTREAM_TIMEOUT')) return 'انتهت مهلة انتظار المزوّد قبل اكتمال الرد. أعيدي المحاولة؛ والجزء الظاهر غير مكتمل.';
+  if (code.includes('UPSTREAM_BUSY')) return 'المزوّد مشغول الآن. أعيدي المحاولة بعد قليل.';
+  if (code.includes('CONTEXT_WINDOW_EXCEEDED')) return 'تعذّر إرسال سجل هذه المحادثة كاملاً ضمن نافذة النموذج. ابدئي جلسة جديدة أو أعيدي السؤال مع السياق اللازم.';
+  if (code.includes('AGENT_CONTINUATION_LIMIT') || code.includes('AGENT_TOOL_ROUND_LIMIT') || code.includes('AGENT_DEADLINE')) return 'لم تكتمل الإجابة ضمن دورة المعالجة الحالية. الجزء الظاهر غير مكتمل؛ أعيدي المحاولة.';
+  if (code.includes('EMPTY_REPLY')) return 'لم يصل نص من النموذج. أعيدي المحاولة.';
+  if (!navigator.onLine || code.includes('Failed to fetch') || code.includes('UPSTREAM_NETWORK')) return 'انقطع الاتصال. تحققي من الإنترنت ثم أعيدي المحاولة.';
+  if (code.startsWith('UPSTREAM_HTTP_')) return `أعاد مزوّد الذكاء رمز HTTP ${code.slice('UPSTREAM_HTTP_'.length)}. أعيدي المحاولة أو راجعي إعدادات المزوّد.`;
+  const detail = String(error?.detail || '').trim();
+  return `تعذّر إكمال الطلب (${code})${detail ? `: ${detail}` : ''}. أعيدي المحاولة.`;
 }
 
 function assistantShell() {
@@ -1489,16 +1385,16 @@ async function requestReply(conversation, question, images, shell) {
   setConnection('online', 'المعلم يكتب...');
   // الدور المُوقوف يبقى في السجل البصري ويُستثنى من سياق النموذج.
   const live = conversation.messages.filter((message) => !message.abandoned);
-  const messages = live.slice(-MAX_REQUEST_MESSAGES).map((message) => ({
+  const messages = live.map((message) => ({
     role: message.role,
-    content: String(message.content || '').slice(0, MAX_REQUEST_MESSAGE_CHARS),
+    content: String(message.content || ''),
   }));
   const last = messages.at(-1);
   // إعادة المحاولة بعد رد جزئي: آخر مدخل قد يكون رداً لا سؤالاً، فيُضاف السؤال
   // صراحةً وإلا أُجيب عن شي غير وارد في الطلب.
   if (messages.at(-1)?.role !== 'user') messages.push({ role: 'user', content: question || 'اشرحي ما يظهر في الصورة المرفقة.' });
   const lastUserIndex = messages.findLastIndex((message) => message.role === 'user');
-  if (images.length && lastUserIndex >= 0) messages[lastUserIndex] = { ...messages[lastUserIndex], content: [{ type: 'text', text: question || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images.slice(0, 1).map((url) => ({ type: 'image_url', image_url: { url } }))] };
+  if (images.length && lastUserIndex >= 0) messages[lastUserIndex] = { ...messages[lastUserIndex], content: [{ type: 'text', text: question || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))] };
   let full = ''; let citations = []; let finished = false; let paint = 0;
   let streamIncomplete = false;
   const streamNotices = new Set();
@@ -1513,30 +1409,15 @@ async function requestReply(conversation, question, images, shell) {
         streamIncomplete = true;
         streamNotices.add(INCOMPLETE_STREAM_MESSAGE);
       }
-      const evidenceNotice = noTrustedEvidenceNotice(packet.event, packet.data);
-      if (evidenceNotice) streamNotices.add(evidenceNotice);
       if (packet.event === 'step') updateAssistantProgress(shell, packet.data);
-      if (packet.event === 'notice') {
-        const mapped = NOTICE_TEXT[String(packet.data?.message || '')];
-        if (mapped) streamNotices.add(mapped);
-      }
       if (packet.event === 'citations') {
-        citations = Array.isArray(packet.data.items) ? packet.data.items.map(normalizeCitation).filter(Boolean).slice(0, MAX_CITATIONS) : [];
+        citations = Array.isArray(packet.data.items) ? packet.data.items.map(normalizeCitation).filter(Boolean) : [];
         shell._citations = citations;
         sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id);
       }
       if (packet.event === 'delta') {
         full += packet.data.text || '';
         if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
-      }
-      // حارس الإسناد على الخادم أزال نصاً دينياً لا سند له من الدليل: النص
-      // المصحح يحلّ محل ما بُثّ، ويُعاد الرسم فوراً، وتُحفظ النسخة المصححة.
-      if (packet.event === 'correction') {
-        if (paint) { cancelAnimationFrame(paint); paint = 0; }
-        if (typeof packet.data.text === 'string') full = packet.data.text;
-        (Array.isArray(packet.data.notices) ? packet.data.notices : []).forEach((notice) => streamNotices.add(String(notice)));
-        fillAssistantBubble(shell.querySelector('.message-bubble'), full, true, shell.id, citations);
-        appendEvidenceNotices(shell, [...streamNotices]);
       }
       if (packet.event === 'done') finished = true;
       if (packet.event === 'error') { const error = new Error(packet.data.error || 'UPSTREAM_FAILED'); error.detail = packet.data.detail || ''; throw error; }
@@ -1545,7 +1426,6 @@ async function requestReply(conversation, question, images, shell) {
     if (streamIncomplete || !finished) throw new Error('UPSTREAM_INCOMPLETE_STREAM');
     if (!full.trim()) throw new Error('EMPTY_REPLY');
     conversation.messages.push({ role: 'assistant', content: full, cites: citations, notices: [...streamNotices] });
-    boundConversation(conversation);
     conversation.updatedAt = Date.now();
     fillAssistantBubble(shell.querySelector('.message-bubble'), full, false, shell.id, citations);
     sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id);
@@ -1563,15 +1443,13 @@ async function requestReply(conversation, question, images, shell) {
       if (full.trim()) {
         const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
         conversation.messages.push({ role: 'assistant', content: partial, cites: citations, notices: [...streamNotices] });
-        boundConversation(conversation);
-        fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations); sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id); appendEvidenceNotices(shell, [...streamNotices]); clearSourceTray(); saveState();
+            fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations); sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id); appendEvidenceNotices(shell, [...streamNotices]); clearSourceTray(); saveState();
       } else shell.remove();
     } else if (full.trim()) {
       // ما وصل قبل انقطاع النموذج مفيد لا يُستبدل؛ نُبقيه ونضيف تحته طريقة إعادة المحاولة.
       const partial = `${full}\n\n${streamIncomplete ? INCOMPLETE_STREAM_MARKER : partialReplyMarker(error)}`;
       conversation.messages.push({ role: 'assistant', content: partial, cites: citations, notices: [...streamNotices] });
-      boundConversation(conversation);
-      conversation.updatedAt = Date.now();
+        conversation.updatedAt = Date.now();
       fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations);
       sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id);
       clearSourceTray();
@@ -1596,8 +1474,8 @@ async function requestReply(conversation, question, images, shell) {
 
 async function sendMessage(text, images = []) {
   if (state.request || state.preparingMessage) return;
-  const question = String(text || '').trim().slice(0, MAX_REQUEST_MESSAGE_CHARS);
-  let selectedImages = Array.isArray(images) ? images.slice(0, 2) : [];
+  const question = String(text || '').trim();
+  let selectedImages = Array.isArray(images) ? images : [];
   if (selectedImages.length && !modelSupportsVision()) {
     // لا حفظ ولا إرسال لصورة لن يقرأها أحد: توهم الطالبة بقدرة غير موجودة.
     selectedImages = [];
@@ -1663,7 +1541,6 @@ async function sendMessage(text, images = []) {
   }
   const visibleText = question || 'اشرحي ما يظهر في الصورة المرفقة.';
   conversation.messages.push({ role: 'user', content: visibleText, hasImage: Boolean(requestImages.length), imageOrigin });
-  boundConversation(conversation);
   if (conversation.title === 'جلسة جديدة') conversation.title = visibleText.replace(/\s+/g, ' ').slice(0, 46);
   conversation.updatedAt = Date.now();
   state.composing = false;
@@ -1878,13 +1755,13 @@ function bindEvents() {
     }
   });
   $('#clearHistoryButton').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!state.conversations.length || !confirm('مسح كل الجلسات المحفوظة؟')) return; state.conversations = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); renderAll(); toast('مُسحت الجلسات'); });
-  $('#composer').addEventListener('submit', (event) => { event.preventDefault(); const text = $('#messageInput').value.trim(); sendMessage(text, state.pendingImages.slice(0, 2)); });
+  $('#composer').addEventListener('submit', (event) => { event.preventDefault(); const text = $('#messageInput').value.trim(); sendMessage(text, state.pendingImages); });
   $('#messageInput').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 140)}px`; });
   $('#messageInput').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('#composer').requestSubmit(); } });
   $('#stopButton').addEventListener('click', () => state.request?.abort.abort(new DOMException('stopped', 'AbortError')));
   $('#attachButton').addEventListener('click', () => { if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.'); $('#imageInput').click(); });
   $('#imageInput').addEventListener('change', async (event) => {
-    const files = [...(event.target.files || [])].slice(0, 2); event.target.value = ''; if (!files.length) return;
+    const files = [...(event.target.files || [])]; event.target.value = ''; if (!files.length) return;
     if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.');
     const pending = [];
     for (const file of files) {
@@ -1901,7 +1778,7 @@ function bindEvents() {
   const composer = $('#composer');
   const handleDroppedFiles = async (files) => {
     const all = [...files];
-    const list = all.filter((f) => /^image\/(jpeg|png|webp)$/.test(f.type)).slice(0, 2);
+    const list = all.filter((f) => /^image\/(jpeg|png|webp)$/.test(f.type));
     // ملف غير صورة يُهمل مع رسالة: الصمت كان يوهم بأن شيئاً سيُستعمل.
     if (all.length && !list.length) { toast('الصيغة مدعومة: صورة JPEG أو PNG أو WebP.'); return; }
     if (!list.length) return;
@@ -1927,7 +1804,7 @@ function bindEvents() {
     await handleDroppedFiles(files);
   });
   $('#historySearch')?.addEventListener('input', renderHistory);
-  $('#examForm')?.addEventListener('submit', (event) => { event.preventDefault(); const title = $('#examTitle')?.value.trim(); const date = $('#examDate')?.value; if (!title || !date) return; state.exams.push({ id: uid('e'), title, date }); saveState(); event.target.reset(); renderPlan(); toast('أُضيف الموعد إلى خطتك'); });
+  // نموذج «خطتي» أُزيل من الواجهة؛ لم يعد هناك ما يُربط به.
   $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
   $('#saveProvider').addEventListener('click', async () => {
     const apiKey = $('#providerKey').value.trim().slice(0, 2_048);
@@ -1940,7 +1817,7 @@ function bindEvents() {
     warmup();
   });
   $('#saveSettings').addEventListener('click', () => { state.settings.studentName = $('#settingsName').value.trim().slice(0, 40); saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظت إعداداتك'); });
-  $('#resetData').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!confirm('سيتم حذف المحادثات والخطة من هذا الجهاز. هل أنت متأكدة؟')) return; state.conversations = []; state.exams = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); closeModal('settingsModal'); renderAll(); toast('تم مسح البيانات المحلية'); });
+  $('#resetData').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!confirm('سيتم حذف المحادثات المحفوظة من هذا الجهاز. هل أنت متأكدة؟')) return; state.conversations = []; state.exams = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); closeModal('settingsModal'); renderAll(); toast('تم مسح البيانات المحلية'); });
   $$('[data-close-modal]').forEach((button) => button.addEventListener('click', () => closeModal(button.dataset.closeModal)));
   $$('.modal').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal.id); }));
   window.addEventListener('online', () => { $('#offlineBar').hidden = true; warmup(); });

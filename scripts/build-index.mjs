@@ -1,5 +1,6 @@
 // يبني الفهرس canonical مرة واحدة من pdf-index.json.
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, stat, rename, mkdir } from 'node:fs/promises';
+import { buildShards } from './shard-index.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanText, compact, normalizeAr, normalizeDigits, topKeywords, searchTokens, uniqueTokens } from '../lib/text.mjs';
@@ -568,7 +569,39 @@ const output = {
   printed,
 };
 
-await writeFile(OUTPUT, `${JSON.stringify(output)}\n`);
+// كتابة ذرّية + بصمة مصدر + إعادة بناء الطبقة المشرَّحة في الأمر ذاته.
+// السبب: الكتابة المباشرة كانت تُنتج ملفاً مبتوراً عند أي انقطاع، فيرفض المحرّك
+// كل طلب لاحق (CURRICULUM_INDEX_INVALID) حتى إعادة بناء يدوية. والبصمة تجعل
+// الخادم يكشف فهرساً بُنِي قبل تغيّر الـPDF فيرفض الانطلاق بدل إجابات خاطئة.
+const OUTPUT_TMP = `${OUTPUT}.tmp-${process.pid}`;
+await writeFile(OUTPUT_TMP, `${JSON.stringify(output)}\n`);
+await rename(OUTPUT_TMP, OUTPUT);
+
+// بصمة المصدر: اسم الملف وحجمه وتاريخ تعديله لكل كتاب. تُقرأ من pdf-index.json
+// لأن search-index لا ينقل fileName إلى كتبه، وهي الطبقة التي تحمل أصل الملف.
+let pdfIndex = { books: [] };
+try { pdfIndex = JSON.parse(await readFile(path.join(LIBRARY, 'pdf-index.json'), 'utf8')); } catch { /* بلا بصمة */ }
+const manifest = {
+  builtAt: new Date().toISOString(),
+  schemaVersion: 4,
+  docs: documents.length,
+  terms: Object.keys(postings).length,
+  sources: [],
+};
+for (const book of raw.books || []) {
+  const source = pdfIndex.books?.find((entry) => entry.id === book.id)?.source?.fileName
+    || pdfIndex.books?.find((entry) => entry.id === book.id)?.pages?.find((page) => page.sourceProvenance?.fileName)?.sourceProvenance?.fileName;
+  if (!source) continue;
+  const info = await stat(path.join(LIBRARY, 'pdf-sources', source)).catch(() => null);
+  if (!info) continue;
+  // اسم الملف يُحفظ مع البصمة لأن كتب search-index.json لا تحمله، والفهرس
+  // المشرَّح هو ما يقرأه الخادم عند الإقلاع لكشف التقادم.
+  manifest.sources.push([book.id, info.size, Number(info.mtimeMs).toFixed(0), source]);
+}
+// يكتب البصمة داخل طبقة shards أيضاً (مصدرها وقت التشغيل) لا في الملف الكامل وحده.
+mkdir(path.join(LIBRARY, 'shards'), { recursive: true }).catch(() => {});
+writeFile(path.join(LIBRARY, 'shards', 'manifest.json'), `${JSON.stringify(manifest)}\n`).catch(() => {});
+await writeFile(`${OUTPUT}.manifest.json`, `${JSON.stringify(manifest)}\n`);
 console.log(`search-index: ${books.length} books, ${documents.length} pages, ${Object.keys(postings).length} terms -> ${OUTPUT}`);
 console.log(`  full text: ${output.stats.fullTextPages} pages / ${output.stats.fullTextChars} chars · enriched: ${enrichedPages} pages across ${output.stats.enrichedBooks} books · figures: ${output.stats.figures} · glossary: ${output.stats.glossaryEntries}`);
 
@@ -596,3 +629,8 @@ console.log(`  evidence status: ${Object.entries(output.stats.evidenceStatuses).
 console.log(`  transferred enrichment fields: ${TRANSFERRED.map((key) => `${key}=${transferredCounts[key]}`).join(' ')}`);
 console.log(`  enrichment keys present in files but not carried: ${notCarried.length ? notCarried.join(', ') : 'none'}`);
 console.log(`  printedPage sources: ${Object.entries(printedSources).map(([key, value]) => `${key}=${value}`).join(' ')} · offsetHint=${documents.filter((doc) => doc.pageOffsetHint != null).length} · damagedText=${documents.filter((doc) => doc.textDamaged).length}`);
+
+// الطبقة المشرَّحة تُبنى مع الفهرس في الأمر ذاته، فلا يبقى مصدران قد يتباعدان:
+// الفهرس المشرَّح يقرأه المحرّك وقت التشغيل، والملف الكامل يبقى للتشخيص.
+const shardsManifest = await buildShards(output, path.join(LIBRARY, 'shards'), { sourceDigests: manifest.sources });
+console.log(`  shards: ${shardsManifest.shards} files · ${shardsManifest.docs} pages · ${shardsManifest.postingsEntries} postings · page records loaded lazily`);
