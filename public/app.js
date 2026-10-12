@@ -218,7 +218,7 @@ function applyTheme() {
   const theme = state.settings.theme === 'dark' ? 'dark' : 'light';
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
-  const color = theme === 'dark' ? '#14201e' : '#f5f7f3';
+  const color = theme === 'dark' ? '#151619' : '#f3f2ef';
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', color);
   const button = $('#themeButton');
   if (button) {
