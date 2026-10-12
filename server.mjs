@@ -9,7 +9,7 @@ try { process.loadEnvFile(path.join(path.dirname(fileURLToPath(import.meta.url))
   if (error?.code !== 'ENOENT') throw error;
 }
 
-import { DEFAULT_MODEL, publicConfig, resolveProvider, supportsVision } from './lib/config.mjs';
+import { publicConfig, resolveProvider, supportsVision } from './lib/config.mjs';
 import { assertIndexFresh, getHealth, getSubjects, listBooks, searchCandidates } from './lib/index.mjs';
 import { TOOLS, executeTool, TOOL_NAMES } from './lib/tools.mjs';
 import { runAgentLoop } from './lib/agent.mjs';
@@ -105,7 +105,8 @@ async function handleChat(req, res) {
     ? rawCurrent.content.filter((part) => part?.type === 'image_url').length
     : 0;
   const images = imageParts(rawCurrent?.content);
-  const hasUnsupportedImages = rawMessages.some((message) => Array.isArray(message?.content) && message.content.some((part) => part?.type === 'image_url' && (!supportsVision(process.env.AI_MODEL || DEFAULT_MODEL) || imageParts([part]).length !== 1)));
+  const config = resolveProvider({ headers: req.headers });
+  const hasUnsupportedImages = rawMessages.some((message) => Array.isArray(message?.content) && message.content.some((part) => part?.type === 'image_url' && (!supportsVision(config.model) || imageParts([part]).length !== 1)));
   if (hasUnsupportedImages) return sendJson(res, 400, { error: 'IMAGE_INPUT_UNSUPPORTED', detail: 'لم يُرسل الطلب: صورة غير مدعومة أو أكبر من حد النقل؛ لم تُحذف بصمت.' });
   const rejectedImageCount = Math.max(0, suppliedImageCount - images.length);
   if (!question.trim() && !images.length && !rejectedImageCount) return sendJson(res, 400, { error: 'EMPTY_MESSAGE' });
@@ -113,7 +114,6 @@ async function handleChat(req, res) {
   const started = Date.now();
   const requestId = newRequestId();
   const session = safeSession(req.headers['x-session']);
-  const config = resolveProvider({ headers: req.headers });
   const log = childLogger(requestId, { model: config.model });
   if (config.warnContext) log.warn('declared context window exceeds the known model window', { warning: config.warnContext, budgetWindow: config.budgetWindow, maxPromptChars: config.maxPromptChars });
   if (config.error) {
@@ -334,7 +334,9 @@ server.keepAliveTimeout = 65_000;
 server.headersTimeout = 70_000;
 server.requestTimeout = 0;
 server.listen(port, '0.0.0.0', () => {
-  console.log(`Mualimi thin-agent ready on :${port} (model=${process.env.AI_MODEL || DEFAULT_MODEL}, tools=${TOOL_NAMES.size})`);
+  const boot = resolveProvider({});
+  console.log(`Mualimi thin-agent ready on :${port} (model=${boot.model}, tools=${TOOL_NAMES.size})`);
+  if (boot.warnModel) console.warn(`model notice: ${boot.warnModel}`);
   setTimeout(async () => {
     try { console.log('index freshness:', JSON.stringify(await assertIndexFresh())); } catch (error) { console.warn('index freshness check failed:', error?.message || error); }
     import('./lib/pdf-fallback.mjs').then((module) => module.warmPdfRuntime?.()).catch(() => {});
