@@ -2,10 +2,8 @@ FROM node:22-alpine AS verify
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
-COPY server.mjs ./server.mjs
 COPY lib ./lib
 COPY scripts ./scripts
-COPY public ./public
 COPY curriculum-library ./curriculum-library
 RUN npm run verify
 

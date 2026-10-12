@@ -6,9 +6,9 @@ const STORAGE_KEY = 'mualimi.v3';
 const LEGACY_SETTINGS = 'm2_settings';
 const LEGACY_CONVERSATIONS = 'm2_convs';
 const LEGACY_EXAMS = 'm2_exams';
-const MAX_CONVERSATIONS = 30;
-const MAX_LOCAL_STATE_CHARS = 1_000_000;
-const MAX_FALLBACK_STATE_CHARS = 250_000;
+const MAX_CONVERSATIONS = Infinity;
+const MAX_LOCAL_STATE_CHARS = Infinity;
+const MAX_FALLBACK_STATE_CHARS = Infinity;
 const IMAGE_DB_NAME = 'mualimi-image-context-v1';
 const IMAGE_STORE_NAME = 'contexts';
 const MAX_IMAGE_DATA_URL_CHARS = 1_450_000;
@@ -89,6 +89,8 @@ function normalizeMessage(message) {
   return {
     role: message.role,
     content: original,
+    ...(message.modelContent != null ? { modelContent: message.modelContent } : {}),
+    ...(message.incomplete ? { incomplete: true } : {}),
     truncated: Boolean(message.truncated),
     cites,
     ...(notices.length ? { notices } : {}),
@@ -160,6 +162,8 @@ function buildStateSnapshot(maxChars) {
       messages: (conversation.messages || []).map((message) => ({
         role: message.role,
         content: String(message.content || ''),
+        ...(message.modelContent != null ? { modelContent: message.modelContent } : {}),
+        ...(message.incomplete ? { incomplete: true } : {}),
         truncated: Boolean(message.truncated),
         cites: Array.isArray(message.cites) ? message.cites.map(normalizeCitation).filter(Boolean) : [],
         ...(Array.isArray(message.notices) && message.notices.length
@@ -173,52 +177,19 @@ function buildStateSnapshot(maxChars) {
     .slice(0, MAX_CONVERSATIONS);
   const settings = { ...state.settings, apiKey: String(state.settings.apiKey || '').slice(0, 2_048), studentName: String(state.settings.studentName || 'رحمة').slice(0, 40), curriculumTrack: 'ديني' };
   const snapshot = { settings, conversations, exams: state.exams.slice(-80) };
-  const trimmedIds = new Set();
-  let serialized = JSON.stringify(snapshot);
-  while (serialized.length > maxChars) {
-    const candidate = [...conversations].filter((conversation) => conversation.messages.length > 2).sort((a, b) => a.updatedAt - b.updatedAt)[0];
-    if (candidate) {
-      candidate.messages.shift();
-      candidate.historyTrimmed = true;
-      trimmedIds.add(candidate.id);
-    } else if (conversations.length > 1) {
-      conversations.pop();
-    } else if (snapshot.exams.length) {
-      snapshot.exams.shift();
-    } else {
-      break;
-    }
-    serialized = JSON.stringify(snapshot);
-  }
-  return { serialized, trimmedIds, fits: serialized.length <= maxChars };
+  const serialized = JSON.stringify(snapshot);
+  // Never discard history to make storage appear successful.
+  return { serialized, trimmedIds: new Set(), fits: serialized.length <= maxChars };
 }
 
 function saveState() {
-  let result = buildStateSnapshot(MAX_LOCAL_STATE_CHARS);
-  let fallback = false;
   try {
-    if (!result.fits) throw new Error('STORAGE_LIMIT');
-    localStorage.setItem(STORAGE_KEY, result.serialized);
+    localStorage.setItem(STORAGE_KEY, buildStateSnapshot().serialized);
+    state.storageWarningShown = false;
   } catch {
-    fallback = true;
-    result = buildStateSnapshot(MAX_FALLBACK_STATE_CHARS);
-    try {
-      if (!result.fits) throw new Error('STORAGE_LIMIT');
-      localStorage.setItem(STORAGE_KEY, result.serialized);
-    } catch {
-      if (!state.storageWarningShown) toast('تعذر حفظ الجلسات؛ قد لا تبقى بعد إغلاق الصفحة.');
-      state.storageWarningShown = true;
-      return;
-    }
+    if (!state.storageWarningShown) toast('تعذر حفظ السجل كاملاً؛ الرسائل باقية الآن لكنها قد لا تبقى بعد إغلاق الصفحة. لم يُحذف منها شيء لتوفير المساحة.');
+    state.storageWarningShown = true;
   }
-  result.trimmedIds.forEach((id) => {
-    const conversation = state.conversations.find((item) => item.id === id);
-    if (conversation) conversation.historyTrimmed = true;
-  });
-  if (fallback && !state.storageWarningShown) toast('حُفظت أحدث الجلسات فقط لتوفير المساحة.');
-  if (!fallback && result.trimmedIds.size && !state.historyTrimWarningShown) toast('حُفظت أحدث الرسائل فقط لتوفير المساحة.');
-  if (fallback || result.trimmedIds.size) state.historyTrimWarningShown = true;
-  state.storageWarningShown = fallback;
 }
 
 function escapeHtml(value) {
@@ -645,41 +616,20 @@ function quizPending(text) {
 }
 
 function fillAssistantBubble(element, content, streaming = false, referencePrefix = '', citations = []) {
-  element.querySelector('.teacher-status')?.remove();
-  if (streaming && quizPending(content)) {
-    if (element.querySelector('.quiz-loading')) return;
-    element.innerHTML = '';
-    const loading = document.createElement('div');
-    loading.className = 'quiz-loading';
-    loading.innerHTML = '<span class="status-orb"></span><span>جارِ تجهيز الاختبار، لحظة من فضلك…</span>';
-    element.appendChild(loading);
-    const typing = document.createElement('span');
-    typing.className = 'typing';
-    typing.innerHTML = '<i></i><i></i><i></i>';
-    element.appendChild(typing);
-    return;
+  let block = element.querySelector('.model-answer-text');
+  if (!block) {
+    element.replaceChildren();
+    block = document.createElement('div');
+    block.className = 'model-answer-text';
+    block.style.whiteSpace = 'pre-wrap';
+    block.style.overflowWrap = 'anywhere';
+    element.appendChild(block);
   }
-  element.innerHTML = '';
-  const parts = String(content || '').split(/```quiz\s*([\s\S]*?)```/g);
-  parts.forEach((part, index) => {
-    if (index % 2 === 1) { const quiz = quizElement(part.trim()); if (quiz) element.appendChild(quiz); return; }
-    if (part.trim()) {
-      const found = extractQuiz(part);
-      if (found) {
-        if (found.rest) { const text = document.createElement('div'); text.innerHTML = markdownHtml(found.rest, referencePrefix, citations); element.appendChild(text); }
-        const card = quizElement(found.quiz);
-        if (card) element.appendChild(card);
-        return;
-      }
-      const block = document.createElement('div'); block.innerHTML = markdownHtml(part, referencePrefix, citations); element.appendChild(block);
-    }
-  });
-  if (streaming) {
-    const typing = document.createElement('span');
-    typing.className = 'typing';
-    typing.innerHTML = '<i></i><i></i><i></i>';
-    element.appendChild(typing);
-  }
+  const next = String(content ?? '');
+  const previous = block._sourceText || '';
+  if (block.firstChild?.nodeType === Node.TEXT_NODE && next.startsWith(previous)) block.firstChild.appendData(next.slice(previous.length));
+  else block.textContent = next;
+  block._sourceText = next;
 }
 
 function normalizedEvidenceToken(value) {
@@ -1237,7 +1187,11 @@ async function* sseEvents(response, signal) {
   try {
     for (;;) {
       if (signal?.aborted) throw signal.reason || new Error('ABORTED');
-      const { done, value } = await reader.read();
+      let timer;
+      const { done, value } = await Promise.race([
+        reader.read(),
+        new Promise((_, reject) => { timer = setTimeout(() => { reject(new Error('CHAT_CONNECTION_TIMEOUT')); void reader.cancel().catch(() => {}); }, 180_000); }),
+      ]).finally(() => clearTimeout(timer));
       if (done) {
         buffer += decoder.decode();
         break;
@@ -1257,13 +1211,14 @@ async function* sseEvents(response, signal) {
 }
 
 function parseSseBlock(block) {
-  let eventName = 'message'; let payload = '';
+  let eventName = 'message'; const dataLines = [];
   block.replace(/\r/g, '').split('\n').forEach((line) => {
     if (line.startsWith('event:')) eventName = line.slice(6).trim();
-    if (line.startsWith('data:')) payload += line.slice(5).trim();
+    if (line.startsWith('data:')) dataLines.push(line.slice(5).replace(/^ /, ''));
   });
-  if (!payload) return null;
-  try { return { event: eventName, data: JSON.parse(payload) }; } catch { return null; }
+  if (!dataLines.length) return null;
+  const payload = dataLines.join('\n');
+  try { return { event: eventName, data: JSON.parse(payload) }; } catch { throw new Error('INVALID_SERVER_STREAM'); }
 }
 
 const INCOMPLETE_STREAM_CODES = new Set(['UPSTREAM_INCOMPLETE_STREAM', 'INCOMPLETE_PROVIDER_STREAM', 'PROVIDER_STREAM_INCOMPLETE', 'UPSTREAM_STREAM_INCOMPLETE', 'STREAM_INCOMPLETE']);
@@ -1298,6 +1253,8 @@ function apiErrorMessage(error) {
   if (code.includes('UPSTREAM_AUTH')) return 'المزوّد لم يقبل المفتاح. تحققي من المفتاح في الإعدادات.';
   if (code.includes('UPSTREAM_MODEL')) return 'النموذج غير متاح عند المزوّد حالياً. تحققي من إعداداته ثم أعيدي المحاولة.';
   if (code.includes('UPSTREAM_BAD_REQUEST')) return 'المزوّد رفض الطلب. أعيدي المحاولة؛ إذا تكرر الخطأ أرسلي رمز الخطأ للمسؤول.';
+  if (code.includes('CHAT_CONNECTION_TIMEOUT')) return 'توقّف اتصال التطبيق؛ الجزء الظاهر غير مكتمل. تحققي من الاتصال وأعيدي المحاولة.';
+  if (code.includes('IMAGE_INPUT_UNSUPPORTED')) return 'لم يُرسل الطلب لأن الصورة غير مدعومة أو تجاوزت حد النقل. أزيليها أو اختاري نموذجاً مناسباً.';
   if (code.includes('UPSTREAM_TIMEOUT')) return 'انتهت مهلة انتظار المزوّد قبل اكتمال الرد. أعيدي المحاولة؛ والجزء الظاهر غير مكتمل.';
   if (code.includes('UPSTREAM_BUSY')) return 'المزوّد مشغول الآن. أعيدي المحاولة بعد قليل.';
   if (code.includes('CONTEXT_WINDOW_EXCEEDED')) return 'تعذّر إرسال سجل هذه المحادثة كاملاً ضمن نافذة النموذج. ابدئي جلسة جديدة أو أعيدي السؤال مع السياق اللازم.';
@@ -1356,7 +1313,7 @@ function appendRetryNotice(target, message, retry) {
   button.className = 'retry-button';
   button.type = 'button';
   button.textContent = 'إعادة المحاولة';
-  button.addEventListener('click', retry);
+  button.addEventListener('click', () => { if (!state.request) retry(); });
   notice.appendChild(button);
   target.appendChild(notice);
 }
@@ -1367,34 +1324,29 @@ function partialReplyMarker(error) {
     : '**توقّف الرد قبل اكتماله.**';
 }
 
-let lastStreamPaint = 0;
-const STREAM_THROTTLE_MS = 50;
 function renderStream(shell, content) {
-  const now = Date.now();
-  if (now - lastStreamPaint < 50) return;
-  lastStreamPaint = now;
+  // The animation frame already coalesces updates; never drop its trailing paint.
   fillAssistantBubble(shell.querySelector('.message-bubble'), content, true, shell.id, shell._citations || []);
   const list = $('#messageList');
   if (list.scrollHeight - list.scrollTop - list.clientHeight < 140) list.scrollTop = list.scrollHeight;
 }
 
-async function requestReply(conversation, question, images, shell) {
+async function requestReply(conversation, question, images, shell, originalMessages = null) {
+  if (state.request) return;
   const abort = new AbortController();
   state.request = { abort, conversation, question, images };
   $('#sendButton').hidden = true; $('#stopButton').hidden = false;
   setConnection('online', 'المعلم يكتب...');
   // الدور المُوقوف يبقى في السجل البصري ويُستثنى من سياق النموذج.
-  const live = conversation.messages.filter((message) => !message.abandoned);
-  const messages = live.map((message) => ({
+  const live = conversation.messages.filter((message) => !message.abandoned && !message.incomplete);
+  const messages = originalMessages || live.map((message) => ({
     role: message.role,
-    content: String(message.content || ''),
+    content: message.modelContent ?? message.content,
   }));
-  const last = messages.at(-1);
-  // إعادة المحاولة بعد رد جزئي: آخر مدخل قد يكون رداً لا سؤالاً، فيُضاف السؤال
-  // صراحةً وإلا أُجيب عن شي غير وارد في الطلب.
-  if (messages.at(-1)?.role !== 'user') messages.push({ role: 'user', content: question || 'اشرحي ما يظهر في الصورة المرفقة.' });
+  // Retry reuses the original request; partial replies never become new evidence.
+  if (!originalMessages && messages.at(-1)?.role !== 'user') messages.push({ role: 'user', content: question });
   const lastUserIndex = messages.findLastIndex((message) => message.role === 'user');
-  if (images.length && lastUserIndex >= 0) messages[lastUserIndex] = { ...messages[lastUserIndex], content: [{ type: 'text', text: question || 'اشرحي ما يظهر في الصورة المرفقة.' }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))] };
+  if (!originalMessages && images.length && lastUserIndex >= 0) messages[lastUserIndex] = { ...messages[lastUserIndex], content: [{ type: 'text', text: question }, ...images.map((url) => ({ type: 'image_url', image_url: { url } }))] };
   let full = ''; let citations = []; let finished = false; let paint = 0;
   let streamIncomplete = false;
   const streamNotices = new Set();
@@ -1416,8 +1368,10 @@ async function requestReply(conversation, question, images, shell) {
         sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id);
       }
       if (packet.event === 'delta') {
+        const firstDelta = !full;
         full += packet.data.text || '';
-        if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
+        if (firstDelta) renderStream(shell, full);
+        else if (!paint) paint = requestAnimationFrame(() => { paint = 0; renderStream(shell, full); });
       }
       if (packet.event === 'done') finished = true;
       if (packet.event === 'error') { const error = new Error(packet.data.error || 'UPSTREAM_FAILED'); error.detail = packet.data.detail || ''; throw error; }
@@ -1441,27 +1395,27 @@ async function requestReply(conversation, question, images, shell) {
         if (conversation.messages[index]?.role === 'user') { conversation.messages[index].abandoned = true; break; }
       }
       if (full.trim()) {
-        const partial = `${full}\n\n(أوقفتِ الرد هنا)`;
-        conversation.messages.push({ role: 'assistant', content: partial, cites: citations, notices: [...streamNotices] });
-            fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations); sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id); appendEvidenceNotices(shell, [...streamNotices]); clearSourceTray(); saveState();
+        const partial = full;
+        conversation.messages.push({ role: 'assistant', content: partial, incomplete: true, cites: citations, notices: [...streamNotices, abort.signal.aborted ? 'أوقفتِ الرد هنا؛ النص غير مكتمل.' : apiErrorMessage(error)] });
+            fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations); sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id); appendEvidenceNotices(shell, [...streamNotices, 'أوقفتِ الرد هنا؛ النص غير مكتمل.']); clearSourceTray(); saveState();
       } else shell.remove();
     } else if (full.trim()) {
       // ما وصل قبل انقطاع النموذج مفيد لا يُستبدل؛ نُبقيه ونضيف تحته طريقة إعادة المحاولة.
-      const partial = `${full}\n\n${streamIncomplete ? INCOMPLETE_STREAM_MARKER : partialReplyMarker(error)}`;
-      conversation.messages.push({ role: 'assistant', content: partial, cites: citations, notices: [...streamNotices] });
+      const partial = full;
+      conversation.messages.push({ role: 'assistant', content: partial, incomplete: true, cites: citations, notices: [...streamNotices, abort.signal.aborted ? 'أوقفتِ الرد هنا؛ النص غير مكتمل.' : apiErrorMessage(error)] });
         conversation.updatedAt = Date.now();
       fillAssistantBubble(shell.querySelector('.message-bubble'), partial, false, shell.id, citations);
       sourceCards(citations, shell.querySelector('.inline-sources'), true, shell.id);
       clearSourceTray();
       const errorMessage = streamIncomplete ? INCOMPLETE_STREAM_MESSAGE : apiErrorMessage(error);
       appendEvidenceNotices(shell, [...streamNotices], errorMessage);
-      appendRetryNotice(shell, errorMessage, () => { shell.remove(); requestReply(conversation, question, images, assistantShell()); });
+      appendRetryNotice(shell, errorMessage, () => { shell.remove(); requestReply(conversation, question, images, assistantShell(), messages); });
       saveState();
     } else {
       const errorMessage = streamIncomplete ? INCOMPLETE_STREAM_MESSAGE : apiErrorMessage(error);
       const bubble = shell.querySelector('.message-bubble');
       bubble.replaceChildren();
-      appendRetryNotice(bubble, errorMessage, () => { shell.remove(); requestReply(conversation, question, images, assistantShell()); });
+      appendRetryNotice(bubble, errorMessage, () => { shell.remove(); requestReply(conversation, question, images, assistantShell(), messages); });
       appendEvidenceNotices(shell, [...streamNotices], errorMessage);
     }
   } finally {
@@ -1474,73 +1428,20 @@ async function requestReply(conversation, question, images, shell) {
 
 async function sendMessage(text, images = []) {
   if (state.request || state.preparingMessage) return;
-  const question = String(text || '').trim();
+  const question = String(text ?? '');
   let selectedImages = Array.isArray(images) ? images : [];
   if (selectedImages.length && !modelSupportsVision()) {
     // لا حفظ ولا إرسال لصورة لن يقرأها أحد: توهم الطالبة بقدرة غير موجودة.
-    selectedImages = [];
-    toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.');
+    toast('لم تُرسل الرسالة: النموذج الحالي لا يقرأ الصور. أزيلي الصور أو اختاري نموذجاً يدعمها.');
+    return;
   }
-  if (!question && !selectedImages.length) return;
+  if (!question.trim() && !selectedImages.length) return;
   const conversation = currentConversation() || createConversation();
-  state.preparingMessage = true;
-  $('#sendButton').disabled = true; $('#attachButton').disabled = true; $('#messageInput').disabled = true;
-  let requestImages = selectedImages;
-  let imageOrigin = selectedImages.length ? 'attached' : '';
-  try {
-    // سياق الصورة السابقة يُرفق مرة واحدة مع الرسالة التالية فقط. بقاؤه
-    // لكل رسائل الجلسة كان يوسم خمس رسائل بلا علاقة بالصورة.
-    if (!requestImages.length && conversation.imageContext && modelSupportsVision()) {
-      const context = await ensureImageContext(conversation);
-      if (!context?.dataUrl) {
-        context && (context.status = 'unavailable');
-        renderImageContextStatus();
-        toast('الصورة السابقة غير متاحة؛ أرفقيها ثانية أو أزيلي السياق.');
-        return;
-      }
-      requestImages = [context.dataUrl];
-      imageOrigin = 'context';
-      // الصورة استُعملت مرة واحدة: لا تُعاد تلقائياً مع كل رسالة بعد هذه،
-      // وتبقى في المحادثة لتفتحيها بملمسك متى شئتِ.
-      delete conversation.imageContext;
-      state.imageContextCache.delete(conversation.id);
-      state.imageContext = { conversationId: conversation.id, dataUrl: '', status: 'none' };
-      renderImageContextStatus();
-    }
-    if (selectedImages.length) {
-      const dataUrl = selectedImages[0];
-      // نحفظ أول صورة فقط كسياق للمحادثة؛ الثانية تُرسل مع الطلب الحالي فقط
-      const context = { conversationId: conversation.id, dataUrl, status: 'saving', stored: false, updatedAt: Date.now() };
-      state.imageContext = context;
-      state.imageContextCache.set(conversation.id, context);
-      conversation.imageContext = { updatedAt: Date.now(), stored: false };
-      renderImageContextStatus();
-      try {
-        const evicted = await storeImageContext(conversation.id, dataUrl);
-        context.status = 'ready'; context.stored = true;
-        conversation.imageContext.stored = true;
-        evicted.forEach((id) => {
-          const previous = state.conversations.find((item) => item.id === id);
-          if (previous?.imageContext) previous.imageContext.stored = false;
-          const cached = state.imageContextCache.get(id);
-          if (cached) cached.stored = false;
-        });
-        const memoryEvicted = rememberImageContext(context);
-        if (evicted.length || memoryEvicted.length) toast('حُفظت الصورة الحالية؛ قد تحتاج صورة أقدم لإعادة الإرفاق.');
-      } catch {
-        context.status = 'ready'; context.stored = false;
-        const memoryEvicted = rememberImageContext(context);
-        if (memoryEvicted.length) toast('حُفظت الصورة الحالية؛ قد تحتاج صورة أقدم لإعادة الإرفاق.');
-        else toast('الصورة متاحة حتى إغلاق هذه الصفحة فقط.');
-      }
-      renderImageContextStatus();
-    }
-  } finally {
-    state.preparingMessage = false;
-    $('#sendButton').disabled = false; $('#attachButton').disabled = false; $('#messageInput').disabled = false;
-  }
-  const visibleText = question || 'اشرحي ما يظهر في الصورة المرفقة.';
-  conversation.messages.push({ role: 'user', content: visibleText, hasImage: Boolean(requestImages.length), imageOrigin });
+  const requestImages = selectedImages;
+  const imageOrigin = selectedImages.length ? 'attached' : '';
+  // Attachments stay in the original turn, without asynchronous pre-send storage.
+  const visibleText = question;
+  conversation.messages.push({ role: 'user', content: visibleText, modelContent: requestImages.length ? [{ type: 'text', text: question }, ...requestImages.map((url) => ({ type: 'image_url', image_url: { url } }))] : question, hasImage: Boolean(requestImages.length), imageOrigin });
   if (conversation.title === 'جلسة جديدة') conversation.title = visibleText.replace(/\s+/g, ' ').slice(0, 46);
   conversation.updatedAt = Date.now();
   state.composing = false;
@@ -1755,7 +1656,7 @@ function bindEvents() {
     }
   });
   $('#clearHistoryButton').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!state.conversations.length || !confirm('مسح كل الجلسات المحفوظة؟')) return; state.conversations = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); renderAll(); toast('مُسحت الجلسات'); });
-  $('#composer').addEventListener('submit', (event) => { event.preventDefault(); const text = $('#messageInput').value.trim(); sendMessage(text, state.pendingImages); });
+  $('#composer').addEventListener('submit', (event) => { event.preventDefault(); const text = $('#messageInput').value; sendMessage(text, state.pendingImages); });
   $('#messageInput').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 140)}px`; });
   $('#messageInput').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('#composer').requestSubmit(); } });
   $('#stopButton').addEventListener('click', () => state.request?.abort.abort(new DOMException('stopped', 'AbortError')));

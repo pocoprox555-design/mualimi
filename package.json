@@ -15,7 +15,7 @@
     "rebuild-pdf-index": "node scripts/rebuild-pdf-index.mjs",
     "validate-index": "node scripts/validate-index.mjs",
     "gate": "node scripts/validate-index.mjs --gate",
-    "verify": "npm run rebuild-pdf-index && npm run build-index && npm run build-shards && npm run gate",
+    "verify": "npm run rebuild-pdf-index && npm run build-index && npm run gate",
     "build-shards": "node scripts/shard-index.mjs"
   },
   "dependencies": {
