@@ -593,7 +593,6 @@ html[data-theme="dark"] .theme-button .theme-moon{display:block}
 .send-button{background:var(--accent);box-shadow:0 5px 13px rgba(124, 124, 124, .2)}
 .send-button:hover{background:var(--accent-hover)}
 .stop-button{background:var(--danger)}
-.composer-hint{padding:8px 6px 0;color:var(--faint);font-size:.66rem;text-align:center}
 .image-preview{padding:9px 3px}
 .image-thumb{border-radius:13px}
 .image-context-status{border-color:var(--line);color:var(--accent-ink);background:var(--accent-soft)}
@@ -691,16 +690,16 @@ html[data-theme="dark"] .loader-line,html[data-theme="dark"] .loader-line::after
 html[data-theme="dark"] .page-scan-figure{background:var(--surface-2)}
 
 @media(max-width:720px){
-  :root{--header-h:calc(62px + env(safe-area-inset-top))}
-  .app-header{height:auto;min-height:var(--header-h);padding:env(safe-area-inset-top) 10px 7px;gap:7px;background:var(--surface)}
+  :root{--header-h:calc(54px + env(safe-area-inset-top))}
+  .app-header{height:auto;min-height:var(--header-h);padding:env(safe-area-inset-top) 8px 2px;gap:5px;background:var(--surface)}
   .mobile-only{display:grid}
   .brand-lockup{gap:8px;min-width:0}
-  .brand-mark{width:38px;height:38px;border-radius:13px}
-  .brand-mark svg{width:28px;height:28px}
+  .brand-mark{width:34px;height:34px;border-radius:11px}
+  .brand-mark svg{width:26px;height:26px}
   .brand-copy strong{font-size:.95rem}
   .brand-copy small{font-size:.58rem}
   .header-center{display:none}
-  .header-actions{gap:0;margin-inline-start:auto}
+  .header-actions{gap:0;margin-inline-start:0}
   .icon-button{width:44px;height:44px;border-radius:14px}
   .app-grid{display:block;min-height:0;height:calc(100% - var(--header-h))}
   .sidebar{position:fixed;z-index:40;inset:0 0 0 auto;width:min(340px,90vw);height:100dvh;padding:max(16px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom));transform:translateX(105%);background:var(--surface);box-shadow:-18px 0 45px rgba(31, 31, 31, .2)}
@@ -722,10 +721,9 @@ html[data-theme="dark"] .page-scan-figure{background:var(--surface-2)}
   .welcome-prompt-row{grid-template-columns:1fr;gap:7px}
   .prompt-chip{min-height:58px;padding:8px 10px;border-radius:14px}
   .prompt-chip-icon{width:33px;height:33px}
-  .composer{gap:6px;padding:7px;border-radius:19px}
-  .composer textarea{min-height:48px;max-height:150px;padding:12px 8px;font-size:16px}
-  .composer-tool,.send-button{width:46px;height:46px;border-radius:14px}
-  .composer-hint{padding-top:6px;font-size:.61rem}
+  .composer{gap:5px;padding:5px;border-radius:17px}
+  .composer textarea{min-height:42px;max-height:150px;padding:8px 7px;font-size:16px}
+  .composer-tool,.send-button{width:44px;height:44px;border-radius:13px}
   .image-preview{padding:7px 2px}
   .history-item{padding:13px;border-radius:15px}
   .modal{align-items:flex-end;padding:0}
