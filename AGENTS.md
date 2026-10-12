@@ -37,7 +37,7 @@ Render يعيد البناء تلقائيًا (~2-3 دقائق). لا حاجة �
 | المفتاح | القيمة | ملاحظة |
 |---------|--------|--------|
 | `AI_ENDPOINT` | `https://opencode.ai/zen/go/v1` | نقطة الاتصال |
-| `AI_MODEL` | `mimo-v2.6-flash` | النموذج الافتراضي |
+| `AI_MODEL` | `deepseek-v4.1-flash` | النموذج الافتراضي |
 | `AI_CONTEXT_WINDOW` | `1000000` | حجم النافذة |
 | `AI_MAX_OUTPUT_TOKENS` | `8000` | قيمة النشر؛ السقف البرمجي `128000` |
 | `AI_SUPPORTS_VISION` | اختياري `true`/`false` | لتجاوز الكشف التلقائي |
