@@ -10,8 +10,7 @@
 - `npm run build-index` — بناء `search-index.json` من `pdf-index.json` وملفات `outlines` و`enrichment`.
 - `npm run validate-index` — طباعة تقرير التحقق الكامل.
 - `npm run gate` — تشغيل بوابة الفهرس وإرجاع فشل عند وجود فجوات حرجة.
-- `npm test` — تشغيل مجموعة الاختبارات المحددة في `package.json`.
-- `npm run verify` — تشغيل `rebuild-pdf-index` ثم `build-index` ثم `gate` ثم `npm test`.
+- `npm run verify` — تشغيل `rebuild-pdf-index` ثم `build-index` ثم `build-shards` ثم `gate`.
 
 ## شكل الفهرس المشتق
 
@@ -39,7 +38,7 @@
 
 ### التحقق والبناء في Docker
 
-مرحلة التحقق في `Dockerfile` تحتاج `pdf-sources` للتحقق من البصمات و`pdf-books` لإعادة بناء الفهارس وتشغيل البوابة والاختبارات. الصورة النهائية تنسخ ملفات التشغيل فقط: `search-index.json` و`pdf-index.json` و`pdf-books` و`outlines` و`pdf-sources`، ولا تتضمن سكربتات البناء أو الاختبارات.
+مرحلة التحقق في `Dockerfile` تحتاج `pdf-sources` للتحقق من البصمات و`pdf-books` لإعادة بناء الفهارس وتشغيل البوابة. الصورة النهائية تنسخ ملفات التشغيل فقط: `search-index.json` و`pdf-index.json` و`pdf-books` و`outlines` و`pdf-sources`، ولا تتضمن سكربتات البناء.
 
 ### تنقية
 

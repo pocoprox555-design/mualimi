@@ -90,7 +90,7 @@ Render يعيد البناء تلقائيًا (~2-3 دقائق). لا حاجة �
 
 ```bash
 npm ci
-npm run verify   # بناء الفهارس واختبار
+npm run verify   # بناء الفهارس والبوابة
 npm start        # http://localhost:3000
 ```
 

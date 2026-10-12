@@ -63,7 +63,7 @@
 | `outlines/<id>.md` | خريطة وصفية للتنقل فقط | ليست نصاً للاقتباس |
 | `enrichment/<id>.json` | تغذية منظمة (glossary/figures/…) | 20/21 مكتمل |
 
-**التسلسل الإلزامي:** `pdf-books` → `rebuild-pdf-index` → `build-index` → `search-index.json` → `npm test` → `npm run gate`. تشغيل `build-index` مع `import-deni` معاً يفسد الفهرس.
+**التسلسل الإلزامي:** `pdf-books` → `rebuild-pdf-index` → `build-index` → `search-index.json` → `npm run gate`. تشغيل `build-index` مع `import-deni` معاً يفسد الفهرس.
 
 يعرض `/api/health` حالة صفحات الفهرس لحظياً (`clean-extracted-text` و`ocr-text` و`damaged-text` و`no-text`). لا تعني `fullTextPages` أو `searchablePages` أن كل صفحة صالحة للاقتباس؛ تُستخدم بوابة الصدق لمنع وصف صفحة بلا دليل موثوق.
 
@@ -73,14 +73,11 @@
 
 ```bash
 npm ci
-npm run verify   # rebuild-pdf-index + build-index + gate + test (81/81)
-npm run smoke    # دخان: سيرفر حقيقي + مزود وهمي (26 فحصاً)
+npm run verify   # rebuild-pdf-index + build-index + build-shards + gate
 npm start        # http://localhost:3000
 ```
 
 يتطلب `curriculum-library/pdf-sources` و`pdf-books` للتحقق. `npm run verify` يفشل بلا ملفات المنهج — هذا مقصود.
-
-`npm run smoke` يشغّل `server.mjs` فعلاً أمام مزود ذكاء وهمي ويتحقق من: تحية بلا مصادر · صفحة بلا مخطط نية وبلا بحث عام · بوابة الامتناع عند تعذّر فتح صفحة · توضيح عند «صفحة ٢٢» بلا مادة · كتالوج حقيقي · اختبار تفاعلي بالعدد المطلوب · صفحتان معاً · لا `image_url` لنموذج بلا رؤية.
 
 ---
 

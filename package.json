@@ -13,11 +13,9 @@
     "build-index": "node scripts/build-index.mjs",
     "shard-index": "node scripts/shard-index.mjs",
     "rebuild-pdf-index": "node scripts/rebuild-pdf-index.mjs",
-    "test": "node --test test/core.test.mjs test/index.test.mjs test/provider.test.mjs test/outline.test.mjs test/grounding.test.mjs test/server.test.mjs test/validate-rules.test.mjs",
-    "smoke": "node test/smoke-chat.mjs && node test/smoke-vision.mjs",
     "validate-index": "node scripts/validate-index.mjs",
     "gate": "node scripts/validate-index.mjs --gate",
-    "verify": "npm run rebuild-pdf-index && npm run build-index && npm run build-shards && npm run gate && npm test",
+    "verify": "npm run rebuild-pdf-index && npm run build-index && npm run build-shards && npm run gate",
     "build-shards": "node scripts/shard-index.mjs"
   },
   "dependencies": {

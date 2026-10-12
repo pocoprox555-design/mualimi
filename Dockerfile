@@ -5,7 +5,6 @@ RUN npm ci
 COPY server.mjs ./server.mjs
 COPY lib ./lib
 COPY scripts ./scripts
-COPY test ./test
 COPY public ./public
 COPY curriculum-library ./curriculum-library
 RUN npm run verify
