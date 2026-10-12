@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-  <meta name="theme-color" content="#0f2d38">
-  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f5f7f3">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="معلمي — معلمك الخاص للسادس الإعدادي. يشرح أي صفحة من كتبك مباشرة بأسلوب هادئ واحترافي.">
   <title>معلمي — معلمك الخاص</title>
   <link rel="manifest" href="/manifest.webmanifest">
@@ -13,109 +13,84 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=8.1">
+  <link rel="stylesheet" href="/style.css?v=9.0">
 </head>
 <body>
   <div id="offlineBar" class="offline-bar" role="status" aria-live="polite" hidden>لا يوجد اتصال — المحادثات المحفوظة متاحة، والرد يحتاج اتصالاً.</div>
 
   <div id="app" class="app-shell" hidden>
-    <!-- ═══ الهيدر ═══ -->
+    <!-- الهيدر الثابت: اختصارات قليلة ومساحة أكبر للمحادثة -->
     <header class="app-header">
-      <button id="mobileMenuButton" class="icon-button mobile-only" aria-label="فتح القائمة">
+      <button id="mobileMenuButton" class="icon-button mobile-only" aria-label="فتح المحادثات" title="فتح المحادثات">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
 
       <div id="headerBrand" class="brand-lockup">
-        <span class="brand-mark">م</span>
-        <span class="brand-copy"><strong>معلمي</strong><small>معلمك الخاص للسادس</small></span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 34c-5-4-10-5-16-4V13c6-1 11 0 16 4 5-4 10-5 16-4v17c-6-1-11 0-16 4Z"/><path d="M24 17v17M13 19c3 0 5 1 7 2M35 19c-3 0-5 1-7 2"/><path d="m24 6 1.8 3.5 3.8.5-2.8 2.7.7 3.8-3.5-1.8-3.5 1.8.7-3.8-2.8-2.7 3.8-.5L24 6Z"/></svg>
+        </span>
+        <span class="brand-copy"><strong>معلمي</strong><small>مساحة رحمة الدراسية</small></span>
       </div>
 
-      <div id="headerSession" class="header-session" hidden>
-        <button id="chatBackButton" class="header-back" aria-label="رجوع إلى الرئيسية">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-          <span>رجوع</span>
-        </button>
-        <div class="header-session-text">
-          <span class="kicker">جلسة تعلم</span>
-          <strong id="headerSessionTitle">جلسة جديدة</strong>
-        </div>
-      </div>
-
-      <div id="headerCenter" class="header-center">
+      <div id="headerCenter" class="header-center" role="status" aria-live="polite">
         <span class="connection-dot"></span>
         <span id="connectionText">جار التحقق…</span>
       </div>
 
       <div class="header-actions">
-        <button id="chatNewButton" class="icon-button header-new-chat" aria-label="جلسة جديدة" hidden>
+        <button id="chatNewButton" class="icon-button" type="button" aria-label="محادثة جديدة" title="محادثة جديدة">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <button id="settingsButton" class="icon-button" aria-label="الإعدادات">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
+        <button id="themeButton" class="icon-button theme-button" type="button" aria-label="تفعيل الوضع الليلي" title="تفعيل الوضع الليلي">
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.6 8.6 0 0 1 8.8 3.8 8.8 8.8 0 1 0 20.2 15.2Z"/></svg>
+        </button>
+        <button id="settingsButton" class="icon-button" type="button" aria-label="مفتاح الاتصال" title="مفتاح الاتصال">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8 3 3-2 2 2 2-3 3-2-2-3 3"/></svg>
         </button>
       </div>
     </header>
 
     <div id="appGrid" class="app-grid">
-      <!-- ═══ القائمة الجانبية ═══ -->
-      <aside id="sidebar" class="sidebar" aria-label="القائمة الجانبية">
-        <button id="newChatButton" class="button button-primary new-chat-button">
-          <span aria-hidden="true">＋</span> جلسة جديدة
+      <!-- القائمة الجانبية: محادثة جديدة وسجل رحمة فقط -->
+      <aside id="sidebar" class="sidebar" aria-label="المحادثات">
+        <div class="sidebar-topline"><span class="sidebar-eyebrow">مساحة رحمة</span><button class="close-button sidebar-close mobile-only" id="sidebarCloseButton" type="button" aria-label="إغلاق المحادثات">×</button></div>
+        <button id="newChatButton" class="button button-primary new-chat-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>محادثة جديدة</span>
         </button>
         <nav class="side-nav" aria-label="التنقل">
-          <button class="nav-item active" data-view="learn"><span class="nav-icon" aria-hidden="true">◈</span> جلسة التعلم</button>
-          <button class="nav-item" data-view="history"><span class="nav-icon" aria-hidden="true">◷</span> جلساتي</button>
+          <button class="nav-item active" data-view="learn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20v15H7.5A2.5 2.5 0 0 0 5 20.5v-15Z"/><path d="M5 6v15M9 7h7M9 11h7"/></svg><span>المحادثة</span></button>
+          <button class="nav-item" data-view="history" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg><span>سجل المحادثات</span></button>
         </nav>
         <div class="sidebar-divider"></div>
-        <div class="sidebar-label"><span>آخر الجلسات</span><button id="clearHistoryButton" type="button">مسح</button></div>
+        <div class="sidebar-label"><span>الأخيرة</span><button id="clearHistoryButton" type="button">مسح الكل</button></div>
         <div id="recentList" class="recent-list"></div>
-        <div class="sidebar-foot">
-          <span class="foot-mark">م</span>
-          <span>مسار التعليم الديني<br><small>السادس الإعدادي</small></span>
-        </div>
+        <div class="sidebar-foot"><span class="foot-mark" aria-hidden="true">ر</span><span>رحمة <small>· السادس الإعدادي</small></span></div>
       </aside>
       <div id="sidebarOverlay" class="sidebar-overlay" hidden></div>
 
       <!-- ═══ المحتوى ═══ -->
       <main class="main-content">
         <section id="view-learn" class="view">
-          <div id="homePanel" class="home-panel">
-            <div class="hero-card">
-              <div class="hero-copy">
-                <span class="kicker light">جلسة اليوم</span>
-                <h1>أهلاً يا <span id="studentName">رحمة</span> ✨</h1>
-                <p>أنا معلمك الخاص — أعرف كتبك صفحة صفحة. قولي مثلاً <em>«اشرحي صفحة 22 من الرياضيات»</em> وأشرحها لك فوراً خطوة بخطوة.</p>
-                <button id="heroStartButton" class="text-button light-button">ابدئي الآن <span aria-hidden="true">←</span></button>
-              </div>
-              <div class="hero-seal" aria-hidden="true"><span>م</span><small>افهميها</small></div>
-              <div class="hero-line" aria-hidden="true"></div>
-            </div>
-
-            <div class="section-heading">
-              <div><span class="kicker">اختاري طريقك</span><h2>كيف أساعدك اليوم؟</h2></div>
-              <span class="section-count">٤ طرق</span>
-            </div>
-            <div class="quick-actions">
-              <button class="quick-action action-ask" data-prompt="اشرحي لي درس التوافيق من الرياضيات بطريقة مبسطة خطوة بخطوة."><span class="action-icon" aria-hidden="true">↗</span><b>اشرحي لي درساً</b><small>فهم خطوة بخطوة</small></button>
-              <button class="quick-action action-quiz" data-prompt="اختبريّني في مادة من مواد السادس — ابدئي بسؤال واحد."><span class="action-icon" aria-hidden="true">✦</span><b>اختبريّني</b><small>تدريب ذكي قصير</small></button>
-              <button class="quick-action action-summary" data-prompt="لخصي لي موضوع شروط إقامة حد الردة من الفقه في نقاط واضحة."><span class="action-icon" aria-hidden="true">≋</span><b>لخصي لي</b><small>خلاصة بلا حشو</small></button>
-              <button class="quick-action action-plan" data-prompt="ساعديني أرتب خطة مذاكرة هذا الأسبوع حسب مواد السادس الديني."><span class="action-icon" aria-hidden="true">◷</span><b>خططي لوقتي</b><small>خطة قابلة للتنفيذ</small></button>
-            </div>
-            <p class="home-hint">تلميح: جربي <em>«صفحة 42 من الفقه»</em> أو <em>«صفحة 22 رياضيات و 42 فقه»</em> — أجيبهما معاً.</p>
-          </div>
-
-          <div id="chatPanel" class="chat-panel" hidden>
-            <div id="messageList" class="message-list" aria-live="polite"></div>
+          <div id="chatPanel" class="chat-panel">
+            <div id="messageList" class="message-list" role="log" aria-label="رسائل المحادثة" aria-live="polite" aria-relevant="additions text"></div>
             <div id="sourceTray" class="source-tray" hidden></div>
             <div id="imageContextStatus" class="image-context-status" role="status" aria-live="polite" hidden></div>
             <div id="imagePreview" class="image-preview" hidden aria-label="الصور المرفقة"></div>
             <form id="composer" class="composer">
               <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="اختيار صورة" hidden>
-              <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة" title="إرفاق صورة" hidden>⊕</button>
-              <textarea id="messageInput" rows="1" placeholder="اكتبي سؤالك… مثلاً: صفحة ٢٢ من الفقه" aria-label="سؤالك"></textarea>
-              <button id="sendButton" class="send-button" type="submit" aria-label="إرسال">↑</button>
-              <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف" hidden>■</button>
+              <button id="attachButton" type="button" class="composer-tool" aria-label="إرفاق صورة" title="إرفاق صورة" hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+              <textarea id="messageInput" rows="1" placeholder="اكتبي سؤالك أو اطلبي اختباراً…" aria-label="رسالتك إلى معلمتك"></textarea>
+              <button id="sendButton" class="send-button" type="submit" aria-label="إرسال الرسالة" title="إرسال الرسالة">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+              </button>
+              <button id="stopButton" class="send-button stop-button" type="button" aria-label="إيقاف الرد" title="إيقاف الرد" hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+              </button>
             </form>
+            <p class="composer-hint">اكتبي بطريقتك — سؤال، شرح، أو اختبار تفاعلي</p>
           </div>
         </section>
 
@@ -133,12 +108,6 @@
       </main>
     </div>
 
-    <!-- ═══ تنقل الجوال ═══ -->
-    <nav class="mobile-nav" aria-label="تنقل الجوال">
-      <button class="mobile-nav-item active" data-view="learn"><span aria-hidden="true">◈</span><small>التعلم</small></button>
-      <button id="mobileNewChat" class="mobile-new-chat" aria-label="جلسة جديدة">＋</button>
-      <button class="mobile-nav-item" data-view="history"><span aria-hidden="true">◷</span><small>جلساتي</small></button>
-    </nav>
   </div>
 
   <!-- ═══ مودال الصفحة ═══ -->
@@ -161,30 +130,23 @@
         <button class="close-button" data-close-modal="settingsModal" aria-label="إغلاق">×</button>
       </div>
 
-      <label for="settingsName">اسمك</label>
-      <input id="settingsName" class="field" maxlength="40" placeholder="شلون أناديچ؟ (اختياري)" autocomplete="nickname">
-      <div class="settings-note"><span aria-hidden="true">i</span><p>مسارك هو التعليم الديني. المعلم يعرف كتبك صفحة صفحة ويشرح أي صفحة تطلبينها فوراً.</p></div>
-
       <div class="settings-status"><span class="connection-dot"></span><span id="settingsConnection">جار التحقق…</span></div>
 
-      <div class="provider-panel">
+      <div class="provider-panel key-panel">
         <div class="provider-panel-head">
-          <div><span class="kicker">الذكاء الاصطناعي</span><h3>مفتاح المعلم</h3></div>
-          <span id="providerState" class="provider-state">غير معروف</span>
+          <div><span class="kicker">الاتصال الآمن</span><h3>مفتاح الوصول</h3></div>
+          <span id="providerState" class="provider-state">جار التحقق…</span>
         </div>
-        <p class="provider-copy">التطبيق خاص. المفتاح يُحفظ على جهازك فقط.</p>
-        <div class="provider-facts"><span>النموذج <b id="providerModel">—</b></span><span>المسار <b id="providerEndpoint">—</b></span></div>
-        <label for="providerKey">مفتاح API <input id="providerKey" class="field" type="password" maxlength="2048" autocomplete="new-password" placeholder="الصقي المفتاح هنا"></label>
-        <button id="saveProvider" class="button button-soft button-wide">حفظ المفتاح</button>
-        <small id="providerResult" class="provider-result"></small>
+        <p class="provider-copy">الصقي مفتاحك هنا. سيُحفظ على هذا الجهاز فقط.</p>
+        <label for="providerKey">مفتاح API</label>
+        <input id="providerKey" class="field" type="password" maxlength="2048" autocomplete="new-password" placeholder="أدخلي مفتاح الاتصال">
+        <button id="saveProvider" class="button button-primary button-wide" type="button">حفظ المفتاح</button>
+        <small id="providerResult" class="provider-result" role="status" aria-live="polite"></small>
       </div>
-
-      <button id="saveSettings" class="button button-primary button-wide">حفظ التغييرات</button>
-      <button id="resetData" class="danger-button">مسح المحادثات من هذا الجهاز</button>
     </div>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/app.js?v=8.1" defer></script>
+  <script src="/app.js?v=9.0" defer></script>
 </body>
 </html>

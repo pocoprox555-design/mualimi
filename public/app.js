@@ -17,7 +17,7 @@ const MAX_IMAGE_CONTEXT_TOTAL_CHARS = 3_600_000;
 const uid = (prefix) => `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
 
 const state = {
-  settings: { apiKey: '', studentName: 'رحمة', curriculumTrack: 'ديني' },
+  settings: { apiKey: '', studentName: 'رحمة', curriculumTrack: 'ديني', theme: 'light' },
   books: [],
   curriculum: null,
   ai: { configured: false },
@@ -143,8 +143,9 @@ function loadState() {
     state.exams = Array.isArray(oldExams) ? oldExams : [];
   }
   state.settings.apiKey = String(state.settings.apiKey || '').slice(0, 2_048);
-  state.settings.studentName = String(state.settings.studentName || 'رحمة').trim().slice(0, 40);
+  state.settings.studentName = 'رحمة';
   state.settings.curriculumTrack = 'ديني';
+  state.settings.theme = state.settings.theme === 'dark' ? 'dark' : 'light';
   state.conversations = state.conversations.filter((conversation) => Array.isArray(conversation.messages)).slice(0, MAX_CONVERSATIONS);
   state.exams = state.exams.filter((exam) => exam?.title && exam?.date).slice(0, 80);
   if(state.view === 'plan') state.view = 'learn';
@@ -175,7 +176,7 @@ function buildStateSnapshot(maxChars) {
     }))
     .sort((a, b) => b.updatedAt - a.updatedAt)
     .slice(0, MAX_CONVERSATIONS);
-  const settings = { ...state.settings, apiKey: String(state.settings.apiKey || '').slice(0, 2_048), studentName: String(state.settings.studentName || 'رحمة').slice(0, 40), curriculumTrack: 'ديني' };
+  const settings = { ...state.settings, apiKey: String(state.settings.apiKey || '').slice(0, 2_048), studentName: 'رحمة', curriculumTrack: 'ديني', theme: state.settings.theme === 'dark' ? 'dark' : 'light' };
   const snapshot = { settings, conversations, exams: state.exams.slice(-80) };
   const serialized = JSON.stringify(snapshot);
   // Never discard history to make storage appear successful.
@@ -213,9 +214,24 @@ function toast(message) {
   element._timer = setTimeout(() => element.classList.remove('show'), 3000);
 }
 
+function applyTheme() {
+  const theme = state.settings.theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+  const color = theme === 'dark' ? '#14201e' : '#f5f7f3';
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', color);
+  const button = $('#themeButton');
+  if (button) {
+    const label = theme === 'dark' ? 'تفعيل الوضع النهاري' : 'تفعيل الوضع الليلي';
+    button.setAttribute('aria-label', label);
+    button.setAttribute('title', label);
+    button.setAttribute('aria-pressed', String(theme === 'dark'));
+  }
+}
+
 function setConnection(mode, text) {
-  const dot = $('.connection-dot');
-  if (dot) dot.className = `connection-dot ${mode || ''}`;
+  const dots = $$('.connection-dot');
+  dots.forEach((dot) => { dot.className = `connection-dot ${mode || ''}`; });
   if ($('#connectionText')) $('#connectionText').textContent = text;
   if ($('#settingsConnection')) $('#settingsConnection').textContent = text;
 }
@@ -229,10 +245,8 @@ function renderProviderStatus() {
     ? 'مفتاح هذا الجهاز'
     : !configured
       ? 'لا يوجد مفتاح'
-      : verified === false ? 'المفتاح مرفوض من المزود' : 'مفتاح الخادم فعال';
+      : verified === false ? 'تعذر التحقق من المفتاح' : 'مفتاح الاتصال جاهز';
   status.classList.toggle('offline', !configured || verified === false);
-  if ($('#providerModel')) $('#providerModel').textContent = state.ai?.model || '—';
-  if ($('#providerEndpoint')) $('#providerEndpoint').textContent = state.ai?.endpoint ? state.ai.endpoint.replace(/^https?:\/\//, '').replace(/\/.*$/, '') : '—';
 }
 
 function statusText(data) {
@@ -254,7 +268,7 @@ function applyImageCapability() {
   if (attach) {
     attach.disabled = !enabled;
     attach.hidden = !enabled;
-    attach.title = enabled ? 'إرفاق صورة' : 'النموذج الحالي لا يقرأ الصور';
+    attach.title = enabled ? 'إرفاق صورة' : 'هذه المحادثة لا تدعم قراءة الصور';
   }
   if (!enabled) {
     state.pendingImages = [];
@@ -532,16 +546,22 @@ function quizFromJson(raw) {
   const list = Array.isArray(quiz.questions) ? quiz.questions : Array.isArray(quiz.quiz) ? quiz.quiz : null;
   if (!list || !list.length) return null;
   const questions = list.map((question) => {
-    const options = Array.isArray(question.options) ? question.options.map(String) : [];
-    let answer = question.answer;
+    const options = Array.isArray(question?.options) ? question.options.map((option) => String(option ?? '').trim()) : [];
+    let answer = question?.answer;
     if (typeof answer === 'string') {
-      const found = options.findIndex((option) => option.trim() === answer.trim());
-      answer = found >= 0 ? found : Number(answer);
-    }
-    return { q: question.q || question.question || '', options, answer: Number(answer), why: question.why || question.explanation || '' };
-  }).filter((question) => question.q && question.options.length >= 2);
-  if (!questions.length) return null;
-  return { title: quiz.title, subject: quiz.subject, questions };
+      const value = answer.trim();
+      const found = options.findIndex((option) => option === value);
+      answer = found >= 0 ? found : /^\d+$/.test(value) ? Number(value) : Number.NaN;
+    } else answer = Number(answer);
+    return {
+      q: String(question?.q || question?.question || '').trim(),
+      options,
+      answer,
+      why: String(question?.why || question?.explanation || '').trim(),
+    };
+  });
+  if (!questions.length || questions.some((question) => !question.q || question.options.length < 2 || question.options.some((option) => !option) || !Number.isInteger(question.answer) || question.answer < 0 || question.answer >= question.options.length)) return null;
+  return { title: String(quiz.title || 'اختبار تفاعلي'), subject: String(quiz.subject || ''), questions };
 }
 
 function extractQuiz(part) {
@@ -568,37 +588,159 @@ function extractQuiz(part) {
 function quizElement(raw) {
   const quiz = typeof raw === 'object' && raw !== null && raw.questions ? raw : quizFromJson(String(raw || ''));
   if (!quiz) return null;
-  const wrapper = document.createElement('div');
-  wrapper.className = 'quiz-card';
-  wrapper.innerHTML = `<h3>${escapeHtml(quiz.title || 'اختبار قصير')}</h3><small>${escapeHtml(quiz.subject || '')}</small>`;
+  const wrapper = document.createElement('section');
+  wrapper.className = 'quiz-card interactive-quiz';
+  wrapper.setAttribute('aria-label', quiz.title || 'اختبار تفاعلي');
+
+  const header = document.createElement('div');
+  header.className = 'quiz-card-head';
+  const identity = document.createElement('div');
+  identity.className = 'quiz-card-identity';
+  const badge = document.createElement('span');
+  badge.className = 'quiz-badge';
+  badge.textContent = 'اختبار تفاعلي';
+  const title = document.createElement('h3');
+  title.textContent = quiz.title || 'اختبار قصير';
+  identity.append(badge, title);
+  if (quiz.subject) {
+    const subject = document.createElement('span');
+    subject.className = 'quiz-subject';
+    subject.textContent = quiz.subject;
+    header.append(identity, subject);
+  } else header.appendChild(identity);
+  wrapper.appendChild(header);
+
+  const total = quiz.questions.length;
+  const formatNumber = (value) => new Intl.NumberFormat('ar-IQ').format(value);
+  const progress = document.createElement('div');
+  progress.className = 'quiz-progress';
+  progress.setAttribute('role', 'status');
+  progress.setAttribute('aria-live', 'polite');
+  progress.textContent = `السؤال ${formatNumber(1)} من ${formatNumber(total)}`;
+  const progressTrack = document.createElement('div');
+  progressTrack.className = 'quiz-progress-track';
+  progressTrack.setAttribute('role', 'progressbar');
+  progressTrack.setAttribute('aria-label', 'تقدم الاختبار');
+  progressTrack.setAttribute('aria-valuemin', '0');
+  progressTrack.setAttribute('aria-valuemax', String(total));
+  progressTrack.setAttribute('aria-valuenow', '0');
+  const progressFill = document.createElement('span');
+  progressFill.className = 'quiz-progress-fill';
+  progressTrack.appendChild(progressFill);
+  const instruction = document.createElement('p');
+  instruction.className = 'quiz-instruction';
+  instruction.textContent = 'اختاري إجابة واحدة؛ يظهر التفسير بعد اختيارك.';
+  wrapper.append(progress, progressTrack, instruction);
+
+  const questions = document.createElement('div');
+  questions.className = 'quiz-question-list';
   let score = 0;
   let answered = 0;
-  const result = document.createElement('p');
+  let activeIndex = 0;
+  const result = document.createElement('div');
   result.className = 'quiz-result';
+  result.setAttribute('role', 'status');
+  result.setAttribute('aria-live', 'polite');
   quiz.questions.forEach((question, index) => {
-    const item = document.createElement('div');
+    const item = document.createElement('section');
     item.className = 'quiz-question';
-    const title = document.createElement('b');
-    title.textContent = `${index + 1}. ${question.q || ''}`;
-    item.appendChild(title);
-    (question.options || []).forEach((option, optionIndex) => {
+    item.dataset.done = 'false';
+    item.hidden = index !== 0;
+    item.setAttribute('aria-label', `السؤال ${formatNumber(index + 1)} من ${formatNumber(total)}`);
+    const number = document.createElement('span');
+    number.className = 'quiz-number';
+    number.textContent = `السؤال ${formatNumber(index + 1)} من ${formatNumber(total)}`;
+    const title = document.createElement('h4');
+    title.textContent = question.q;
+    const options = document.createElement('div');
+    options.className = 'quiz-options';
+    options.setAttribute('role', 'group');
+    options.setAttribute('aria-label', `خيارات السؤال ${formatNumber(index + 1)}`);
+    const letters = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+    question.options.forEach((option, optionIndex) => {
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = option;
+      button.className = 'quiz-option';
+      button.setAttribute('aria-pressed', 'false');
+      const letter = document.createElement('span');
+      letter.className = 'quiz-option-letter';
+      letter.setAttribute('aria-hidden', 'true');
+      letter.textContent = letters[optionIndex] || String(optionIndex + 1);
+      const label = document.createElement('span');
+      label.className = 'quiz-option-label';
+      label.textContent = option;
+      button.append(letter, label);
       button.addEventListener('click', () => {
-        if (item.dataset.done) return;
-        item.dataset.done = '1'; answered += 1;
-        const correct = optionIndex === Number(question.answer);
-        if (correct) { score += 1; button.classList.add('correct'); } else { button.classList.add('wrong'); item.querySelectorAll('button')[Number(question.answer)]?.classList.add('correct'); }
-        item.querySelectorAll('button').forEach((choice) => { choice.disabled = true; });
-        const why = document.createElement('small'); why.textContent = question.why || ''; item.appendChild(why);
-        if (answered === quiz.questions.length) result.textContent = `نتيجتك ${score} من ${answered}`;
+        if (item.dataset.done === 'true' || index !== activeIndex) return;
+        item.dataset.done = 'true';
+        answered += 1;
+        const correct = optionIndex === question.answer;
+        if (correct) score += 1;
+        button.classList.add(correct ? 'is-correct' : 'is-wrong');
+        button.setAttribute('aria-pressed', 'true');
+        options.querySelectorAll('button').forEach((choice) => { choice.disabled = true; });
+        options.querySelectorAll('button')[question.answer]?.classList.add('is-correct');
+        const feedback = document.createElement('p');
+        feedback.className = `quiz-explanation${correct ? ' is-correct' : ' is-wrong'}`;
+        feedback.textContent = `${correct ? 'إجابة صحيحة.' : 'ليست الإجابة الصحيحة.'}${question.why ? ` ${question.why}` : ''}`;
+        item.appendChild(feedback);
+        progress.textContent = answered === total ? 'اكتمل الاختبار' : `أجبتِ عن ${formatNumber(answered)} من ${formatNumber(total)} أسئلة`;
+        progressTrack.setAttribute('aria-valuenow', String(answered));
+        progressFill.style.width = `${answered / total * 100}%`;
+        if (answered === total) {
+          const scoreLine = document.createElement('strong');
+          scoreLine.textContent = score === total
+            ? `أحسنتِ! إجاباتك الصحيحة ${formatNumber(score)} من ${formatNumber(total)}.`
+            : `نتيجتك ${formatNumber(score)} من ${formatNumber(total)} إجابات صحيحة.`;
+          const restart = document.createElement('button');
+          restart.type = 'button';
+          restart.className = 'quiz-restart';
+          restart.textContent = 'إعادة الاختبار';
+          restart.addEventListener('click', () => {
+            score = 0;
+            answered = 0;
+            activeIndex = 0;
+            progress.textContent = `السؤال ${formatNumber(1)} من ${formatNumber(total)}`;
+            progressTrack.setAttribute('aria-valuenow', '0');
+            progressFill.style.width = '0%';
+            result.replaceChildren();
+            questions.querySelectorAll('.quiz-question').forEach((questionItem, questionIndex) => {
+              questionItem.hidden = questionIndex !== 0;
+              questionItem.dataset.done = 'false';
+              questionItem.querySelector('.quiz-explanation')?.remove();
+              questionItem.querySelector('.quiz-next')?.remove();
+              questionItem.querySelectorAll('.quiz-option').forEach((choice) => {
+                choice.disabled = false;
+                choice.classList.remove('is-correct', 'is-wrong');
+                choice.setAttribute('aria-pressed', 'false');
+              });
+            });
+            questions.querySelector('.quiz-option')?.focus();
+          });
+          result.replaceChildren(scoreLine, restart);
+        } else {
+          const next = document.createElement('button');
+          next.type = 'button';
+          next.className = 'quiz-next';
+          next.textContent = 'السؤال التالي ←';
+          next.addEventListener('click', () => {
+            item.hidden = true;
+            activeIndex = index + 1;
+            const nextItem = questions.querySelectorAll('.quiz-question')[activeIndex];
+            if (!nextItem) return;
+            nextItem.hidden = false;
+            progress.textContent = `السؤال ${formatNumber(activeIndex + 1)} من ${formatNumber(total)}`;
+            nextItem.querySelector('.quiz-option')?.focus();
+          });
+          item.appendChild(next);
+        }
       });
-      item.appendChild(button);
+      options.appendChild(button);
     });
-    wrapper.appendChild(item);
+    item.append(number, title, options);
+    questions.appendChild(item);
   });
-  wrapper.appendChild(result);
+  wrapper.append(questions, result);
   return wrapper;
 }
 
@@ -626,10 +768,43 @@ function fillAssistantBubble(element, content, streaming = false, referencePrefi
     element.appendChild(block);
   }
   const next = String(content ?? '');
-  const previous = block._sourceText || '';
-  if (block.firstChild?.nodeType === Node.TEXT_NODE && next.startsWith(previous)) block.firstChild.appendData(next.slice(previous.length));
-  else block.textContent = next;
-  block._sourceText = next;
+  const paintText = (text) => {
+    const previous = block._sourceText || '';
+    if (block.firstChild?.nodeType === Node.TEXT_NODE && text.startsWith(previous)) block.firstChild.appendData(text.slice(previous.length));
+    else block.textContent = text;
+    block._sourceText = text;
+  };
+  const extracted = extractQuiz(next);
+  const loading = element.querySelector('.quiz-loading');
+  element.querySelector('.interactive-quiz')?.remove();
+  if (!streaming && extracted) {
+    loading?.remove();
+    paintText(extracted.rest);
+    const card = quizElement(extracted.quiz);
+    if (card) element.appendChild(card);
+    else paintText(next);
+    return;
+  }
+  if (streaming && (extracted || quizPending(next))) {
+    let visible = extracted?.rest || '';
+    if (!extracted) {
+      const fence = next.match(/```(?:quiz|json)\s*/i);
+      const rawObject = /^\s*\{/.test(next) && /"(?:quiz|questions)"\s*:/.test(next.slice(0, 300));
+      const start = fence?.index ?? (rawObject ? next.indexOf('{') : -1);
+      visible = start >= 0 ? next.slice(0, start).trimEnd() : '';
+    }
+    paintText(visible);
+    if (!loading) {
+      const indicator = document.createElement('div');
+      indicator.className = 'quiz-loading';
+      indicator.setAttribute('role', 'status');
+      indicator.textContent = 'أرتّب لكِ الاختبار التفاعلي…';
+      element.appendChild(indicator);
+    }
+    return;
+  }
+  loading?.remove();
+  paintText(next);
 }
 
 function normalizedEvidenceToken(value) {
@@ -769,7 +944,7 @@ function sourceCards(sources, target, compact = false, referencePrefix = '') {
 function userMessageElement(message) {
   const article = document.createElement('article');
   article.className = 'message user';
-  article.innerHTML = `<div class="message-label">أنتِ</div><div class="message-bubble"></div>`;
+  article.innerHTML = '<div class="message-label"><span class="message-avatar student-avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span><span>أنتِ</span></div><div class="message-bubble"></div>';
   const bubble = article.querySelector('.message-bubble');
   const text = document.createElement('p');
   text.innerHTML = escapeHtml(message.content || 'صورة مرفقة').replace(/\n/g, '<br>');
@@ -790,7 +965,7 @@ function assistantMessageElement(message) {
   const article = document.createElement('article');
   article.id = uid('answer');
   article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"></div><div class="inline-sources source-tray"></div>';
+  article.innerHTML = '<div class="message-label"><span class="message-avatar teacher-avatar" aria-hidden="true">م</span><span>معلمتك</span></div><div class="message-bubble"></div><div class="inline-sources source-tray"></div>';
   fillAssistantBubble(article.querySelector('.message-bubble'), message.content, false, article.id, message.cites || []);
   if (message.truncated) {
     const note = document.createElement('small'); note.className = 'message-truncated'; note.textContent = 'حُفظ الجزء الأول من الرد فقط.'; article.querySelector('.message-bubble').appendChild(note);
@@ -806,7 +981,7 @@ function renderMessages() {
   const conversation = currentConversation();
   list.innerHTML = '';
   if (!conversation || !conversation.messages.length) {
-    list.innerHTML = `<div class="welcome-message"><div class="welcome-icon">م</div><h2>من أين نبدأ؟</h2><p>اكتبي اسم الدرس أو السؤال كما يخطر في بالك. سأبحث في الكتب أولا، وأوضح لكِ إن لم أجد نصا موثوقا.</p><div class="welcome-prompt-row"><button class="prompt-chip" data-prompt="اشرح لي أحكام التلاوة بطريقة سهلة">أحكام التلاوة</button><button class="prompt-chip" data-prompt="اشرح لي أسلوب الاستفهام مع أمثلة">أسلوب الاستفهام</button><button class="prompt-chip" data-prompt="اختبرني في التاريخ">اختبار سريع</button></div></div>`;
+    list.innerHTML = `<div class="welcome-message"><div class="welcome-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 34c-5-4-10-5-16-4V13c6-1 11 0 16 4 5-4 10-5 16-4v17c-6-1-11 0-16 4Z"/><path d="M24 17v17M13 19c3 0 5 1 7 2M35 19c-3 0-5 1-7 2"/></svg></div><span class="welcome-eyebrow">مساحة خاصة لرحمة</span><h2>أهلاً بكِ، ماذا ندرس اليوم؟</h2><p>اسألي بطريقتك، واطلبي شرح صفحة أو درس، أو ابدئي اختباراً تفاعلياً. سأفهم طلبك وأستند إلى كتبك حين يلزم.</p><div class="welcome-prompt-row"><button class="prompt-chip" data-prompt="اشرحي لي صفحة من أحد كتبي خطوة بخطوة."><span class="prompt-chip-icon" aria-hidden="true">↗</span><span><b>شرح صفحة</b><small>خطوة بخطوة</small></span></button><button class="prompt-chip prompt-quiz" data-prompt="اختبريني تفاعلياً في موضوع تختارينه من دروسي، سؤالاً بعد سؤال، ولا تكشفي الإجابة قبل أن أختار."><span class="prompt-chip-icon" aria-hidden="true">✓</span><span><b>اختبار تفاعلي</b><small>اختاري موضوعاً أو اتركيه لي</small></span></button><button class="prompt-chip" data-prompt="لخصي لي درساً أذكره في نقاط واضحة، مع أهم الأفكار."><span class="prompt-chip-icon" aria-hidden="true">≡</span><span><b>تلخيص درس</b><small>أهم الأفكار بوضوح</small></span></button></div></div>`;
     bindPromptButtons(list);
     return;
   }
@@ -827,29 +1002,18 @@ function clearSourceTray() {
   tray.hidden = true;
 }
 
-function updateHeaderSession(chatting, conversation) {
-  const session = $('#headerSession');
-  if (!session) return;
-  const brand = $('#headerBrand');
-  const center = $('#headerCenter');
+function updateHeaderSession() {
   const newButton = $('#chatNewButton');
-  session.hidden = !chatting;
-  if (brand) brand.hidden = chatting;
-  if (center) center.hidden = chatting;
-  if (newButton) newButton.hidden = !chatting;
-  if (chatting) $('#headerSessionTitle').textContent = conversation?.title || 'جلسة جديدة';
+  if (newButton) newButton.hidden = false;
 }
 
 function showLearnPanel() {
   clearSourceTray();
-  const conversation = currentConversation();
-  // زر الرجوع يعيد للرئيسية فعلاً: الرئيسية تُعرض عندما يطلبها المستخدم
-  // (homeVisible) حتى لو كانت الجلسة الحالية تحمل رسائل.
-  const chatting = !state.homeVisible && Boolean(conversation?.messages?.length || state.composing);
-  $('#homePanel').hidden = chatting;
-  $('#chatPanel').hidden = !chatting;
-  updateHeaderSession(chatting, conversation);
-  if (chatting) renderMessages();
+  const chatPanel = $('#chatPanel');
+  if (!chatPanel) return;
+  chatPanel.hidden = false;
+  updateHeaderSession();
+  renderMessages();
   renderPendingImages();
 }
 
@@ -930,7 +1094,6 @@ function openSidebar(){
 }
 
 function renderAll() {
-  $('#studentName').textContent = state.settings.studentName || 'طالبة';
   renderRecent();
   setView(state.view);
 }
@@ -1222,8 +1385,8 @@ function parseSseBlock(block) {
 }
 
 const INCOMPLETE_STREAM_CODES = new Set(['UPSTREAM_INCOMPLETE_STREAM', 'INCOMPLETE_PROVIDER_STREAM', 'PROVIDER_STREAM_INCOMPLETE', 'UPSTREAM_STREAM_INCOMPLETE', 'STREAM_INCOMPLETE']);
-const INCOMPLETE_STREAM_MESSAGE = 'انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل وليس إجابة نهائية. راجعي الأدلة وأعيدي المحاولة.';
-const INCOMPLETE_STREAM_MARKER = '**انقطع تدفّق مزوّد الذكاء قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل.**';
+const INCOMPLETE_STREAM_MESSAGE = 'انقطع الاتصال قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل وليس إجابة نهائية. راجعي الأدلة وأعيدي المحاولة.';
+const INCOMPLETE_STREAM_MARKER = '**انقطع الاتصال قبل اكتمال الرد؛ الجزء الظاهر غير مكتمل.**';
 
 function evidenceSignalToken(value) {
   if (typeof value !== 'string') return '';
@@ -1248,27 +1411,27 @@ function incompleteProviderStreamSignal(eventName, data) {
 function apiErrorMessage(error) {
   const code = String(error?.message || error);
   if (isIncompleteProviderStreamCode(code)) return INCOMPLETE_STREAM_MESSAGE;
-  if (code.includes('AI_NOT_CONFIGURED')) return 'لم يُرسل مفتاح للمزوّد. افتحي الإعدادات وأدخلي مفتاح API ثم أعيدي المحاولة.';
+  if (code.includes('AI_NOT_CONFIGURED')) return 'لا يوجد مفتاح اتصال محفوظ. افتحي الإعدادات وأدخلي مفتاح API ثم أعيدي المحاولة.';
   if (code.includes('HTTP_413')) return 'حجم سجل الجلسة أو الصور تجاوز ما يقبله الطلب. ابدئي جلسة جديدة أو أرسلي الصور على دفعات.';
-  if (code.includes('UPSTREAM_AUTH')) return 'المزوّد لم يقبل المفتاح. تحققي من المفتاح في الإعدادات.';
-  if (code.includes('UPSTREAM_MODEL')) return 'النموذج غير متاح عند المزوّد حالياً. تحققي من إعداداته ثم أعيدي المحاولة.';
-  if (code.includes('UPSTREAM_BAD_REQUEST')) return 'المزوّد رفض الطلب. أعيدي المحاولة؛ إذا تكرر الخطأ أرسلي رمز الخطأ للمسؤول.';
+  if (code.includes('UPSTREAM_AUTH')) return 'لم يُقبل المفتاح. راجعيه في الإعدادات ثم أعيدي المحاولة.';
+  if (code.includes('UPSTREAM_MODEL')) return 'تعذر بدء الرد حالياً. تحققي من المفتاح والاتصال ثم أعيدي المحاولة.';
+  if (code.includes('UPSTREAM_BAD_REQUEST')) return 'تعذر معالجة الطلب. أعيدي المحاولة؛ وإذا تكرر الخطأ أرسلي رمزه للمسؤول.';
   if (code.includes('CHAT_CONNECTION_TIMEOUT')) return 'توقّف اتصال التطبيق؛ الجزء الظاهر غير مكتمل. تحققي من الاتصال وأعيدي المحاولة.';
-  if (code.includes('IMAGE_INPUT_UNSUPPORTED')) return 'لم يُرسل الطلب لأن الصورة غير مدعومة أو تجاوزت حد النقل. أزيليها أو اختاري نموذجاً مناسباً.';
-  if (code.includes('UPSTREAM_TIMEOUT')) return 'انتهت مهلة انتظار المزوّد قبل اكتمال الرد. أعيدي المحاولة؛ والجزء الظاهر غير مكتمل.';
-  if (code.includes('UPSTREAM_BUSY')) return 'المزوّد مشغول الآن. أعيدي المحاولة بعد قليل.';
-  if (code.includes('CONTEXT_WINDOW_EXCEEDED')) return 'تعذّر إرسال سجل هذه المحادثة كاملاً ضمن نافذة النموذج. ابدئي جلسة جديدة أو أعيدي السؤال مع السياق اللازم.';
+  if (code.includes('IMAGE_INPUT_UNSUPPORTED')) return 'لم يُرسل الطلب لأن الصورة غير مدعومة أو تجاوزت حد النقل. أزيليها واكتبي سؤالك نصاً.';
+  if (code.includes('UPSTREAM_TIMEOUT')) return 'انتهت مهلة انتظار الرد. أعيدي المحاولة؛ والجزء الظاهر غير مكتمل.';
+  if (code.includes('UPSTREAM_BUSY')) return 'الخدمة مشغولة الآن. أعيدي المحاولة بعد قليل.';
+  if (code.includes('CONTEXT_WINDOW_EXCEEDED')) return 'تعذّر إرسال سجل هذه المحادثة كاملاً. ابدئي جلسة جديدة أو أعيدي السؤال مع السياق اللازم.';
   if (code.includes('AGENT_CONTINUATION_LIMIT') || code.includes('AGENT_TOOL_ROUND_LIMIT') || code.includes('AGENT_DEADLINE')) return 'لم تكتمل الإجابة ضمن دورة المعالجة الحالية. الجزء الظاهر غير مكتمل؛ أعيدي المحاولة.';
   if (code.includes('EMPTY_REPLY')) return 'لم يصل نص من النموذج. أعيدي المحاولة.';
   if (!navigator.onLine || code.includes('Failed to fetch') || code.includes('UPSTREAM_NETWORK')) return 'انقطع الاتصال. تحققي من الإنترنت ثم أعيدي المحاولة.';
-  if (code.startsWith('UPSTREAM_HTTP_')) return `أعاد مزوّد الذكاء رمز HTTP ${code.slice('UPSTREAM_HTTP_'.length)}. أعيدي المحاولة أو راجعي إعدادات المزوّد.`;
+  if (code.startsWith('UPSTREAM_HTTP_')) return `تعذر إكمال الاتصال (HTTP ${code.slice('UPSTREAM_HTTP_'.length)}). أعيدي المحاولة بعد قليل.`;
   const detail = String(error?.detail || '').trim();
   return `تعذّر إكمال الطلب (${code})${detail ? `: ${detail}` : ''}. أعيدي المحاولة.`;
 }
 
 function assistantShell() {
   const article = document.createElement('article'); article.id = uid('answer'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label">المعلم</div><div class="message-bubble"><div class="teacher-status" role="status" aria-live="polite" aria-atomic="true"><span class="status-orb" aria-hidden="true"></span><span class="status-copy"><span class="status-text">جار تجهيز الرد…</span><small class="status-detail"></small></span></div></div><div class="inline-sources source-tray" hidden></div>';
+  article.innerHTML = '<div class="message-label"><span class="message-avatar teacher-avatar" aria-hidden="true">م</span><span>معلمتك</span></div><div class="message-bubble"><div class="teacher-status" role="status" aria-live="polite" aria-atomic="true"><span class="status-orb" aria-hidden="true"></span><span class="status-copy"><span class="status-text">جار تجهيز الرد…</span><small class="status-detail"></small></span></div></div><div class="inline-sources source-tray" hidden></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
 }
@@ -1432,7 +1595,7 @@ async function sendMessage(text, images = []) {
   let selectedImages = Array.isArray(images) ? images : [];
   if (selectedImages.length && !modelSupportsVision()) {
     // لا حفظ ولا إرسال لصورة لن يقرأها أحد: توهم الطالبة بقدرة غير موجودة.
-    toast('لم تُرسل الرسالة: النموذج الحالي لا يقرأ الصور. أزيلي الصور أو اختاري نموذجاً يدعمها.');
+    toast('لم تُرسل الرسالة: هذه المحادثة لا تدعم قراءة الصور. أزيلي المرفق واكتبي سؤالك نصاً.');
     return;
   }
   if (!question.trim() && !selectedImages.length) return;
@@ -1639,13 +1802,18 @@ function closeModal(id) {
 
 function bindEvents() {
   $$('.nav-item, .mobile-nav-item').forEach((button) => button.addEventListener('click', () => { if (button.dataset.view === 'learn') state.homeVisible = false; setView(button.dataset.view); }));
-  $$('.quick-action').forEach((button) => button.addEventListener('click', () => openComposer(button.dataset.prompt || '')));
   bindPromptButtons();
-  $('#newChatButton').addEventListener('click', newChat); $('#chatNewButton').addEventListener('click', newChat); $('#mobileNewChat').addEventListener('click', newChat); $('#heroStartButton').addEventListener('click', () => openComposer());
-  $('#chatBackButton').addEventListener('click', goHome);
-  $('#mobileMenuButton').addEventListener('click', () => {
+  $('#newChatButton')?.addEventListener('click', newChat);
+  $('#chatNewButton')?.addEventListener('click', newChat);
+  $('#mobileMenuButton')?.addEventListener('click', () => {
     const sb = $('#sidebar');
-    if(sb?.classList.contains('open')) closeSidebar(); else openSidebar();
+    if (sb?.classList.contains('open')) closeSidebar(); else openSidebar();
+  });
+  $('#sidebarCloseButton')?.addEventListener('click', closeSidebar);
+  $('#themeButton')?.addEventListener('click', () => {
+    state.settings.theme = state.settings.theme === 'dark' ? 'light' : 'dark';
+    applyTheme();
+    saveState();
   });
   $('#sidebarOverlay')?.addEventListener('click', closeSidebar);
   document.addEventListener('keydown', (e)=>{
@@ -1660,10 +1828,10 @@ function bindEvents() {
   $('#messageInput').addEventListener('input', (event) => { event.target.style.height = 'auto'; event.target.style.height = `${Math.min(event.target.scrollHeight, 140)}px`; });
   $('#messageInput').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('#composer').requestSubmit(); } });
   $('#stopButton').addEventListener('click', () => state.request?.abort.abort(new DOMException('stopped', 'AbortError')));
-  $('#attachButton').addEventListener('click', () => { if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.'); $('#imageInput').click(); });
+  $('#attachButton').addEventListener('click', () => { if (!modelSupportsVision()) return toast('هذه المحادثة لا تدعم قراءة الصور — اسأليني نصاً وسأشرحه من كتبك.'); $('#imageInput').click(); });
   $('#imageInput').addEventListener('change', async (event) => {
     const files = [...(event.target.files || [])]; event.target.value = ''; if (!files.length) return;
-    if (!modelSupportsVision()) return toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.');
+    if (!modelSupportsVision()) return toast('هذه المحادثة لا تدعم قراءة الصور — اسأليني نصاً وسأشرحه من كتبك.');
     const pending = [];
     for (const file of files) {
       if (state.pendingImages.length + pending.length >= 2) { toast('يمكنك إرفاق صورتين كحد أقصى في الرسالة الواحدة.'); break; }
@@ -1683,7 +1851,7 @@ function bindEvents() {
     // ملف غير صورة يُهمل مع رسالة: الصمت كان يوهم بأن شيئاً سيُستعمل.
     if (all.length && !list.length) { toast('الصيغة مدعومة: صورة JPEG أو PNG أو WebP.'); return; }
     if (!list.length) return;
-    if (!modelSupportsVision()) { toast('النموذج الحالي لا يقرأ الصور — اسأليني نصاً وسأشرحه من كتبك.'); return; }
+    if (!modelSupportsVision()) { toast('هذه المحادثة لا تدعم قراءة الصور — اسأليني نصاً وسأشرحه من كتبك.'); return; }
     if (list.length > 2) toast('سأرفق صورتين كحد أقصى.');
     // اللصق على الشاشة الرئيسية بلا مربع كتابة: نفتحه حتى ترى المرفق.
     if (!currentConversation() || !state.composing) openComposer();
@@ -1706,7 +1874,7 @@ function bindEvents() {
   });
   $('#historySearch')?.addEventListener('input', renderHistory);
   // نموذج «خطتي» أُزيل من الواجهة؛ لم يعد هناك ما يُربط به.
-  $('#settingsButton').addEventListener('click', () => { $('#settingsName').value = state.settings.studentName || ''; $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); });
+  $('#settingsButton').addEventListener('click', () => { $('#providerKey').value = state.settings.apiKey || ''; $('#providerResult').textContent = ''; renderProviderStatus(); $('#settingsModal').hidden = false; $('#settingsModal').setAttribute('aria-hidden', 'false'); $('#providerKey').focus(); });
   $('#saveProvider').addEventListener('click', async () => {
     const apiKey = $('#providerKey').value.trim().slice(0, 2_048);
     const result = $('#providerResult');
@@ -1717,8 +1885,6 @@ function bindEvents() {
     toast(apiKey ? 'حُفظ المفتاح' : 'حُذف المفتاح');
     warmup();
   });
-  $('#saveSettings').addEventListener('click', () => { state.settings.studentName = $('#settingsName').value.trim().slice(0, 40); saveState(); closeModal('settingsModal'); renderAll(); toast('حُفظت إعداداتك'); });
-  $('#resetData').addEventListener('click', () => { if (state.request || state.preparingMessage) return toast(state.request ? 'أوقفي الرد الحالي أولا' : 'انتظري تجهيز الرسالة.'); if (!confirm('سيتم حذف المحادثات المحفوظة من هذا الجهاز. هل أنت متأكدة؟')) return; state.conversations = []; state.exams = []; state.activeId = null; state.imageContext = null; state.imageContextCache.clear(); state.pendingImages = []; clearAllImageContexts().catch(() => {}); renderPendingImages(); saveState(); closeModal('settingsModal'); renderAll(); toast('تم مسح البيانات المحلية'); });
   $$('[data-close-modal]').forEach((button) => button.addEventListener('click', () => closeModal(button.dataset.closeModal)));
   $$('.modal').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal.id); }));
   window.addEventListener('online', () => { $('#offlineBar').hidden = true; warmup(); });
@@ -1731,6 +1897,7 @@ function enterApp() {
 
 function boot() {
   loadState();
+  applyTheme();
   try{ bindEvents(); }catch(e){ console.error('bindEvents',e); }
   enterApp();
   if (!navigator.onLine) $('#offlineBar').hidden = false;
