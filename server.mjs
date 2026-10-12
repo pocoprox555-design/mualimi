@@ -20,6 +20,7 @@ import {
 
 const PROJECT_ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_ROOT = path.join(PROJECT_ROOT, 'public');
+const STUDENT_TRACK = 'ديني';
 const startedAt = Date.now();
 const providerHealth = { verified: null, lastError: null, checkedAt: 0, fingerprint: '' };
 
@@ -73,7 +74,7 @@ function safeSession(value) {
 
 function systemPrompt(studentName = '', canSeeImages = false) {
   const name = clean(studentName).slice(0, 80) || 'رحمة';
-  return `أنتِ معلّمة خبيرة بالمنهج ومعلّمة ${name} الخاصة، بعربية واضحة وصيغة المؤنث. مكتبة كتب المنهج وفهارسها كاملة بين يديك عبر الأدوات. أنتِ تقررين أين تبحثين وماذا تقرئين ومتى تكتفين. تحققي من الكتب قبل كل معلومة منهجية، واذكري الكتاب والصفحة؛ فرّقي الرقم المطبوع عن رقم PDF الفيزيائي. الأوصاف ليست نص الكتاب وحالات الاستخراج والترقيم ليست ضماناً بصرياً. اعترفي صراحةً إن لم تجدي أو لم تستطيعي التحقق. عند طلب رحمة اختباراً تفاعلياً صريحاً، قدّمي تمهيداً قصيراً ثم كتلة واحدة داخل سياج الشيفرة الموسوم quiz، بصيغة JSON ذات المفاتيح title وsubject وquestions؛ وليحتوِ كل سؤال على q وoptions وanswer (فهرس يبدأ من صفر) وwhy. اجعلي الخيارات واضحة ومتوازنة، ولا تذكري الإجابة الصحيحة أو تفسيرها خارج الكتلة كي يكشفهما التطبيق بعد اختيار رحمة. استندي إلى الأدوات للتحقق من الحقائق المنهجية، ولا تختلقي أسئلة أو أدلة. الصور ${canSeeImages ? 'مدعومة' : 'غير مدعومة'} في هذا الطلب.`;
+  return `أنتِ معلّمة خبيرة بالمنهج ومعلّمة ${name} الخاصة، بعربية واضحة وصيغة المؤنث. مكتبة كتب المنهج وفهارسها كاملة بين يديك عبر الأدوات. أنتِ تقررين أين تبحثين وماذا تقرئين ومتى تكتفين. تحققي من الكتب قبل كل معلومة منهجية، واذكري الكتاب والصفحة؛ فرّقي الرقم المطبوع عن رقم PDF الفيزيائي. الأوصاف ليست نص الكتاب وحالات الاستخراج والترقيم ليست ضماناً بصرياً. اعترفي صراحةً إن لم تجدي أو لم تستطيعي التحقق. عند طلب رحمة اختباراً تفاعلياً صريحاً، قدّمي تمهيداً قصيراً ثم كتلة واحدة داخل سياج الشيفرة الموسوم quiz، بصيغة JSON ذات المفاتيح title وsubject وquestions؛ وليحتوِ كل سؤال على q وoptions وanswer (فهرس يبدأ من صفر) وwhy. اجعلي الخيارات واضحة ومتوازنة، ولا تذكري الإجابة الصحيحة أو تفسيرها خارج الكتلة كي يكشفهما التطبيق بعد اختيار رحمة. استندي إلى الأدوات للتحقق من الحقائق المنهجية، ولا تختلقي أسئلة أو أدلة. المسار المعتمد لرحمة هو التعليم الديني (ديوان الوقف السني)؛ استخدمي كتبه فقط، وكتاب الرياضيات المطلوب هو كتاب ديوان الوقف السني. كتب الأدبي خارج نطاقها. الصور ${canSeeImages ? 'مدعومة' : 'غير مدعومة'} في هذا الطلب.`;
 }
 
 function errorCode(error) {
@@ -173,6 +174,7 @@ async function handleChat(req, res) {
       requestId,
       onTrace: (round) => trace.push(round),
       sendImage: canSee,
+      track: STUDENT_TRACK,
       onText(text) {
         output += text;
         firstTokenAt ||= Date.now();
@@ -258,7 +260,7 @@ async function api(req, res, url) {
   if ((pathname === '/api/bootstrap' || pathname === '/api/config') && req.method === 'GET') {
     try {
       const config = resolveProvider({ headers: req.headers });
-      const [books, subjects, curriculum] = await Promise.all([listBooks(), getSubjects(), getHealth()]);
+      const [books, subjects, curriculum] = await Promise.all([listBooks({ track: STUDENT_TRACK }), getSubjects({ track: STUDENT_TRACK }), getHealth()]);
       return sendJson(res, 200, {
         app: { name: 'معلمي', version: '8.0.0' },
         ...publicConfig(config),
@@ -272,7 +274,7 @@ async function api(req, res, url) {
   }
   if (pathname === '/api/books' && req.method === 'GET') {
     try {
-      const books = await listBooks({ subject: clean(url.searchParams.get('subject')), track: clean(url.searchParams.get('track')) });
+      const books = await listBooks({ subject: clean(url.searchParams.get('subject')), track: STUDENT_TRACK });
       return sendJson(res, 200, { books });
     } catch (error) { return sendJson(res, 503, { error: error.message }); }
   }
@@ -283,7 +285,7 @@ async function api(req, res, url) {
       const results = await searchCandidates(query, {
         bookId: clean(url.searchParams.get('bookId')),
         subject: clean(url.searchParams.get('subject')),
-        track: clean(url.searchParams.get('track')),
+        track: STUDENT_TRACK,
         offset: Number(url.searchParams.get('offset')) || 0,
         limit: Number(url.searchParams.get('limit')) || 24,
       });
@@ -299,7 +301,7 @@ async function api(req, res, url) {
       bookId,
       printedPage: printed == null ? undefined : Number(printed),
       physicalPage: physical == null ? undefined : Number(physical),
-    }, { sendImage: false });
+    }, { sendImage: false, track: STUDENT_TRACK });
     if (!result.ok) return sendJson(res, 404, { error: result.error || 'PAGE_NOT_FOUND', detail: result.content });
     return sendJson(res, 200, result.meta?.page || {});
   }

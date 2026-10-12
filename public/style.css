@@ -218,13 +218,15 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .message.assistant{align-self:stretch;max-width:100%}
 .message-label{color:var(--faint);font-size:.65rem;font-weight:800;margin:0 8px 6px}
 .message.user .message-label{text-align:left}
-.message-bubble{border-radius:18px;padding:14px 17px;font-size:.9rem;line-height:1.95;overflow-wrap:anywhere}
+.message-bubble{border-radius:18px;padding:15px 18px;font-size:.92rem;line-height:1.9;overflow-wrap:anywhere}
 .message.user .message-bubble{color:#fff;background:linear-gradient(135deg,var(--deep-2),var(--deep-3));border-end-start-radius:5px}
 .message.assistant .message-bubble{color:var(--ink);border:1px solid var(--line);background:var(--surface);border-end-end-radius:5px;box-shadow:0 4px 14px rgba(22,47,52,.04)}
 .message-bubble p{margin:0 0 9px}
 .message-bubble p:last-child{margin-bottom:0}
-.message-bubble h1,.message-bubble h2,.message-bubble h3{color:var(--deep);font-size:1rem;margin:13px 0 6px}
-.message-bubble h1{font-size:1.12rem}
+.message-bubble h1,.message-bubble h2,.message-bubble h3{color:var(--deep);font-size:1rem;margin:18px 0 8px;padding-inline-start:10px;border-inline-start:3px solid var(--gold);line-height:1.55}
+.message-bubble h1{font-size:1.15rem}
+.message-bubble h2{font-size:1.06rem}
+.message-bubble h3{font-size:.98rem}
 .message-bubble hr{border:0;border-top:1px solid var(--line);margin:13px 0}
 .message-bubble ul,.message-bubble ol{margin:6px 0 11px;padding-inline-start:1.35em}
 .message-bubble li{padding:2px 0}
@@ -238,7 +240,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .message-bubble .table-scroll{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:11px;background:var(--surface);-webkit-overflow-scrolling:touch}
 .message-bubble table{border-collapse:collapse;width:100%;min-width:320px;font-size:.82em}
 .message-bubble th,.message-bubble td{border:1px solid var(--line);padding:8px 11px;text-align:right;vertical-align:top}
-.message-bubble th{color:var(--deep);background:var(--surface-2);white-space:nowrap}
+.message-bubble th{color:var(--deep);background:var(--surface-2);white-space:nowrap;font-weight:800}
+.message-bubble tbody tr:nth-child(even){background:var(--surface-2)}
 .math-line{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;background:var(--surface-2);border-radius:8px;padding:2px 9px;margin:2px 0}
 .reference-mark{display:inline-block;color:var(--teal);background:var(--teal-light);border-radius:5px;padding:0 5px;font-size:.68em;font-weight:900;vertical-align:.35em;margin:0 2px}
 .reference-mark:hover{color:#fff;background:var(--teal)}
@@ -251,9 +254,11 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .evidence-note.warning{color:#895d2b;background:#fcf6ea}
 
 /* حالة الكتابة */
-.teacher-status{position:relative;display:flex;align-items:flex-start;gap:11px;min-height:22px;padding:3px 2px 10px}
-.teacher-status::after{content:'';position:absolute;inset-inline:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent 5%,var(--teal) 35%,var(--gold) 65%,transparent 95%);background-size:220% 100%;animation:statusSweep 1.5s linear infinite}
-.status-orb{width:18px;height:18px;border-radius:50%;flex:0 0 auto;border:3px solid #e6efe9;border-top-color:var(--teal);border-inline-end-color:var(--gold);animation:orbSpin .85s linear infinite}
+.teacher-status{position:relative;display:flex;align-items:center;gap:12px;min-height:48px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.teacher-status::after{content:'';position:absolute;inset-inline:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent 5%,var(--muted) 35%,var(--gold) 65%,transparent 95%);background-size:220% 100%;animation:statusSweep 1.5s linear infinite}
+.status-orb{width:22px;height:22px;border-radius:50%;flex:0 0 auto;border:3px solid var(--line);border-top-color:var(--teal);border-inline-end-color:var(--gold);animation:orbSpin .8s linear infinite}
+.message.assistant.is-streaming .message-bubble::after{content:'';display:inline-block;width:7px;height:7px;margin-inline-start:7px;border-radius:50%;background:var(--gold);vertical-align:middle;animation:livePulse .9s ease-in-out infinite alternate}
+@keyframes livePulse{to{opacity:.35;transform:scale(.7)}}
 .status-copy{display:block;min-width:0}
 .status-text{color:var(--deep);font-size:.78rem;font-weight:700}
 .status-detail{display:block;color:var(--muted);font-size:.68rem;font-weight:500;line-height:1.6;margin-top:2px}
@@ -630,6 +635,7 @@ html[data-theme="dark"] .theme-button .theme-moon{display:block}
 .quiz-option-label{min-width:0}
 .quiz-next,.quiz-restart{min-height:44px;border-radius:12px;padding:9px 14px;font-size:.72rem;font-weight:900;transition:transform .16s,background .16s}
 .quiz-next{display:block;margin:12px 0 0 auto;background:var(--teal);color:#fff}
+.quiz-question button.quiz-next{border-color:var(--teal);background:var(--teal);color:#fff;text-align:center}
 .quiz-next:hover{background:var(--teal-2);transform:translateY(-1px)}
 .quiz-restart{margin-inline-start:10px;background:var(--surface);border:1px solid var(--line);color:var(--teal-ink)}
 .quiz-restart:hover{background:var(--teal-light)}
@@ -656,9 +662,9 @@ html[data-theme="dark"] body,html[data-theme="dark"] .app-shell,html[data-theme=
 html[data-theme="dark"] .app-header,html[data-theme="dark"] .sidebar,html[data-theme="dark"] .modal-card,html[data-theme="dark"] .welcome-message,html[data-theme="dark"] .message.assistant .message-bubble,html[data-theme="dark"] .composer,html[data-theme="dark"] .history-item,html[data-theme="dark"] .history-search,html[data-theme="dark"] .quiz-question,html[data-theme="dark"] .source-card,html[data-theme="dark"] .source-card.pdf-fallback,html[data-theme="dark"] .source-card.unreliable,html[data-theme="dark"] .source-card.visual,html[data-theme="dark"] .source-card.external-source{background:var(--surface);border-color:var(--line);color:var(--ink)}
 html[data-theme="dark"] .brand-mark,html[data-theme="dark"] .welcome-message .welcome-icon,html[data-theme="dark"] .teacher-avatar{background:linear-gradient(145deg,#315f52,#203f38);color:var(--gold-soft)}
 html[data-theme="dark"] .nav-item.active,html[data-theme="dark"] .student-avatar,html[data-theme="dark"] .history-icon,html[data-theme="dark"] .composer-tool,html[data-theme="dark"] .image-context-status,html[data-theme="dark"] .evidence-note{background:var(--teal-light);color:var(--teal-ink)}
-html[data-theme="dark"] .message.user .message-bubble{background:linear-gradient(140deg,#326f61,#245d52);color:#fff}
+html[data-theme="dark"] .message.user .message-bubble{background:linear-gradient(140deg,#343b40,#2a3136);border:1px solid #465057;color:#e8ecef}
 html[data-theme="dark"] .message-bubble h1,html[data-theme="dark"] .message-bubble h2,html[data-theme="dark"] .message-bubble h3,html[data-theme="dark"] .message-bubble strong,html[data-theme="dark"] .welcome-message h2,html[data-theme="dark"] .quiz-card h3,html[data-theme="dark"] .quiz-question h4,html[data-theme="dark"] .modal-header h2{color:var(--deep)}
-html[data-theme="dark"] .message-bubble code,html[data-theme="dark"] .math-line{background:var(--surface-3);color:var(--teal-ink)}
+html[data-theme="dark"] .message-bubble code,html[data-theme="dark"] .math-line{background:var(--surface-3);color:var(--ink)}
 html[data-theme="dark"] .message-bubble pre{background:#101916;color:#e7efea}
 html[data-theme="dark"] .prompt-chip,html[data-theme="dark"] .quiz-card,html[data-theme="dark"] .quiz-option,html[data-theme="dark"] .quiz-explanation,html[data-theme="dark"] .quiz-loading,html[data-theme="dark"] .key-panel,html[data-theme="dark"] .field,html[data-theme="dark"] .page-scan-figure,html[data-theme="dark"] .page-meta span,html[data-theme="dark"] .history-storage-note{background:var(--surface-2);border-color:var(--line);color:var(--ink)}
 html[data-theme="dark"] .prompt-chip:hover,html[data-theme="dark"] .quiz-option:hover:not(:disabled){background:var(--teal-light);color:var(--teal-ink)}
@@ -667,6 +673,8 @@ html[data-theme="dark"] .quiz-option.is-correct,html[data-theme="dark"] .quiz-ex
 html[data-theme="dark"] .quiz-option.is-correct .quiz-option-letter{background:#2a4a36;color:#c4e7c7}
 html[data-theme="dark"] .quiz-option.is-wrong,html[data-theme="dark"] .quiz-explanation.is-wrong{background:#422b2a;border-color:#87504b;color:#f0b8ad}
 html[data-theme="dark"] .quiz-option.is-wrong .quiz-option-letter{background:#583431;color:#f0c4ba}
+html[data-theme="dark"] .quiz-question button.quiz-next{border-color:#465057;background:#343b40;color:#e8ecef}
+html[data-theme="dark"] .quiz-question button.quiz-next:hover{border-color:#59636a;background:#424a50;color:#f3f5f6}
 html[data-theme="dark"] .quiz-result{background:var(--teal-light);border-color:var(--line);color:var(--teal-ink)}
 html[data-theme="dark"] .evidence-note.warning,html[data-theme="dark"] .source-card.pdf-fallback,html[data-theme="dark"] .source-card.unreliable,html[data-theme="dark"] .source-card.visual{background:var(--gold-light);border-color:#5b4a2e;color:var(--gold-soft)}
 html[data-theme="dark"] .source-card.external-source{background:#27263a;border-color:#46435e;color:#d0caed}

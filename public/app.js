@@ -763,15 +763,14 @@ function fillAssistantBubble(element, content, streaming = false, referencePrefi
     element.replaceChildren();
     block = document.createElement('div');
     block.className = 'model-answer-text';
-    block.style.whiteSpace = 'pre-wrap';
+    block.style.whiteSpace = 'normal';
     block.style.overflowWrap = 'anywhere';
     element.appendChild(block);
   }
   const next = String(content ?? '');
   const paintText = (text) => {
-    const previous = block._sourceText || '';
-    if (block.firstChild?.nodeType === Node.TEXT_NODE && text.startsWith(previous)) block.firstChild.appendData(text.slice(previous.length));
-    else block.textContent = text;
+    const rendered = markdownHtml(text, referencePrefix, citations);
+    if (block.innerHTML !== rendered) block.innerHTML = rendered;
     block._sourceText = text;
   };
   const extracted = extractQuiz(next);
@@ -1431,7 +1430,7 @@ function apiErrorMessage(error) {
 
 function assistantShell() {
   const article = document.createElement('article'); article.id = uid('answer'); article.className = 'message assistant';
-  article.innerHTML = '<div class="message-label"><span class="message-avatar teacher-avatar" aria-hidden="true">م</span><span>معلمتك</span></div><div class="message-bubble"><div class="teacher-status" role="status" aria-live="polite" aria-atomic="true"><span class="status-orb" aria-hidden="true"></span><span class="status-copy"><span class="status-text">جار تجهيز الرد…</span><small class="status-detail"></small></span></div></div><div class="inline-sources source-tray" hidden></div>';
+  article.innerHTML = '<div class="message-label"><span class="message-avatar teacher-avatar" aria-hidden="true">م</span><span>معلمتك</span></div><div class="message-bubble" aria-busy="true"><div class="teacher-status" role="status" aria-live="polite" aria-atomic="true"><span class="status-orb" aria-hidden="true"></span><span class="status-copy"><span class="status-text">جار تجهيز الرد…</span><small class="status-detail"></small></span></div></div><div class="inline-sources source-tray" hidden></div>';
   $('#messageList').appendChild(article); $('#messageList').scrollTop = $('#messageList').scrollHeight;
   return article;
 }
@@ -1489,6 +1488,7 @@ function partialReplyMarker(error) {
 
 function renderStream(shell, content) {
   // The animation frame already coalesces updates; never drop its trailing paint.
+  shell.classList.add('is-streaming');
   fillAssistantBubble(shell.querySelector('.message-bubble'), content, true, shell.id, shell._citations || []);
   const list = $('#messageList');
   if (list.scrollHeight - list.scrollTop - list.clientHeight < 140) list.scrollTop = list.scrollHeight;
@@ -1582,6 +1582,8 @@ async function requestReply(conversation, question, images, shell, originalMessa
       appendEvidenceNotices(shell, [...streamNotices], errorMessage);
     }
   } finally {
+    shell.classList.remove('is-streaming');
+    shell.querySelector('.message-bubble')?.setAttribute('aria-busy', 'false');
     state.request = null; $('#sendButton').hidden = false; $('#stopButton').hidden = true;
     setConnection(navigator.onLine ? 'online' : 'offline', navigator.onLine ? statusText(state.ai) : 'تحققي من الاتصال');
     if (navigator.onLine) warmup();
