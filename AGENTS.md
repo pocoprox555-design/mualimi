@@ -39,7 +39,7 @@ Render يعيد البناء تلقائيًا (~2-3 دقائق). لا حاجة �
 | `AI_ENDPOINT` | `https://opencode.ai/zen/go/v1` | نقطة الاتصال |
 | `AI_MODEL` | `deepseek-v4.1-flash` | النموذج المسجّل؛ أي قيمة أخرى تُتجاهَل |
 | `AI_CONTEXT_WINDOW` | `1000000` | حجم النافذة |
-| `AI_MAX_OUTPUT_TOKENS` | `8000` | قيمة النشر؛ السقف البرمجي `128000` |
+| `AI_MAX_OUTPUT_TOKENS` | `8000` | قيمة النشر؛ السقف البرمجي `384000` (حد خرج DeepSeek V4.1 Flash) |
 | `AI_SUPPORTS_VISION` | اختياري `true`/`false` | لتجاوز الكشف التلقائي |
 
 ## كيفية استخدام المفتاح (للمستخدم)
