@@ -1551,6 +1551,19 @@ async function requestReply(conversation, question, images, shell, originalMessa
     saveState(); renderRecent();
   } catch (error) {
     if (paint) cancelAnimationFrame(paint);
+    // محاولة صامتة واحدة عند فشل أول طلب بلا أي نص ظاهر وكان العطل عابراً
+    // (انقطاع بث أو شبكة أو مزود)؛ تُستثنى الأخطاء النهائية فتُعرض مباشرة.
+    // إعادة المحاولة تورّث originalMessages فلا تتكرر تلقائياً أبداً.
+    if (!abort.signal.aborted && !originalMessages && !full.trim()) {
+      const code = String(error?.message || error);
+      const transient = streamIncomplete || /UPSTREAM_(INCOMPLETE_STREAM|FAILED|NETWORK|TIMEOUT|BUSY)|HTTP_5\d\d|Failed to fetch|NetworkError/i.test(code);
+      const fatal = /AI_NOT_CONFIGURED|UPSTREAM_AUTH|UPSTREAM_BAD_REQUEST|UPSTREAM_MODEL|HTTP_413|EMPTY_REPLY|EMPTY_MESSAGE|IMAGE_INPUT_UNSUPPORTED/i.test(code);
+      if (transient && !fatal) {
+        shell.remove();
+        await requestReply(conversation, question, images, assistantShell(), messages);
+        return;
+      }
+    }
     if (abort.signal.aborted) {
       // أوقفتِ الطالبة الرد: دورها يُوسم «موقوف» فلا يُعاد الجواب عنه لاحقاً
       // داخل جواب آخر، ويبقى ما كُتب منها مرئياً في السجل.

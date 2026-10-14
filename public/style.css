@@ -699,7 +699,7 @@ html[data-theme="dark"] .page-scan-figure{background:var(--surface-2)}
   .brand-copy strong{font-size:.95rem}
   .brand-copy small{font-size:.58rem}
   .header-center{display:none}
-  .header-actions{gap:0;margin-inline-start:0}
+  .header-actions{gap:0;margin-inline-start:auto;margin-inline-end:0}
   .icon-button{width:44px;height:44px;border-radius:14px}
   .app-grid{display:block;min-height:0;height:calc(100% - var(--header-h))}
   .sidebar{position:fixed;z-index:40;inset:0 0 0 auto;width:min(340px,90vw);height:100dvh;padding:max(16px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom));transform:translateX(105%);background:var(--surface);box-shadow:-18px 0 45px rgba(31, 31, 31, .2)}
