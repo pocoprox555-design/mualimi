@@ -254,7 +254,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .evidence-note.warning{color:#895d2b;background:#fcf6ea}
 
 /* حالة الكتابة */
-.teacher-status{position:relative;display:flex;align-items:center;gap:12px;min-height:48px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.teacher-status{position:relative;display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+/* إصلاح الإطار المزدوج: الفقاعة الخارجية شفافة أثناء التحميل فقط */
+.message.assistant .message-bubble:has(> .teacher-status:only-child),html[data-theme="dark"] .message.assistant .message-bubble:has(> .teacher-status:only-child){padding:0;border:0;background:transparent;box-shadow:none;border-radius:0}
 .teacher-status::after{content:'';position:absolute;inset-inline:0;bottom:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent 5%,var(--muted) 35%,var(--gold) 65%,transparent 95%);background-size:220% 100%;animation:statusSweep 1.5s linear infinite}
 .status-orb{width:22px;height:22px;border-radius:50%;flex:0 0 auto;border:3px solid var(--line);border-top-color:var(--accent);border-inline-end-color:var(--gold);animation:orbSpin .8s linear infinite}
 .message.assistant.is-streaming .message-bubble::after{content:'';display:inline-block;width:7px;height:7px;margin-inline-start:7px;border-radius:50%;background:var(--gold);vertical-align:middle;animation:livePulse .9s ease-in-out infinite alternate}
@@ -552,18 +554,18 @@ html[data-theme="dark"] .theme-button .theme-moon{display:block}
 .view{width:min(100%,1120px);padding:clamp(18px,3vw,34px) clamp(16px,4vw,54px) 24px}
 #view-learn{height:100%;min-height:0;overflow:hidden}
 .chat-panel{width:100%;height:100%;flex:1;display:flex;flex-direction:column;min-height:0}
-.message-list{gap:22px;padding:18px 4px 24px;scrollbar-color:var(--line) transparent;scrollbar-width:thin}
+.message-list{gap:18px;padding:18px 4px 24px;scrollbar-color:var(--line) transparent;scrollbar-width:thin}
 .message{max-width:min(82%,720px)}
-.message.user{align-self:flex-start;max-width:min(78%,680px)}
+.message.user{align-self:flex-start;width:fit-content;max-width:min(78%,680px)}
 .message.assistant{align-self:center;width:min(100%,850px);max-width:min(100%,850px)}
-.message-label{display:flex;align-items:center;gap:8px;margin:0 8px 8px;color:var(--muted);font-size:.69rem;letter-spacing:.01em}
+.message-label{display:flex;align-items:center;gap:6px;margin:0 6px 4px;color:var(--muted);font-size:.65rem;letter-spacing:.01em}
 .message.user .message-label{justify-content:flex-start}
-.message-avatar{width:30px;height:30px;display:grid;place-items:center;flex:0 0 auto;border-radius:11px}
-.message-avatar svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.message-avatar{width:24px;height:24px;display:grid;place-items:center;flex:0 0 auto;border-radius:9px}
+.message-avatar svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .student-avatar{color:var(--accent-ink);background:var(--accent-soft)}
-.teacher-avatar{color:#f4dfb5;background:linear-gradient(145deg,#515151,#373737);font-size:.93rem;font-weight:900}
-.message-bubble{padding:18px 21px;border-radius:20px;font-size:.96rem;line-height:1.95}
-.message.user .message-bubble{background:linear-gradient(140deg,#656565,#545454);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 22px rgba(75, 75, 75, .13);border-end-start-radius:7px}
+.teacher-avatar{color:#f4dfb5;background:linear-gradient(145deg,#515151,#373737);font-size:.8rem;font-weight:900}
+.message-bubble{padding:15px 17px;border-radius:18px;font-size:.94rem;line-height:1.85}
+.message.user .message-bubble{padding:10px 14px;border-radius:16px;line-height:1.7;background:linear-gradient(140deg,#656565,#545454);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 22px rgba(75, 75, 75, .13);border-end-start-radius:7px}
 .message.assistant .message-bubble{background:var(--surface);border:1px solid var(--line);border-radius:21px;border-end-end-radius:7px;box-shadow:var(--shadow-xs)}
 .message-bubble h1,.message-bubble h2,.message-bubble h3{color:var(--deep)}
 .message-bubble strong{color:var(--accent-ink)}
@@ -709,10 +711,10 @@ html[data-theme="dark"] .page-scan-figure{background:var(--surface-2)}
   #view-learn{height:100%;min-height:0}
   #view-history{overflow-y:auto;-webkit-overflow-scrolling:touch}
   .chat-panel{height:100%;min-height:0}
-  .message-list{gap:16px;padding:13px 2px 16px}
+  .message-list{gap:12px;padding:13px 2px 16px}
   .message,.message.user{max-width:92%}
   .message.assistant{width:100%;max-width:100%}
-  .message-bubble{padding:15px 16px;border-radius:18px;font-size:.94rem;line-height:1.9}
+  .message-bubble{padding:13px 14px;border-radius:16px;font-size:.92rem;line-height:1.8}
   .message-bubble .table-scroll{margin:10px -6px;border-radius:10px;cursor:grab}
   .message-bubble .table-scroll:active{cursor:grabbing}
   .message-bubble table{font-size:.79rem}
