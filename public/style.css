@@ -218,7 +218,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .message.assistant{align-self:stretch;max-width:100%}
 .message-label{color:var(--faint);font-size:.65rem;font-weight:800;margin:0 8px 6px}
 .message.user .message-label{text-align:left}
-.message-bubble{border-radius:18px;padding:15px 18px;font-size:.92rem;line-height:1.9;overflow-wrap:anywhere}
+.message-bubble{border-radius:18px;padding:15px 18px;font-size:.92rem;line-height:1.9;overflow-wrap:break-word;word-break:normal}
 .message.user .message-bubble{color:#fff;background:linear-gradient(135deg,var(--deep-2),var(--deep-3));border-end-start-radius:5px}
 .message.assistant .message-bubble{color:var(--ink);border:1px solid var(--line);background:var(--surface);border-end-end-radius:5px;box-shadow:0 4px 14px rgba(43, 43, 43, .04)}
 .message-bubble p{margin:0 0 9px}
@@ -237,10 +237,10 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus
 .message-bubble pre code{color:inherit;background:none;padding:0;display:block}
 .message-bubble blockquote{border-inline-start:3px solid var(--gold);color:var(--muted);margin:10px 0;padding:4px 13px}
 .message-bubble del{opacity:.62}
-.message-bubble .table-scroll{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:11px;background:var(--surface);-webkit-overflow-scrolling:touch}
-.message-bubble table{border-collapse:collapse;width:100%;min-width:320px;font-size:.82em}
-.message-bubble th,.message-bubble td{border:1px solid var(--line);padding:8px 11px;text-align:right;vertical-align:top}
-.message-bubble th{color:var(--deep);background:var(--surface-2);white-space:nowrap;font-weight:800}
+.message-bubble .table-scroll{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;margin:10px -4px;border:1px solid var(--line);border-radius:11px;background:var(--surface);-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain}
+.message-bubble table{border-collapse:collapse;width:max-content;min-width:100%;font-size:.82em;table-layout:auto}
+.message-bubble th,.message-bubble td{border:1px solid var(--line);padding:8px 11px;text-align:right;vertical-align:top;overflow-wrap:break-word;word-break:normal;white-space:normal;min-width:110px;max-width:230px;line-height:1.8}
+.message-bubble th{color:var(--deep);background:var(--surface-2);white-space:nowrap;min-width:max-content;font-weight:800}
 .message-bubble tbody tr:nth-child(even){background:var(--surface-2)}
 .math-line{display:inline-block;direction:ltr;unicode-bidi:isolate;font-weight:700;background:var(--surface-2);border-radius:8px;padding:2px 9px;margin:2px 0}
 .reference-mark{display:inline-block;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:0 5px;font-size:.68em;font-weight:900;vertical-align:.35em;margin:0 2px}
@@ -713,6 +713,10 @@ html[data-theme="dark"] .page-scan-figure{background:var(--surface-2)}
   .message,.message.user{max-width:92%}
   .message.assistant{width:100%;max-width:100%}
   .message-bubble{padding:15px 16px;border-radius:18px;font-size:.94rem;line-height:1.9}
+  .message-bubble .table-scroll{margin:10px -6px;border-radius:10px;cursor:grab}
+  .message-bubble .table-scroll:active{cursor:grabbing}
+  .message-bubble table{font-size:.79rem}
+  .message-bubble th,.message-bubble td{padding:7px 9px;min-width:100px}
   .welcome-message{width:100%;padding:22px 15px;border-radius:23px}
   .welcome-message .welcome-icon{width:58px;height:58px;border-radius:19px}
   .welcome-icon svg{width:34px;height:34px}

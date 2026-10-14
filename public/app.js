@@ -764,7 +764,7 @@ function fillAssistantBubble(element, content, streaming = false, referencePrefi
     block = document.createElement('div');
     block.className = 'model-answer-text';
     block.style.whiteSpace = 'normal';
-    block.style.overflowWrap = 'anywhere';
+    block.style.overflowWrap = 'break-word';
     element.appendChild(block);
   }
   const next = String(content ?? '');
