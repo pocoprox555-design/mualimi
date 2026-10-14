@@ -782,3 +782,9 @@ html[data-theme="dark"] .loader-line,html[data-theme="dark"] .loader-line::after
 .field:focus,.composer:focus-within{border-color:#85888e}
 .composer:focus-within{box-shadow:0 9px 28px rgba(50,52,58,.1)}
 html[data-theme="dark"] .button-primary,html[data-theme="dark"] .send-button:not(.stop-button),html[data-theme="dark"] .mobile-new-chat,html[data-theme="dark"] .quiz-next,html[data-theme="dark"] .header-back:hover,html[data-theme="dark"] .reference-mark:hover,html[data-theme="dark"] .quiz-question button.quiz-next{color:#222429}
+
+/* زر السؤال التالي: بارز وواضح في الوضعين (يغلب قواعد التباين المنخفض) */
+.message-bubble .quiz-question button.quiz-next,.message-bubble .quiz-next{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin:14px 0 0;border:1px solid transparent;border-radius:14px;padding:12px 16px;font-size:.85rem;font-weight:900;background:linear-gradient(135deg,#34363c,#282a2f);color:#f4dfb5;box-shadow:0 8px 20px rgba(20,22,26,.22)}
+.message-bubble .quiz-question button.quiz-next:hover,.message-bubble .quiz-next:hover{transform:translateY(-1px);filter:brightness(1.08)}
+html[data-theme="dark"] .message-bubble .quiz-question button.quiz-next,html[data-theme="dark"] .message-bubble .quiz-next{background:linear-gradient(135deg,#d3b982,#b8945e);border-color:transparent;color:#23211a;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.message-bubble .quiz-next:disabled{opacity:.65;transform:none}
